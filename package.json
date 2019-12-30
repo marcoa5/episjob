@@ -1,0 +1,44 @@
+{
+  "name": "servicejob",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "build": {
+    "asar": false,
+    "appId": "sjma",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "files": [
+      "**/*"
+    ]
+  },
+  "author": "Marco Arato",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.7",
+    "electron-builder": "^21.2.0",
+    "electron-packager": "^14.1.1",
+    "electron-winstaller": "^4.0.0",
+    "electron-wix-msi": "^2.2.0"
+  },
+  "dependencies": {
+    "asar": "^2.0.3",
+    "electron-updater": "^4.2.0",
+    "nodemailer": "^6.4.2",
+    "update-electron-app": "^1.5.0",
+    "winax": "^1.12.0",
+    "yarn": "^1.21.1"
+  },
+  "description": "service job filler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcoa5/episjob.git"
+  }
+}
