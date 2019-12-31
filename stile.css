@@ -809,7 +809,7 @@ text-align: center;
 
 
 #upd {
-    position: fixed;
+    position: absolute;
     top: 10px; right: 10px;
     width: 190px; height: 30px;
     background-color: rgb(255,205,0);
