@@ -72,6 +72,6 @@ autoUpdater.on('update-downloaded', () => {
 });
 
 
-ipcMain.on('restart_app', () => {
+ipc.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
