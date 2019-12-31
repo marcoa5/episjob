@@ -821,6 +821,7 @@ text-align: center;
 }
 
 #notification {
+	font-family: Arial;
     position: fixed;
     bottom: 20px;
     left: 20px;

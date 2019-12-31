@@ -10,11 +10,8 @@ const http = require('http');
 const path = require('path');
 const url = require('url');
 const shell = electron.shell;
-const { autoUpdater, dialog } = require('electron');
+const { autoUpdater } = require('electron-updater');
 
-
-
-require('update-electron-app')()
 
 let win
 var winA
@@ -30,7 +27,7 @@ function createWindow () {
   })
   // e carica l'index.html dell'app.
   win.loadFile('SL.html');
-  Menu.setApplicationMenu(null);
+  //Menu.setApplicationMenu(null);
 }
 
 
@@ -39,6 +36,7 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow();
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 ipc.on('app_version', (event) => {
@@ -63,4 +61,17 @@ ipc.on('print-to-pdf', event => {
     })
     
   })
+});
+
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
+});
+
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
 });
