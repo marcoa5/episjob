@@ -107,7 +107,6 @@ function closeMenu(){
         var dataURL = canvas.toDataURL();
         if(h=="firmac"){
           document.getElementById("firmacc1").src = dataURL;
-          document.getElementById("rissondaggio").innerText = document.getElementById("sondaggio").innerText;
           closeMenu();
         } else if(h=="firmat"){
           document.getElementById("firmatt1").src = dataURL;
@@ -365,7 +364,7 @@ if(a=="a"){
       mItm.Display();    
       mItm.To = 'xxx.xxx@epiroc.com';
       mItm.Subject = "Prova";
-      mItm.Body = "Email di prova";
+      mItm.Body = "Email di prova"  + " - Risultato sondaggio: " + document.getElementById('rissondaggio').innerText;
       mItm.Attachments.Add(a + '\\Scheda Lavoro.ma');    
       mItm.GetInspector.WindowState = 2;
       //mItm.send();
@@ -788,3 +787,26 @@ function closeSU(){
 	closeMenu();
 }
 
+
+function sondaggio(){
+	var sondint = document.getElementsByName('int');
+	var sondric = document.getElementsByName('ric');
+	var sondese = document.getElementsByName('ese');
+	for(var i=0;i<5;i++){
+		if(sondint[i].checked){
+			var a1 = i
+			a1++
+		}
+		if(sondric[i].checked){
+			var a2 = i
+			a2++
+		}
+		if(sondese[i].checked){
+			var a3 = i
+			a3++
+		}
+	
+	}
+	var risultato=document.getElementById('rissondaggio');
+	risultato.innerText = "Organizzazione Intervento: " + a1 + " - Consegna Ricambi: " + a2 + " - Esecuzione Intervento: " + a3;
+}
