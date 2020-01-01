@@ -7,21 +7,17 @@
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="js/jquery.js"></script>
         <script src="js/command.js"></script>
-        <script src="js/read.js"></script>
         <script src="js/sign.js"></script>
-        <script src="js/gg.js"></script>
-        <script src="js/data.js"></script>
         <script src="js/jspdf.min.js"></script>
-        <script src="js/renderer.js"></script>
         <script src="js/jqueryui.js"></script>
-		<script src="js/update.js"></script>
+
         <script>var nodemailer = require('nodemailer');</script> 
         <script>if (window.module) module = window.module;</script>
         <script>const { dialog } = require('electron').remote;</script>
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 </head>
-<body onload="Apri()" onresize="dimen()">
+<body onload="liveCheck()" onresize="dimen()">
 <div id="salva">
 <object height="50"></object>
 <div id="copia">
@@ -60,9 +56,9 @@
                                                                         <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                         <tr class="spazio"></tr>
                                                                         <tr><td class="a1" colspan="6">CLIENTE</td></tr>
-                                                                        <tr><td class="a5" colspan="6"><div class="in" id="cliente1"></div></td></tr>
-                                                                        <tr><td class="a5" colspan="6"></td></tr>
-                                                                        <tr><td class="a5" colspan="6"></td></tr>
+                                                                        <tr><td class="a5" colspan="6"><div class="in" id="cliente11"></div></td></tr>
+                                                                        <tr><td class="a5" colspan="6"><div class="in" id="cliente12"></div></td></tr>
+                                                                        <tr><td class="a5" colspan="6"><div class="in" id="cliente13"></div></td></tr>
                                                                         <tr><td class="a3" colspan="6"></td></tr>
                                                                         <tr class="spazio"></tr>
                                                                         <tr><td class="a1" colspan="6">CANTIERE</td></tr>
@@ -404,12 +400,14 @@
 						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Pulisci</td>
 				</tr>
 		</table>
+		
 		<div id="upd"></div>
+		
 </div>
 <!--finestre di dialogo-->
 <div name="finestre">
 <div class="ccc" ><!--Matricola-->
-
+<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 
 		<div class="finestra" id="menuMatricola">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
@@ -420,6 +418,8 @@
 								<input id="matricolas" class="inser" placeholder="Matricola..."><br>
 								<input id="prodotto" class="inser" placeholder="Prodotto..."><br>
 								<input id="cliente" class="inser" placeholder="Cliente..."><br>
+								<input id="clientead1" class="inser" style="display: none">
+								<input id="clientead2" class="inser" style="display: none">
 								<input id="cantiere" class="inser" placeholder="Cantiere..."><br><br>
 								<input id="orem" class="inser" placeholder="Ore Motore..." onkeypress="return isNumber(event)"><br>
 								<input id="perc1" class="inser1" placeholder="Percussione 1..." onkeypress="return isNumber(event)">
@@ -568,18 +568,106 @@
 <div id="notification" class="hidden">
   <p id="message"></p>
   <button id="close-button" onClick="closeNotification()">
-    Close
+    Apri pagina download
   </button>
   <button id="restart-button" onClick="restartApp()" class="hidden">
     Restart
   </button>
 </div>
 </body>
+
 <script>
 	$('#menuMatricola').draggable();
 	$('#menuRapporto').draggable();
 	$('#menuOre').draggable();
 
+
+	const { ipcRenderer } = require('electron');
+    const version = document.getElementById('upd');
+    ipcRenderer.send('app_version');
+    ipcRenderer.on('app_version', (event, arg) => {
+      ipcRenderer.removeAllListeners('app_version');
+      version.innerText = 'V' + arg.version;
+	});
+	
+	const notification = document.getElementById('notification');
+	const message = document.getElementById('message');
+	const restartButton = document.getElementById('restart-button');
+	ipcRenderer.on('update_available', () => {
+	ipcRenderer.removeAllListeners('update_available');
+	message.innerText = 'È disponibile un aggiornamento. Scarica l\'ultima versione...';
+	notification.classList.remove('hidden');
+	});
+
+
+	function closeNotification() {
+		window.open("https://github.com/marcoa5/episjob/releases", '_blank', 'location=yes,height=570,width=450,scrollbars=yes,status=yes');;
+	}
+	
+var https = require('https');
+
+const dns = require("dns");
+let isConnected = false;
+
+function liveCheck() {
+		if(navigator.onLine){
+			aggiornamol();
+			aggiornacli();
+		} else {}}
+
+
+
+
+
+
+
+function aggiornamol(){
+	options = { 
+		host               : "raw.githubusercontent.com", 
+		port               : 443,
+		path               : "/marcoa5/episjob/master/molupd.txt",
+		method             : 'GET',
+		rejectUnauthorized : true,
+		requestCert        : true,
+		agent              : false
+	};
+	var file = fs.createWriteStream("mol.txt");
+	var request = https.get(options, function(response){
+		response.pipe(file);
+		file.on("finish", function(){
+			file.close();
+		});
+	});
+	request.end();
+	request.on('error', function(err){
+		throw (err);
+	});	
+}
+
+function aggiornacli(){
+	options = { 
+		host               : "raw.githubusercontent.com", 
+		port               : 443,
+		path               : "/marcoa5/episjob/master/customersupd.txt",
+		method             : 'GET',
+		rejectUnauthorized : true,
+		requestCert        : true,
+		agent              : false
+	};
+	var file = fs.createWriteStream("customers.txt");
+	var request = https.get(options, function(response){
+		response.pipe(file);
+		file.on("finish", function(){
+			file.close();
+		});
+	});
+	request.end();
+	request.on('error', function(err){
+		throw (err);
+	});	
+}
+
+	
 </script>
 
 </html>
