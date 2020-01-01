@@ -14,6 +14,7 @@ function openMenu(n){
     if(n == 'firmac1'){init("firmac")};
     if(n == 'firmat1'){init("firmat")};
     if(n=='menuOre'){oggi()};
+	if(n=='manuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
     var iu = document.getElementById('stdspe').innerText;
         if(iu=='SPE'){document.getElementById('manspe').checked = true}
@@ -36,6 +37,13 @@ function openMenu(n){
     document.getElementById("perc3").value=document.getElementById("perc31").innerText;
     document.getElementById("rappl").value=document.getElementById("rappl1").innerText;
     document.getElementById("oss").value=document.getElementById("oss1").innerText;
+	
+	if(document.getElementById("data11").innerText!==""){
+	var giorno =  new Date(document.getElementById("data11").innerText);
+	var manno = giorno.getFullYear();
+	var mmese = (giorno.getMonth()+1).toString().padStart(2,'0');
+	var mgiorno = giorno.getDate().toString().padStart(2,'0');
+	document.getElementById("data2").value= manno + "-" + mmese.padStart(2,'0') +"-" + mgiorno.padStart(2,'0');}
 }
 
 window.onresize = dimen();
@@ -124,6 +132,7 @@ function salvadati(){
     document.getElementById("perc11").innerText = document.getElementById("perc1").value;
     document.getElementById("perc21").innerText = document.getElementById("perc2").value;
     document.getElementById("perc31").innerText = document.getElementById("perc3").value;
+	document.getElementById("data11").innerText= new Date(document.getElementById("data2").value).toLocaleDateString();
     if(document.getElementById("manstd").checked){document.getElementById('stdspe').innerText = "STD"}else{document.getElementById('stdspe').innerText = "SPE"}
     openMenu('menuRapporto');
 }
@@ -137,7 +146,7 @@ function salvacomm(){
 
 
 function copiaore(){
-  salvadati();
+  //salvadati();
   var datiinput = document.getElementById('ris');
   var righe = datiinput.getElementsByTagName('tr');
   var datioutput = document.getElementById('tabset');
@@ -303,32 +312,42 @@ function controlladata(){
 
 var remote = require('electron').remote;
 var fs = require('fs');
+var mkdirp = require('mkdirp');
+function printpdf (a) {
+if(a=="a"){
+	  const tmp = require('tmp')
+	  var s = document.getElementById('salva').innerHTML; 
+	  
+	tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
+		if (err) throw err;
+		var gin = path.indexOf("tmp");
+		path = path.substring(0, gin) + "ServiceJob";
+		mkdirp(path, function(err) {});
+		function ma(path, callback){
+			fs.writeFileSync(path + "\\Scheda Lavoro.ma", s);
+			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(path + "\\Scheda Lavoro.pdf", data)});
+			callback();
+		}
+		
+		ma(path, function(){setTimeout(function(){send_mail(path)}, 3000)});
+		})
+}else {
+		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+		  fs.writeFileSync(a, data, (err) => {if (err) throw err})})}
+		}
 
-function printpdf () {
-  const tmp = require('tmp')
-  tmp.dir(async (err, path, cleanupCallback) => {
-    remote.getCurrentWindow().webContents.printToPDF({
-      pageSize: 'A4', marginsType: '0'
-    }).then(data => {
-      fs.writeFileSync(path + "\\test.pdf", data, (err) => {
-        if (err) throw err
-        send_mail();
-      })
-      send_mail(path)
-    }
-    
-    )
-})
-
-      
-
-
-    }
-
-    function send_mail(a) {     
-      var path = require('path');
+    function send_mail(a) {  
+	    var ora = new Date()
+		var anno = ora.getFullYear().toString();
+		var mese = (ora.getMonth()+1).toString();
+		var giorno = ora.getDate().toString();
+		var hr = ora.getHours().toString();
+		var mi = ora.getMinutes().toString();
+		var se = ora.getSeconds().toString();
+		var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0');
+      /*var path = require('path');
       var loc = window.location.pathname; 
-      var dir = path.dirname(loc);
+      var dir = path.dirname(loc);*/
       var winax = require('winax'); 
       var objO = new ActiveXObject('Outlook.Application');     
       var objNS = objO.GetNameSpace('MAPI');     
@@ -337,10 +356,22 @@ function printpdf () {
       mItm.To = 'xxx.xxx@epiroc.com';
       mItm.Subject = "Prova";
       mItm.Body = "Email di prova";
-      mItm.Attachments.Add(a + '\\test.pdf');    
+      mItm.Attachments.Add(a + '\\Scheda Lavoro.pdf');    
       mItm.GetInspector.WindowState = 2;
       //mItm.send();
-    }
+	  var objO = new ActiveXObject('Outlook.Application');     
+      var objNS = objO.GetNameSpace('MAPI');     
+      var mItm = objO.CreateItem(0);     
+      mItm.Display();    
+      mItm.To = 'xxx.xxx@epiroc.com';
+      mItm.Subject = "Prova";
+      mItm.Body = "Email di prova";
+      mItm.Attachments.Add(a + '\\Scheda Lavoro.ma');    
+      mItm.GetInspector.WindowState = 2;
+      //mItm.send();
+	  fs.rename(a + '\\Scheda Lavoro.pdf', a + "\\" + datalo + " - " + document.getElementById('cliente11').innerText + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
+	  fs.rename(a + '\\Scheda Lavoro.ma', a + "\\" + datalo +  " - " + document.getElementById('cliente11').innerText + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
+	}
 
 
 function myFunction() {
@@ -427,10 +458,10 @@ function salvafile(){
     var anno = ora.getFullYear().toString();
     var mese = (ora.getMonth()+1).toString();
     var giorno = ora.getDate().toString();
-    var hr = ora.getHours().toString();
-    var mi = ora.getMinutes().toString();
-    var se = ora.getSeconds().toString();
-    var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0');
+    //var hr = ora.getHours().toString();
+    //var mi = ora.getMinutes().toString();
+    //var se = ora.getSeconds().toString();
+    var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')/*+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0')*/;
     
     var cli = document.getElementById('cliente11').innerText;
     if(cli!==""){datalo += " - " + cli};
@@ -452,7 +483,7 @@ function salvafile(){
         
         //Placeholder 3
         filters :[
-         {name: 'Scheda Lavoro', extensions: ['ma']},
+         {name: 'Scheda Lavoro', extensions: ['ma']},{name: 'PDF', extensions: ['pdf']},
         ]
        }
     
@@ -460,14 +491,15 @@ function salvafile(){
 
     
     var cartella =  dialog.showSaveDialogSync(options, "");
-    if(cartella!==undefined){
+	var che = cartella.substring(cartella.length-2,cartella.length);
+    if(che=="ma"){
         var s = document.getElementById('salva').innerHTML;           
         fs.writeFile(cartella, s, function(err) {
             if(err) {
                 return console.log(err);
             }
         });
-    }
+    } else {printpdf(cartella)};
 }
 
   function aprifile(){
@@ -499,7 +531,7 @@ function salvafile(){
 
 
     function pulisci(){
-        
+        document.getElementById('data2').value="";
         var filename =  "blank.ma"
         if(filename!==undefined){
             $.get(filename, function(data) {
@@ -509,6 +541,7 @@ function salvafile(){
                 $('#menuMatricola').draggable();
                 $('#menuRapporto').draggable();
                 $('#menuOre').draggable();
+				$('#SU').draggable();
             })}
         
             closeMenu();
@@ -718,5 +751,40 @@ function indirizzo_cliente(){
 		}
 }}
 
+function openSU(){
+	const prompt = require('electron-prompt');
+	 
+	prompt({
+		title: 'Password',
+		label: 'Pw:',
+		value: '',
+		inputAttrs: {
+			type: 'url'
+		},
+		type: 'input'
+	})
+	.then((r) => {
+		if(r === null) {
+			console.log('user cancelled');
+		} else {
+			console.log('result', r);
+		}
+	})
+	.catch(console.error);
+	document.getElementById('sucommessa').value=document.getElementById('commessa1').innerText;
+	document.getElementById('sunsofferta').value=document.getElementById('nsofferta1').innerText;
+	document.getElementById('suapbpcs').value=document.getElementById('apbpcs').innerText;
+	document.getElementById('suchbpcs').value=document.getElementById('chbpcs').innerText;
+	document.getElementById('sudocbpcs').value=document.getElementById('docbpcs').innerText;
+	
+}
 
+function closeSU(){
+	document.getElementById('commessa1').innerText=document.getElementById('sucommessa').value;
+	document.getElementById('nsofferta1').innerText=document.getElementById('sunsofferta').value;
+	document.getElementById('apbpcs').innerText=document.getElementById('suapbpcs').value;
+	document.getElementById('chbpcs').innerText=document.getElementById('suchbpcs').value;
+	document.getElementById('docbpcs').innerText=document.getElementById('sudocbpcs').value;
+	closeMenu();
+}
 

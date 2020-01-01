@@ -32,11 +32,11 @@
                                                 <div id="tl" class="topleft">
                                                         <table class="tabella">
                                                                 <tr><td class="a1" colspan="6">COMMESSA</td></tr>
-                                                                <tr><td class="a2" colspan="6"><div id="commessa"></div></td></tr>
+                                                                <tr><td class="a2" colspan="6"><div id="commessa1"></div></td></tr>
                                                                 <tr><td class="a3" colspan="6"></td></tr>
                                                                 <tr class="spazio"></tr>
                                                                 <tr><td class="a1" colspan="3">VS. ORDINE</td><td class="a1" colspan="3">NS. OFFERTA</td></tr>
-                                                                <tr><td class="a2" colspan="3"><div class= "in" id="vsordine"></div></td><td class="a2" colspan="3"></td></tr>
+                                                                <tr><td class="a2" colspan="3"><div class= "in" id="vsordine"></div></td><td class="a2" colspan="3"><div id="nsofferta1"></div></td></tr>
                                                                 <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                 <tr class="spazio"></tr>
                                                                 <tr><td class="a1" colspan="3">PRODOTTO</td><td class="a1" colspan="3">MATRICOLA</td></tr>
@@ -52,7 +52,7 @@
                                                 <div id="tr" class="topright">
                                                                 <table class="tabella">
                                                                         <tr><td class="a1" colspan="3">DATA</td><td class="a1" colspan="3">PAGINA</td></tr>
-                                                                        <tr><td class="a2" colspan="3"><td class="a2" colspan="3"></td></td></tr>
+                                                                        <tr><td class="a2" colspan="3"><div class="in" id="data11"></div></td><td class="a2" colspan="3"></td></tr>
                                                                         <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                         <tr class="spazio"></tr>
                                                                         <tr><td class="a1" colspan="6">CLIENTE</td></tr>
@@ -378,9 +378,9 @@
 				<tr>
 					<td class="firma"><img height="60" width="138" alt="Firma" id="firmatt1" onclick="openMenu('firmat1')" style="cursor: pointer" src="img/white.png"></td>
 					<td class="firma"><img height="60" width="138" alt="Firma " id="firmacc1" onclick="openMenu('firmac1')" style="cursor: pointer" src="img/white.png"></td>
-					<td class="firma"></td>
-					<td class="firma"></td>
-					<td class="firma"></td>
+					<td class="firma"><div id="apbpcs"></div></td>
+					<td class="firma"><div id="chbpcs"></div></td>
+					<td class="firma"><div id="docbpcs"></div></td>
 				</tr>
 			</table>                                                               
 	</div>
@@ -396,23 +396,37 @@
 						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width ="20" ><br>Modifica</td>
 						<td onclick="aprifile()"><img src="img/rig.png" class="imgmenu" alt="Customer" height="20" width ="20" ><br>Apri</td>
 						<td onclick="salvafile()"><img src="img/Engineer.png" class="imgmenu" alt="Rapporto" height="20" width ="20" ><br>Salva</td>
-						<td id="pdf" onclick="printpdf()"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Pdf</td>
+						<td id="mail" onclick="printpdf('a')"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Email</td>
 						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Pulisci</td>
 				</tr>
 		</table>
 		
-		<div id="upd"></div>
+		<div id="upd" oncontextmenu="openMenu('menuSU')"></div>
 		
 </div>
 <!--finestre di dialogo-->
 <div name="finestre">
 <div class="ccc" ><!--Matricola-->
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
-
+	<div class="finestra" id="menuSU">
+					<div class="barrat"><div class="g"></div><p class="tt">SU</p></div>
+					<div class="finestrai">
+						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
+						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
+						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
+						<input id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
+						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
+					</div>
+					<br>
+					<button class="pulsante" onclick="closeMenu()">Annulla</button>
+					<button class="pulsante" onclick="closeSU()">Ok</button>
+					<br><br><br>
+			</div> 
 		<div class="finestra" id="menuMatricola">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
 				<div class="finestrai">
 						<form id="inputmac">
+								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
 								<input id="matricolas" class="inser" placeholder="Matricola..."><br>
@@ -580,6 +594,7 @@
 	$('#menuMatricola').draggable();
 	$('#menuRapporto').draggable();
 	$('#menuOre').draggable();
+	$('#menuSU').draggable();
 
 
 	const { ipcRenderer } = require('electron');
