@@ -14,6 +14,7 @@ function openMenu(n){
     if(n == 'firmac1'){init("firmac")};
     if(n == 'firmat1'){init("firmat")};
     if(n=='menuOre'){oggi()};
+	if(n=='menuMatricola'){Apri()};
     var iu = document.getElementById('stdspe').innerText;
         if(iu=='SPE'){document.getElementById('manspe').checked = true}
     ;
@@ -25,7 +26,9 @@ function openMenu(n){
     myFunction();
     document.getElementById("matricolas").value=document.getElementById("matricola").innerText;
     document.getElementById("prodotto").value=document.getElementById("prodotto1").innerText;
-    document.getElementById("cliente").value=document.getElementById("cliente1").innerText;
+    document.getElementById("cliente").value=document.getElementById("cliente11").innerText;
+	document.getElementById("clientead1").value=document.getElementById("cliente12").innerText;
+	document.getElementById("clientead2").value=document.getElementById("cliente13").innerText;
     document.getElementById("cantiere").value=document.getElementById("cantiere1").innerText;
     document.getElementById("orem").valu=document.getElementById("orem1").innerTexte;
     document.getElementById("perc1").value=document.getElementById("perc11").innerText;
@@ -113,7 +116,9 @@ function closeMenu(){
 function salvadati(){
     document.getElementById("matricola").innerText = document.getElementById("matricolas").value;
     document.getElementById("prodotto1").innerText = document.getElementById("prodotto").value;
-    document.getElementById("cliente1").innerText = document.getElementById("cliente").value;
+    document.getElementById("cliente11").innerText = document.getElementById("cliente").value;
+	document.getElementById("cliente12").innerText = document.getElementById("clientead1").value;
+	document.getElementById("cliente13").innerText = document.getElementById("clientead2").value;
     document.getElementById("cantiere1").innerText = document.getElementById("cantiere").value;
     document.getElementById("orem1").innerText = document.getElementById("orem").value;
     document.getElementById("perc11").innerText = document.getElementById("perc1").value;
@@ -295,6 +300,423 @@ function controlladata(){
   };
 
 }
+
+var remote = require('electron').remote;
+var fs = require('fs');
+
+function printpdf () {
+  const tmp = require('tmp')
+  tmp.dir(async (err, path, cleanupCallback) => {
+    remote.getCurrentWindow().webContents.printToPDF({
+      pageSize: 'A4', marginsType: '0'
+    }).then(data => {
+      fs.writeFileSync(path + "\\test.pdf", data, (err) => {
+        if (err) throw err
+        send_mail();
+      })
+      send_mail(path)
+    }
+    
+    )
+})
+
+      
+
+
+    }
+
+    function send_mail(a) {     
+      var path = require('path');
+      var loc = window.location.pathname; 
+      var dir = path.dirname(loc);
+      var winax = require('winax'); 
+      var objO = new ActiveXObject('Outlook.Application');     
+      var objNS = objO.GetNameSpace('MAPI');     
+      var mItm = objO.CreateItem(0);     
+      mItm.Display();    
+      mItm.To = 'xxx.xxx@epiroc.com';
+      mItm.Subject = "Prova";
+      mItm.Body = "Email di prova";
+      mItm.Attachments.Add(a + '\\test.pdf');    
+      mItm.GetInspector.WindowState = 2;
+      //mItm.send();
+    }
+
+
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myinput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("listam");
+    li = ul.getElementsByTagName("tr");
+    for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("td")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+    }
+}
+
+
+function Apri(){
+	
+		//carica_clienti
+	
+	$('#listac tr').remove();
+    var i = 1
+    $.get('customers.txt', function(data) {
+            var linee = data.split("\n");
+            $.each(linee, function(n, elem) {
+                var record = elem.split("_")
+                var il = 'ele' + i
+                var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
+                     stringa += '<td>' + record[0] + '</td>';
+                     stringa += '<td>' + record[1] + '</td>';
+                     stringa += '<td>' + record[2] + '</td>';
+                stringa += '</tr>'
+                $('#listac').append(stringa)
+            i++
+            });
+    });
+	
+	$('#listam tr').remove();
+    var i = 1
+    $.get('mol.txt', function(data) {
+            var linee = data.split("\n");
+            $.each(linee, function(n, elem) {
+                var record = elem.split("_")
+                var il = 'ele' + i
+                var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
+                     stringa += '<td>' + record[0] + '</td>';
+                     stringa += '<td>' + record[4] + '</td>';
+                     stringa += '<td>' + record[1] + '</td>';
+                     stringa += '<td>' + record[7] + '</td>';
+                stringa += '</tr>'
+                $('#listam').append(stringa)
+            i++
+            });
+    });
+	
+
+	
+}
+
+
+
+function copia(a){
+    var riga = document.getElementById(a)
+    var elementi = riga.getElementsByTagName('td');
+    for (var t=0; t<elementi.length;t++){
+    document.getElementById("matricolas").value = elementi[0].innerText;
+    document.getElementById("myinput").value = elementi[0].innerText;
+    document.getElementById("prodotto").value = elementi[1].innerText;
+    document.getElementById("cliente").value = elementi[2].innerText;
+    document.getElementById("cantiere").value = elementi[3].innerText;
+    }
+	indirizzo_cliente();
+    myFunction();
+}
+
+
+//salva
+function salvafile(){
+    var ora = new Date()
+    var anno = ora.getFullYear().toString();
+    var mese = (ora.getMonth()+1).toString();
+    var giorno = ora.getDate().toString();
+    var hr = ora.getHours().toString();
+    var mi = ora.getMinutes().toString();
+    var se = ora.getSeconds().toString();
+    var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0');
+    
+    var cli = document.getElementById('cliente11').innerText;
+    if(cli!==""){datalo += " - " + cli};
+    var mac = document.getElementById('prodotto1').innerText;
+    if(mac!==""){datalo += " - " + mac};
+    var mat = document.getElementById('matricola').innerText;
+    if(mat!==""){datalo += " - " + mat};
+
+    var desk = require('path').join(require('os').homedir(), 'Desktop');
+    let options = {
+        //Placeholder 1
+        title: "Salva File",
+        
+        //Placeholder 2
+        defaultPath : desk + '\\' + datalo + ".ma",
+        
+        //Placeholder 4
+        buttonLabel : "Salva Scheda Lavoro",
+        
+        //Placeholder 3
+        filters :[
+         {name: 'Scheda Lavoro', extensions: ['ma']},
+        ]
+       }
+    
+    
+
+    
+    var cartella =  dialog.showSaveDialogSync(options, "");
+    if(cartella!==undefined){
+        var s = document.getElementById('salva').innerHTML;           
+        fs.writeFile(cartella, s, function(err) {
+            if(err) {
+                return console.log(err);
+            }
+        });
+    }
+}
+
+  function aprifile(){
+    var desk = require('path').join(require('os').homedir(), 'Desktop');
+    let options = {
+        title : "Seleziona File", 
+        defaultPath : desk,
+        buttonLabel : "Apri File", 
+        filters :[
+            {name: 'Schede Lavoro', extensions: ['ma']},
+           ],   
+        properties: ['openFile']
+       }
+    
+    
+    
+    var filename =  dialog.showOpenDialogSync(options, "");
+    if(filename!==undefined){
+        $.get(filename, function(data) {
+            /*console.log(data)
+            document.getElementById('salva').innerHTML = ""*/
+            document.getElementById('salva').innerHTML = data
+        })}
+        closeMenu()
+    }
+
+
+
+
+
+    function pulisci(){
+        
+        var filename =  "blank.ma"
+        if(filename!==undefined){
+            $.get(filename, function(data) {
+                /*console.log(data)
+                document.getElementById('salva').innerHTML = ""*/
+                document.getElementById('salva').innerHTML = data
+                $('#menuMatricola').draggable();
+                $('#menuRapporto').draggable();
+                $('#menuOre').draggable();
+            })}
+        
+            closeMenu();
+    
+        }
+    
+function ver_pulisci(){
+	const options = {
+				type: 'info',
+                buttons: ['Elimina', 'Mantieni'],
+                title: 'Eliminare?',
+                message: 'Vuoi eliminare i dati non salvati?',
+				noLink: true
+              };
+	
+			var resp = dialog.showMessageBoxSync(null, options) 
+            if (resp==0){
+                pulisci();
+                closeMenu();
+            }
+        }
+		
+function oggi(){
+            n =  new Date();
+            y = n.getFullYear();
+            m = n.getMonth() + 1;
+            d = n.getDate();
+            document.getElementById("data1").value = y + "-" + m.toString().padStart(2,'0') + "-" + d.toString().padStart(2,'0');
+            controlladata();
+        }
+
+
+
+        function aggiungi() {
+            const options = {
+                type: 'error',
+                buttons: ['OK'],
+                title: 'Errore',
+                message: 'Massimo 7 giorni',
+              };
+            var riga = document.getElementById('ris').getElementsByTagName('tr');
+            var ind = riga.length;
+            //verifica che le righe siano < 7
+            if(ind<=6){    
+                var parts = document.getElementById("data1").value.toString().split("-");
+                var mydate = parts[0]+ parts[1]+ parts[2]; 
+                document.getElementById('ris').appendChild(document.createElement("TR"));
+                var ele = [document.getElementById('tec').value, mydate];
+                //controlla le festività
+                var fest = verificadata(document.getElementById('data1').value);
+                //copia tutti gli elementi "ore"
+                var orr = document.getElementsByClassName('ore');
+                //aggiunge le ore all'array ele
+                for(t=0;t<orr.length;t++){ele.push(orr[t].value)};
+                //crea l'indice di riga nella prima colonna
+                var n = document.createElement('TD');
+                var t = document.createTextNode(ind+1);
+                document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
+                n.appendChild(t); 
+                //aggiunge tutti gli elementi contenuti in 'ele' all'interno della tabella 'ris'   
+                for(var i=0; i<ele.length;i++){
+                    n = document.createElement('TD');
+                    var t = document.createTextNode(ele[i]);
+                    if(i>1){
+                        var att = document.createAttribute("class");
+                        att.value= "ores";
+                        n.setAttributeNode(att);}
+                    n.appendChild(t);
+                    document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
+                }
+                //aggiunge l'elimina riga
+                var n = document.createElement('TD');
+                var t = document.createTextNode("Elimina riga");
+                n.appendChild(t);
+                att = document.createAttribute("class");
+                att.value="elim";
+                n.setAttributeNode(att);
+                att = document.createAttribute("onClick");
+                att.value="cancella(this.parentNode.rowIndex)";
+                n.setAttributeNode(att);
+                document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
+                //canella le ore
+                clearore();
+                sortTable();
+                var numrig = document.getElementById('ris').getElementsByTagName('tr');
+                for(var z=0;z<numrig.length;z++){
+                    numrig[z].getElementsByTagName('td')[0].innerText = z+1;
+                }             
+            } else {dialog.showMessageBox(null, options);}
+            
+        }
+
+
+        function cancella(n){
+                document.getElementById('ris').getElementsByTagName('tr')[n].remove();
+                var a1a = document.getElementById('ris').getElementsByTagName('tr');
+                var inc = 1;
+                for (var y=0;y<a1a.length;y++){
+                    a1a[y].getElementsByTagName('td')[0].innerText=inc;
+                    inc++;
+                }
+            }
+
+
+        function eliminatutto(){
+            var nrrighe = document.getElementById('ris').getElementsByTagName('tr');
+            if(nrrighe.length>0){
+                    var g = document.getElementById('ris').getElementsByTagName('tr');
+                    for (var y=g.length - 1;y>-1;y--){
+                        g[y].remove();
+                    }
+                }
+            }
+            
+        function clearore(){
+            var or = document.getElementsByClassName('ore');
+            for(var i=0;i<or.length;i++){or[i].value="";}
+        }
+
+
+        function sortTable() {
+            var table, rows, switching, i, x1, x, y, shouldSwitch;
+            table = document.getElementById("ris");
+            switching = true;
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+              //start by saying: no switching is done:
+              switching = false;
+              rows = table.rows;
+              /*Loop through all table rows (except the
+              first, which contains table headers):*/
+              for (i = 0; i < (rows.length-1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[2].innerText;
+                y = rows[i + 1].getElementsByTagName("TD")[2].innerText;
+                //check if the two rows should switch place:
+                if (x.toLowerCase() > y.toLowerCase()) {
+                  //if so, mark as a switch and break the loop:
+                  shouldSwitch = true;
+                  break;
+                }
+              }
+              if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+              }
+              
+            }
+          }
+		  
+
+
+function verificadata(g){
+    var feste = ["01-01", "06-01", "04-25", "05-01", "06-02", "08-15", "08-16", "11-01", "12-07", "12-08", "12-24", "12-25", "12-26", "12-31"];
+    var dd = new Date(g);
+    var pasqua = Easter(g.substring(0,4));
+    var gpasquetta = pasqua.substring(3,5)+1;
+    var pasquetta =  pasqua.substring(0,3) + padout(pasqua.substring(3,5)*1+1);
+    feste.push(pasqua, pasquetta);
+    var wd = dd.getDay();
+    var fest = false
+    if(wd==0){fest="fest"}
+    else if(wd==6){fest="sab"}
+    else {fest = "fer"};
+    var test = padout(dd.getMonth()+1) + "-" + padout(dd.getDate());
+    feste.forEach(function(el){if(el==test){fest="fest"}});
+    return fest;
+}    
+
+
+     
+
+
+function Easter(Y) {
+    var C = Math.floor(Y/100);
+    var N = Y - 19*Math.floor(Y/19);
+    var K = Math.floor((C - 17)/25);
+    var I = C - Math.floor(C/4) - Math.floor((C - K)/3) + 19*N + 15;
+    I = I - 30*Math.floor((I/30));
+    I = I - Math.floor(I/28)*(1 - Math.floor(I/28)*Math.floor(29/(I + 1))*Math.floor((21 - N)/11));
+    var J = Y + Math.floor(Y/4) + I + 2 - C + Math.floor(C/4);
+    J = J - 7*Math.floor(J/7);
+    var L = I - J;
+    var M = 3 + Math.floor((L + 40)/44);
+    var D = L + 28 - 31*Math.floor(M/4);
+
+    return padout(M) + '-' + padout(D);
+}
+
+function padout(number) { return (number < 10) ? '0' + number : number; }
+
+function indirizzo_cliente(){
+	var elclienti = document.getElementById('listac');
+	var clienti = elclienti.rows
+	var cliente = document.getElementById('cliente').value;
+	for(var i = 0; i<clienti.length;i++){
+		if(cliente==clienti[i].getElementsByTagName('td')[0].innerText){
+			document.getElementById('clientead1').value= clienti[i].getElementsByTagName('td')[1].innerText;
+			document.getElementById('clientead2').value= clienti[i].getElementsByTagName('td')[2].innerText;
+			break;
+		}
+}}
 
 
 
