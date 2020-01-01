@@ -1,6 +1,6 @@
 {
   "name": "servicejob",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -31,6 +31,7 @@
   "dependencies": {
     "asar": "^2.0.3",
     "electron-updater": "^4.2.0",
+    "fs-extra": "^8.1.0",
     "nodemailer": "^6.4.2",
     "update-electron-app": "^1.5.0",
     "winax": "^1.12.0",
