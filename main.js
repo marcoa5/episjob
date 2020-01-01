@@ -27,7 +27,7 @@ function createWindow () {
   })
   // e carica l'index.html dell'app.
   win.loadFile('SL.html');
-  //Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(null);
 }
 
 
