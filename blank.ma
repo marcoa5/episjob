@@ -12,11 +12,11 @@
                                                 <div id="tl" class="topleft">
                                                         <table class="tabella">
                                                                 <tbody><tr><td class="a1" colspan="6">COMMESSA</td></tr>
-                                                                <tr><td class="a2" colspan="6"><div id="commessa"></div></td></tr>
+                                                                <tr><td class="a2" colspan="6"><div id="commessa1"></div></td></tr>
                                                                 <tr><td class="a3" colspan="6"></td></tr>
                                                                 <tr class="spazio"></tr>
                                                                 <tr><td class="a1" colspan="3">VS. ORDINE</td><td class="a1" colspan="3">NS. OFFERTA</td></tr>
-                                                                <tr><td class="a2" colspan="3"><div class="in" id="vsordine"></div></td><td class="a2" colspan="3"></td></tr>
+                                                                <tr><td class="a2" colspan="3"><div class="in" id="vsordine"></div></td><td class="a2" colspan="3"><div id="nsofferta1"></div></td></tr>
                                                                 <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                 <tr class="spazio"></tr>
                                                                 <tr><td class="a1" colspan="3">PRODOTTO</td><td class="a1" colspan="3">MATRICOLA</td></tr>
@@ -50,7 +50,7 @@
                                         
                                         <div class="centro">
                                                 <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
-                                                <object class="note" height="207">
+                                                <object class="note" height="206">
                                                                 <object class="notetext" height="207"><div id="rappl1"></div></object>
                                                                 <div class="righe"></div>
                                                                 <div class="righe"></div>
@@ -358,9 +358,9 @@
 				<tr>
 					<td class="firma"><img height="60" width="138" alt="Firma" id="firmatt1" onclick="openMenu('firmat1')" style="cursor: pointer" src="img/white.png"></td>
 					<td class="firma"><img height="60" width="138" alt="Firma " id="firmacc1" onclick="openMenu('firmac1')" style="cursor: pointer" src="img/white.png"></td>
-					<td class="firma"></td>
-					<td class="firma"></td>
-					<td class="firma"></td>
+					<td class="firma"><div id="apbpcs"></div></td>
+					<td class="firma"><div id="chbpcs"></div></td>
+					<td class="firma"><div id="docbpcs"></div></td>
 				</tr>
 			</tbody></table>                                                               
 	</div>
