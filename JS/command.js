@@ -1,4 +1,12 @@
-
+var https = require('https');
+var remote = require('electron').remote;
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+const tmp = require('tmp');
+var winax = require('winax');
+const prompt = require('electron-prompt');
+const {shell} = require('electron');
+const process = require('process');
 
 
 function openMenu(n){
@@ -309,12 +317,9 @@ function controlladata(){
 
 }
 
-var remote = require('electron').remote;
-var fs = require('fs');
-var mkdirp = require('mkdirp');
+
 function printpdf (a) {
 if(a=="a"){
-	  const tmp = require('tmp')
 	  var s = document.getElementById('salva').innerHTML; 
 	  
 	tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
@@ -344,10 +349,8 @@ if(a=="a"){
 		var mi = ora.getMinutes().toString();
 		var se = ora.getSeconds().toString();
 		var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0');
-      /*var path = require('path');
-      var loc = window.location.pathname; 
-      var dir = path.dirname(loc);*/
-      var winax = require('winax'); 
+      /*var loc = window.location.pathname; 
+      var dir = path.dirname(loc);*/ 
       var objO = new ActiveXObject('Outlook.Application');     
       var objNS = objO.GetNameSpace('MAPI');     
       var mItm = objO.CreateItem(0);     
@@ -397,7 +400,7 @@ function Apri(){
 	
 	$('#listac tr').remove();
     var i = 1
-    $.get('customers.txt', function(data) {
+    $.get('.\\customers.txt', function(data) {
             var linee = data.split("\n");
             $.each(linee, function(n, elem) {
                 var record = elem.split("_")
@@ -414,7 +417,7 @@ function Apri(){
 	
 	$('#listam tr').remove();
     var i = 1
-    $.get('mol.txt', function(data) {
+    $.get('.\\mol.txt', function(data) {
             var linee = data.split("\n");
             $.each(linee, function(n, elem) {
                 var record = elem.split("_")
@@ -750,9 +753,7 @@ function indirizzo_cliente(){
 		}
 }}
 
-function openSU(){
-	const prompt = require('electron-prompt');
-	 
+function openSU(){	 
 	prompt({
 		title: 'Password',
 		label: 'Pw:',
@@ -830,10 +831,10 @@ function aggiorna(){
 							return;
 						}
 						console.log("DONE: " + info.filePath);
-						const {shell} = require('electron');
+						
 						// Open a URL in the default way
 						shell.openItem(info.filePath);
-						const remote = require('electron').remote;
+						
 						let w = remote.getCurrentWindow();
 						w.close();
 					});
@@ -844,3 +845,50 @@ function aggiorna(){
 }
 
 
+
+var cart = process.argv[5].substring(11);
+function aggiornamol(){
+	options = { 
+		host               : "raw.githubusercontent.com", 
+		port               : 443,
+		path               : "/marcoa5/episjob/master/molupd.txt",
+		method             : 'GET',
+		rejectUnauthorized : true,
+		requestCert        : true,
+		agent              : false
+	};
+	var file = fs.createWriteStream(cart + "\\mol.txt");
+	var request = https.get(options, function(response){
+		response.pipe(file);
+		file.on("finish", function(){
+			file.close();
+		});
+	});
+	request.end();
+	request.on('error', function(err){
+		throw (err);
+	});	
+}
+
+function aggiornacli(){
+	options = { 
+		host               : "raw.githubusercontent.com", 
+		port               : 443,
+		path               : "/marcoa5/episjob/master/customersupd.txt",
+		method             : 'GET',
+		rejectUnauthorized : true,
+		requestCert        : true,
+		agent              : false
+	};
+	var file = fs.createWriteStream(cart + "\\customers.txt");
+	var request = https.get(options, function(response){
+		response.pipe(file);
+		file.on("finish", function(){
+			file.close();
+		});
+	});
+	request.end();
+	request.on('error', function(err){
+		throw (err);
+	});	
+}
