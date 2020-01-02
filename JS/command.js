@@ -810,3 +810,44 @@ function sondaggio(){
 	var risultato=document.getElementById('rissondaggio');
 	risultato.innerText = "Organizzazione Intervento: " + a1 + " - Consegna Ricambi: " + a2 + " - Esecuzione Intervento: " + a3;
 }
+
+
+//update dell'appCodeName
+function aggiorna(){
+	$.getJSON("https://api.github.com/repos/marcoa5/episjob/releases/latest").done(function (data){
+		var items = [];
+		$.each( data, function( key, val ) {
+			if(key=="name"){
+				if(val!==$('#upd').text().substring(1)){
+					require("electron").remote.require("electron-download-manager").download({
+						//downloadFolder: "C:\\Users\\iycma\\Desktop\\myapp\\",
+						url: "https://github.com/marcoa5/episjob/releases/download/v1.0.8/servicejob-Setup-1.0.8.exe"
+					}, function (error, info) {
+						if (error) {
+							console.log(error);
+							return;
+						}
+						console.log("DONE: " + info.filePath);
+						esegui(info.filePath);
+					});
+				}
+			}
+		});
+	})
+}
+
+function esegui(a){
+var child = require('child_process').execFile;
+var executablePath = a;
+
+child(executablePath, function(err, data) {
+    if(err){
+       console.error(err);
+	return;}
+		console.log(data.toString());
+		const remote = require('electron').remote;
+		let w = remote.getCurrentWindow();
+		w.close();
+	})
+}
+

@@ -620,8 +620,8 @@
 <!--Updater-->
 <div id="notification" class="hidden">
   <p id="message"></p>
-  <button id="close-button" onClick="closeNotification()">
-    Apri pagina download
+  <button id="close-button" onClick="aggiorna()">
+    Aggiorna Adesso
   </button>
   <button id="restart-button" onClick="restartApp()" class="hidden">
     Restart
@@ -649,14 +649,11 @@
 	const restartButton = document.getElementById('restart-button');
 	ipcRenderer.on('update_available', () => {
 	ipcRenderer.removeAllListeners('update_available');
-	message.innerText = 'È disponibile un aggiornamento. Scarica l\'ultima versione...';
+	message.innerText = 'È disponibile un aggiornamento';
 	notification.classList.remove('hidden');
 	});
 
 
-	function closeNotification() {
-		window.open("https://github.com/marcoa5/episjob/releases", '_blank', 'location=yes,height=570,width=450,scrollbars=yes,status=yes');;
-	}
 	
 var https = require('https');
 
