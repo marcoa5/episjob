@@ -45,6 +45,22 @@ app.on('ready', () => {
   autoUpdater.checkForUpdatesAndNotify();
 });
 
+app.on('before-quit', () => {
+  if(document.getElementById('agg').innerText !== ""){
+	 function esegui(a){
+		var child = require('child_process').execFile;
+		var executablePath = a;
+		child(executablePath, function(err, data) {
+			if(err){
+			   console.error(err);
+			return;}
+				console.log(data.toString());
+			})
+	}
+  }
+  app.quit()
+})
+
 ipc.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
