@@ -22,7 +22,7 @@ function openMenu(n){
     if(n == 'firmac1'){init("firmac")};
     if(n == 'firmat1'){init("firmat")};
     if(n=='menuOre'){oggi()};
-	if(n=='manuSU'){openSU()};
+	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
     var iu = document.getElementById('stdspe').innerText;
         if(iu=='SPE'){document.getElementById('manspe').checked = true}
@@ -756,7 +756,7 @@ function indirizzo_cliente(){
 }}
 
 function openSU(){	 
-	prompt({
+	/*prompt({
 		title: 'Password',
 		label: 'Pw:',
 		value: '',
@@ -772,7 +772,7 @@ function openSU(){
 			console.log('result', r);
 		}
 	})
-	.catch(console.error);
+	.catch(console.error);*/
 	document.getElementById('sucommessa').value=document.getElementById('commessa1').innerText;
 	document.getElementById('sunsofferta').value=document.getElementById('nsofferta1').innerText;
 	document.getElementById('suapbpcs').value=document.getElementById('apbpcs').innerText;
