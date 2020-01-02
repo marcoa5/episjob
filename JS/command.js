@@ -819,8 +819,8 @@ function aggiorna(){
 		$.each( data, function( key, val ) {
 			if(key=="name"){
 				if(val!==$('#upd').text().substring(1)){
-					document.getElementById('message').innerText = 'Download in corso...';
-					document.getElementById('restart-button')restartButton.classList.add('hidden');
+					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavvierà automaticamente...";
+					document.getElementById('restart-button').classList.add('hidden');
 					document.getElementById('close-button').classList.add('hidden');
 					require("electron").remote.require("electron-download-manager").download({
 					url: "https://github.com/marcoa5/episjob/releases/download/v"+val+"/servicejob-Setup-"+val+".exe"
@@ -832,7 +832,7 @@ function aggiorna(){
 						console.log("DONE: " + info.filePath);
 						const {shell} = require('electron');
 						// Open a URL in the default way
-						shell.openExternal(info.filePath);
+						shell.openItem(info.filePath);
 						const remote = require('electron').remote;
 						let w = remote.getCurrentWindow();
 						w.close();
