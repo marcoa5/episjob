@@ -819,16 +819,23 @@ function aggiorna(){
 		$.each( data, function( key, val ) {
 			if(key=="name"){
 				if(val!==$('#upd').text().substring(1)){
+					document.getElementById('message').innerText = 'Download in corso...';
+					document.getElementById('restart-button')restartButton.classList.add('hidden');
+					document.getElementById('close-button').classList.add('hidden');
 					require("electron").remote.require("electron-download-manager").download({
-						//downloadFolder: "C:\\Users\\iycma\\Desktop\\myapp\\",
-						url: "https://github.com/marcoa5/episjob/releases/download/v1.0.8/servicejob-Setup-1.0.8.exe"
+					url: "https://github.com/marcoa5/episjob/releases/download/v"+val+"/servicejob-Setup-"+val+".exe"
 					}, function (error, info) {
 						if (error) {
 							console.log(error);
 							return;
 						}
 						console.log("DONE: " + info.filePath);
-						esegui(info.filePath);
+						const {shell} = require('electron');
+						// Open a URL in the default way
+						shell.openExternal(info.filePath);
+						const remote = require('electron').remote;
+						let w = remote.getCurrentWindow();
+						w.close();
 					});
 				}
 			}
@@ -836,18 +843,4 @@ function aggiorna(){
 	})
 }
 
-function esegui(a){
-var child = require('child_process').execFile;
-var executablePath = a;
-
-child(executablePath, function(err, data) {
-    if(err){
-       console.error(err);
-	return;}
-		console.log(data.toString());
-		const remote = require('electron').remote;
-		let w = remote.getCurrentWindow();
-		w.close();
-	})
-}
 
