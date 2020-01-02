@@ -621,10 +621,10 @@
 <div id="notification" class="hidden">
   <p id="message"></p>
   <button id="close-button" onClick="aggiorna()">
-    Aggiorna Adesso
+    Aggiorna Ora
   </button>
-  <button id="restart-button" onClick="restartApp()" class="hidden">
-    Restart
+  <button id="restart-button" onClick="chiudi()" class="hidden">
+    Annulla
   </button>
 </div>
 </body>
@@ -647,13 +647,13 @@
 	const notification = document.getElementById('notification');
 	const message = document.getElementById('message');
 	const restartButton = document.getElementById('restart-button');
+	const closeButton = document.getElementById('close-button');
 	ipcRenderer.on('update_available', () => {
 	ipcRenderer.removeAllListeners('update_available');
 	message.innerText = 'È disponibile un aggiornamento';
 	notification.classList.remove('hidden');
 	});
-
-
+	
 	
 var https = require('https');
 
