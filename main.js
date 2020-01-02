@@ -11,7 +11,11 @@ const path = require('path');
 const url = require('url');
 const shell = electron.shell;
 const { autoUpdater } = require('electron-updater');
-
+const DownloadManager = require("electron-download-manager");
+ 
+DownloadManager.register({
+    downloadFolder: app.getPath("downloads") + "\\my-app"
+});
 
 let win
 var winA
@@ -28,6 +32,8 @@ function createWindow () {
   // e carica l'index.html dell'app.
   win.loadFile('SL.html');
   //Menu.setApplicationMenu(null);
+  win.maximize();
+  console.log(app.getPath("downloads") + "\\my-app");
 }
 
 
