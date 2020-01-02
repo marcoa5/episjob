@@ -51,7 +51,7 @@
                                         <div class="centro">
                                                 <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
                                                 <object class="note" height="206">
-                                                                <object class="notetext" height="207"><div id="rappl1"></div></object>
+                                                                <object class="notetext" height="240"><div id="rappl1"></div></object>
                                                                 <div class="righe"></div>
                                                                 <div class="righe"></div>
                                                                 <div class="righe"></div>
@@ -367,4 +367,250 @@
 	</div>
 </div>
 </div>
+</div>
+
+<!--barra gialla in alto-->
+<div id="menuA" class="menu">
+		<table id="tabmenu">
+				<tbody><tr>
+						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width="20"><br>Modifica</td>
+						<td onclick="aprifile()"><img src="img/rig.png" class="imgmenu" alt="Customer" height="20" width="20"><br>Apri</td>
+						<td onclick="salvafile()"><img src="img/Engineer.png" class="imgmenu" alt="Rapporto" height="20" width="20"><br>Salva</td>
+						<td id="mail" onclick="controllafirme()"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Email</td>
+						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Pulisci</td>
+				</tr>
+		</tbody></table>
+		
+		<div id="upd" oncontextmenu="openMenu('menuSU')">V1.0.13</div>
+		
+</div>
+<!--finestre di dialogo-->
+<div name="finestre">
+<div class="ccc"><!--Matricola-->
+<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
+	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
+					<div class="barrat"><div class="g"></div><p class="tt">SU</p></div>
+					<div class="finestrai" style="max-height: 458px;">
+						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
+						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
+						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
+						<input id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
+						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
+					</div>
+					<br>
+					<button class="pulsante" onclick="closeMenu()">Annulla</button>
+					<button class="pulsante" onclick="closeSU()">Ok</button>
+					<br><br><br>
+			</div> 
+		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
+				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
+				<div class="finestrai" style="max-height: 458px;">
+						<form id="inputmac">
+								<input type="date" name="bday" id="data2">
+								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
+								<div class="inser" id="mmm"><table id="listam"></table></div>
+								<input id="matricolas" class="inser" placeholder="Matricola..."><br>
+								<input id="prodotto" class="inser" placeholder="Prodotto..."><br>
+								<input id="cliente" class="inser" placeholder="Cliente..."><br>
+								<input id="clientead1" class="inser" style="display: none">
+								<input id="clientead2" class="inser" style="display: none">
+								<input id="cantiere" class="inser" placeholder="Cantiere..."><br><br>
+								<input id="orem" class="inser" placeholder="Ore Motore..." onkeypress="return isNumber(event)"><br>
+								<input id="perc1" class="inser1" placeholder="Percussione 1..." onkeypress="return isNumber(event)">
+								<input id="perc2" class="inser1" placeholder="Percussione 2..." onkeypress="return isNumber(event)">
+								<input id="perc3" class="inser1" placeholder="Percussione 3..." onkeypress="return isNumber(event)"><br>
+								<input id="ordine" class="inser" placeholder="Vs.Ordine...">
+								<div class="radiobtn">
+										<p style="margin: 5px; font-family: Arial; font-weight: 900">Manodopera: </p>
+										<input type="radio" id="manstd" name="man" value="Standard" checked="">
+										<label for="manstd">Standard</label>
+										<input type="radio" id="manspe" name="man" value="Specialistica">
+										<label for="manspe">Specialistica</label>
+								</div>
+						</form>
+				</div>
+				<br>
+				<button class="pulsante" onclick="ver_pulisci()">Annulla</button>
+				<button class="pulsante" onclick="salvadati()">Avanti</button>
+				<br><br><br>
+		</div>        
+</div>
+<div class="ccc"><!--Rapporto-->    
+		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
+				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
+				<div class="finestrai" style="max-height: 458px;">
+						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
+						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
+				</div>
+				<br>
+				<button class="pulsante" onclick="openMenu('menuMatricola')">Indietro</button>
+				<button class="pulsante" onclick="salvacomm()">Avanti</button>
+				<br><br><br>
+		
+		</div>
+</div>
+<div class="ccc"><!--Ore-->
+		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
+				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
+				<div class="finestrai" id="htmlore" style="max-height: 458px;">
+						<table id="main">
+								<tbody><tr>
+										<th rowspan="3">TECNICO</th>
+										<th rowspan="3">DATA</th>
+										<th colspan="10">ORE</th>
+										<th rowspan="3">KM</th>
+										<th rowspan="3">SPV</th>
+										<th rowspan="3">OFF</th>
+										<th rowspan="3">OFS</th>
+								</tr>
+								<tr>
+										<th colspan="2">SPO</th>
+										<th colspan="2">SPS</th>
+										<th colspan="2">MNT</th>
+										<th colspan="2">MF</th>
+										<th colspan="2">MNF</th>
+								</tr>
+								<tr>
+										<th>V</th>
+										<th>L</th>
+										<th>V</th>
+										<th>L</th>
+										<th>V</th>
+										<th>L</th>
+										<th>V</th>
+										<th>L</th>
+										<th>V</th>
+										<th>L</th>
+
+								</tr>
+								<tr id="rigadati">
+										<td>
+										<select id="tec">
+												<option value="A. Laini">Andrea Laini</option>
+												<option value="G. Rizzi">Giorgio Rizzi</option>
+												<option value="G. Piccioni">Gabriele Piccioni</option>
+										</select>
+										</td>
+										<td>
+										<input type="date" name="bday" id="data1" onchange="controlladata()">
+										</td>
+										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '1')"></td>
+										<td><input id="spol1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '2')"></td>
+										<td><input id="spsv1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('sps','1')"></td>
+										<td><input id="spsl1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('sps','2')"></td>
+										<td><input id="mntv1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnt','1')"></td>
+										<td><input id="mntl1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnt','2')"></td>
+										<td><input id="mfv1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mf','1')"></td>
+										<td><input id="mfl1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mf','2')"></td>
+										<td><input id="mnfv1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','1')"></td>
+										<td><input id="mnfl1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','2')"></td>
+										<td><input id="km1" class="ore" type="text" maxlength="3" onkeypress="return isNumber(event)"></td>
+										<td><input id="spv1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)"></td>
+										<td><input id="off1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('off', '1')"></td>
+										<td><input id="ofs1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('ofs', '1')"></td>
+								</tr>
+
+								</tbody></table>
+								<br>
+								<button class="buttonore" id="agg" onclick="aggiungi()">Aggiungi</button>
+								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
+								<br><br>
+								<table id="ris" style="color: white;">
+								
+						</table><br><br>        
+						
+				</div>
+				
+				<button class="pulsante" onclick="openMenu('menuRapporto')">Indietro</button>
+				<button class="pulsante" onclick="copiaore()">OK</button>
+				<br><br><br>
+		</div>    
+
+
+<div class="ccc"><!--Email-->    
+		<div class="finestra" id="menuMail">
+				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
+				<div class="finestrai" style="max-height: 458px;">
+						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%" required=""><button id="aggmail" class="pulsante" style="width: 10%" onclick="nuovamail()">OK</button><br>
+						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
+				</div>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
+				<button class="pulsante" onclick="controllaindirizzi()">Ok</button>
+				<br><br><br>
+		
+		</div>
+</div>		
+</div>
+<div class="ccc" id="sigt"><!--Firma Tecnico-->
+		<div class="finestra" id="firmat1">
+				<div class="barrat"><div class="g"><div class="close" onclick="closeMenu()">×</div></div></div>
+				<canvas id="firmat" width="100" height="100"></canvas><br><br>
+				<button id="erase1" class="pulsante">Cancella</button>
+				<button id="save1" class="pulsante">Salva Firma</button>
+				<br><br><br>
+		</div>        
+</div>
+<div class="ccc" id="sigc"><!--Firma Cliente-->
+	<div class="finestra" id="firmac1">
+			<div class="barrat"><div class="g"><div class="close" onclick="closeMenu()">×</div></div></div>
+			<canvas id="firmac" width="100" height="100"></canvas>
+			<div id="sondaggio" style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
+				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
+					<p style="margin: 1px; font-family: Arial; font-weight: 900">Organizzazione Intervento: </p>
+					<input type="radio" id="int1" name="int" value="1">
+					<label for="int1">1</label>
+					<input type="radio" id="int2" name="int" value="2">
+					<label for="int2">2</label>
+					<input type="radio" id="int3" name="int" value="3">
+					<label for="int3">3</label>
+					<input type="radio" id="int4" name="int" value="4">
+					<label for="int4">4</label>
+					<input type="radio" id="int5" name="int" value="5">
+					<label for="int5">5</label>
+				</div>
+				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
+					<p style="margin: 1px; font-family: Arial; font-weight: 900">Puntualità consegna ricambi: </p>
+					<input type="radio" id="ric1" name="ric" value="1">
+					<label for="ric1">1</label>
+					<input type="radio" id="ric2" name="ric" value="2">
+					<label for="ric2">2</label>
+					<input type="radio" id="ric3" name="ric" value="3">
+					<label for="ric3">3</label>
+					<input type="radio" id="ric4" name="ric" value="4">
+					<label for="ric4">4</label>
+					<input type="radio" id="ric5" name="ric" value="5">
+					<label for="ric5">5</label>
+				</div>
+				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
+					<p style="margin: 2px; font-family: Arial; font-weight: 900">Esecuzione intervento: </p>
+					<input type="radio" id="ese1" name="ese" value="1">
+					<label for="ese1">1</label>
+					<input type="radio" id="ese2" name="ese" value="2">
+					<label for="ese2">2</label>
+					<input type="radio" id="ese3" name="ese" value="3">
+					<label for="ese3">3</label>
+					<input type="radio" id="ese4" name="ese" value="4">
+					<label for="ese4">4</label>
+					<input type="radio" id="ese5" name="ese" value="5">
+					<label for="ese5">5</label>
+				</div>
+			</div><br>
+			<button id="erase2" class="pulsante">Cancella</button>
+			<button id="save2" class="pulsante" onclick="sondaggio()">Salva Firma</button>
+			
+			<br><br><br>
+	</div>        
+</div>
+</div>
+<!--std o spe--><div id="stdspe" style="display: none;">STD</div>
+<!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
+<!--Updater-->
+<div id="notification" class="hidden">
+  <p id="message"></p>
+  <button id="close-button" onclick="aggiorna()">
+    Aggiorna Ora
+  </button>
+  <button id="restart-button" onclick="chiudi()" class="hidden">
+    Annulla
+  </button>
 </div>
