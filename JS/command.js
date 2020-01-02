@@ -340,7 +340,7 @@ if(a=="a"){
 		  fs.writeFileSync(a, data, (err) => {if (err) throw err})})}
 		}
 
-    function send_mail(a) {  
+    function send_mail(a) { 	
 	    var ora = new Date()
 		var anno = ora.getFullYear().toString();
 		var mese = (ora.getMonth()+1).toString();
@@ -348,14 +348,16 @@ if(a=="a"){
 		var hr = ora.getHours().toString();
 		var mi = ora.getMinutes().toString();
 		var se = ora.getSeconds().toString();
-		var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0');
-      /*var loc = window.location.pathname; 
-      var dir = path.dirname(loc);*/ 
+		var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0'); 
       var objO = new ActiveXObject('Outlook.Application');     
       var objNS = objO.GetNameSpace('MAPI');     
       var mItm = objO.CreateItem(0);     
-      mItm.Display();    
-      mItm.To = 'xxx.xxx@epiroc.com';
+      mItm.Display();   
+	  //aggiunge gli indirizzi mail
+	  var elenco = document.getElementsByClassName('mail');
+	  var lista = "";
+	  for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +"; "}
+      mItm.To = lista;
       mItm.Subject = "Prova";
       mItm.Body = "Email di prova";
       mItm.Attachments.Add(a + '\\Scheda Lavoro.pdf');    
@@ -891,4 +893,67 @@ function aggiornacli(){
 	request.on('error', function(err){
 		throw (err);
 	});	
+}
+
+
+function nuovamail(){
+	var te = document.getElementById('indmail').checkValidity();
+	if(te==true){
+	var inse = '<div class="mail">' + document.getElementById('indmail').value + "</div><br>";
+	
+	var node = document.createElement("div");
+	node.className = "mail";
+	var textnode = document.createTextNode(document.getElementById('indmail').value);
+	node.appendChild(textnode);
+	node.addEventListener("click", eliminamail);
+	document.getElementById('elencomail').appendChild(node) ;
+	document.getElementById('indmail').value="";
+	document.getElementById('indmail').focus();
+	var elem = document.getElementsByClassName('mail')//.addEventListener("click", eliminamail());
+	//for(var i=0; i<elem.length;i++){elem[i].addEventListener("click", eliminamail)};
+	} else {
+		const options = {
+		type: 'error',
+		buttons: ['OK'],
+		title: 'Errore',
+		message: 'Mail non valida'
+	};
+	dialog.showMessageBoxSync(null, options);
+	}
+}
+
+function eliminamail(){
+	const options = {
+		type: 'question',
+		buttons: ['No','Si'],
+		title: 'Elimina',
+		noLink: true,
+		message: 'Vuoi eliminare?'}
+	var sce = dialog.showMessageBoxSync(null, options);
+	if(sce==1){this.remove();}
+}
+
+
+function controllaindirizzi(){
+	const options = {
+		type: 'error',
+		buttons: ['Ok'],
+		title: 'Indirizzi',
+		noLink: true,
+		message: 'Indirizzi Mail non presenti'}
+	var el = document.getElementsByClassName('mail');
+	if(el.length!==0){closeMenu(); printpdf('a')} else {dialog.showMessageBoxSync(null, options)}
+}
+
+
+function controllafirme(){
+	var ft = document.getElementById('firmatt1').getAttribute('src');
+	var fc = document.getElementById('firmacc1').getAttribute('src');
+	const options = {
+		type: 'error',
+		buttons: ['Ok'],
+		title: 'Firme',
+		noLink: true,
+		message: 'Il documento non è stato firmato'}
+	if(ft=="img/white.png" | fc=="img/white.png"){dialog.showMessageBoxSync(null, options)} else {openMenu('menuMail')}
 }

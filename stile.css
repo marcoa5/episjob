@@ -871,3 +871,23 @@ text-align: center;
     color: rgb(66, 85, 99);
     opacity: 100%;
 }
+
+input[type=email]:valid{
+	box-shadow: 0 0 10px 0 green;
+}
+
+.mail {
+	box-sizing: border-box;
+	font-family: Arial;
+	font-weight: 600;
+	font-size: 13px;
+	background-color: rgb(255, 205,0);
+	box-shadow: 0 0 2px 0 black;
+	box-radius: 5px;
+	display: inline-table;
+	margin: 5px;
+	padding: 2px;
+	cursor: pointer;
+}
+
+
