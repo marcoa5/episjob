@@ -537,23 +537,14 @@ function aprifile(a){
 		var filename =  dialog.showOpenDialogSync(options, "");
 		if(filename!==undefined){
         $.get(filename, function(data) {document.getElementById('salva').innerHTML = data})}
-		aggiungicheckmail()
+		
 		closeMenu()
 	} else {
 		$.get(a, function(data) {
         document.getElementById('salva').innerHTML = data
-		aggiungicheckmail()
         })
 	}
 }
-
-function aggiungicheckmail(){
-	var input = document.getElementById("indmail");
-	input.addEventListener("keydown", function(event) {if (event.keyCode === 13) {event.preventDefault(); nuovamail();}});
-}
-
-
-
     function pulisci(){
         document.getElementById('data2').value="";
         var filename =  "blank.ma"
