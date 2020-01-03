@@ -1,6 +1,6 @@
 {
   "name": "servicejob",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -17,7 +17,16 @@
     },
     "files": [
       "**/*"
-    ]
+    ],
+	"fileAssociations": [
+	 {
+		"ext": "ma",
+		"role": "Editor",
+		"icon": "img/docicon.ico",
+		"perMachine": true,
+		"name": "Service Job File"
+	 }
+	]
   },
   "author": "marcoa5",
   "license": "ISC",

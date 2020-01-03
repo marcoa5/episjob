@@ -516,29 +516,28 @@ function salvafile(){
     } else {printpdf(cartella)};
 }
 
-  function aprifile(){
-    var desk = require('path').join(require('os').homedir(), 'Desktop');
-    let options = {
-        title : "Seleziona File", 
-        defaultPath : desk,
-        buttonLabel : "Apri File", 
-        filters :[
-            {name: 'Schede Lavoro', extensions: ['ma']},
-           ],   
-        properties: ['openFile']
-       }
-    
-    
-    
-    var filename =  dialog.showOpenDialogSync(options, "");
-    if(filename!==undefined){
-        $.get(filename, function(data) {
-            /*console.log(data)
-            document.getElementById('salva').innerHTML = ""*/
-            document.getElementById('salva').innerHTML = data
-        })}
-        closeMenu()
-    }
+function aprifile(a){
+	if(a=="a"){
+		var desk = require('path').join(require('os').homedir(), 'Desktop');
+		let options = {
+			title : "Seleziona File", 
+			defaultPath : desk,
+			buttonLabel : "Apri File", 
+			filters :[
+				{name: 'Schede Lavoro', extensions: ['ma']},
+			   ],   
+			properties: ['openFile']
+        }
+		var filename =  dialog.showOpenDialogSync(options, "");
+		if(filename!==undefined){
+        $.get(filename, function(data) {document.getElementById('salva').innerHTML = data})}
+		closeMenu()
+	} else {
+		$.get(a, function(data) {
+        document.getElementById('salva').innerHTML = data
+        })
+	}
+}
 
 
 
