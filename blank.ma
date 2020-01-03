@@ -367,30 +367,13 @@
 	</div>
 </div>
 </div>
-</div>
-
-<!--barra gialla in alto-->
-<div id="menuA" class="menu">
-		<table id="tabmenu">
-				<tbody><tr>
-						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width="20"><br>Modifica</td>
-						<td onclick="aprifile()"><img src="img/rig.png" class="imgmenu" alt="Customer" height="20" width="20"><br>Apri</td>
-						<td onclick="salvafile()"><img src="img/Engineer.png" class="imgmenu" alt="Rapporto" height="20" width="20"><br>Salva</td>
-						<td id="mail" onclick="controllafirme()"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Email</td>
-						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Pulisci</td>
-				</tr>
-		</tbody></table>
-		
-		<div id="upd" oncontextmenu="openMenu('menuSU')">V1.0.13</div>
-		
-</div>
 <!--finestre di dialogo-->
 <div name="finestre">
 <div class="ccc"><!--Matricola-->
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
-					<div class="barrat"><div class="g"></div><p class="tt">SU</p></div>
-					<div class="finestrai" style="max-height: 458px;">
+					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
+					<div class="finestrai" style="max-height: 797px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
 						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
@@ -404,7 +387,7 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai" style="max-height: 458px;">
+				<div class="finestrai" style="max-height: 797px;">
 						<form id="inputmac">
 								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
@@ -438,7 +421,7 @@
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai" style="max-height: 458px;">
+				<div class="finestrai" style="max-height: 797px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
@@ -452,7 +435,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore" style="max-height: 458px;">
+				<div class="finestrai" id="htmlore" style="max-height: 797px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -530,8 +513,8 @@
 <div class="ccc"><!--Email-->    
 		<div class="finestra" id="menuMail">
 				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-				<div class="finestrai" style="max-height: 458px;">
-						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%" required=""><button id="aggmail" class="pulsante" style="width: 10%" onclick="nuovamail()">OK</button><br>
+				<div class="finestrai" style="max-height: 797px;">
+						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
@@ -544,16 +527,16 @@
 <div class="ccc" id="sigt"><!--Firma Tecnico-->
 		<div class="finestra" id="firmat1">
 				<div class="barrat"><div class="g"><div class="close" onclick="closeMenu()">×</div></div></div>
-				<canvas id="firmat" width="100" height="100"></canvas><br><br>
+				<canvas id="firmat" width="100" height="100" onmousedown="abilitaok()"></canvas><br><br>
 				<button id="erase1" class="pulsante">Cancella</button>
-				<button id="save1" class="pulsante">Salva Firma</button>
+				<button id="save1" class="pulsante" disabled="">Salva Firma</button>
 				<br><br><br>
 		</div>        
 </div>
 <div class="ccc" id="sigc"><!--Firma Cliente-->
 	<div class="finestra" id="firmac1">
 			<div class="barrat"><div class="g"><div class="close" onclick="closeMenu()">×</div></div></div>
-			<canvas id="firmac" width="100" height="100"></canvas>
+			<canvas id="firmac" width="100" height="100" onmousedown="abilitaok()"></canvas>
 			<div id="sondaggio" style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
 					<p style="margin: 1px; font-family: Arial; font-weight: 900">Organizzazione Intervento: </p>
@@ -596,7 +579,7 @@
 				</div>
 			</div><br>
 			<button id="erase2" class="pulsante">Cancella</button>
-			<button id="save2" class="pulsante" onclick="sondaggio()">Salva Firma</button>
+			<button id="save2" class="pulsante" onclick="sondaggio()" disabled="">Salva Firma</button>
 			
 			<br><br><br>
 	</div>        
@@ -613,4 +596,20 @@
   <button id="restart-button" onclick="chiudi()" class="hidden">
     Annulla
   </button>
+</div>
+</div>
+<!--barra gialla in alto-->
+<div id="menuA" class="menu">
+		<table id="tabmenu">
+				<tbody><tr>
+						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width="20"><br>Modifica</td>
+						<td onclick="aprifile('a')"><img src="img/rig.png" class="imgmenu" alt="Customer" height="20" width="20"><br>Apri</td>
+						<td onclick="salvafile()"><img src="img/save.png" class="imgmenu" alt="Rapporto" height="20" width="20"><br>Salva</td>
+						<td id="mail" onclick="controllafirme()"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Email</td>
+						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Pulisci</td>
+				</tr>
+		</tbody></table>
+		
+		<div id="upd" oncontextmenu="openMenu('menuSU')">V1.0.19</div>
+		
 </div>
