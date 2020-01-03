@@ -96,20 +96,24 @@ function closeMenu(){
       
       window.onresize = resizeCanvas;
       resizeCanvas();
-
+		
       
       var signaturePad = new SignaturePad(canvas, {});
-      var er, sa = false
+      var er, sa, fi = false
       if(h=="firmat"){
         er = "erase1";
         sa = "save1";
+		fi = "firmatt1"
       } else if(h=="firmac"){
         er = "erase2";
         sa = "save2";
+		fi="firmacc1";
       }
-
+		
         document.getElementById(er).addEventListener('click', function () {
         signaturePad.clear();
+		$('#' + sa).attr("disabled", true);
+		$('#' + fi).attr('src', "./img/white.png");
       });
       document.getElementById(sa).addEventListener('click', function () {
         var dataURL = canvas.toDataURL();
@@ -122,7 +126,8 @@ function closeMenu(){
         } else {}
       });  
       
-     
+		canvas.getContext("2d").drawImage(document.getElementById(fi),0,0);
+	
     }
       
 
@@ -399,7 +404,12 @@ function myFunction() {
 function Apri(){
 	
 		//carica_clienti
-	
+	var og = new Date();
+	var anno = og.getFullYear();
+	var mese = (og.getMonth()+1).toString().padStart(2,'0');
+	var giorno = og.getDate().toString().padStart(2,'0');
+	var fg = anno + "-" + mese + "-" + giorno;
+	document.getElementById('data2').value = fg;
 	$('#listac tr').remove();
     var i = 1
     $.get('.\\customers.txt', function(data) {
@@ -949,11 +959,20 @@ function controllaindirizzi(){
 function controllafirme(){
 	var ft = document.getElementById('firmatt1').getAttribute('src');
 	var fc = document.getElementById('firmacc1').getAttribute('src');
+	ft = ft.substring(ft.length - 9, ft.length);
+	fc = fc.substring(fc.length - 9, fc.length);
 	const options = {
 		type: 'error',
 		buttons: ['Ok'],
 		title: 'Firme',
 		noLink: true,
 		message: 'Il documento non è stato firmato'}
-	if(ft=="img/white.png" | fc=="img/white.png"){dialog.showMessageBoxSync(null, options)} else {openMenu('menuMail')}
+	if(ft=="white.png" | fc=="white.png"){dialog.showMessageBoxSync(null, options)} else {openMenu('menuMail')}
 }
+
+function abilitaok(){
+$("#save1").attr("disabled", false); 
+$("#save2").attr("disabled", false); 
+}
+
+
