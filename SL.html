@@ -679,6 +679,14 @@ input.addEventListener("keyup", function(event) {
 });
 
 
+var data = ipcRenderer.sendSync('get-file-data')
+if (data ===  null) {
+    console.log("There is no file")
+} else {
+    // Do something with the file.
+    console.log(data)
+}
+
 	
 </script>
 
