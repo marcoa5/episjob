@@ -514,7 +514,7 @@
 		<div class="finestra" id="menuMail">
 				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
 				<div class="finestrai" style="max-height: 817px;">
-						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
+						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
