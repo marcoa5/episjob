@@ -373,7 +373,7 @@
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
 					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai" style="max-height: 797px;">
+					<div class="finestrai" style="max-height: 817px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
 						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
@@ -387,7 +387,7 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai" style="max-height: 797px;">
+				<div class="finestrai" style="max-height: 817px;">
 						<form id="inputmac">
 								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
@@ -421,7 +421,7 @@
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai" style="max-height: 797px;">
+				<div class="finestrai" style="max-height: 817px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
@@ -435,7 +435,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore" style="max-height: 797px;">
+				<div class="finestrai" id="htmlore" style="max-height: 817px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -513,7 +513,7 @@
 <div class="ccc"><!--Email-->    
 		<div class="finestra" id="menuMail">
 				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-				<div class="finestrai" style="max-height: 797px;">
+				<div class="finestrai" style="max-height: 817px;">
 						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 				</div>
@@ -610,6 +610,6 @@
 				</tr>
 		</tbody></table>
 		
-		<div id="upd" oncontextmenu="openMenu('menuSU')">V1.0.19</div>
+		<div id="upd" oncontextmenu="openMenu('menuSU')">V1.0.20</div>
 		
 </div>

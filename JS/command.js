@@ -162,6 +162,12 @@ function copiaore(){
   var datiinput = document.getElementById('ris');
   var righe = datiinput.getElementsByTagName('tr');
   var datioutput = document.getElementById('tabset');
+  var righeout = datioutput.getElementsByTagName('tr');
+  for(var i=3;i<10;i++){
+	  for(var j=0;j<22;j++){
+		  righeout[i].getElementsByTagName('td')[j].innerText="";
+	  }
+  }
   var elenco=[];
   var riga=[];
   for(var i=0;i<righe.length;i++){
