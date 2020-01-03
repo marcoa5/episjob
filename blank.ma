@@ -598,18 +598,3 @@
   </button>
 </div>
 </div>
-<!--barra gialla in alto-->
-<div id="menuA" class="menu">
-		<table id="tabmenu">
-				<tbody><tr>
-						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width="20"><br>Modifica</td>
-						<td onclick="aprifile('a')"><img src="img/rig.png" class="imgmenu" alt="Customer" height="20" width="20"><br>Apri</td>
-						<td onclick="salvafile()"><img src="img/save.png" class="imgmenu" alt="Rapporto" height="20" width="20"><br>Salva</td>
-						<td id="mail" onclick="controllafirme()"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Email</td>
-						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width="20"><br>Pulisci</td>
-				</tr>
-		</tbody></table>
-		
-		<div id="upd" oncontextmenu="openMenu('menuSU')">V1.0.20</div>
-		
-</div>
