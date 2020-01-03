@@ -670,8 +670,7 @@ function liveCheck() {
 
 
 
-var input = document.getElementById("indmail");
-input.addEventListener("keyup", function(event) {if (event.keyCode === 13) {event.preventDefault(); nuovamail();}});
+aggiungicheckmail()
 
 
 var data = ipcRenderer.sendSync('get-file-data')
