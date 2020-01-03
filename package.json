@@ -23,7 +23,6 @@
 		"ext": "ma",
 		"role": "Editor",
 		"icon": "img/docicon.ico",
-		"perMachine": true,
 		"name": "Service Job File"
 	 }
 	]
