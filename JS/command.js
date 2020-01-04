@@ -578,6 +578,11 @@ function aprifile(a){
         $.get(filename, function(data) {document.getElementById('salva').innerHTML = data})}
 		$('#modifiche').text("0");
 		$('#salvataggio').text(filename);
+		$('#menuMatricola').draggable();
+		$('#menuRapporto').draggable();
+		$('#menuOre').draggable();
+		$('#menuSU').draggable();
+		$('#menuMail').draggable();
 		closeMenu()
 	} else {
 		$.get(a, function(data) {

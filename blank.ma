@@ -32,7 +32,7 @@
                                                 <div id="tr" class="topright">
                                                                 <table class="tabella">
                                                                         <tbody><tr><td class="a1" colspan="3">DATA</td><td class="a1" colspan="3">PAGINA</td></tr>
-                                                                        <tr><td class="a2" colspan="3"><div class="in" id="data11"></div></td><td class="a2" colspan="3"></td></tr>
+                                                                        <tr><td class="a2" colspan="3"><div class="in" id="data11"></div></td><td class="a2" colspan="3"><div class="in">1  di  1</div></td></tr>
                                                                         <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                         <tr class="spazio"></tr>
                                                                         <tr><td class="a1" colspan="6">CLIENTE</td></tr>
