@@ -6,7 +6,7 @@ body{
 }
 
 .menu{
-    height:50px;
+    height:20px;
     position: fixed;
     background-color: rgb(255,205,0);
     width: 100%;
@@ -253,6 +253,12 @@ body{
     width: 100%;
 }
 
+.centro:hover, .dati:hover, .tabset:hover, #firmacc1:hover, #firmatt1:hover{
+	box-shadow: 0 0 20px 0 rgb(255,205,0);
+	background-color: rgb(255,255,204);
+	cursor: pointer;
+}
+
 .testo{
     margin:0;
     margin-top: 0.2cm;
@@ -451,7 +457,7 @@ canvas{
 
 .ccc{
     position: fixed;
-    top: 55px;
+    top: 10px;
     width: 100%;
     left:0;
     text-align: center;
@@ -561,9 +567,6 @@ label{
 #firmat1, #firmac1{
     min-width: 850px;
     
-}
-#firmacc1:hover, #firmatt1:hover{
-    background-color: rgb(255,205,0);
 }
 
 #mmm{
@@ -821,11 +824,11 @@ text-align: center;
 
 #upd {
     position: absolute;
-    top: 10px; right: 10px;
-    width: 50px; height: 30px;
+    top: 5px; right: 10px;
+    width: 50px; height: 10px;
     background-color: none;
     font-family: Arial;
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 900;
     text-align: right;
     

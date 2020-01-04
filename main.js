@@ -29,14 +29,61 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+  
+  //crea menu
+  var menu = Menu.buildFromTemplate([
+    
+        {
+		label: 'File',
+            submenu: [
+            {label:'Nuovo', click(){win.webContents.send('pulisci')}, accelerator: 'CmdOrCtrl+N'},
+			{type: 'separator'},
+            {label:'Salva', click(){win.webContents.send('salva')}, accelerator: 'CmdOrCtrl+S'},
+			{label:'Salva con nome', click(){win.webContents.send('salvacon')}, accelerator: 'CmdOrCtrl+Shift+S'},
+			{label:'Apri', click(){win.webContents.send('apri')}, accelerator: 'CmdOrCtrl+O'},
+			{type: 'separator'},
+			{label:'Esporta PDF', click(){win.webContents.send('pdf')}, accelerator: 'CmdOrCtrl+P'},
+			{type: 'separator'},
+			{label:'Invia email', click(){win.webContents.send('mail')},accelerator: 'CmdOrCtrl+I'},
+			{type: 'separator'},
+            {label:'Esci', click(){win.webContents.send('esci')}, accelerator: 'CmdOrCtrl+Q'}
+        ]
+		},
+		{
+		label: 'Modifica',
+            submenu: [
+            {label:'Compila Dati', click(){win.webContents.send('compilad')}, accelerator: 'CmdOrCtrl+Shift+D'},
+			{label:'Compila Commenti', click(){win.webContents.send('compilac')}, accelerator: 'CmdOrCtrl+Shift+R'},
+			{label:'Compila Ore', click(){win.webContents.send('compilao')}, accelerator: 'CmdOrCtrl+Shift+O'},
+        ]
+		}
+	
+  ])
+  
+  
   // e carica l'index.html dell'app.
   win.loadFile('SL.html');
-  Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(menu);
   win.maximize();
   console.log(app.getPath("downloads") + "\\my-app");
 }
 
-
+var menu = Menu.buildFromTemplate([
+    {
+        label: 'Menu',
+            submenu: [
+            {label:'Nuovo', click(event){event.sender.send('pulisci')}},
+			{type: 'separator'},
+            {label:'Salva'},
+			{label:'Salva con nome'},
+			{label:'Apri'},
+			{type: 'separator'},
+			{label:'Invia email'},
+			{type: 'separator'},
+            {label:'Exit', click() {app.quit()}}
+        ]
+    }
+  ])
 
 
 
