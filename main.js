@@ -2,6 +2,7 @@ const electron = require('electron')
 const fs = require('fs');
 const os = require('os');
 const app = electron.app;
+const dialog = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const Tray = electron.Tray;
@@ -19,6 +20,7 @@ DownloadManager.register({
 
 let win
 var winA
+let fesci = false;
 function createWindow () {
   // Crea la finestra del browser
   win = new BrowserWindow({
@@ -66,25 +68,18 @@ function createWindow () {
   Menu.setApplicationMenu(menu);
   win.maximize();
   console.log(app.getPath("downloads") + "\\my-app");
+  
+  
+  
+	win.on('close', function(e){
+		if(!fesci){
+			e.preventDefault();
+			e.sender.send('esci')
+			fesci = true
+		}
+	})
+
 }
-
-var menu = Menu.buildFromTemplate([
-    {
-        label: 'Menu',
-            submenu: [
-            {label:'Nuovo', click(event){event.sender.send('pulisci')}},
-			{type: 'separator'},
-            {label:'Salva'},
-			{label:'Salva con nome'},
-			{label:'Apri'},
-			{type: 'separator'},
-			{label:'Invia email'},
-			{type: 'separator'},
-            {label:'Exit', click() {app.quit()}}
-        ]
-    }
-  ])
-
 
 
 app.on('ready', () => {
@@ -92,21 +87,8 @@ app.on('ready', () => {
   autoUpdater.checkForUpdatesAndNotify();
 });
 
-app.on('before-quit', () => {
-  if(document.getElementById('agg').innerText !== ""){
-	 function esegui(a){
-		var child = require('child_process').execFile;
-		var executablePath = a;
-		child(executablePath, function(err, data) {
-			if(err){
-			   console.error(err);
-			return;}
-				console.log(data.toString());
-			})
-	}
-  }
-  app.quit()
-})
+//TEST
+
 
 ipc.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
@@ -154,3 +136,9 @@ ipc.on('get-file-data', function(event) {
   }
   event.returnValue = data
 })
+
+
+
+
+
+

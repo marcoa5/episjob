@@ -607,7 +607,7 @@
 </div>
 <!--Salvataggio-->
 <div id="salvataggio" style="display: none"></div>
-<div id="modifiche" style="display: none"></div> 
+<div id="modifiche" style="display: none">0</div> 
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
 <!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
 <!--Updater-->
@@ -673,18 +673,21 @@ function liveCheck() {
 
 
 ipcRenderer.on('pulisci', function(){pulisci()});
-ipcRenderer.on('apri', function(){aprifile('a')});
+ipcRenderer.on('apri', function(){aprifo()});
 ipcRenderer.on('mail', function(){controllafirme()});
 ipcRenderer.on('compilad', function(){openMenu('menuMatricola')});
 ipcRenderer.on('compilac', function(){openMenu('menuRapporto')});
 ipcRenderer.on('compilao', function(){openMenu('menuOre')});
-ipcRenderer.on('salva', function(){salvafile()});
-ipcRenderer.on('salvacon', function(){salvafilecon()});
+ipcRenderer.on('salva', function(){salvafile(document.getElementById('salvataggio').innerText)});
+ipcRenderer.on('salvacon', function(){salvafile('')});
 ipcRenderer.on('pdf', function(){esportapdf()});
 ipcRenderer.on('esci', function(){esci()});
 
+
 var data = ipcRenderer.sendSync('get-file-data');
 if (data!==null) {aprifile(data.toString());}
+
+
 
 	
 </script>

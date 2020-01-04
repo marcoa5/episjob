@@ -587,7 +587,7 @@
 </div>
 <!--Salvataggio-->
 <div id="salvataggio" style="display: none"></div>
-<div id="modifiche" style="display: none"></div> 
+<div id="modifiche" style="display: none">0</div> 
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
 <!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
 <!--Updater-->
