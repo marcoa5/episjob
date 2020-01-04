@@ -10,7 +10,7 @@ const process = require('process');
 
 
 function openMenu(n){
-    
+    $('#modifiche').text("1");;
     var f = document.getElementsByClassName("finestra")
     for(var c=0;c<f.length;c++){
         f[c].style.display = "none";
@@ -146,14 +146,15 @@ function salvadati(){
     document.getElementById("perc31").innerText = document.getElementById("perc3").value;
 	document.getElementById("data11").innerText= new Date(document.getElementById("data2").value).toLocaleDateString();
     if(document.getElementById("manstd").checked){document.getElementById('stdspe').innerText = "STD"}else{document.getElementById('stdspe').innerText = "SPE"}
-    openMenu('menuRapporto');
+    closeMenu();
 }
 
 
 function salvacomm(){
   document.getElementById("rappl1").innerText = document.getElementById("rappl").value;
   document.getElementById("oss1").innerText = document.getElementById("oss").value;
-  openMenu('menuOre');
+  
+  closeMenu();
 }
 
 
@@ -472,57 +473,93 @@ function copia(a){
 }
 
 
-//salva
-function salvafile(){
-    var ora = new Date()
+function creanomefile(){
+	var ora = new Date()
     var anno = ora.getFullYear().toString();
     var mese = (ora.getMonth()+1).toString();
     var giorno = ora.getDate().toString();
-    //var hr = ora.getHours().toString();
-    //var mi = ora.getMinutes().toString();
-    //var se = ora.getSeconds().toString();
-    var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')/*+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0')*/;
-    
+    var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0');
     var cli = document.getElementById('cliente11').innerText;
     if(cli!==""){datalo += " - " + cli};
     var mac = document.getElementById('prodotto1').innerText;
     if(mac!==""){datalo += " - " + mac};
     var mat = document.getElementById('matricola').innerText;
     if(mat!==""){datalo += " - " + mat};
+	return datalo;
+}
 
+//salva con nome
+function salvafilecon(){
     var desk = require('path').join(require('os').homedir(), 'Desktop');
     let options = {
-        //Placeholder 1
-        title: "Salva File",
-        
-        //Placeholder 2
-        defaultPath : desk + '\\' + datalo + ".ma",
-        
-        //Placeholder 4
+        title: "Salva con nome",
+        defaultPath : desk + '\\' + creanomefile() + ".ma",
         buttonLabel : "Salva Scheda Lavoro",
-        
-        //Placeholder 3
-        filters :[
-         {name: 'Scheda Lavoro', extensions: ['ma']},{name: 'PDF', extensions: ['pdf']},
-        ]
+        filters :[{name: 'Scheda Lavoro', extensions: ['ma']}],
        }
-    
-    
-
-    
     var cartella =  dialog.showSaveDialogSync(options, "");
 	var che = cartella.substring(cartella.length-2,cartella.length);
-    if(che=="ma"){
-        var s = document.getElementById('salva').innerHTML;           
-        fs.writeFile(cartella, s, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
-    } else {printpdf(cartella)};
+    var s = document.getElementById('salva').innerHTML;           
+    fs.writeFile(cartella, s, function(err) {
+		if(err) {return console.log(err)};
+	$('#salvataggio').text(cartella);
+	
+	})
+}
+
+//salva
+function salvafile(){
+	var te = $('#salvataggio').text();
+	if(te!==""){
+		var cartella =  $('#salvataggio').text();
+		var s = document.getElementById('salva').innerHTML;           
+		fs.writeFile(cartella, s, function(err) {
+			if(err) {return console.log(err)};
+		$('#salvataggio').text(cartella);
+		$('#modifiche').text("");
+		})
+	} else {
+		salvafilecon();
+	}
+}
+
+function esportapdf(){
+	var desk = require('path').join(require('os').homedir(), 'Desktop');
+    let options = {
+        title: "Esporta PDF",
+        defaultPath : desk + '\\' + creanomefile() + ".pdf",
+        buttonLabel : "Esporta PDF",
+        filters :[
+         {name: 'PDF', extensions: ['pdf']},
+        ]
+       }
+    var cartella =  dialog.showSaveDialogSync(options, "");
+	var che = cartella.substring(cartella.length-2,cartella.length);
+	printpdf(cartella);
+}
+
+function controllamodifiche(){
+	var c = $('#modifiche').text();
+	if(c!==""){
+		const options = {
+			type: 'question',
+			buttons: ['No', 'Si'],
+			title: 'Salva',
+			message: 'Vuoi Salvare le modifiche?',
+			noLink: true
+		}
+		var sce = dialog.showMessageBoxSync(null, options);
+		if(sce=="1"){salvafile()};
+	}
+}
+
+function esci(){
+	controllamodifiche();
+	remote.app.quit();
 }
 
 function aprifile(a){
+	controllamodifiche();
 	if(a=="a"){
 		var desk = require('path').join(require('os').homedir(), 'Desktop');
 		let options = {
