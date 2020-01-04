@@ -884,9 +884,8 @@ function aggiorna(){
 						
 						// Open a URL in the default way
 						shell.openItem(info.filePath);
-						
-						let w = remote.getCurrentWindow();
-						w.close();
+						document.getElementById('modifiche').innerText = "0";
+						remote.app.quit();
 					});
 				}
 			}
