@@ -511,7 +511,7 @@
 
 
 <div class="ccc"><!--Email-->    
-		<div class="finestra" id="menuMail">
+		<div class="finestra ui-draggable ui-draggable-handle" id="menuMail" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
 				<div class="finestrai" style="max-height: 438px;">
 						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
@@ -586,7 +586,7 @@
 </div>
 </div>
 <!--Salvataggio-->
-<div id="salvataggio" style="display: none"></div>
+<div id="salvataggio" style="display: none">C:\Users\iycma\OneDrive - Epiroc\Epiroc\General\Tools\Service Job - Electron\blank.ma</div>
 <div id="modifiche" style="display: none">0</div> 
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
 <!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
