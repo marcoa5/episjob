@@ -226,7 +226,7 @@ function controllaore(n, id){
     var a = document.getElementById('spov1').value;
     var b= document.getElementById('spol1').value;
     if((a*1+b*1)<9){return} else {
-      dialog.showMessageBox(null, options);
+      dialog.showMessageBox(remote.win, options);
       if(id=='1'){
         document.getElementById('spov1').value = 8 - document.getElementById('spol1').value*1
       } else {
@@ -238,7 +238,7 @@ function controllaore(n, id){
     var a = document.getElementById('spsv1').value;
     var b= document.getElementById('spsl1').value;
     if((a*1+b*1)<9){return} else {
-      dialog.showMessageBox(null, options);
+      dialog.showMessageBox(remote.win, options);
       if(id=='1'){
         document.getElementById('spsv1').value = 8 - document.getElementById('spsl1').value*1
       } else {
@@ -250,7 +250,7 @@ function controllaore(n, id){
     var a = document.getElementById('mntv1').value;
     var b= document.getElementById('mntl1').value;
     if((a*1+b*1)<9){return} else {
-      dialog.showMessageBox(null, options);
+      dialog.showMessageBox(remote.win, options);
       if(id=='1'){
         document.getElementById('mntv1').value = 8 - document.getElementById('mntl1').value*1
       } else {
@@ -262,7 +262,7 @@ function controllaore(n, id){
     var a = document.getElementById('mfv1').value;
     var b= document.getElementById('mfl1').value;
     if((a*1+b*1)<17){return} else {
-      dialog.showMessageBox(null, options2);
+      dialog.showMessageBox(remote.win, options2);
       if(id=='1'){
         document.getElementById('mfv1').value = 16 - document.getElementById('mfl1').value*1
       } else {
@@ -274,7 +274,7 @@ function controllaore(n, id){
     var a = document.getElementById('mnfv1').value;
     var b= document.getElementById('mnfl1').value;
     if((a*1+b*1)<9){return} else {
-      dialog.showMessageBox(null, options);
+      dialog.showMessageBox(remote.win, options);
       if(id=='1'){
         document.getElementById('mnfv1').value = 8 - document.getElementById('mnfl1').value*1
       } else {
@@ -285,14 +285,14 @@ function controllaore(n, id){
   if(n=='off'){
     var a = document.getElementById('off1').value;
     if((a*1)<9){return} else {
-      dialog.showMessageBox(null, options);
+      dialog.showMessageBox(remote.win, options);
       document.getElementById('off1').value = 8 
     }
   }
   if(n=='ofs'){
     var a = document.getElementById('ofs1').value;
     if((a*1)<9){return} else {
-      dialog.showMessageBox(null, options);
+      dialog.showMessageBox(remote.win, options);
       document.getElementById('ofs1').value = 8 
     }
   }
@@ -488,39 +488,35 @@ function creanomefile(){
 	return datalo;
 }
 
-//salva con nome
-function salvafilecon(){
-    var desk = require('path').join(require('os').homedir(), 'Desktop');
-    let options = {
-        title: "Salva con nome",
-        defaultPath : desk + '\\' + creanomefile() + ".ma",
-        buttonLabel : "Salva Scheda Lavoro",
-        filters :[{name: 'Scheda Lavoro', extensions: ['ma']}],
-       }
-    var cartella =  dialog.showSaveDialogSync(options, "");
-	var che = cartella.substring(cartella.length-2,cartella.length);
-    var s = document.getElementById('salva').innerHTML;           
-    fs.writeFile(cartella, s, function(err) {
-		if(err) {return console.log(err)};
-	$('#salvataggio').text(cartella);
-	
-	})
-}
-
 //salva
-function salvafile(){
-	var te = $('#salvataggio').text();
-	if(te!==""){
-		var cartella =  $('#salvataggio').text();
-		var s = document.getElementById('salva').innerHTML;           
-		fs.writeFile(cartella, s, function(err) {
-			if(err) {return console.log(err)};
-		$('#salvataggio').text(cartella);
-		$('#modifiche').text("");
-		})
+function salvafile(nome, callback){
+	if(nome!==""){
+		var cartella =  nome;
 	} else {
-		salvafilecon();
+		var desk = require('path').join(require('os').homedir(), 'Desktop');
+		let options = {
+			title: "Salva con nome",
+			defaultPath : desk + '\\' + creanomefile() + ".ma",
+			buttonLabel : "Salva Scheda Lavoro",
+			filters :[{name: 'Scheda Lavoro', extensions: ['ma']}],
+        }
+		var cartella =  dialog.showSaveDialogSync(options, "");
 	}
+	var s = document.getElementById('salva').innerHTML;           
+	fs.writeFile(cartella, s, function(err) {
+		if(err) {return console.log(err)};
+		$('#modifiche').text("0");
+		$('#salvataggio').text(cartella);
+		const options = {
+			type: 'info',
+			buttons: ['Ok'],
+			title: 'Salvataggio',
+			message: 'File salvato: ' + cartella,
+			noLink: true
+		}
+	var f = dialog.showMessageBoxSync(remote.win, options);
+	callback();
+		})	
 }
 
 function esportapdf(){
@@ -538,28 +534,32 @@ function esportapdf(){
 	printpdf(cartella);
 }
 
-function controllamodifiche(){
+function controllamodifiche(a, callback){
 	var c = $('#modifiche').text();
-	if(c!==""){
+	if(c=="1"){
 		const options = {
-			type: 'question',
-			buttons: ['No', 'Si'],
-			title: 'Salva',
-			message: 'Vuoi Salvare le modifiche?',
+			type: 'question', 
+			buttons: ['No', 'Si'], 
+			title: 'Salva', 
+			message: 'Vuoi Salvare le modifiche?', 
 			noLink: true
-		}
-		var sce = dialog.showMessageBoxSync(null, options);
-		if(sce=="1"){salvafile()};
-	}
+		};
+		var sce = dialog.showMessageBoxSync(remote.win, options);
+		if(sce==1){
+			if(a=='esci'){
+				salvafile(document.getElementById('salvataggio').innerText, function(){remote.app.quit()})
+			} else if(a=='apri'){
+				salvafile(document.getElementById('salvataggio').innerText, function(){aprifile('a')})
+			} else {};
+		} else {callback()}
+	} else {callback()}
 }
 
-function esci(){
-	controllamodifiche();
-	remote.app.quit();
-}
+function aprifo(){controllamodifiche('apri', function(){aprifile('a')})}
+
+function esci(){controllamodifiche('esci', function(){remote.app.quit()})}
 
 function aprifile(a){
-	controllamodifiche();
 	if(a=="a"){
 		var desk = require('path').join(require('os').homedir(), 'Desktop');
 		let options = {
@@ -609,7 +609,7 @@ function ver_pulisci(){
 				noLink: true
               };
 	
-			var resp = dialog.showMessageBoxSync(null, options) 
+			var resp = dialog.showMessageBoxSync(remote.win, options) 
             if (resp==0){
                 pulisci();
                 closeMenu();
@@ -682,7 +682,7 @@ function oggi(){
                 for(var z=0;z<numrig.length;z++){
                     numrig[z].getElementsByTagName('td')[0].innerText = z+1;
                 }             
-            } else {dialog.showMessageBox(null, options);}
+            } else {dialog.showMessageBox(remote.win, options);}
             
         }
 
@@ -966,7 +966,7 @@ function nuovamail(){
 		title: 'Errore',
 		message: 'Mail non valida'
 	};
-	dialog.showMessageBoxSync(null, options);
+	dialog.showMessageBoxSync(remote.win, options);
 	}
 }
 
@@ -977,7 +977,7 @@ function eliminamail(){
 		title: 'Elimina',
 		noLink: true,
 		message: 'Vuoi eliminare?'}
-	var sce = dialog.showMessageBoxSync(null, options);
+	var sce = dialog.showMessageBoxSync(remote.win, options);
 	if(sce==1){this.remove();}
 }
 
@@ -990,7 +990,7 @@ function controllaindirizzi(){
 		noLink: true,
 		message: 'Indirizzi Mail non presenti'}
 	var el = document.getElementsByClassName('mail');
-	if(el.length!==0){closeMenu(); printpdf('a')} else {dialog.showMessageBoxSync(null, options)}
+	if(el.length!==0){closeMenu(); printpdf('a')} else {dialog.showMessageBoxSync(remote.win, options)}
 }
 
 
@@ -1005,12 +1005,10 @@ function controllafirme(){
 		title: 'Firme',
 		noLink: true,
 		message: 'Il documento non è stato firmato'}
-	if(ft=="white.png" | fc=="white.png"){dialog.showMessageBoxSync(null, options)} else {openMenu('menuMail')}
+	if(ft=="white.png" | fc=="white.png"){dialog.showMessageBoxSync(remote.win, options)} else {openMenu('menuMail')}
 }
 
 function abilitaok(){
 $("#save1").attr("disabled", false); 
 $("#save2").attr("disabled", false); 
 }
-
-
