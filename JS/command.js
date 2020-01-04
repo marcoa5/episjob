@@ -502,6 +502,8 @@ function salvafile(nome, callback){
         }
 		var cartella =  dialog.showSaveDialogSync(options, "");
 	}
+	$('#modifiche').text("0");
+	$('#salvataggio').text(cartella);
 	var s = document.getElementById('salva').innerHTML;           
 	fs.writeFile(cartella, s, function(err) {
 		if(err) {return console.log(err)};
@@ -574,11 +576,14 @@ function aprifile(a){
 		var filename =  dialog.showOpenDialogSync(options, "");
 		if(filename!==undefined){
         $.get(filename, function(data) {document.getElementById('salva').innerHTML = data})}
-		
+		$('#modifiche').text("0");
+		$('#salvataggio').text(filename);
 		closeMenu()
 	} else {
 		$.get(a, function(data) {
-        document.getElementById('salva').innerHTML = data
+        document.getElementById('salva').innerHTML = data;
+		$('#modifiche').text("0");
+		$('#salvataggio').text(a);
 		$('#menuMatricola').draggable();
 		$('#menuRapporto').draggable();
 		$('#menuOre').draggable();
