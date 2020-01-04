@@ -1,5 +1,5 @@
 
-<object height="50"></object>
+<object height="10"></object>
 <div id="copia">
                         <div class="foglio" id="pagina">
                                 <div class="margini">
@@ -8,7 +8,7 @@
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. € 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.com</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
-                                        <div class="dati">
+                                        <div class="dati" onclick="openMenu('menuMatricola')">
                                                 <div id="tl" class="topleft">
                                                         <table class="tabella">
                                                                 <tbody><tr><td class="a1" colspan="6">COMMESSA</td></tr>
@@ -48,7 +48,7 @@
                                                 </div>
                                         </div>
                                         
-                                        <div class="centro">
+                                        <div class="centro" onclick="openMenu('menuRapporto')">
                                                 <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
                                                 <object class="note" height="206">
                                                                 <object class="notetext" height="240"><div id="rappl1"></div></object>
@@ -76,7 +76,7 @@
                                                 </object>
                                         </div>
 	<div class="settimana"><!--Tabella Ore-->
-		<table id="tabset" class="tabset">
+		<table id="tabset" class="tabset" onclick="openMenu('menuOre')">
 			<tbody><tr class="tabrow" style="font-weight: 800;">
 							<td class="tabcell" rowspan="3">TECNICO</td>
 							<td class="tabcell" colspan="3" rowspan="2">DATA</td>
@@ -373,7 +373,7 @@
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
 					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai" style="max-height: 817px;">
+					<div class="finestrai" style="max-height: 438px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
 						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
@@ -387,7 +387,7 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai" style="max-height: 817px;">
+				<div class="finestrai" style="max-height: 438px;">
 						<form id="inputmac">
 								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
@@ -413,21 +413,21 @@
 						</form>
 				</div>
 				<br>
-				<button class="pulsante" onclick="ver_pulisci()">Annulla</button>
-				<button class="pulsante" onclick="salvadati()">Avanti</button>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
+				<button class="pulsante" onclick="salvadati()">Ok</button>
 				<br><br><br>
 		</div>        
 </div>
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai" style="max-height: 817px;">
+				<div class="finestrai" style="max-height: 438px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
 				<br>
-				<button class="pulsante" onclick="openMenu('menuMatricola')">Indietro</button>
-				<button class="pulsante" onclick="salvacomm()">Avanti</button>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
+				<button class="pulsante" onclick="salvacomm()">Ok</button>
 				<br><br><br>
 		
 		</div>
@@ -435,7 +435,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore" style="max-height: 817px;">
+				<div class="finestrai" id="htmlore" style="max-height: 438px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -504,7 +504,7 @@
 						
 				</div>
 				
-				<button class="pulsante" onclick="openMenu('menuRapporto')">Indietro</button>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="copiaore()">OK</button>
 				<br><br><br>
 		</div>    
@@ -513,7 +513,7 @@
 <div class="ccc"><!--Email-->    
 		<div class="finestra" id="menuMail">
 				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-				<div class="finestrai" style="max-height: 817px;">
+				<div class="finestrai" style="max-height: 438px;">
 						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 				</div>
@@ -585,6 +585,9 @@
 	</div>        
 </div>
 </div>
+<!--Salvataggio-->
+<div id="salvataggio" style="display: none"></div>
+<div id="modifiche" style="display: none"></div> 
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
 <!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
 <!--Updater-->

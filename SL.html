@@ -19,7 +19,7 @@
 </head>
 <body onload="liveCheck()" onresize="dimen()">
 <div id="salva">
-<object height="50"></object>
+<object height="10"></object>
 <div id="copia">
                         <div class="foglio" id="pagina">
                                 <div class="margini">
@@ -28,7 +28,7 @@
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. € 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.com</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
-                                        <div class="dati">
+                                        <div class="dati" onclick="openMenu('menuMatricola')">
                                                 <div id="tl" class="topleft">
                                                         <table class="tabella">
                                                                 <tr><td class="a1" colspan="6">COMMESSA</td></tr>
@@ -68,7 +68,7 @@
                                                 </div>
                                         </div>
                                         
-                                        <div class="centro">
+                                        <div class="centro" onclick="openMenu('menuRapporto')">
                                                 <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
                                                 <object class="note" height="206">
                                                                 <object class="notetext" height="240"><div id="rappl1"></div></object>
@@ -96,7 +96,7 @@
                                                 </object>
                                         </div>
 	<div class="settimana"><!--Tabella Ore-->
-		<table id="tabset" class="tabset">
+		<table id="tabset" class="tabset" onclick="openMenu('menuOre')">
 			<tr class="tabrow" style="font-weight: 800;">
 							<td class="tabcell" rowspan="3">TECNICO</td>
 							<td class="tabcell" colspan="3" rowspan="2">DATA</td>
@@ -433,8 +433,8 @@
 						</form>
 				</div>
 				<br>
-				<button class="pulsante" onclick="ver_pulisci()">Annulla</button>
-				<button class="pulsante" onclick="salvadati()">Avanti</button>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
+				<button class="pulsante" onclick="salvadati()">Ok</button>
 				<br><br><br>
 		</div>        
 </div>
@@ -446,8 +446,8 @@
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
 				<br>
-				<button class="pulsante" onclick="openMenu('menuMatricola')">Indietro</button>
-				<button class="pulsante" onclick="salvacomm()">Avanti</button>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
+				<button class="pulsante" onclick="salvacomm()">Ok</button>
 				<br><br><br>
 		
 		</div>
@@ -524,7 +524,7 @@
 						
 				</div>
 				
-				<button class="pulsante" onclick="openMenu('menuRapporto')">Indietro</button>
+				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="copiaore()">OK</button>
 				<br><br><br>
 		</div>    
@@ -605,6 +605,9 @@
 	</div>        
 </div>
 </div>
+<!--Salvataggio-->
+<div id="salvataggio" style="display: none"></div>
+<div id="modifiche" style="display: none"></div> 
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
 <!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
 <!--Updater-->
@@ -621,7 +624,7 @@
 </div>
 <!--barra gialla in alto-->
 <div id="menuA" class="menu">
-		<table id="tabmenu">
+		<!--<table id="tabmenu">
 				<tr>
 						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width ="20" ><br>Modifica</td>
 						<td onclick="aprifile('a')"><img src="img/rig.png" class="imgmenu" alt="Customer" height="20" width ="20" ><br>Apri</td>
@@ -629,7 +632,7 @@
 						<td id="mail" onclick="controllafirme()"><img src="img/ra.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Email</td>
 						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Pulisci</td>
 				</tr>
-		</table>
+		</table>-->
 		
 		<div id="upd" oncontextmenu="openMenu('menuSU')"></div>
 		
@@ -669,12 +672,18 @@ function liveCheck() {
 		} else {}}
 
 
+ipcRenderer.on('pulisci', function(){pulisci()});
+ipcRenderer.on('apri', function(){aprifile('a')});
+ipcRenderer.on('mail', function(){controllafirme()});
+ipcRenderer.on('compilad', function(){openMenu('menuMatricola')});
+ipcRenderer.on('compilac', function(){openMenu('menuRapporto')});
+ipcRenderer.on('compilao', function(){openMenu('menuOre')});
+ipcRenderer.on('salva', function(){salvafile()});
+ipcRenderer.on('salvacon', function(){salvafilecon()});
+ipcRenderer.on('pdf', function(){esportapdf()});
+ipcRenderer.on('esci', function(){esci()});
 
-/*var input = document.getElementById("indmail");
-	input.addEventListener("keydown", function(event) {if (event.keyCode === 13) {event.preventDefault(); nuovamail();}});*/
-
-
-var data = ipcRenderer.sendSync('get-file-data')
+var data = ipcRenderer.sendSync('get-file-data');
 if (data!==null) {aprifile(data.toString());}
 
 	
