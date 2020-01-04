@@ -645,6 +645,7 @@
 	$('#menuRapporto').draggable();
 	$('#menuOre').draggable();
 	$('#menuSU').draggable();
+	$('#menuMail').draggable();
 
 
 	const { ipcRenderer } = require('electron');
@@ -681,7 +682,8 @@ ipcRenderer.on('compilao', function(){openMenu('menuOre')});
 ipcRenderer.on('salva', function(){salvafile(document.getElementById('salvataggio').innerText)});
 ipcRenderer.on('salvacon', function(){salvafile('')});
 ipcRenderer.on('pdf', function(){esportapdf()});
-ipcRenderer.on('esci', function(){esci()});
+ipcRenderer.on('esci', function(){remote.app.quit()});
+ipcRenderer.on('escisalva', function(){esci()});
 
 
 var data = ipcRenderer.sendSync('get-file-data');

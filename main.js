@@ -74,7 +74,7 @@ function createWindow () {
 	win.on('close', function(e){
 		if(!fesci){
 			e.preventDefault();
-			e.sender.send('esci')
+			e.sender.send('escisalva')
 			fesci = true
 		}
 	})
