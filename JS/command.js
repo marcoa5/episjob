@@ -39,7 +39,7 @@ function openMenu(n){
 	document.getElementById("clientead1").value=document.getElementById("cliente12").innerText;
 	document.getElementById("clientead2").value=document.getElementById("cliente13").innerText;
     document.getElementById("cantiere").value=document.getElementById("cantiere1").innerText;
-    document.getElementById("orem").valu=document.getElementById("orem1").innerTexte;
+    document.getElementById("orem").value=document.getElementById("orem1").innerText;
     document.getElementById("perc1").value=document.getElementById("perc11").innerText;
     document.getElementById("perc2").value=document.getElementById("perc21").innerText;
     document.getElementById("perc3").value=document.getElementById("perc31").innerText;
@@ -579,6 +579,11 @@ function aprifile(a){
 	} else {
 		$.get(a, function(data) {
         document.getElementById('salva').innerHTML = data
+		$('#menuMatricola').draggable();
+		$('#menuRapporto').draggable();
+		$('#menuOre').draggable();
+		$('#menuSU').draggable();
+		$('#menuMail').draggable();
         })
 	}
 }
@@ -594,6 +599,7 @@ function aprifile(a){
                 $('#menuRapporto').draggable();
                 $('#menuOre').draggable();
 				$('#SU').draggable();
+				$('#menuMail').draggable();
             })}
         
             closeMenu();
@@ -947,7 +953,6 @@ function nuovamail(){
 	var te = document.getElementById('indmail').checkValidity();
 	if(te==true){
 	var inse = '<div class="mail">' + document.getElementById('indmail').value + "</div><br>";
-	
 	var node = document.createElement("div");
 	node.className = "mail";
 	var textnode = document.createTextNode(document.getElementById('indmail').value);
@@ -966,6 +971,13 @@ function nuovamail(){
 		message: 'Mail non valida'
 	};
 	dialog.showMessageBoxSync(remote.win, options);
+	}
+}
+
+function riaprimenumail(){
+	var c = document.getElementsByClassName('mail');
+	for(var i=0;i<c.length;i++){
+		c[i].addEventListener("click", eliminamail);
 	}
 }
 
@@ -1004,7 +1016,7 @@ function controllafirme(){
 		title: 'Firme',
 		noLink: true,
 		message: 'Il documento non è stato firmato'}
-	if(ft=="white.png" | fc=="white.png"){dialog.showMessageBoxSync(remote.win, options)} else {openMenu('menuMail')}
+	if(ft=="white.png" | fc=="white.png"){dialog.showMessageBoxSync(remote.win, options)} else {riaprimenumail();openMenu('menuMail');}
 }
 
 function abilitaok(){
