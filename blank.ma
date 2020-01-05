@@ -47,33 +47,34 @@
                                                                 </tbody></table>
                                                 </div>
                                         </div>
-                                        
+                                        <object style="height: 3px;"></object>
                                         <div class="centro" onclick="openMenu('menuRapporto')">
                                                 <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
-                                                <object class="note" height="206">
-                                                                <object class="notetext" height="240"><div id="rappl1"></div></object>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                </object>
-                                                <div class="header"><div class="headertext">OSSERVAZIONI</div></div>
-                                                <object class="note" height="65">
-                                                                <object class="notetext1" height="65"><div id="oss1"></div></object>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                                <div class="righe"></div>
-                                                </object>
+                                                    <div class="notetext">
+														<div id="rappl1" style="height: 225px;"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe"></div>
+														<div class="righe" style="border-bottom: none"></div>
+													</div>
+												<div class="header"><div class="headertext">OSSERVAZIONI</div></div>
+                                                    <div class="notetext">
+														<div id="oss1" style="height: 65px;"></div>
+															<div class="righe"></div>
+															<div class="righe"></div>
+															<div class="righe"></div>
+															<div class="righe" style="border-bottom: none"></div>
+													</div>
                                         </div>
 	<div class="settimana"><!--Tabella Ore-->
 		<table id="tabset" class="tabset" onclick="openMenu('menuOre')">

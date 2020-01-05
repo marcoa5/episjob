@@ -349,8 +349,11 @@ if(a=="a"){
 		})
 }else {
 		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
-		  fs.writeFileSync(a, data, (err) => {if (err) throw err})})}
-		}
+		  fs.writeFileSync(a, data, (err) => {
+			  if (err) throw err
+			  })
+			  shell.openItem(a)})}
+}
 
     function send_mail(a) { 	
 	    var ora = new Date()
@@ -897,8 +900,6 @@ function aggiorna(){
 							return;
 						}
 						console.log("DONE: " + info.filePath);
-						
-						// Open a URL in the default way
 						shell.openItem(info.filePath);
 						document.getElementById('modifiche').innerText = "0";
 						remote.app.quit();
@@ -913,49 +914,11 @@ function aggiorna(){
 
 var cart = process.argv[5].substring(11);
 function aggiornamol(){
-	options = { 
-		host               : "raw.githubusercontent.com", 
-		port               : 443,
-		path               : "/marcoa5/episjob/master/molupd.txt",
-		method             : 'GET',
-		rejectUnauthorized : true,
-		requestCert        : true,
-		agent              : false
-	};
-	var file = fs.createWriteStream(cart + "\\mol.txt");
-	var request = https.get(options, function(response){
-		response.pipe(file);
-		file.on("finish", function(){
-			file.close();
-		});
-	});
-	request.end();
-	request.on('error', function(err){
-		throw (err);
-	});	
+$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/molupd.txt", function(data){fs.writeFileSync(cart + "\\mol.txt", data)})
 }
 
-function aggiornacli(){
-	options = { 
-		host               : "raw.githubusercontent.com", 
-		port               : 443,
-		path               : "/marcoa5/episjob/master/customersupd.txt",
-		method             : 'GET',
-		rejectUnauthorized : true,
-		requestCert        : true,
-		agent              : false
-	};
-	var file = fs.createWriteStream(cart + "\\customers.txt");
-	var request = https.get(options, function(response){
-		response.pipe(file);
-		file.on("finish", function(){
-			file.close();
-		});
-	});
-	request.end();
-	request.on('error', function(err){
-		throw (err);
-	});	
+function aggiornacli(){	
+	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/customersupd.txt", function(data){fs.writeFileSync(cart + "\\customers.txt", data)})
 }
 
 
