@@ -31,34 +31,32 @@ function openMenu(n){
     
 
 
-    document.getElementById("myinput").value=document.getElementById("matricola").innerText;
+    $('#myinput').val($('#matricola').text());
     myFunction();
-    document.getElementById("matricolas").value=document.getElementById("matricola").innerText;
-    document.getElementById("prodotto").value=document.getElementById("prodotto1").innerText;
-    document.getElementById("cliente").value=document.getElementById("cliente11").innerText;
-	document.getElementById("clientead1").value=document.getElementById("cliente12").innerText;
-	document.getElementById("clientead2").value=document.getElementById("cliente13").innerText;
-    document.getElementById("cantiere").value=document.getElementById("cantiere1").innerText;
-    document.getElementById("orem").value=document.getElementById("orem1").innerText;
-    document.getElementById("perc1").value=document.getElementById("perc11").innerText;
-    document.getElementById("perc2").value=document.getElementById("perc21").innerText;
-    document.getElementById("perc3").value=document.getElementById("perc31").innerText;
-    document.getElementById("rappl").value=document.getElementById("rappl1").innerText;
-    document.getElementById("oss").value=document.getElementById("oss1").innerText;
-	document.getElementById("ordine").value=document.getElementById("vsordine").innerText;
-	if(document.getElementById("data11").innerText!==""){
-	var giorno =  new Date(document.getElementById("data11").innerText);
-	var manno = giorno.getFullYear();
-	var mmese = (giorno.getMonth()+1).toString().padStart(2,'0');
-	var mgiorno = giorno.getDate().toString().padStart(2,'0');
-	document.getElementById("data2").value= manno + "-" + mmese.padStart(2,'0') +"-" + mgiorno.padStart(2,'0');}
+    $('#matricolas').val($('#matricola').text());
+    $('#prodotto').val($('#prodotto1').text());
+    $('#cliente').val($('#cliente11').text());
+	$('#clientead1').val($('#cliente12').text());
+	$('#clientead2').val($('#cliente13').text());
+    $('#cantiere').val($('#cantiere1').text());
+    $('#orem').val($('#orem1').text());
+    $('#perc1').val($('#perc11').text());
+    $('#perc2').val($('#perc21').text());
+    $('#perc3').val($('#perc31').text());
+    $('#rappl').val($('#rappl1').text());
+    $('#oss').val($('#oss1').text());
+	$('#ordine').val($('#vsordine').text());
+	if($('#data11').text()!==""){
+	var frdata = $('#data11').text().split("/");
+	var gdata = frdata[2]+"-"+frdata[1]+"-"+frdata[0];
+	$("#data2").val(gdata);}
 }
 
 window.onresize = dimen();
 dimen();
 
 function dimen(){
-  var fff = document.getElementsByClassName("finestrai")
+  var fff = $(".finestrai")
   for(var u=0;u<fff.length;u++){
       fff[u].style.maxHeight = window.innerHeight- 200 +"px";
   }
@@ -66,12 +64,12 @@ function dimen(){
 
 
 function closeMenu(){
-    var fin = document.getElementsByClassName("finestra")
+    var fin = $(".finestra")
     for(var i =0;i<fin.length;i++){
         fin[i].style.display="none"
     }
     
-    document.getElementsByClassName("foglio")[0].style.filter = ""
+    $(".foglio")[0].style.filter = ""
     }
 
 
@@ -134,26 +132,28 @@ function closeMenu(){
 
 
 function salvadati(){
-    document.getElementById("matricola").innerText = document.getElementById("matricolas").value;
-    document.getElementById("prodotto1").innerText = document.getElementById("prodotto").value;
-    document.getElementById("cliente11").innerText = document.getElementById("cliente").value;
-	document.getElementById("cliente12").innerText = document.getElementById("clientead1").value;
-	document.getElementById("cliente13").innerText = document.getElementById("clientead2").value;
-    document.getElementById("cantiere1").innerText = document.getElementById("cantiere").value;
-    document.getElementById("orem1").innerText = document.getElementById("orem").value;
-    document.getElementById("perc11").innerText = document.getElementById("perc1").value;
-    document.getElementById("perc21").innerText = document.getElementById("perc2").value;
-    document.getElementById("perc31").innerText = document.getElementById("perc3").value;
-	document.getElementById("data11").innerText= new Date(document.getElementById("data2").value).toLocaleDateString();
-    if(document.getElementById("manstd").checked){document.getElementById('stdspe').innerText = "STD"}else{document.getElementById('stdspe').innerText = "SPE"}
+    $("#matricola").text($("#matricolas").val());
+    $("#prodotto1").text($("#prodotto").val());
+    $("#cliente11").text($("#cliente").val()) ;
+	$("#cliente12").text($("#clientead1").val());
+	$("#cliente13").text($("#clientead2").val());
+    $("#cantiere1").text($("#cantiere").val());
+    $("#orem1").text($("#orem").val());
+    $("#perc11").text($("#perc1").val());
+    $("#perc21").text($("#perc2").val());
+    $("#perc31").text($("#perc3").val());
+	var agg1 = $('#data2').val().split("-")
+	var aggdata = agg1[2] + "/" + agg1[1] + "/" +agg1[0];
+	$("#data11").text(aggdata);
+    if(document.getElementById("manstd").checked){$('#stdspe').text("STD")}else{$('#stdspe').text("SPE")}
     closeMenu();
-	document.getElementById("vsordine").innerText=document.getElementById("ordine").value;
+	$("#vsordine").text($("#ordine").val());
 }
 
 
 function salvacomm(){
-  document.getElementById("rappl1").innerText = document.getElementById("rappl").value;
-  document.getElementById("oss1").innerText = document.getElementById("oss").value;
+  $("#rappl1").text($("#rappl").val());
+  $("#oss1").text($("#oss").val());
   
   closeMenu();
 }
@@ -161,9 +161,9 @@ function salvacomm(){
 
 function copiaore(){
   //salvadati();
-  var datiinput = document.getElementById('ris');
+  var datiinput = $('#ris');
   var righe = datiinput.getElementsByTagName('tr');
-  var datioutput = document.getElementById('tabset');
+  var datioutput = $('#tabset');
   var righeout = datioutput.getElementsByTagName('tr');
   for(var i=3;i<10;i++){
 	  for(var j=0;j<22;j++){
@@ -224,8 +224,8 @@ function controllaore(n, id){
     message: 'Non puoi superare le 16 ore',
   };
   if(n=='spo'){
-    var a = document.getElementById('spov1').value;
-    var b= document.getElementById('spol1').value;
+    var a = $('#spov1').val();
+    var b= $('#spol1').val();
     if((a*1+b*1)<9){return} else {
       dialog.showMessageBox(remote.win, options);
       if(id=='1'){
