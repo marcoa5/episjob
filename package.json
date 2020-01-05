@@ -1,6 +1,6 @@
 {
-  "name": "servicejob",
-  "version": "1.0.33",
+  "name": "ServiceJob",
+  "version": "1.0.34",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
