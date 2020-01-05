@@ -33,9 +33,9 @@ body{
 .margini{ 
     position: relative;
     height: 27.3cm;
-    width: 18.6cm;
-    left: 1.2cm;
-    top: 1.2cm;
+    width: 702px;
+    margin: auto;
+	top: 1cm;
 }
 
 .int{
@@ -65,16 +65,22 @@ body{
 
 .dati{
     left:0;
-    width: 700px;
+	margin:0;
+	padding:0;
+	height: 156px;
 }
 
-.topleft, .topright{width: 340px;}
+.topleft, .topright{
+	width: 340px; 	
+	margin:0;
+	padding:0;
+	height: 156px;
+	}
 
 .topleft{
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     position: absolute;
-    height: 4.4cm;
     left:0;
     
 }
@@ -83,19 +89,16 @@ body{
     position: absolute;
     right: 1px;
     font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    height: 4.4cm;
-    
-    
+    display: inline-block;   
 }
 
 .topcenter{
     border-collapse: collapse;
-
+	
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     width: 10px;
-    height: 4.4cm;
+    height: 156px;
     
 }
 
@@ -158,35 +161,28 @@ body{
 }
 
 .header{
+	height: 20px;
     border-collapse: collapse;
-    margin-top: 0;
-    margin-right: 20px;
-    width: 700px;
-    top:0;
-    left:0;
-    
     float: top;
     border: 1px solid black;
     font-family: Arial;
     font-size: 9pt;
+	text-align: center;
 }
 
 
 .headertext{
-    margin-left: 10px;
+	position: inline;
+    margin: 2px 0;
     font-family: Arial;
     font-weight: 800;
-    font-size: 7pt;
+    font-size: 10px;
 }
 
 
 .note{
+	position: inline;
     border-collapse: collapse;
-    margin-top: 0;
-    margin-right: 20px;
-    width: 700px;
-    top:0;
-    left:0;
     display: inline-block;
     text-align: justify;
     border: 1px solid black;
@@ -195,46 +191,42 @@ body{
     font-family: arial;
     font-size: 9pt;
     line-height: 20px;
-    overflow: hidden;
-    position: relative;
 }
 
 .notetext{
-    margin-right: 20px;
-    width: 700px;
-    top:0;
-    left:0;
-    position: absolute;
+    border-collapse: collapse;
+    float: top;
+    border: 1px solid black;
+	border-top:none;
+	border-bottom:none;
+    font-family: Arial;
     overflow: hidden;
-    line-height: 175%;
-    max-lines: 12;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 7pt;
-    width: 100%;
-
 }
 
-.notetext1{
 
-    position: absolute;
-    overflow: hidden;
-    line-height: 175%;
-    max-lines: 4;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 7pt;
-
+#rappl1, #oss1{
+	position: absolute;
+	padding: 0 15px;
+	overflow: hidden;
+	line-height: 16px;
+    font-size: 9.5px;
+	text-align: justify;
 }
+
+
 
 .righe{
     top: 0;
-    width: 100%;
-    position: relative;
-    height: 15.7px;
+    display: block;
+	top:0;
+    height: 16px;
     border-bottom: 0.3px solid gray;
 }
 
+.dati, .header, .headertext, .note, .notetext, .righe {
+	box-sizing: border-box;
+	width: 702px;
+}
 
 
 .commessa{
@@ -352,7 +344,8 @@ body{
     font-family: arial;
     font-size: 7pt;
     text-align: center;
-    border-collapse: collapse;   
+    border-collapse: collapse;  
+	border: 1px solid black;	
 
 }
 .tabset2{
@@ -673,11 +666,12 @@ label{
 
 #inputmac {
     background-color: white;
+	width: 90%;
 }
   /* width */
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
 	cursor:pointer;
   }
 
