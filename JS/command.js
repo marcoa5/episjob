@@ -45,7 +45,7 @@ function openMenu(n){
     document.getElementById("perc3").value=document.getElementById("perc31").innerText;
     document.getElementById("rappl").value=document.getElementById("rappl1").innerText;
     document.getElementById("oss").value=document.getElementById("oss1").innerText;
-	
+	document.getElementById("ordine").value=document.getElementById("vsordine").innerText;
 	if(document.getElementById("data11").innerText!==""){
 	var giorno =  new Date(document.getElementById("data11").innerText);
 	var manno = giorno.getFullYear();
@@ -147,6 +147,7 @@ function salvadati(){
 	document.getElementById("data11").innerText= new Date(document.getElementById("data2").value).toLocaleDateString();
     if(document.getElementById("manstd").checked){document.getElementById('stdspe').innerText = "STD"}else{document.getElementById('stdspe').innerText = "SPE"}
     closeMenu();
+	document.getElementById("vsordine").innerText=document.getElementById("ordine").value;
 }
 
 
@@ -384,7 +385,8 @@ if(a=="a"){
       mItm.Display();    
       mItm.To = 'xxx.xxx@epiroc.com';
       mItm.Subject = "Prova";
-      mItm.Body = "Email di prova"  + " - Risultato sondaggio: " + document.getElementById('rissondaggio').innerText;
+	  var son = $('#rissondaggio').text();
+      mItm.Body = "Email di prova"  + "\n\n\nRisultato sondaggio:\n\n" + son.split(" - ")[0] + "\n" + son.split(" - ")[1] + "\n" +son.split(" - ")[2];
       mItm.Attachments.Add(a + '\\Scheda Lavoro.ma');    
       mItm.GetInspector.WindowState = 2;
       //mItm.send();
@@ -974,7 +976,22 @@ function controllaindirizzi(){
 		noLink: true,
 		message: 'Indirizzi Mail non presenti'}
 	var el = document.getElementsByClassName('mail');
-	if(el.length!==0){closeMenu(); printpdf('a')} else {dialog.showMessageBoxSync(remote.win, options)}
+	var st="";
+	for(var i=0;i<el.length;i++){
+		st+="- " + el[i].innerText + "\n";
+	}
+	const options1 = {
+		type: 'question',
+		buttons: ['No', 'Si'],
+		title: 'Invio',
+		noLink: true,
+		message: 'Inviare la mail ai seguenti indirizzi?\n' + st}
+	
+	if(el.length!==0){
+		var sce=dialog.showMessageBoxSync(remote.win, options1);
+		if(sce==1){closeMenu(); printpdf('a')}
+		} else {dialog.showMessageBoxSync(remote.win, options)}
+	
 }
 
 
