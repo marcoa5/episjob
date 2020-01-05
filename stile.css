@@ -489,7 +489,7 @@ canvas{
     color: rgb(255,205,0);
 }
 
-.pulsante{
+.pulsante, .pulsante1{
     box-sizing: border-box;
     width: 40%;
     border-style: no;
@@ -503,12 +503,14 @@ canvas{
     cursor: pointer; 
 }
 
-.pulsante:hover{
+.pulsante1{width: 27%}
+
+.pulsante:hover, .pulsante1:hover{
     background-color: rgb(66,85,99);
     color: rgb(255,205,0);    
 }
 
-.pulsante:disabled{
+.pulsante:disabled, .pulsante1:disabled{
     background-color: grey;;
     color: rgb(153, 102, 0);    
 }
@@ -890,11 +892,11 @@ input[type=email]:valid{
 	font-weight: 600;
 	font-size: 13px;
 	background-color: rgb(255, 205,0);
-	box-shadow: 0 0 5px 0 black;
-	border-radius: 5px;
+	box-shadow: 0 0 7px 0 black;
+	border-radius: 10px;
 	display: inline-table;
 	margin: 5px;
-	padding: 2px;
+	padding: 3px;
 	cursor: pointer;
 }
 

@@ -519,7 +519,7 @@
 						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
-				<button class="pulsante" onclick="controllaindirizzi()">Ok</button>
+				<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>
 				<br><br><br>
 		
 		</div>
@@ -527,16 +527,17 @@
 </div>
 <div class="ccc" id="sigt"><!--Firma Tecnico-->
 		<div class="finestra" id="firmat1">
-				<div class="barrat"><div class="g"><div class="close" onclick="closeMenu()">×</div></div></div>
+				<div class="barrat"><div class="g"></div></div>
 				<canvas id="firmat" width="100" height="100" onmousedown="abilitaok()"></canvas><br><br>
-				<button id="erase1" class="pulsante">Cancella</button>
-				<button id="save1" class="pulsante" disabled="">Salva Firma</button>
+				<button class="pulsante1" onclick="closeMenu()">Annulla</button>
+				<button id="erase1" class="pulsante1">Elimina Firma</button>
+				<button id="save1" class="pulsante1" disabled="">Salva Firma</button>
 				<br><br><br>
 		</div>        
 </div>
 <div class="ccc" id="sigc"><!--Firma Cliente-->
 	<div class="finestra" id="firmac1">
-			<div class="barrat"><div class="g"><div class="close" onclick="closeMenu()">×</div></div></div>
+			<div class="barrat"><div class="g"></div></div>
 			<canvas id="firmac" width="100" height="100" onmousedown="abilitaok()"></canvas>
 			<div id="sondaggio" style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
@@ -579,8 +580,9 @@
 					<label for="ese5">5</label>
 				</div>
 			</div><br>
-			<button id="erase2" class="pulsante">Cancella</button>
-			<button id="save2" class="pulsante" onclick="sondaggio()" disabled="">Salva Firma</button>
+			<button class="pulsante1" onclick="closeMenu()">Annulla</button>
+			<button id="erase2" class="pulsante1">Elimina Firma</button>
+			<button id="save2" class="pulsante1" onclick="sondaggio()" disabled="">Salva Firma</button>
 			
 			<br><br><br>
 	</div>        
