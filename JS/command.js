@@ -161,9 +161,9 @@ function salvacomm(){
 
 function copiaore(){
   //salvadati();
-  var datiinput = $('#ris');
+  var datiinput = document.getElementById('ris');
   var righe = datiinput.getElementsByTagName('tr');
-  var datioutput = $('#tabset');
+  var datioutput = document.getElementById('tabset');
   var righeout = datioutput.getElementsByTagName('tr');
   for(var i=3;i<10;i++){
 	  for(var j=0;j<22;j++){
