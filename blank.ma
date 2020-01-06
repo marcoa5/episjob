@@ -8,7 +8,7 @@
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. € 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.com</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
-                                        <div class="dati" onclick="openMenu('menuMatricola')">
+                                        <div class="dati" id="aamatricola" onclick="openMenu('menuMatricola')">
                                                 <div id="tl" class="topleft">
                                                         <table class="tabella">
                                                                 <tbody><tr><td class="a1" colspan="6">COMMESSA</td></tr>
@@ -48,7 +48,7 @@
                                                 </div>
                                         </div>
                                         <object style="height: 3px;"></object>
-                                        <div class="centro" onclick="openMenu('menuRapporto')">
+                                        <div class="centro" id="aarapporto" onclick="openMenu('menuRapporto')">
                                                 <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
                                                     <div class="notetext">
 														<div id="rappl1" style="height: 225px;"></div>
@@ -393,13 +393,13 @@
 								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
-								<input id="matricolas" class="inser" placeholder="Matricola..."><br>
-								<input id="prodotto" class="inser" placeholder="Prodotto..."><br>
-								<input id="cliente" class="inser" placeholder="Cliente..."><br>
+								<input id="matricolas" class="inser" placeholder="Matricola...">
+								<input id="prodotto" class="inser" placeholder="Prodotto...">
+								<input id="cliente" class="inser" placeholder="Cliente...">
 								<input id="clientead1" class="inser" style="display: none">
 								<input id="clientead2" class="inser" style="display: none">
-								<input id="cantiere" class="inser" placeholder="Cantiere..."><br><br>
-								<input id="orem" class="inser" placeholder="Ore Motore..." onkeypress="return isNumber(event)"><br>
+								<input id="cantiere" class="inser" placeholder="Cantiere...">
+								<input id="orem" class="inser" placeholder="Ore Motore..." onkeypress="return isNumber(event)">
 								<input id="perc1" class="inser1" placeholder="Percussione 1..." onkeypress="return isNumber(event)">
 								<input id="perc2" class="inser1" placeholder="Percussione 2..." onkeypress="return isNumber(event)">
 								<input id="perc3" class="inser1" placeholder="Percussione 3..." onkeypress="return isNumber(event)"><br>
@@ -416,7 +416,7 @@
 				<br>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="salvadati()">Ok</button>
-				<br><br><br>
+				<br><br>
 		</div>        
 </div>
 <div class="ccc"><!--Rapporto-->    
@@ -429,7 +429,7 @@
 				<br>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="salvacomm()">Ok</button>
-				<br><br><br>
+				<br><br>
 		
 		</div>
 </div>
@@ -498,16 +498,16 @@
 								<br>
 								<button class="buttonore" id="agg" onclick="aggiungi()">Aggiungi</button>
 								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
-								<br><br>
+								<br>
 								<table id="ris" style="color: white;">
 								
-						</table><br><br>        
+						</table><br>  
 						
 				</div>
 				
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="copiaore()">OK</button>
-				<br><br><br>
+				<br><br>
 		</div>    
 
 
@@ -520,24 +520,23 @@
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>
-				<br><br><br>
-		
+				<br><br>		
 		</div>
 </div>		
 </div>
 <div class="ccc" id="sigt"><!--Firma Tecnico-->
 		<div class="finestra" id="firmat1">
-				<div class="barrat"><div class="g"></div></div>
+				<div class="barrat"><div class="g"><p class="tt">Firma Tecnico</p></div></div>
 				<canvas id="firmat" width="100" height="100" onmousedown="abilitaok()"></canvas><br><br>
 				<button class="pulsante1" onclick="closeMenu()">Annulla</button>
 				<button id="erase1" class="pulsante1">Elimina Firma</button>
 				<button id="save1" class="pulsante1" disabled="">Salva Firma</button>
-				<br><br><br>
+				<br><br>
 		</div>        
 </div>
 <div class="ccc" id="sigc"><!--Firma Cliente-->
 	<div class="finestra" id="firmac1">
-			<div class="barrat"><div class="g"></div></div>
+			<div class="barrat"><div class="g"><p class="tt">Firma Cliente</p></div></div>
 			<canvas id="firmac" width="100" height="100" onmousedown="abilitaok()"></canvas>
 			<div id="sondaggio" style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
@@ -584,7 +583,7 @@
 			<button id="erase2" class="pulsante1">Elimina Firma</button>
 			<button id="save2" class="pulsante1" onclick="sondaggio()" disabled="">Salva Firma</button>
 			
-			<br><br><br>
+			<br><br>
 	</div>        
 </div>
 </div>
