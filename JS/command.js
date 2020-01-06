@@ -557,12 +557,16 @@ function controllamodifiche(a, callback){
 				salvafile(document.getElementById('salvataggio').innerText, function(){remote.app.quit()})
 			} else if(a=='apri'){
 				salvafile(document.getElementById('salvataggio').innerText, function(){aprifile('a')})
+			} else if(a=='pulisci'){
+				salvafile(document.getElementById('salvataggio').innerText, function(){pulisci()})
 			} else {};
 		} else {callback()}
 	} else {callback()}
 }
 
 function aprifo(){controllamodifiche('apri', function(){aprifile('a')})}
+
+function puliscifo(){controllamodifiche('pulisci', function(){pulisci()})}
 
 function esci(){controllamodifiche('esci', function(){remote.app.quit()})}
 
@@ -610,13 +614,13 @@ function aprifile(a){
                 /*console.log(data)
                 document.getElementById('salva').innerHTML = ""*/
                 document.getElementById('salva').innerHTML = data
+				$('#salvataggio').text("");
                 $('#menuMatricola').draggable();
                 $('#menuRapporto').draggable();
                 $('#menuOre').draggable();
 				$('#SU').draggable();
 				$('#menuMail').draggable();
             })}
-        
             closeMenu();
     
         }
