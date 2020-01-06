@@ -59,13 +59,7 @@ function createWindow () {
 			{label:'Compila Ore', click(){win.webContents.send('compilao')}, accelerator: 'CmdOrCtrl+Shift+O'},
         ]
 		},
-		/*{
-		label: 'View',
-			submenu: [
-			{label: 'DevTools', accelerator: 'CmdOrCtrl+Shift+I', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();}},
-			{label: 'Reload', accelerator: 'CmdOrCtrl+R', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.reload()}},
-			]
-        },*/
+		//{label: 'View',submenu: [{label: 'DevTools', accelerator: 'CmdOrCtrl+Shift+I', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();}}, {label: 'Reload', accelerator: 'CmdOrCtrl+R', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.reload()}},]},
   ])
   
   

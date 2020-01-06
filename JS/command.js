@@ -18,18 +18,17 @@ function openMenu(n){
     document.getElementById(n).style.display = "block";
     dimen();
     document.getElementsByClassName("foglio")[0].style.filter = "blur(8px)"
-    document.getElementsByClassName("foglio")[0].disabled = true;
+	var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll=function(){window.scrollTo(x, y);}
     if(n == 'firmac1'){init("firmac")};
     if(n == 'firmat1'){init("firmat")};
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
-    var iu = document.getElementById('stdspe').innerText;
-        if(iu=='SPE'){document.getElementById('manspe').checked = true}
-    ;
-
-    
-
+    var iu = $('#stdspe').text();
+    if(iu=='SPE'){document.getElementById('manspe').checked = true};
+	$("#pagina *").attr("disabled", "disabled").off('click');
 
     $('#myinput').val($('#matricola').text());
     myFunction();
@@ -64,6 +63,7 @@ function dimen(){
 
 
 function closeMenu(){
+	window.onscroll=function(){};
     var fin = $(".finestra")
     for(var i =0;i<fin.length;i++){
         fin[i].style.display="none"
