@@ -308,7 +308,7 @@
 		<div class="legenda"><!--Legenda-->                                
 			<table style="border:0px solid black; width: 100%; margin: 0;  " >
 				<th class="tabset2" colspan="10" >RIFERIMENTI</th>
-				<tr style="font-family: Calibri; width: 100%" ><br>
+				<tr class="legenda1" ><br>
 						<td style=" width: 3%; font-weight: bold">spo</td>
 						<td style="  width:22%">Manodopera Specialistica Ordinaria</td>  
 						<td style=" width: 25%">(08.00-17.00)</td>    
@@ -316,7 +316,7 @@
 						<td style=" width: 22%">Chilometri</td>  
 						<td style=" width: 25%"></td>       
 				</tr>
-				<tr style="font-family: Calibri; width: 100%" >
+				<tr class="legenda1" >
 						<td><b>sps</b> </td>
 						<td >Manodopera Specialistica Straordinaria</td>  
 						<td >(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>    
@@ -324,7 +324,7 @@
 						<td >Spese viaggio</td>  
 						<td ></td>       
 				</tr>
-				<tr style="font-family: Calibri; width: 100%" >
+				<tr class="legenda1" >
 						<td><b>std</b> </td>
 						<td>Manodopera Standard</td>  
 						<td>(08.00-17.00)</td>    
@@ -332,15 +332,15 @@
 						<td>Manodopera Officina </td>  
 						<td>(08.00-17.00)</td>       
 				</tr>
-				<tr style="font-family: Calibri; width: 100%" >
+				<tr class="legenda1" >
 						<td><b>str</b></td>
 						<td>Manodopera Straordinaria</td>  
 						<td>(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>    
 						<td><b>ofs</b></td>
 						<td>Manodopera Officina Straordinaria</td>  
-						<td>06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>   
+						<td>(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>   
 				</tr>    
-				<tr style="font-family: Calibri; width: 100%" >
+				<tr class="legenda1" >
 						<td ><b>mnt</b></td>
 						<td>Manodopera Notturna</td>  
 						<td>(22.00-06.00)</td>    
@@ -348,7 +348,7 @@
 						<td>Viaggio</td>  
 						<td></td>       
 				</tr>
-				<tr style="font-family: Calibri; width: 100%" >
+				<tr class="legenda1" >
 						<td ><b>mf</b></td>
 						<td >Manodopera Festiva </td>  
 						<td>(06.00-22.00)</td>    
@@ -356,7 +356,7 @@
 						<td>Lavoro</td>  
 						<td></td>       
 				</tr>
-				<tr style="font-family: Calibri; width: 100%" >
+				<tr class="legenda1" >
 						<td ><b>mnf</b></td>
 						<td>Manodopera Festiva Notturna</td>  
 						<td>(22.00-06.00)</td>    
@@ -508,8 +508,8 @@
 										<td><input id="mfl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)"  onkeyup="controllaore('mf','2')"></td>
 										<td><input id="mnfv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','1')"></td>
 										<td><input id="mnfl1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','2')"></td>
-										<td><input id="km1" class="ore" type="text"  maxlength="3" onkeypress="return isNumber(event)" /></td>
-										<td><input id="spv1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" /></td>
+										<td><input id="km1" class="ore" type="text"  maxlength="4" onkeypress="return isNumber(event)" /></td>
+										<td><input id="spv1" class="ore" type="text"  maxlength="2" onfocus="scrivikm()" onkeypress="return isNumber(event)" /></td>
 										<td><input id="off1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('off', '1')"></td>
 										<td><input id="ofs1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('ofs', '1')"></td>
 								</tr>
@@ -532,22 +532,22 @@
 
 
 <div class="ccc"><!--Email-->    
-		<div class="finestra" id="menuMail">
-				<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-				<div class="finestrai">
-						<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
-						<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
-				</div>
-				<button class="pulsante" onclick="closeMenu()">Annulla</button>
-				<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>
-				<br><br>		
-		</div>
+	<div class="finestra" id="menuMail">
+			<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
+			<div class="finestrai">
+					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
+					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
+			</div>
+			<button class="pulsante" onclick="closeMenu()">Annulla</button>
+			<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>
+			<br><br>		
+	</div>
 </div>		
 </div>
 <div class="ccc" id="sigt"><!--Firma Tecnico-->
 		<div class="finestra" id="firmat1">
 				<div class="barrat"><div class="g"><p class="tt">Firma Tecnico</p></div></div>
-				<canvas id="firmat" width="100" height="100" onpointerdown="abilitaok()"></canvas><br><br>
+				<canvas id="firmat" width="100" height="100" onpointerdown="abilitaok('t')"></canvas><br><br>
 				<button class="pulsante1" onclick="closeMenu()">Annulla</button>
 				<button id="erase1" class="pulsante1">Elimina Firma</button>
 				<button id="save1" class="pulsante1" disabled>Salva Firma</button>
@@ -557,51 +557,52 @@
 <div class="ccc" id="sigc"><!--Firma Cliente-->
 	<div class="finestra" id="firmac1">
 			<div class="barrat"><div class="g"><p class="tt">Firma Cliente</p></div></div>
-			<canvas id="firmac" width="100" height="100" onpointerdown="abilitaok()"></canvas>
+			<input id="nomecognome" type="text" placeholder="Nome e Cognome" class="inser" style="width: 40%" onchange="controllanomec()">
+			<canvas id="firmac" width="100" height="100" onpointerdown="controllafirmac()"></canvas>
 			<div id="sondaggio"  style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
 					<p style="margin: 1px; font-family: Arial; font-weight: 900">Organizzazione Intervento: </p>
 					<input type="radio" id="int1" name="int" value="1">
-					<label for="int1">1</label>
+					<label for="int1" onclick="controllasondc()">1</label>
 					<input type="radio" id="int2" name="int" value="2">
-					<label for="int2">2</label>
+					<label for="int2" onclick="controllasondc()">2</label>
 					<input type="radio" id="int3" name="int" value="3">
-					<label for="int3">3</label>
+					<label for="int3" onclick="controllasondc()">3</label>
 					<input type="radio" id="int4" name="int" value="4">
-					<label for="int4">4</label>
+					<label for="int4" onclick="controllasondc()">4</label>
 					<input type="radio" id="int5" name="int" value="5">
-					<label for="int5">5</label>
+					<label for="int5" onclick="controllasondc()">5</label>
 				</div>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
 					<p style="margin: 1px; font-family: Arial; font-weight: 900">Puntualità consegna ricambi: </p>
 					<input type="radio" id="ric1" name="ric" value="1">
-					<label for="ric1">1</label>
+					<label for="ric1" onclick="controllasondc()">1</label>
 					<input type="radio" id="ric2" name="ric" value="2">
-					<label for="ric2">2</label>
+					<label for="ric2" onclick="controllasondc()">2</label>
 					<input type="radio" id="ric3" name="ric" value="3">
-					<label for="ric3">3</label>
+					<label for="ric3" onclick="controllasondc()">3</label>
 					<input type="radio" id="ric4" name="ric" value="4">
-					<label for="ric4">4</label>
+					<label for="ric4" onclick="controllasondc()">4</label>
 					<input type="radio" id="ric5" name="ric" value="5">
-					<label for="ric5">5</label>
+					<label for="ric5" onclick="controllasondc()">5</label>
 				</div>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
 					<p style="margin: 2px; font-family: Arial; font-weight: 900">Esecuzione intervento: </p>
 					<input type="radio" id="ese1" name="ese" value="1">
-					<label for="ese1">1</label>
+					<label for="ese1" onclick="controllasondc()">1</label>
 					<input type="radio" id="ese2" name="ese" value="2">
-					<label for="ese2">2</label>
+					<label for="ese2" onclick="controllasondc()">2</label>
 					<input type="radio" id="ese3" name="ese" value="3">
-					<label for="ese3">3</label>
+					<label for="ese3" onclick="controllasondc()">3</label>
 					<input type="radio" id="ese4" name="ese" value="4">
-					<label for="ese4">4</label>
+					<label for="ese4" onclick="controllasondc()">4</label>
 					<input type="radio" id="ese5" name="ese" value="5">
-					<label for="ese5">5</label>
+					<label for="ese5" onclick="controllasondc()">5</label>
 				</div>
 			</div><br>
 			<button class="pulsante1" onclick="closeMenu()">Annulla</button>
 			<button id="erase2" class="pulsante1">Elimina Firma</button>
-			<button id="save2" class="pulsante1" onclick="sondaggio()" disabled>Salva Firma</button>
+			<button id="save2" class="pulsante1" disabled>Salva e Invia Scheda Lavoro</button>
 			
 			<br><br>
 	</div>        
@@ -610,8 +611,11 @@
 <!--Salvataggio-->
 <div id="salvataggio" style="display: none"></div>
 <div id="modifiche" style="display: none">0</div> 
+<div id="contfirmac" style="display: none"></div>
+<div id="contnomec" style="display: none"></div>
+<div id="contsondc" style="display: none"></div>
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
-<!--risposta al sondaggio--><div id="rissondaggio" style="display: none;"></div>
+<!--risposta al sondaggio--><div id="rissondaggio" style="display: none"></div>
 <!--Updater-->
 <div id="notification" class="hidden">
   <p id="message"></p>
@@ -625,7 +629,7 @@
 </div>
 </div>
 <!--barra gialla in alto-->
-<div id="menuA" class="menu" ondblclick="remote.win.toggleDevTools()">
+<div id="menuA" class="menu" onclick="mille()">
 		<!--<table id="tabmenu">
 				<tr>
 						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width ="20" ><br>Modifica</td>
@@ -687,12 +691,11 @@ ipcRenderer.on('salvacon', function(){salvafile('')});
 ipcRenderer.on('pdf', function(){esportapdf()});
 ipcRenderer.on('esci', function(){remote.app.quit()});
 ipcRenderer.on('escisalva', function(){controllamodifiche('esci', function(){remote.app.quit()})});
+ipcRenderer.on('km', function(){coeffkm()});
 
 
 var data = ipcRenderer.sendSync('get-file-data');
 if (data!==null) {aprifile(data.toString());}
-
-
 
 
 	
