@@ -498,7 +498,7 @@
 								<br>
 								<button class="buttonore" id="agg" onclick="aggiungi()">Aggiungi</button>
 								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
-								<br>
+								<br><br>
 								<table id="ris" style="color: white;">
 								
 						</table><br>  
@@ -527,7 +527,7 @@
 <div class="ccc" id="sigt"><!--Firma Tecnico-->
 		<div class="finestra" id="firmat1">
 				<div class="barrat"><div class="g"><p class="tt">Firma Tecnico</p></div></div>
-				<canvas id="firmat" width="100" height="100" onmousedown="abilitaok()"></canvas><br><br>
+				<canvas id="firmat" width="100" height="100" onpointerdown="abilitaok()"></canvas><br><br>
 				<button class="pulsante1" onclick="closeMenu()">Annulla</button>
 				<button id="erase1" class="pulsante1">Elimina Firma</button>
 				<button id="save1" class="pulsante1" disabled="">Salva Firma</button>
@@ -537,7 +537,7 @@
 <div class="ccc" id="sigc"><!--Firma Cliente-->
 	<div class="finestra" id="firmac1">
 			<div class="barrat"><div class="g"><p class="tt">Firma Cliente</p></div></div>
-			<canvas id="firmac" width="100" height="100" onmousedown="abilitaok()"></canvas>
+			<canvas id="firmac" width="100" height="100" onpointerdown="abilitaok()"></canvas>
 			<div id="sondaggio" style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
 					<p style="margin: 1px; font-family: Arial; font-weight: 900">Organizzazione Intervento: </p>
