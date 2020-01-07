@@ -23,9 +23,10 @@ function openMenu(n){
     window.onscroll=function(){window.scrollTo(x, y);}
     if(n == 'firmac1'){init("firmac")};
     if(n == 'firmat1'){init("firmat")};
+    if(n=='menuRapporto'){$('#rappl').focus()};
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
-	if(n=='menuMatricola'){Apri()};
+	if(n=='menuMatricola'){$('#data2').focus();Apri()};
     var iu = $('#stdspe').text();
     if(iu=='SPE'){document.getElementById('manspe').checked = true};
 	$("#pagina *").attr("disabled", "disabled").off('click');
@@ -37,10 +38,10 @@ function openMenu(n){
 	$('#clientead1').val($('#cliente12').text());
 	$('#clientead2').val($('#cliente13').text());
     $('#cantiere').val($('#cantiere1').text());
-    $('#orem').val($('#orem1').text());
-    $('#perc1').val($('#perc11').text());
-    $('#perc2').val($('#perc21').text());
-    $('#perc3').val($('#perc31').text());
+    $('#orem').val($('#orem1').text().replace(".",""));
+    $('#perc1').val($('#perc11').text().replace(".",""));
+    $('#perc2').val($('#perc21').text().replace(".",""));
+    $('#perc3').val($('#perc31').text().replace(".",""));
     $('#rappl').val($('#rappl1').text());
     $('#oss').val($('#oss1').text());
 	$('#ordine').val($('#vsordine').text());
@@ -73,6 +74,10 @@ function closeMenu(){
 var canvas, ctx = false
 
 function init(h){
+	if(h=='firmac'){
+		$('#nomecognome').val($('#contnomec').text())
+		caricasond();
+	}
 	canvas=document.getElementById(h);
 	function resizeCanvas(){
 		var ratio =  Math.max(window.devicePixelRatio || 1, 1);
@@ -96,12 +101,25 @@ function init(h){
 		signaturePad.clear();
 		$('#' + sa).attr("disabled", true);
 		$('#' + fi).attr('src', "./img/white.png");
+		$('#contfirmac').text('');
+		$('#contnomec').text('');
+		$('#contsondc').text('');
+		$('#nomecognome').val('');
+		for(var i=0;i<5;i++){
+			document.getElementsByName('int')[i].checked=false;
+			document.getElementsByName('ric')[i].checked=false;
+			document.getElementsByName('ese')[i].checked=false;
+		}
+		$('#rissondaggio').text('');
+		
 	});
 	document.getElementById(sa).addEventListener('click', function () {
 		var dataURL = canvas.toDataURL();
+		sondaggio();
 		if(h=="firmac"){
 			document.getElementById("firmacc1").src = dataURL;
 			closeMenu();
+			controllafirme();
 		} else if(h=="firmat"){
 			document.getElementById("firmatt1").src = dataURL;
 			closeMenu();
@@ -118,10 +136,10 @@ function salvadati(){
 	$("#cliente12").text($("#clientead1").val());
 	$("#cliente13").text($("#clientead2").val());
     $("#cantiere1").text($("#cantiere").val());
-    $("#orem1").text($("#orem").val());
-    $("#perc11").text($("#perc1").val());
-    $("#perc21").text($("#perc2").val());
-    $("#perc31").text($("#perc3").val());
+    $("#orem1").text(mille($("#orem").val().toString()));
+    $("#perc11").text(mille($("#perc1").val().toString()));
+    $("#perc21").text(mille($("#perc2").val().toString()));
+    $("#perc31").text(mille($("#perc3").val().toString()));
 	var agg1 = $('#data2').val().split("-")
 	var aggdata = agg1[2] + "/" + agg1[1] + "/" +agg1[0];
 	$("#data11").text(aggdata);
@@ -168,7 +186,7 @@ function copiaore(){
 	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
 	}
 	}
-
+	datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[18].innerText = mille(righe[i].getElementsByTagName('td')[13].innerText);
 	}
 	closeMenu();
 }
@@ -358,7 +376,7 @@ function send_mail(a) {
 	mItm.To = 'xxx.xxx@epiroc.com';
 	mItm.Subject = "Prova";
 	var son = $('#rissondaggio').text();
-	mItm.Body = "Email di prova"  + "\n\n\nRisultato sondaggio:\n\n" + son.split(" - ")[0] + "\n" + son.split(" - ")[1] + "\n" +son.split(" - ")[2];
+	mItm.Body = "Email di prova"  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
 	mItm.Attachments.Add(a + '\\Scheda Lavoro.ma');    
 	mItm.GetInspector.WindowState = 2;
 	//mItm.send();
@@ -811,7 +829,7 @@ function sondaggio(){
 		}
 	}
 	var risultato=document.getElementById('rissondaggio');
-	risultato.innerText = "Organizzazione Intervento: " + a1 + " - Consegna Ricambi: " + a2 + " - Esecuzione Intervento: " + a3;
+	risultato.innerText = "" + a1 + a2 + a3;
 }
 
 //update dell'appCodeName
@@ -851,28 +869,29 @@ function aggiornacli(){
 	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/customersupd.txt", function(data){fs.writeFileSync(cart + "\\customers.txt", data)})
 }
 
-function nuovamail(){
+function nuovamail(a,b){
 	var te = document.getElementById('indmail').checkValidity();
 	if(te==true){
-	var inse = '<div class="mail">' + document.getElementById('indmail').value + "</div><br>";
-	var node = document.createElement("div");
-	node.className = "mail";
-	var textnode = document.createTextNode(document.getElementById('indmail').value);
-	node.appendChild(textnode);
-	node.addEventListener("click", eliminamail);
-	document.getElementById('elencomail').appendChild(node) ;
-	document.getElementById('indmail').value="";
-	document.getElementById('indmail').focus();
-	var elem = document.getElementsByClassName('mail')//.addEventListener("click", eliminamail());
-	//for(var i=0; i<elem.length;i++){elem[i].addEventListener("click", eliminamail)};
+		var inse = '<div class="mail">' + document.getElementById('indmail').value + "</div><br>";
+		var node = document.createElement("div");
+		node.className = "mail";
+		var textnode = document.createTextNode(document.getElementById('indmail').value);
+		node.appendChild(textnode);
+		node.addEventListener("click", eliminamail);
+		document.getElementById('elencomail').appendChild(node) ;
+		document.getElementById('indmail').value="";
+		document.getElementById('indmail').focus();
+		var elem = document.getElementsByClassName('mail');
+		a();
+		b();
 	} else {
 		const options = {
 		type: 'error',
 		buttons: ['OK'],
 		title: 'Errore',
 		message: 'Mail non valida'
-	};
-	dialog.showMessageBoxSync(remote.win, options);
+		};
+		dialog.showMessageBoxSync(remote.win, options);
 	}
 }
 
@@ -918,15 +937,15 @@ function controllaindirizzi(){
 	if(el.length!==0){
 		var sce=dialog.showMessageBoxSync(remote.win, options1);
 		if(sce==1){closeMenu(); printpdf('a')}
-		} else {dialog.showMessageBoxSync(remote.win, options)
-	}
+		} else {
+			if($('#indmail').val()!==""){nuovamail(closeMenu, controllaindirizzi);}
+			//dialog.showMessageBoxSync(remote.win, options)
+		}
 }
 
 function controllafirme(){
 	var ft = document.getElementById('firmatt1').getAttribute('src');
-	var fc = document.getElementById('firmacc1').getAttribute('src');
 	ft = ft.substring(ft.length - 9, ft.length);
-	fc = fc.substring(fc.length - 9, fc.length);
 	const options = {
 		type: 'error',
 		buttons: ['Ok'],
@@ -934,10 +953,115 @@ function controllafirme(){
 		noLink: true,
 		message: 'Il documento non è stato firmato'
 	}
-	if(ft=="white.png" | fc=="white.png"){dialog.showMessageBoxSync(remote.win, options)} else {riaprimenumail();openMenu('menuMail');}
+	if(ft=="white.png"){dialog.showMessageBoxSync(remote.win, options)} else {riaprimenumail();openMenu('menuMail');}
 }
 
-function abilitaok(){
-	$("#save1").attr("disabled", false); 
-	$("#save2").attr("disabled", false); 
+function abilitaok(a){
+	if(a=='t'){
+		$("#save1").attr("disabled", false);
+	} else{
+		$('#contfirmac').text('1');
+	}
+}
+
+function scrivikm(){
+	$.get('km.txt', function(data){
+		const prompt = require('electron-prompt');
+		prompt({
+			title: 'KM',
+			label: 'Km di autostrada:',
+			value: parseFloat(($('#spv1').val()).replace(",",".")/data).toFixed(0),
+			type: 'input'
+		})
+		.then((r) => {
+			if(r === null) {
+			} else {
+				$('#spv1').val(parseFloat(r*data).toFixed(0) + ",00");
+			}
+		})
+		.catch(console.error);
+		$('#off1').focus();
+	})
+}
+
+function controllafirmac(){
+	$('#contfirmac').text('1');
+	abilitainvia();
+}
+
+function controllanomec(){
+	if($('#nomecognome').val()!==""){
+		$('#contnomec').text($('#nomecognome').val());
+		} else {
+			$('#contnomec').text('');
+		}
+	abilitainvia()
+}
+
+
+function controllasondc(){
+	var int1 = document.getElementsByName("int");
+	var ric1 = document.getElementsByName("ric");
+	var ese1 = document.getElementsByName("ese");
+	var g=0;
+	for(var t=0;t<5;t++){
+		if(int1[t].checked){g++};
+		if(ric1[t].checked){g++};
+		if(ese1[t].checked){g++};		
+	}
+	if(g>=2){$('#contsondc').text('1')}
+	abilitainvia()
+}
+
+function abilitainvia(){
+	if($('#contfirmac').text()!=="" && $('#contsondc').text()!=="" && $('#contnomec').text()!==""){
+		$('#save2').attr("disabled", false);
+	} else {
+		$('#save2').attr("disabled", true);
+	}
+}
+
+function caricasond(){
+	var risso = $('#rissondaggio').text();
+	if(risso>0){
+		var s1 = risso.substring(0,1);
+		var s2 = risso.substring(1,2);
+		var s3 = risso.substring(2,3);
+		document.getElementsByName('int')[s1-1].checked=true;
+		document.getElementsByName('ric')[s2-1].checked=true;
+		document.getElementsByName('ese')[s3-1].checked=true;
+	}
+}
+
+function mille(a){
+	var l = a.length;
+	if(l>3){
+		var d = a.substring(l-3,l);
+		var f = l-d.length;
+		var w = a.substring(0,f)
+		var mig = (w+"."+d);
+		return mig;
+	} else {
+		return a;
+	}
+	
+}
+
+function coeffkm(){
+	const prompt = require('electron-prompt');
+	$.get('km.txt', function(data){
+	prompt({
+		title: 'Coefficiente km',
+		label: 'Imposta Coefficiente:',
+		value: data,
+		type: 'input'
+	})
+	.then((r) => {
+		if(r === null) {
+		} else {
+			fs.writeFileSync('km.txt', r.replace(",","."));
+		}
+	})
+	.catch(console.error);
+	})
 }

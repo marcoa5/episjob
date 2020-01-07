@@ -192,6 +192,7 @@ body{
 }
 
 .notetext{
+	word-wrap: normal;
     border-collapse: collapse;
     float: top;
     border: 1px solid black;
@@ -209,6 +210,8 @@ body{
 	line-height: 16px;
     font-size: 9.5px;
 	text-align: justify;
+	white-space: normal;
+	white-space: pre-wrap;
 }
 
 
