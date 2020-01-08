@@ -148,8 +148,8 @@ function salvadati(){
 }
 
 function salvacomm(){
-	$("#rappl1").text($("#rappl").val());
-	$("#oss1").text($("#oss").val());
+	$("#rappl1").text($("#rappl").val().toUpperCase());
+	$("#oss1").text($("#oss").val().toUpperCase());
 	closeMenu();
 }
 
@@ -346,6 +346,11 @@ function printpdf (a) {
 
 //Invia Mail
 function send_mail(a) { 	
+	var son = $('#rissondaggio').text();
+	if(son.substring(0,1)=="u"){
+		son = ""
+	}
+	
 	var ora = new Date()
 	var anno = ora.getFullYear().toString();
 	var mese = (ora.getMonth()+1).toString();
@@ -354,6 +359,9 @@ function send_mail(a) {
 	var mi = ora.getMinutes().toString();
 	var se = ora.getSeconds().toString();
 	var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0'); 
+	var nomef = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
+	fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
+	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
 	var objO = new ActiveXObject('Outlook.Application');     
 	var objNS = objO.GetNameSpace('MAPI');     
 	var mItm = objO.CreateItem(0);     
@@ -363,24 +371,22 @@ function send_mail(a) {
 	var lista = "";
 	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +"; "}
 	mItm.To = lista;
-	mItm.Subject = "Prova";
-	mItm.Body = "Email di prova";
-	mItm.Attachments.Add(a + '\\Scheda Lavoro.pdf');    
+	mItm.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
+	mItm.Body = "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
+	mItm.Attachments.Add(nomef + ".pdf");    
 	mItm.GetInspector.WindowState = 2;
 	//mItm.send();
 	var objO = new ActiveXObject('Outlook.Application');     
 	var objNS = objO.GetNameSpace('MAPI');     
 	var mItm = objO.CreateItem(0);     
 	mItm.Display();    
-	mItm.To = 'xxx.xxx@epiroc.com';
-	mItm.Subject = "Prova";
-	var son = $('#rissondaggio').text();
-	mItm.Body = "Email di prova"  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
-	mItm.Attachments.Add(a + '\\Scheda Lavoro.ma');    
+	mItm.To = 'marco.fumagalli@epiroc.com; carlo.colombo@epiroc.com; mario.parravicini@epiroc.com';
+	mItm.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
+	mItm.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
+	mItm.Attachments.Add(nomef + ".ma");    
 	mItm.GetInspector.WindowState = 2;
 	//mItm.send();
-	fs.rename(a + '\\Scheda Lavoro.pdf', a + "\\" + datalo + " - " + document.getElementById('cliente11').innerText + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
-	fs.rename(a + '\\Scheda Lavoro.ma', a + "\\" + datalo +  " - " + document.getElementById('cliente11').innerText + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
+	
 }
 
 //Filtra elenco macchine
@@ -625,8 +631,13 @@ function oggi(){
 	y = n.getFullYear();
 	m = n.getMonth() + 1;
 	d = n.getDate();
-	document.getElementById("data1").value = y + "-" + m.toString().padStart(2,'0') + "-" + d.toString().padStart(2,'0');
-	controlladata();
+	$("#data1").val(today());//y + "-" + m.toString().padStart(2,'0') + "-" + d.toString().padStart(2,'0');
+	$( function() {
+		$( "#data1" ).datepicker();
+		$( "#data1" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+		controlladata();
+	});
+	
 }
 
 function aggiungi() {
@@ -640,8 +651,8 @@ function aggiungi() {
 	var ind = riga.length;
 	//verifica che le righe siano < 7
 	if(ind<=6){    
-		var parts = document.getElementById("data1").value.toString().split("-");
-		var mydate = parts[0]+ parts[1]+ parts[2]; 
+		var parts = document.getElementById("data1").value.toString().split("/");
+		var mydate = parts[2]+ parts[1]+ parts[0]; 
 		document.getElementById('ris').appendChild(document.createElement("TR"));
 		var ele = [document.getElementById('tec').value, mydate];
 		//controlla le festività
@@ -750,9 +761,13 @@ function sortTable() {
 }
 		  
 function verificadata(g){
-    var feste = ["01-01", "06-01", "04-25", "05-01", "06-02", "08-15", "08-16", "11-01", "12-07", "12-08", "12-24", "12-25", "12-26", "12-31"];
+	var gg= g.substring(0,2);
+	var mm=g.substring(3,5);
+	var an=g.substring(6,10);
+	g = mm+"/"+gg+"/"+g.substring(6,10);
+    var feste = ["01-01", "01-06", "04-25", "05-01", "06-02", "08-15", "08-16", "11-01", "12-07", "12-08", "12-24", "12-25", "12-26", "12-31"];
     var dd = new Date(g);
-    var pasqua = Easter(g.substring(0,4));
+    var pasqua = Easter(an);
     var gpasquetta = pasqua.substring(3,5)+1;
     var pasquetta =  pasqua.substring(0,3) + padout(pasqua.substring(3,5)*1+1);
     feste.push(pasqua, pasquetta);
@@ -761,7 +776,7 @@ function verificadata(g){
     if(wd==0){fest="fest"}
     else if(wd==6){fest="sab"}
     else {fest = "fer"};
-    var test = padout(dd.getMonth()+1) + "-" + padout(dd.getDate());
+    var test = padout(dd.getMonth()+1) + "/" + padout(dd.getDate());
     feste.forEach(function(el){if(el==test){fest="fest"}});
     return fest;
 }    
@@ -777,8 +792,8 @@ function Easter(Y) {
     J = J - 7*Math.floor(J/7);
     var L = I - J;
     var M = 3 + Math.floor((L + 40)/44);
-    var D = L + 28 - 31*Math.floor(M/4);
-    return padout(M) + '-' + padout(D);
+    var D = L + 28 - 31*Math.floor(M/4)-1;
+    return padout(M) + '/' + padout(D);
 }
 
 function padout(number) { return (number < 10) ? '0' + number : number; }
@@ -1102,6 +1117,7 @@ function today(){
 	var anno = og.getFullYear();
 	var mese = (og.getMonth()+1).toString().padStart(2,'0');
 	var giorno = og.getDate().toString().padStart(2,'0');
-	var fg = giorno + "/" + mese + "/" + anno;
+	var fg = mese + "/" + giorno + "/" + anno;
 	return fg
 }
+
