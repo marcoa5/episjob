@@ -69,7 +69,6 @@ function createWindow () {
   win.loadFile('SL.html');
   Menu.setApplicationMenu(menu);
   win.maximize();
-  console.log(app.getPath("downloads") + "\\my-app");
   
   
   
