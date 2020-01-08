@@ -905,4 +905,10 @@ input[type=email]:valid{
 	cursor: pointer;
 }
 
+.legenda1{
+	text-align:left;
+	font-size: 5pt;
+	line-height: 170%;
+}
+
 
