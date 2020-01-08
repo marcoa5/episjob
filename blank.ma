@@ -117,7 +117,7 @@
 							<td class="tabcell">L</td>
 			</tr>
 			<tr class="tabrow">
-							<td class="tabcell1"><div class="tecnico" id="tecnico11"></div></td>
+							<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico11"></div></td>
 							<td class="tabcell2"><div class="data" id="g11"></div></td>
 							<td class="tabcell2"><div class="data" id="m11"></div></td>
 							<td class="tabcell2"><div class="data" id="a11"></div></td>
@@ -141,7 +141,7 @@
 							<td class="tabcell3"><div class="data1" id="ofs11"></div></td>
 			</tr>
 			<tr class="tabrow">
-					<td class="tabcell1"><div class="tecnico" id="tecnico21"></div></td>
+					<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico21"></div></td>
 					<td class="tabcell2"><div class="data" id="g21"></div></td>
 					<td class="tabcell2"><div class="data" id="m21"></div></td>
 					<td class="tabcell2"><div class="data" id="a21"></div></td>
@@ -165,7 +165,7 @@
 					<td class="tabcell3"><div class="data1" id="ofs21"></div></td>
 			</tr>
 			<tr class="tabrow">
-					<td class="tabcell1"><div class="tecnico" id="tecnico31"></div></td>
+					<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico31"></div></td>
 					<td class="tabcell2"><div class="data" id="g31"></div></td>
 					<td class="tabcell2"><div class="data" id="m31"></div></td>
 					<td class="tabcell2"><div class="data" id="a31"></div></td>
@@ -189,7 +189,7 @@
 					<td class="tabcell3"><div class="data1" id="ofs31"></div></td>
 			</tr>
 			<tr class="tabrow">
-					<td class="tabcell1"><div class="tecnico" id="tecnico41"></div></td>
+					<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico41"></div></td>
 					<td class="tabcell2"><div class="data" id="g41"></div></td>
 					<td class="tabcell2"><div class="data" id="m41"></div></td>
 					<td class="tabcell2"><div class="data" id="a41"></div></td>
@@ -213,7 +213,7 @@
 					<td class="tabcell3"><div class="data1" id="ofs41"></div></td>
 			</tr>
 			<tr class="tabrow">
-					<td class="tabcell1"><div class="tecnico" id="tecnico51"></div></td>
+					<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico51"></div></td>
 					<td class="tabcell2"><div class="data" id="g51"></div></td>
 					<td class="tabcell2"><div class="data" id="m51"></div></td>
 					<td class="tabcell2"><div class="data" id="a51"></div></td>
@@ -237,7 +237,7 @@
 					<td class="tabcell3"><div class="data1" id="ofs51"></div></td>
 			</tr>
 			<tr class="tabrow">
-					<td class="tabcell1"><div class="tecnico" id="tecnico61"></div></td>
+					<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico61"></div></td>
 					<td class="tabcell2"><div class="data" id="g61"></div></td>
 					<td class="tabcell2"><div class="data" id="m61"></div></td>
 					<td class="tabcell2"><div class="data" id="a61"></div></td>
@@ -261,7 +261,7 @@
 					<td class="tabcell3"><div class="data1" id="ofs61"></div></td>
 			</tr>
 			<tr class="tabrow">
-					<td class="tabcell1"><div class="tecnico" id="tecnico71"></div></td>
+					<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico71"></div></td>
 					<td class="tabcell2"><div class="data" id="g71"></div></td>
 					<td class="tabcell2"><div class="data" id="m71"></div></td>
 					<td class="tabcell2"><div class="data" id="a71"></div></td>
@@ -374,7 +374,7 @@
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
 					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai">
+					<div class="finestrai" style="max-height: 438px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
 						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
@@ -388,9 +388,9 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai">
+				<div class="finestrai" style="max-height: 438px;">
 						<form id="inputmac">
-								<input type="text" name="bday" id="data2">
+								<input type="text" name="bday" id="data2" class="hasDatepicker">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
 								<input id="matricolas" class="inser" placeholder="Matricola...">
@@ -422,7 +422,7 @@
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai">
+				<div class="finestrai" style="max-height: 438px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
@@ -436,7 +436,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore">
+				<div class="finestrai" id="htmlore" style="max-height: 438px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -470,13 +470,27 @@
 								<tr id="rigadati">
 										<td>
 										<select id="tec">
-												<option value="A. Laini">Andrea Laini</option>
-												<option value="G. Rizzi">Giorgio Rizzi</option>
-												<option value="G. Piccioni">Gabriele Piccioni</option>
+												<option value="ANDREA LAINI">A. LAINI</option>
+												<option value="GIORGIO RIZZI">G. RIZZI</option>
+												<option value="GABRIELE PICCIONI">G. PICCIONI</option>
+												<option value="ROBERTO BOTRÈ">R. BOTRÈ</option>
+												<option value="ENZO FELICI">E. FELICI</option>
+												<option value="CLAUDIO MICHIELOTTO">C. MICHIELOTTO</option>
+												<option value="WALTER BIAGIONI">W. BIAGIONI</option>
+												<option value="RAFFAELE RECH">R. RECH</option>
+												<option value="IVAN OVACIUC">I. OVACIUC</option>
+												<option value="PIETRO CIANGOLI">P. CIANGOLI</option>
+												<option value="SAID ELAKHRAS">S. ELAKHRAS</option>
+												<option value="ALESSANDRO MOLLO">A. MOLLO</option>
+												<option value="FABRIZIO VERNIA">F. VERNIA</option>
+												<option value="GIANFRANCO MURA">G. MURA</option>
+												<option value="FRANCESCO MURA">F. MURA</option>
+												<option value="NATALINO CARUSO">N. CARUSO</option>
+												<option value="ALESSANDRO ALESCIO">A. ALESCIO</option>
 										</select>
 										</td>
 										<td>
-										<input type="date" name="bday" id="data1" onchange="controlladata()">
+										<input type="text" name="bday" id="data1" onchange="controlladata()">
 										</td>
 										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '1')"></td>
 										<td><input id="spol1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '2')"></td>
@@ -514,7 +528,7 @@
 <div class="ccc"><!--Email-->    
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuMail" style="position: relative;">
 			<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-			<div class="finestrai">
+			<div class="finestrai" style="max-height: 438px;">
 					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 			</div>
@@ -579,6 +593,7 @@
 					<input type="radio" id="ese5" name="ese" value="5">
 					<label for="ese5" onclick="controllasondc()">5</label>
 				</div>
+				<p style="font-size:9pt;">Legenda:  1=Insoddisfacente   2=Scarso   3=Sufficiente   4=Buono   5=Ottimo</p>
 			</div><br>
 			<button class="pulsante1" onclick="closeMenu()">Annulla</button>
 			<button id="erase2" class="pulsante1">Elimina Firma</button>
