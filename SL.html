@@ -14,6 +14,7 @@
         <script>var nodemailer = require('nodemailer');</script> 
         <script>if (window.module) module = window.module;</script>
         <script>const { dialog } = require('electron').remote;</script>
+		<script>const {webFrame} = require('electron'); webFrame.setZoomFactor(1);</script>
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="jquery-ui.css">
@@ -645,7 +646,7 @@
 </div>
 </div>
 <!--barra gialla in alto-->
-<div id="menuA" class="menu">
+<div id="menuA" class="menu" onclick="zoom()">
 		<!--<table id="tabmenu">
 				<tr>
 						<td onclick="openMenu('menuMatricola')"><img src="img/Power-WF.png" class="imgmenu" alt="Open/New" height="20" width ="20" ><br>Modifica</td>
@@ -717,7 +718,14 @@ if (data!==null) {aprifile(data.toString());}
   $( function() {
     $( "#data2" ).datepicker();
   } );
-
+  
+$('body').on('mousewheel', function(event) {
+    if(event.ctrlKey){
+	var zoom = event.originalEvent.deltaY/150;
+	if((webFrame.getZoomFactor() - zoom/6)>=0.6){
+		webFrame.setZoomFactor(webFrame.getZoomFactor() - zoom/6);}
+	}
+});
 	
 </script>
 
