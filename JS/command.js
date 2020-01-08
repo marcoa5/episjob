@@ -7,6 +7,7 @@ var winax = require('winax');
 const prompt = require('electron-prompt');
 const {shell} = require('electron');
 const process = require('process');
+const homedir = require('os').homedir();
 
 
 function openMenu(n){
@@ -26,7 +27,7 @@ function openMenu(n){
     if(n=='menuRapporto'){$('#rappl').focus()};
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
-	if(n=='menuMatricola'){$('#data2').focus();Apri()};
+	if(n=='menuMatricola'){Apri()};
     var iu = $('#stdspe').text();
     if(iu=='SPE'){document.getElementById('manspe').checked = true};
 	$("#pagina *").attr("disabled", "disabled").off('click');
@@ -48,7 +49,6 @@ function openMenu(n){
 	if($('#data11').text()!==""){
 		var frdata = $('#data11').text().split("/");
 		var gdata = frdata[2]+"-"+frdata[1]+"-"+frdata[0];
-		$("#data2").val(gdata);
 	}
 }
 
@@ -140,8 +140,7 @@ function salvadati(){
     $("#perc11").text(mille($("#perc1").val().toString()));
     $("#perc21").text(mille($("#perc2").val().toString()));
     $("#perc31").text(mille($("#perc3").val().toString()));
-	var agg1 = $('#data2').val().split("-")
-	var aggdata = agg1[2] + "/" + agg1[1] + "/" +agg1[0];
+	var aggdata = $('#data2').val();
 	$("#data11").text(aggdata);
     if(document.getElementById("manstd").checked){$('#stdspe').text("STD")}else{$('#stdspe').text("SPE")}
     closeMenu();
@@ -404,12 +403,16 @@ function myFunction() {
 
 //carica elenco clienti e macchine
 function Apri(){
-	var og = new Date();
-	var anno = og.getFullYear();
-	var mese = (og.getMonth()+1).toString().padStart(2,'0');
-	var giorno = og.getDate().toString().padStart(2,'0');
-	var fg = anno + "-" + mese + "-" + giorno;
-	document.getElementById('data2').value = fg;
+	if($('#data11').text()!==""){
+		$('#data2').val($('#data11').text());
+	} else {
+		$('#data2').val(today());
+	}
+	$( function() {
+		$( "#data2" ).datepicker();
+		$( "#data2" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+	});
+	$( "#data2").datepicker( "option", "dateFormat", "dd/mm/yy" );
 	$('#listac tr').remove();
     var i = 1
     $.get('.\\customers.txt', function(data) {
@@ -480,7 +483,7 @@ function salvafile(nome, callback){
 	if(nome!==""){
 		var cartella =  nome;
 	} else {
-		var desk = require('path').join(require('os').homedir(), 'Desktop');
+		var desk = finddesktop().toString();
 		let options = {
 			title: "Salva con nome",
 			defaultPath : desk + '\\' + creanomefile() + ".ma",
@@ -509,7 +512,7 @@ function salvafile(nome, callback){
 }
 
 function esportapdf(){
-	var desk = require('path').join(require('os').homedir(), 'Desktop');
+	var desk = finddesktop();
     let options = {
         title: "Esporta PDF",
         defaultPath : desk + '\\' + creanomefile() + ".pdf",
@@ -550,7 +553,7 @@ function controllamodifiche(a, callback){
 //Apri file
 function aprifile(a){
 	if(a=="a"){
-		var desk = require('path').join(require('os').homedir(), 'Desktop');
+		var desk = finddesktop();
 		let options = {
 			title : "Seleziona File", 
 			defaultPath : desk,
@@ -797,7 +800,15 @@ function openSU(){
 	document.getElementById('sucommessa').value=document.getElementById('commessa1').innerText;
 	document.getElementById('sunsofferta').value=document.getElementById('nsofferta1').innerText;
 	document.getElementById('suapbpcs').value=document.getElementById('apbpcs').innerText;
+	$( function() {
+		$( "#suapbpcs" ).datepicker();
+		$( "#suapbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+	});
 	document.getElementById('suchbpcs').value=document.getElementById('chbpcs').innerText;
+	$( function() {
+		$( "#suchbpcs" ).datepicker();
+		$( "#suchbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+	});
 	document.getElementById('sudocbpcs').value=document.getElementById('docbpcs').innerText;
 }
 
@@ -1064,4 +1075,33 @@ function coeffkm(){
 	})
 	.catch(console.error);
 	})
+}
+
+
+function temp(){
+	tmp.dir(function tep(err,path){
+		var gin = path.indexOf("tmp");
+			path = path.substring(0, gin) + "ServiceJob";
+			mkdirp(path, function(err) {shell.openItem(path)});
+	})
+}
+
+function finddesktop(){
+	var desk="";
+	var test = homedir + "\\Onedrive - Epiroc\\desktop";
+	if(fs.existsSync(test)){
+		desk = test;
+	} else {
+		desk = require('path').join(require('os').homedir(), 'Desktop');
+	}
+	return desk
+}
+  
+function today(){
+	var og = new Date();
+	var anno = og.getFullYear();
+	var mese = (og.getMonth()+1).toString().padStart(2,'0');
+	var giorno = og.getDate().toString().padStart(2,'0');
+	var fg = giorno + "/" + mese + "/" + anno;
+	return fg
 }

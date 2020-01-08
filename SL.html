@@ -10,12 +10,13 @@
         <script src="js/sign.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/jqueryui.js"></script>
-
+		<script src="js/jqueryui.js"></script>
         <script>var nodemailer = require('nodemailer');</script> 
         <script>if (window.module) module = window.module;</script>
         <script>const { dialog } = require('electron').remote;</script>
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="jquery-ui.css">
 </head>
 <body onload="liveCheck()" onresize="dimen()">
 <div id="salva">
@@ -410,7 +411,7 @@
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
 				<div class="finestrai">
 						<form id="inputmac">
-								<input type="date" name="bday" id="data2">
+								<input type="text" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
 								<input id="matricolas" class="inser" placeholder="Matricola...">
@@ -692,11 +693,15 @@ ipcRenderer.on('pdf', function(){esportapdf()});
 ipcRenderer.on('esci', function(){remote.app.quit()});
 ipcRenderer.on('escisalva', function(){controllamodifiche('esci', function(){remote.app.quit()})});
 ipcRenderer.on('km', function(){coeffkm()});
+ipcRenderer.on('arch', function(){temp()});
 
 
 var data = ipcRenderer.sendSync('get-file-data');
 if (data!==null) {aprifile(data.toString());}
 
+  $( function() {
+    $( "#data2" ).datepicker();
+  } );
 
 	
 </script>
