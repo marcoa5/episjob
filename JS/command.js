@@ -628,6 +628,16 @@ function oggi(){
 	m = n.getMonth() + 1;
 	d = n.getDate();
 	$('#data1').val(today());	
+	var i=1;
+	$.get('.\\tech.txt', function(data) {
+		var linee = data.split("\n");
+		$.each(linee, function(n, elem) {
+			var record = elem.split("_");
+			var stringa= '<option value="' + record[0] + '">' + record[1] + '</option>';
+			$('#tec').append(stringa);
+			i++;
+		});
+	});
 }
 
 function aggiungi() {
@@ -875,6 +885,10 @@ function aggiornamol(){
 
 function aggiornacli(){	
 	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/customersupd.txt", function(data){fs.writeFileSync(cart + "\\customers.txt", data)})
+}
+
+function aggiornatech(){	
+	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/techupd.txt", function(data){fs.writeFileSync(cart + "\\tech.txt", data)})
 }
 
 function nuovamail(a,b){
