@@ -1117,7 +1117,7 @@ function controllaviaggi(){
 	}
 }
 
-$( document ).ready(function() {
+$( document ).ready(function(e) {
 	$('#km1').attr("disabled", true);
 	$('#spv1').attr("disabled", true);
     $('#spov1').change(function(){
@@ -1133,3 +1133,7 @@ $( document ).ready(function() {
 		controllaviaggi();
 	});
 });
+
+$(document).keyup(function(e){
+	if(e.key === "Escape"){closeMenu()};
+})
