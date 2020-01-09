@@ -17,8 +17,8 @@
     },
     "files": [
       "**/*",
-	  "!molupd.txt"
-	  "!customersupd.txt"
+	  "!molupd.txt",
+	  "!customersupd.txt",
 	  "!techupd.txt"
     ],
     "fileAssociations": [
