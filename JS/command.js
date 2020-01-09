@@ -8,7 +8,7 @@ const prompt = require('electron-prompt');
 const {shell} = require('electron');
 const process = require('process');
 const homedir = require('os').homedir();
-
+const SP = require('sharepoint');
 
 function openMenu(n){
     $('#modifiche').text("1");;
@@ -1151,3 +1151,4 @@ $( document ).ready(function(e) {
 $(document).keyup(function(e){
 	if(e.key === "Escape"){closeMenu()};
 })
+
