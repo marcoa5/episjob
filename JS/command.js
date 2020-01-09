@@ -414,11 +414,7 @@ function Apri(){
 	} else {
 		$('#data2').val(today());
 	}
-	$( function() {
-		$( "#data2" ).datepicker();
-		$( "#data2" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
-	});
-	$( "#data2").datepicker( "option", "dateFormat", "dd/mm/yy" );
+
 	$('#listac tr').remove();
     var i = 1
     $.get('.\\customers.txt', function(data) {
@@ -631,13 +627,7 @@ function oggi(){
 	y = n.getFullYear();
 	m = n.getMonth() + 1;
 	d = n.getDate();
-	$("#data1").val(today());//y + "-" + m.toString().padStart(2,'0') + "-" + d.toString().padStart(2,'0');
-	$( function() {
-		$( "#data1" ).datepicker();
-		$( "#data1" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
-		controlladata();
-	});
-	
+	$('#data1').val(today());	
 }
 
 function aggiungi() {
@@ -688,7 +678,7 @@ function aggiungi() {
 		att.value="cancella(this.parentNode.rowIndex)";
 		n.setAttributeNode(att);
 		document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
-		//canella le ore
+		//canCella le ore
 		clearore();
 		sortTable();
 		var numrig = document.getElementById('ris').getElementsByTagName('tr');
@@ -815,15 +805,7 @@ function openSU(){
 	document.getElementById('sucommessa').value=document.getElementById('commessa1').innerText;
 	document.getElementById('sunsofferta').value=document.getElementById('nsofferta1').innerText;
 	document.getElementById('suapbpcs').value=document.getElementById('apbpcs').innerText;
-	$( function() {
-		$( "#suapbpcs" ).datepicker();
-		$( "#suapbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
-	});
 	document.getElementById('suchbpcs').value=document.getElementById('chbpcs').innerText;
-	$( function() {
-		$( "#suchbpcs" ).datepicker();
-		$( "#suchbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
-	});
 	document.getElementById('sudocbpcs').value=document.getElementById('docbpcs').innerText;
 }
 
@@ -1117,9 +1099,37 @@ function today(){
 	var anno = og.getFullYear();
 	var mese = (og.getMonth()+1).toString().padStart(2,'0');
 	var giorno = og.getDate().toString().padStart(2,'0');
-	var fg = mese + "/" + giorno + "/" + anno;
+	var fg = giorno + "/" + mese + "/" + anno;
 	return fg
 }
 
+function controllaviaggi(){
+	var a1 = $('#spov1').val();
+	var a2 = $('#spsv1').val();
+	var a3 = $('#mntv1').val();
+	var a4 = $('#mnfv1').val();
+	if(a1!=="" | a2!=="" | a3!=="" | a4!==""){
+		$('#km1').attr("disabled", false);
+		$('#spv1').attr("disabled", false);
+	} else {
+		$('#km1').attr("disabled", true);
+		$('#spv1').attr("disabled", true);
+	}
+}
 
-
+$( document ).ready(function() {
+	$('#km1').attr("disabled", true);
+	$('#spv1').attr("disabled", true);
+    $('#spov1').change(function(){
+		controllaviaggi();
+	});    
+	$('#spsv1').change(function(){
+		controllaviaggi();
+	});
+	$('#mntv1').change(function(){
+		controllaviaggi();
+	});
+	$('#mnfv1').change(function(){
+		controllaviaggi();
+	});
+});

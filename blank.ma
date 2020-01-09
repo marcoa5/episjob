@@ -374,11 +374,11 @@
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
 					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai" style="max-height: 438px;">
+					<div class="finestrai" style="max-height: 1157px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
-						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
-						<input id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
+						<input id="suapbpcs" class="inser hasDatepicker" placeholder="Apertura BPCS..."><br>
+						<input id="suchbpcs" class="inser hasDatepicker" placeholder="Chiusura BPCS..."><br>
 						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
 					</div>
 					<br>
@@ -388,7 +388,7 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai" style="max-height: 438px;">
+				<div class="finestrai" style="max-height: 1157px;">
 						<form id="inputmac">
 								<input type="text" name="bday" id="data2" class="hasDatepicker">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
@@ -422,7 +422,7 @@
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai" style="max-height: 438px;">
+				<div class="finestrai" style="max-height: 1157px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
@@ -436,7 +436,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore" style="max-height: 438px;">
+				<div class="finestrai" id="htmlore" style="max-height: 1157px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -490,7 +490,7 @@
 										</select>
 										</td>
 										<td>
-										<input type="text" name="bday" id="data1" onchange="controlladata()">
+										<input type="text" name="bday" id="data1" onchange="controlladata()" class="hasDatepicker">
 										</td>
 										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '1')"></td>
 										<td><input id="spol1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '2')"></td>
@@ -502,8 +502,8 @@
 										<td><input id="mfl1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mf','2')"></td>
 										<td><input id="mnfv1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','1')"></td>
 										<td><input id="mnfl1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','2')"></td>
-										<td><input id="km1" class="ore" type="text" maxlength="4" onkeypress="return isNumber(event)"></td>
-										<td><input id="spv1" class="ore" type="text" maxlength="2" onfocus="scrivikm()" onkeypress="return isNumber(event)"></td>
+										<td><input id="km1" class="ore" type="text" maxlength="4" onkeypress="return isNumber(event)" disabled="disabled"></td>
+										<td><input id="spv1" class="ore" type="text" maxlength="2" onfocus="scrivikm()" onkeypress="return isNumber(event)" disabled="disabled"></td>
 										<td><input id="off1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('off', '1')"></td>
 										<td><input id="ofs1" class="ore" type="text" maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('ofs', '1')"></td>
 								</tr>
@@ -514,11 +514,8 @@
 								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
 								<br><br>
 								<table id="ris" style="color: white;">
-								
-						</table><br>  
-						
+						</table><br><br>  
 				</div>
-				
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="copiaore()">OK</button>
 				<br><br>
@@ -528,7 +525,7 @@
 <div class="ccc"><!--Email-->    
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuMail" style="position: relative;">
 			<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-			<div class="finestrai" style="max-height: 438px;">
+			<div class="finestrai" style="max-height: 1157px;">
 					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 			</div>
