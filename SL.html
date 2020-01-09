@@ -491,23 +491,7 @@
 								<tr id="rigadati">
 										<td>
 										<select id="tec">
-												<option value="ANDREA LAINI">A. LAINI</option>
-												<option value="GIORGIO RIZZI">G. RIZZI</option>
-												<option value="GABRIELE PICCIONI">G. PICCIONI</option>
-												<option value="ROBERTO BOTRÈ">R. BOTRÈ</option>
-												<option value="ENZO FELICI">E. FELICI</option>
-												<option value="CLAUDIO MICHIELOTTO">C. MICHIELOTTO</option>
-												<option value="WALTER BIAGIONI">W. BIAGIONI</option>
-												<option value="RAFFAELE RECH">R. RECH</option>
-												<option value="IVAN OVACIUC">I. OVACIUC</option>
-												<option value="PIETRO CIANGOLI">P. CIANGOLI</option>
-												<option value="SAID ELAKHRAS">S. ELAKHRAS</option>
-												<option value="ALESSANDRO MOLLO">A. MOLLO</option>
-												<option value="FABRIZIO VERNIA">F. VERNIA</option>
-												<option value="GIANFRANCO MURA">G. MURA</option>
-												<option value="FRANCESCO MURA">F. MURA</option>
-												<option value="NATALINO CARUSO">N. CARUSO</option>
-												<option value="ALESSANDRO ALESCIO">A. ALESCIO</option>
+											<!--Nomi da aggiungere-->
 										</select>
 										</td>
 										<td>
@@ -660,20 +644,20 @@
 </body>
 
 <script>
-	$('#menuMatricola').draggable();
-	$('#menuRapporto').draggable();
-	$('#menuOre').draggable();
-	$('#menuSU').draggable();
-	$('#menuMail').draggable();
+$('#menuMatricola').draggable();
+$('#menuRapporto').draggable();
+$('#menuOre').draggable();
+$('#menuSU').draggable();
+$('#menuMail').draggable();
 
 
-	const { ipcRenderer } = require('electron');
-    const version = document.getElementById('upd');
-    ipcRenderer.send('app_version');
-    ipcRenderer.on('app_version', (event, arg) => {
-      ipcRenderer.removeAllListeners('app_version');
-      version.innerText = 'V' + arg.version;
-	});
+const { ipcRenderer } = require('electron');
+const version = document.getElementById('upd');
+ipcRenderer.send('app_version');
+ipcRenderer.on('app_version', (event, arg) => {
+  ipcRenderer.removeAllListeners('app_version');
+  version.innerText = 'V' + arg.version;
+});
 	
 const notification = document.getElementById('notification');
 const message = document.getElementById('message');
@@ -689,6 +673,7 @@ function liveCheck() {
 	if(navigator.onLine){
 		aggiornamol();
 		aggiornacli();
+		aggiornatech();
 	} else {}
 }
 
