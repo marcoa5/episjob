@@ -10,8 +10,7 @@
         <script src="js/sign.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/jqueryui.js"></script>
-		<script src="js/jqueryui.js"></script>
-        <script>var nodemailer = require('nodemailer');</script> 
+		<script src="js/jqueryui.js"></script> 
         <script>if (window.module) module = window.module;</script>
         <script>const { dialog } = require('electron').remote;</script>
 		<script>const {webFrame} = require('electron'); webFrame.setZoomFactor(1);</script>
@@ -536,11 +535,8 @@
 								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
 								<br><br>
 								<table id="ris" style="color: white;">
-								
-						</table><br>  
-						
+						</table><br><br>  
 				</div>
-				
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="copiaore()">OK</button>
 				<br><br>
@@ -725,6 +721,23 @@ $('body').on('mousewheel', function(event) {
 	if((webFrame.getZoomFactor() - zoom/6)>=0.6){
 		webFrame.setZoomFactor(webFrame.getZoomFactor() - zoom/6);}
 	}
+});
+
+$( function() {
+	$( "#data1" ).datepicker();
+	$( "#data1" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+});
+$( function() {
+	$( "#data2" ).datepicker();
+	$( "#data2" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+});
+$( function() {
+	$( "#suapbpcs" ).datepicker();
+	$( "#suapbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+});
+	$( function() {
+	$( "#suchbpcs" ).datepicker();
+	$( "#suchbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
 });
 	
 </script>
