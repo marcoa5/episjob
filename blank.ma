@@ -377,8 +377,8 @@
 					<div class="finestrai" style="max-height: 438px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
-						<input id="suapbpcs" class="inser hasDatepicker" placeholder="Apertura BPCS..."><br>
-						<input id="suchbpcs" class="inser hasDatepicker" placeholder="Chiusura BPCS..."><br>
+						<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
+						<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
 						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
 						<!--<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
 					</div>
@@ -391,7 +391,9 @@
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
 				<div class="finestrai" style="max-height: 438px;">
 						<form id="inputmac">
-								<input type="text" name="bday" id="data2" class="hasDatepicker">
+					
+								 <date-input value="{{value}}"></date-input>
+								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
 								<input id="matricolas" class="inser" placeholder="Matricola...">
@@ -475,7 +477,7 @@
 										</select>
 										</td>
 										<td>
-										<input type="text" name="bday" id="data1" onchange="controlladata()" class="hasDatepicker">
+										<input type="date" name="bday" id="data1" onchange="controlladata()">
 										</td>
 										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '1')"></td>
 										<td><input id="spol1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '2')"></td>

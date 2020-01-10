@@ -10,7 +10,7 @@ const process = require('process');
 const homedir = require('os').homedir();
 var sprLib = require("sprestlib");
 var campi = [];
-var acc;
+var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
 	
 function openMenu(n){
@@ -84,8 +84,8 @@ function init(h){
 	canvas=document.getElementById(h);
 	function resizeCanvas(){
 		var ratio =  Math.max(window.devicePixelRatio || 1, 1);
-		canvas.width = "552";
-		canvas.height = "240";
+		canvas.width = "700";
+		canvas.height = "300";
 	}
 	//window.onresize = resizeCanvas;
 	resizeCanvas();
@@ -143,7 +143,7 @@ function salvadati(){
     $("#perc11").text(mille($("#perc1").val().toString()));
     $("#perc21").text(mille($("#perc2").val().toString()));
     $("#perc31").text(mille($("#perc3").val().toString()));
-	var aggdata = $('#data2').val();
+	var aggdata = convdata($('#data2').val());
 	$("#data11").text(aggdata);
     if(document.getElementById("manstd").checked){$('#stdspe').text("STD")}else{$('#stdspe').text("SPE")}
     closeMenu();
@@ -413,9 +413,9 @@ function myFunction() {
 //carica elenco clienti e macchine
 function Apri(){
 	if($('#data11').text()!==""){
-		$('#data2').val($('#data11').text());
+		$('#data2').val(convdata($('#data11').text()));
 	} else {
-		$('#data2').val(today());
+		$('#data2').val(convdata(today()));
 	}
 
 	$('#listac tr').remove();
@@ -578,8 +578,6 @@ function aprifile(a){
 		$('#menuOre').draggable();
 		$('#menuSU').draggable();
 		$('#menuMail').draggable();
-		$('#firmat1').draggable();
-		$('#firmac1').draggable();
 		closeMenu()
 	} else {
 		$.get(a, function(data) {
@@ -591,8 +589,6 @@ function aprifile(a){
 		$('#menuOre').draggable();
 		$('#menuSU').draggable();
 		$('#menuMail').draggable();
-		$('#firmat1').draggable();
-		$('#firmac1').draggable();
         })
 	}
 }
@@ -603,17 +599,13 @@ function pulisci(){
 	var filename =  "blank.ma"
 	if(filename!==undefined){
 		$.get(filename, function(data) {
-			/*console.log(data)
-			document.getElementById('salva').innerHTML = ""*/
-			document.getElementById('salva').innerHTML = data
+			document.getElementById('salva').innerHTML = data;
 			$('#salvataggio').text("");
 			$('#menuMatricola').draggable();
 			$('#menuRapporto').draggable();
 			$('#menuOre').draggable();
 			$('#SU').draggable();
 			$('#menuMail').draggable();
-			$('#firmat1').draggable();
-			$('#firmac1').draggable();
 		})}
 		closeMenu();
 
@@ -636,7 +628,7 @@ function oggi(){
 	y = n.getFullYear();
 	m = n.getMonth() + 1;
 	d = n.getDate();
-	$('#data1').val(today());	
+	$('#data1').val(convdata(today()));	
 	var i=1;
 	$.get('.\\tech.txt', function(data) {
 		var linee = data.split("\n");
@@ -660,8 +652,8 @@ function aggiungi() {
 	var ind = riga.length;
 	//verifica che le righe siano < 7
 	if(ind<=6){    
-		var parts = document.getElementById("data1").value.toString().split("/");
-		var mydate = parts[2]+ parts[1]+ parts[0]; 
+		var parts = document.getElementById("data1").value.toString().split("-");
+		var mydate = parts[0]+ parts[1]+ parts[2]; 
 		document.getElementById('ris').appendChild(document.createElement("TR"));
 		var ele = [document.getElementById('tec').value, mydate];
 		//controlla le festività
@@ -823,8 +815,8 @@ function indirizzo_cliente(){
 function openSU(){	 
 	document.getElementById('sucommessa').value=document.getElementById('commessa1').innerText;
 	document.getElementById('sunsofferta').value=document.getElementById('nsofferta1').innerText;
-	document.getElementById('suapbpcs').value=document.getElementById('apbpcs').innerText;
-	document.getElementById('suchbpcs').value=document.getElementById('chbpcs').innerText;
+	document.getElementById('suapbpcs').value=convdata(document.getElementById('apbpcs').innerText);
+	document.getElementById('suchbpcs').value=convdata(document.getElementById('chbpcs').innerText);
 	document.getElementById('sudocbpcs').value=document.getElementById('docbpcs').innerText;
 	addsp();
 }
@@ -832,8 +824,8 @@ function openSU(){
 function closeSU(){
 	document.getElementById('commessa1').innerText=document.getElementById('sucommessa').value;
 	document.getElementById('nsofferta1').innerText=document.getElementById('sunsofferta').value;
-	document.getElementById('apbpcs').innerText=document.getElementById('suapbpcs').value;
-	document.getElementById('chbpcs').innerText=document.getElementById('suchbpcs').value;
+	document.getElementById('apbpcs').innerText=convdata(document.getElementById('suapbpcs').value);
+	document.getElementById('chbpcs').innerText=convdata(document.getElementById('suchbpcs').value);
 	document.getElementById('docbpcs').innerText=document.getElementById('sudocbpcs').value;
 	closeMenu();
 }
@@ -1171,7 +1163,11 @@ $( document ).ready(function(e) {
 		var ch = obj.Email;
 		if(ch=="marco.fumagalli@epiroc.com" | ch=="mario.parravicini@epiroc.com" | ch=="marco.arato@epiroc.com" | ch=="carlo.colombo@epiroc.com" | ch=="nicolo.tuppo@epiroc.com") {acc = "admin"};
 		if(acc!==""){var str = " (" + acc + ")"}
-		$('#user').text(obj.Title + str); 
+		if(obj.Title!==undefined){
+			$('#user').text(obj.Title + str);
+		} else {
+			$('#user').text();
+		}			
 	});
 	sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
 	.then(function(arr){
@@ -1268,3 +1264,34 @@ function addsp(){
 	}
 }
 
+
+$(document).ready(function(){
+	$( ".calendario" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+	$( "#suapbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+	$( "#suchbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
+})
+
+function convdata(v){
+	if(v!==""){
+	var n;
+	var g;
+	var m;
+	var a;
+	var o;
+	if(v.substring(2,3)=="/"){
+		n = v.split("/");
+		g = n[0];
+		m = n[1];
+		a = n[2];
+		o = a +"-" + m +"-" + g
+		return o
+	} else {
+		n = v.split("-");
+		a = n[0];
+		m = n[1];
+		g = n[2];
+		o = g +"/" + m +"/" + a
+		return o
+	}
+	} else {return ""}
+}
