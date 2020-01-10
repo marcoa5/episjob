@@ -823,10 +823,12 @@ text-align: center;
 }
 
 
-#upd {
-    position: absolute;
+#upd, #user {
+    position: inline;
+	float: right;
     top: 5px; right: 10px;
-    width: 50px; height: 10px;
+    margin-right: 20px;
+	height: 10px;
     background-color: none;
     font-family: Arial;
     font-size: 10px;
