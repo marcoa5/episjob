@@ -83,6 +83,7 @@ function createWindow () {
 }
 
 
+
 app.on('ready', () => {
   createWindow();
   autoUpdater.checkForUpdatesAndNotify();
