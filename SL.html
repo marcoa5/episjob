@@ -650,7 +650,8 @@ $('#menuRapporto').draggable();
 $('#menuOre').draggable();
 $('#menuSU').draggable();
 $('#menuMail').draggable();
-
+$('#firmat1').draggable();
+$('#firmac1').draggable();
 
 const { ipcRenderer } = require('electron');
 const version = document.getElementById('upd');
@@ -702,7 +703,7 @@ if (data!==null) {aprifile(data.toString());}
   } );
   
 $('body').on('mousewheel', function(event) {
-    if(event.ctrlKey){
+    if(event.ctrlKey && $('firmac1').css('display', 'none') && $('firmat1').css('display', 'none')){
 	var zoom = event.originalEvent.deltaY/150;
 	if((webFrame.getZoomFactor() - zoom/6)>=0.6){
 		webFrame.setZoomFactor(webFrame.getZoomFactor() - zoom/6);}
