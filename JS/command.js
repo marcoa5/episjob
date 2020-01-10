@@ -87,7 +87,7 @@ function init(h){
 		canvas.width = "552";
 		canvas.height = "240";
 	}
-	window.onresize = resizeCanvas;
+	//window.onresize = resizeCanvas;
 	resizeCanvas();
 	var signaturePad = new SignaturePad(canvas, {});
 	var er, sa, fi = false
@@ -578,6 +578,8 @@ function aprifile(a){
 		$('#menuOre').draggable();
 		$('#menuSU').draggable();
 		$('#menuMail').draggable();
+		$('#firmat1').draggable();
+		$('#firmac1').draggable();
 		closeMenu()
 	} else {
 		$.get(a, function(data) {
@@ -589,6 +591,8 @@ function aprifile(a){
 		$('#menuOre').draggable();
 		$('#menuSU').draggable();
 		$('#menuMail').draggable();
+		$('#firmat1').draggable();
+		$('#firmac1').draggable();
         })
 	}
 }
@@ -608,6 +612,8 @@ function pulisci(){
 			$('#menuOre').draggable();
 			$('#SU').draggable();
 			$('#menuMail').draggable();
+			$('#firmat1').draggable();
+			$('#firmac1').draggable();
 		})}
 		closeMenu();
 
@@ -1261,3 +1267,4 @@ function addsp(){
 		})
 	}
 }
+
