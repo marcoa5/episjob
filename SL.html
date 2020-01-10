@@ -138,10 +138,10 @@
 							<td class="tabcell">L</td>
 			</tr>
 			<tr class="tabrow">
-							<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico11"></div></td>
-							<td class="tabcell2"><div class="data" id="g11"></div></td>
-							<td class="tabcell2"><div class="data" id="m11"></div></td>
-							<td class="tabcell2"><div class="data" id="a11"></div></td>
+							<td class="tabcell1" id="nom" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico11"></div></td>
+							<td class="tabcell2" id="dat1"><div class="data" id="g11"></div></td>
+							<td class="tabcell2" id="dat2"><div class="data" id="m11"></div></td>
+							<td class="tabcell2" id="dat3"><div class="data" id="a11"></div></td>
 							<td class="tabcell3"><div class="data1" id="spov11"></div></td>
 							<td class="tabcell3"><div class="data1" id="spol11"></div></td>
 							<td class="tabcell3"><div class="data1" id="spsv11"></div></td>
@@ -401,7 +401,7 @@
 						<input id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
 						<input id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
 						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
-						<!--<button class="pulsante" onclick="addsp()">Carica Sondaggio</button>-->
+						<!--<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
 					</div>
 					<br>
 					<button class="pulsante" onclick="closeMenu()">Annulla</button>
@@ -638,7 +638,7 @@
 				</tr>
 		</table>-->
 		
-		<div id="upd" oncontextmenu="openMenu('menuSU')"></div>
+		<div id="upd" oncontextmenu="openMenu('menuSU')"></div><div id="user"></div>
 		
 </div>
 

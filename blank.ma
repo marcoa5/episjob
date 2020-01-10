@@ -117,10 +117,10 @@
 							<td class="tabcell">L</td>
 			</tr>
 			<tr class="tabrow">
-							<td class="tabcell1" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico11"></div></td>
-							<td class="tabcell2"><div class="data" id="g11"></div></td>
-							<td class="tabcell2"><div class="data" id="m11"></div></td>
-							<td class="tabcell2"><div class="data" id="a11"></div></td>
+							<td class="tabcell1" id="nom" style="text-align: left; padding-left: 10px;"><div class="tecnico" id="tecnico11"></div></td>
+							<td class="tabcell2" id="dat1"><div class="data" id="g11"></div></td>
+							<td class="tabcell2" id="dat2"><div class="data" id="m11"></div></td>
+							<td class="tabcell2" id="dat3"><div class="data" id="a11"></div></td>
 							<td class="tabcell3"><div class="data1" id="spov11"></div></td>
 							<td class="tabcell3"><div class="data1" id="spol11"></div></td>
 							<td class="tabcell3"><div class="data1" id="spsv11"></div></td>
@@ -287,7 +287,7 @@
 		</tbody></table>
 		<div class="legenda"><!--Legenda-->                                
 			<br><table style="border:0px solid black; width: 100%; margin: 0;  ">
-				<tbody><tr><th class="tabset2" colspan="10">RIFERIMENTI</th>
+				<tbody><tr><th class="tabset2" colspan="10" style="font-family: Arial; font-weight: 800;">RIFERIMENTI</th>
 				</tr><tr class="legenda1">
 						<td style=" width: 3%; font-weight: bold">spo</td>
 						<td style="  width:22%">Manodopera Specialistica Ordinaria</td>  
@@ -374,12 +374,13 @@
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
 					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai" style="max-height: 1157px;">
+					<div class="finestrai" style="max-height: 438px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
 						<input id="suapbpcs" class="inser hasDatepicker" placeholder="Apertura BPCS..."><br>
 						<input id="suchbpcs" class="inser hasDatepicker" placeholder="Chiusura BPCS..."><br>
 						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
+						<!--<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
 					</div>
 					<br>
 					<button class="pulsante" onclick="closeMenu()">Annulla</button>
@@ -388,7 +389,7 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai" style="max-height: 1157px;">
+				<div class="finestrai" style="max-height: 438px;">
 						<form id="inputmac">
 								<input type="text" name="bday" id="data2" class="hasDatepicker">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
@@ -422,7 +423,7 @@
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai" style="max-height: 1157px;">
+				<div class="finestrai" style="max-height: 438px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
@@ -436,7 +437,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore" style="max-height: 1157px;">
+				<div class="finestrai" id="htmlore" style="max-height: 438px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -470,23 +471,7 @@
 								<tr id="rigadati">
 										<td>
 										<select id="tec">
-												<option value="ANDREA LAINI">A. LAINI</option>
-												<option value="GIORGIO RIZZI">G. RIZZI</option>
-												<option value="GABRIELE PICCIONI">G. PICCIONI</option>
-												<option value="ROBERTO BOTRÈ">R. BOTRÈ</option>
-												<option value="ENZO FELICI">E. FELICI</option>
-												<option value="CLAUDIO MICHIELOTTO">C. MICHIELOTTO</option>
-												<option value="WALTER BIAGIONI">W. BIAGIONI</option>
-												<option value="RAFFAELE RECH">R. RECH</option>
-												<option value="IVAN OVACIUC">I. OVACIUC</option>
-												<option value="PIETRO CIANGOLI">P. CIANGOLI</option>
-												<option value="SAID ELAKHRAS">S. ELAKHRAS</option>
-												<option value="ALESSANDRO MOLLO">A. MOLLO</option>
-												<option value="FABRIZIO VERNIA">F. VERNIA</option>
-												<option value="GIANFRANCO MURA">G. MURA</option>
-												<option value="FRANCESCO MURA">F. MURA</option>
-												<option value="NATALINO CARUSO">N. CARUSO</option>
-												<option value="ALESSANDRO ALESCIO">A. ALESCIO</option>
+											<!--Nomi da aggiungere-->
 										</select>
 										</td>
 										<td>
@@ -525,7 +510,7 @@
 <div class="ccc"><!--Email-->    
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuMail" style="position: relative;">
 			<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-			<div class="finestrai" style="max-height: 1157px;">
+			<div class="finestrai" style="max-height: 438px;">
 					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 			</div>

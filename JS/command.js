@@ -8,8 +8,11 @@ const prompt = require('electron-prompt');
 const {shell} = require('electron');
 const process = require('process');
 const homedir = require('os').homedir();
-const SP = require('sharepoint');
-
+var sprLib = require("sprestlib");
+var campi = [];
+var acc;
+var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
+	
 function openMenu(n){
     $('#modifiche').text("1");;
     var f = document.getElementsByClassName("finestra")
@@ -817,6 +820,7 @@ function openSU(){
 	document.getElementById('suapbpcs').value=document.getElementById('apbpcs').innerText;
 	document.getElementById('suchbpcs').value=document.getElementById('chbpcs').innerText;
 	document.getElementById('sudocbpcs').value=document.getElementById('docbpcs').innerText;
+	addsp();
 }
 
 function closeSU(){
@@ -1152,3 +1156,108 @@ $(document).keyup(function(e){
 	if(e.key === "Escape"){closeMenu()};
 })
 
+
+$( document ).ready(function(e) {
+	var chiave ="";
+	var colonne = [];
+	sprLib.user({'baseUrl': murl}).info()
+	.then(function(obj){
+		var ch = obj.Email;
+		if(ch=="marco.fumagalli@epiroc.com" | ch=="mario.parravicini@epiroc.com" | ch=="marco.arato@epiroc.com" | ch=="carlo.colombo@epiroc.com" | ch=="nicolo.tuppo@epiroc.com") {acc = "admin"};
+		if(acc!==""){var str = " (" + acc + ")"}
+		$('#user').text(obj.Title + str); 
+	});
+	sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
+	.then(function(arr){
+		chiave = arr[0].GetContextWebInformation.FormDigestValue;
+		campi[0]=chiave;
+		sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: chiave }).cols()
+		.then(function(arrayResults){
+			colonne=arrayResults; 
+			colonne.forEach(function(id){
+				if(id.dataType=="Text"){
+					campi.push(id.dataName);
+				}
+			})
+		});
+	})
+});
+
+
+function addsp(){
+	var risu = ['a'];
+	var con = "";
+	var f = [];
+	var t=0;
+	var a=0;
+	risu.push($('#cliente11').text());
+	risu.push($('#matricola').text());
+	risu.push($('#nomecognome').val());
+	risu.push($('#prodotto1').text());
+	risu.push($('#nom').text());
+	risu.push($('#rissondaggio').text().substring(0,1));
+	risu.push($('#rissondaggio').text().substring(1,2));
+	risu.push($('#rissondaggio').text().substring(2,3));
+	risu.push($('#dat3').text()+$('#dat2').text()+$('#dat1').text());
+	risu.push($('#stdspe').text());
+	risu.forEach(function(val){
+		if(val==""){con = "1"};
+	})
+	if(con!=="1"){
+		sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: campi[0] }).items()
+		.then(function(val){
+			val.forEach(function(d, id){
+				f.push(id);
+				f.push(d.Title);
+				f.push(d.Matricola);
+				f.push(d.Nome_x0020_Cliente);
+				f.push(d.macchina);
+				f.push(d.tecnico);
+				f.push(d.sondaggio1);
+				f.push(d.sondaggio2);
+				f.push(d.sondaggio3);
+				f.push(d.data_x0020_intervento);
+				f.push(d.tipo_x0020_intervento);
+				for(var i=1;i<11;i++){
+					if(risu[i]==f[i]){a++}else{break}
+				}
+				if(a==10){t++}
+				a=0;
+				f = [];
+			})
+			if(t==0){
+				sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: campi[0] })
+				.create({
+					Title: risu[1],
+					Matricola: risu[2],
+					Nome_x0020_Cliente: risu[3],
+					macchina: risu[4],
+					tecnico: risu[5],
+					sondaggio1: risu[6],
+					sondaggio2: risu[7],
+					sondaggio3: risu[8],
+					data_x0020_intervento: risu[9],
+					tipo_x0020_intervento: risu[10],
+				})
+				.then(function(objItem){
+					const options = {
+						type: 'info',
+						buttons: ['OK'],
+						title: 'SharePoint',
+						message: 'Sondaggio caricato su SP',
+						};
+						dialog.showMessageBoxSync(remote.win, options);
+				})
+				//.catch(function(strErr){ console.error(strErr); });
+			} else {
+				const options = {
+				type: 'error',
+				buttons: ['OK'],
+				title: 'Errore',
+				message: 'Sondaggio già presente in SP',
+				};
+				dialog.showMessageBoxSync(remote.win, options);
+			}
+		})
+	}
+}
