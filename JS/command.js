@@ -295,7 +295,7 @@ function controllaore(n, id){
 
 //disabilita l'inserimento in base al giorno dell'anno
 function controlladata(){
-	var param = verificadata(document.getElementById('data1').value);
+	var param = verificadata(convdata(document.getElementById('data1').value));
 	if(param=="fest"){
 		document.getElementById('spov1').disabled= true;
 		document.getElementById('spol1').disabled= true;
@@ -378,7 +378,7 @@ function send_mail(a) {
 	mItm.Body = "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
 	mItm.Attachments.Add(nomef + ".pdf");    
 	mItm.GetInspector.WindowState = 2;
-	//mItm.send();
+	mItm.send();
 	var objO = new ActiveXObject('Outlook.Application');     
 	var objNS = objO.GetNameSpace('MAPI');     
 	var mItm = objO.CreateItem(0);     
@@ -388,7 +388,7 @@ function send_mail(a) {
 	mItm.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
 	mItm.Attachments.Add(nomef + ".ma");    
 	mItm.GetInspector.WindowState = 2;
-	//mItm.send();
+	mItm.send();
 	
 }
 
@@ -1160,6 +1160,7 @@ $( document ).ready(function(e) {
 	var colonne = [];
 	sprLib.user({'baseUrl': murl}).info()
 	.then(function(obj){
+		
 		var ch = obj.Email;
 		if(ch=="marco.fumagalli@epiroc.com" | ch=="mario.parravicini@epiroc.com" | ch=="marco.arato@epiroc.com" | ch=="carlo.colombo@epiroc.com" | ch=="nicolo.tuppo@epiroc.com") {acc = "admin"};
 		if(acc!==""){var str = " (" + acc + ")"}
