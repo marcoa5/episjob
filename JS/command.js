@@ -1136,18 +1136,6 @@ function controllaviaggi(){
 $( document ).ready(function(e) {
 	$('#km1').attr("disabled", true);
 	$('#spv1').attr("disabled", true);
-    $('#spov1').change(function(){
-		controllaviaggi();
-	});    
-	$('#spsv1').change(function(){
-		controllaviaggi();
-	});
-	$('#mntv1').change(function(){
-		controllaviaggi();
-	});
-	$('#mnfv1').change(function(){
-		controllaviaggi();
-	});
 });
 
 $(document).keyup(function(e){
@@ -1264,13 +1252,6 @@ function addsp(){
 		})
 	}
 }
-
-
-$(document).ready(function(){
-	$( ".calendario" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
-	$( "#suapbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
-	$( "#suchbpcs" ).datepicker( "option", "dateFormat", "dd/mm/yy" )
-})
 
 function convdata(v){
 	if(v!==""){
