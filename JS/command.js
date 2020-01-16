@@ -145,7 +145,7 @@ function salvadati(){
     $("#perc31").text(mille($("#perc3").val().toString()));
 	var aggdata = convdata($('#data2').val());
 	$("#data11").text(aggdata);
-    if(document.getElementById("manstd").checked){$('#stdspe').text("STD")}else{$('#stdspe').text("SPE")}
+    if(document.getElementById("manstd").checked){$('#stdspe').text("STD"); $('#spostd').text("STD"); $('#spsstr').text("STR")}else{$('#stdspe').text("SPE");$('#spostd').text("SPO");$('#spsstr').text("SPS")}
     closeMenu();
 	$("#vsordine").text($("#ordine").val());
 }
@@ -674,13 +674,25 @@ function aggiungi() {
 			if(i>1){
 				var att = document.createAttribute("class");
 				att.value= "ores";
-				n.setAttributeNode(att);}
+				n.setAttributeNode(att);
+			}
 			n.appendChild(t);
 			document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
 		}
+		//aggiunge il modifica riga
+		var n = document.createElement('TD');
+		var t = document.createTextNode("Modifica");
+		n.appendChild(t);
+		att = document.createAttribute("class");
+		att.value="elim";
+		n.setAttributeNode(att);
+		att = document.createAttribute("onClick");
+		att.value="modifica(this.parentNode.rowIndex)";
+		n.setAttributeNode(att);
+		document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
 		//aggiunge l'elimina riga
 		var n = document.createElement('TD');
-		var t = document.createTextNode("Elimina riga");
+		var t = document.createTextNode("Elimina");
 		n.appendChild(t);
 		att = document.createAttribute("class");
 		att.value="elim";
@@ -1276,4 +1288,17 @@ function convdata(v){
 		return o
 	}
 	} else {return ""}
+}
+
+function modifica(r){
+	var a = document.getElementById("ris").getElementsByTagName("tr")[r].getElementsByTagName("td");
+	var b = document.getElementById("main").getElementsByTagName("tr")[3].getElementsByTagName("td");
+	for(var i=1;i<17;i++){
+		if(i>2){
+			b[i-1].getElementsByTagName("input")[0].value=a[i].innerText;
+		}
+		document.getElementById("tec").value = a[1].innerText
+		document.getElementById("data1").value = a[2].innerText.substring(0,4) + "-" + a[2].innerText.substring(4,6)+ "-" + a[2].innerText.substring(6,8);
+	}
+	cancella(r);
 }
