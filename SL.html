@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
         
 <head>
-
+		<title>Epiroc Service Job</title>
         <link rel="stylesheet" type="text/css" href="stile.css">
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="js/jquery.js"></script>
@@ -498,13 +498,13 @@
 										<td>
 										<input type="date" name="bday" id="data1" onchange="controlladata()">
 										</td>
-										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '1')"></td>
+										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onchange="controllaviaggi()" onkeyup="controllaore('spo', '1')"></td>
 										<td><input id="spol1" class="ore" type="text" maxlength="1"  onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '2')"></td>
-										<td><input id="spsv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('sps','1')"></td>
+										<td><input id="spsv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onchange="controllaviaggi()" onkeyup="controllaore('sps','1')"></td>
 										<td><input id="spsl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('sps','2')"></td>
-										<td><input id="mntv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('mnt','1')"></td>
+										<td><input id="mntv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onchange="controllaviaggi()" onkeyup="controllaore('mnt','1')"></td>
 										<td><input id="mntl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('mnt','2')"></td>
-										<td><input id="mfv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)"  onkeyup="controllaore('mf','1')"></td>
+										<td><input id="mfv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)"  onchange="controllaviaggi()" onkeyup="controllaore('mf','1')"></td>
 										<td><input id="mfl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)"  onkeyup="controllaore('mf','2')"></td>
 										<td><input id="mnfv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','1')"></td>
 										<td><input id="mnfl1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','2')"></td>
