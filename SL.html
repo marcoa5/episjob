@@ -691,6 +691,9 @@ ipcRenderer.on('esci', function(){remote.app.quit()});
 ipcRenderer.on('escisalva', function(){controllamodifiche('esci', function(){remote.app.quit()})});
 ipcRenderer.on('km', function(){coeffkm()});
 ipcRenderer.on('arch', function(){temp()});
+ipcRenderer.on('print', function(){stampa()})
+
+
 
 
 var data = ipcRenderer.sendSync('get-file-data');
