@@ -221,7 +221,7 @@ function controllaore(n, id){
 		var a = $('#spov1').val();
 		var b= $('#spol1').val();
 		if((a*1+b*1)<9){return} else {
-		  dialog.showMessageBox(remote.win, options);
+		  dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('spov1').value = 8 - document.getElementById('spol1').value*1
 			} else {
@@ -233,7 +233,7 @@ function controllaore(n, id){
 		var a = document.getElementById('spsv1').value;
 		var b= document.getElementById('spsl1').value;
 		if((a*1+b*1)<9){return} else {
-		  dialog.showMessageBox(remote.win, options);
+		  dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('spsv1').value = 8 - document.getElementById('spsl1').value*1
 			} else {
@@ -245,7 +245,7 @@ function controllaore(n, id){
 		var a = document.getElementById('mntv1').value;
 		var b= document.getElementById('mntl1').value;
 		if((a*1+b*1)<9){return} else {
-			dialog.showMessageBox(remote.win, options);
+			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('mntv1').value = 8 - document.getElementById('mntl1').value*1
 			} else {
@@ -257,7 +257,7 @@ function controllaore(n, id){
 		var a = document.getElementById('mfv1').value;
 		var b= document.getElementById('mfl1').value;
 		if((a*1+b*1)<17){return} else {
-			dialog.showMessageBox(remote.win, options2);
+			dialog.showMessageBox(remote.getCurrentWindow(), options2);
 			if(id=='1'){
 				document.getElementById('mfv1').value = 16 - document.getElementById('mfl1').value*1
 			} else {
@@ -269,7 +269,7 @@ function controllaore(n, id){
 		var a = document.getElementById('mnfv1').value;
 		var b= document.getElementById('mnfl1').value;
 		if((a*1+b*1)<9){return} else {
-			dialog.showMessageBox(remote.win, options);
+			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('mnfv1').value = 8 - document.getElementById('mnfl1').value*1
 			} else {
@@ -280,14 +280,14 @@ function controllaore(n, id){
 	if(n=='off'){
 		var a = document.getElementById('off1').value;
 		if((a*1)<9){return} else {
-			dialog.showMessageBox(remote.win, options);
+			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			document.getElementById('off1').value = 8 
 		}
 	}
 	if(n=='ofs'){
 		var a = document.getElementById('ofs1').value;
 		if((a*1)<9){return} else {
-			dialog.showMessageBox(remote.win, options);
+			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			document.getElementById('ofs1').value = 8 
 		}
 	}
@@ -511,7 +511,7 @@ function salvafile(nome, callback){
 			message: 'File salvato: ' + cartella,
 			noLink: true
 		}
-	var f = dialog.showMessageBoxSync(remote.win, options);
+	var f = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	callback();
 		})	
 }
@@ -542,7 +542,7 @@ function controllamodifiche(a, callback){
 			message: 'Vuoi Salvare le modifiche?', 
 			noLink: true
 		};
-		var sce = dialog.showMessageBoxSync(remote.win, options);
+		var sce = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 		if(sce==1){
 			if(a=='esci'){
 				salvafile(document.getElementById('salvataggio').innerText, function(){remote.app.quit()})
@@ -619,7 +619,7 @@ function ver_pulisci(){
 		message: 'Vuoi eliminare i dati non salvati?',
 		noLink: true
 	};
-	var resp = dialog.showMessageBoxSync(remote.win, options) 
+	var resp = dialog.showMessageBoxSync(remote.getCurrentWindow(), options) 
 	if (resp==0){pulisci(); closeMenu();}
 }
 		
@@ -708,7 +708,7 @@ function aggiungi() {
 		for(var z=0;z<numrig.length;z++){
 			numrig[z].getElementsByTagName('td')[0].innerText = z+1;
 		}             
-	} else {dialog.showMessageBox(remote.win, options);}
+	} else {dialog.showMessageBox(remote.getCurrentWindow(), options);}
 	
 }
 
@@ -927,7 +927,7 @@ function nuovamail(a,b){
 		title: 'Errore',
 		message: 'Mail non valida'
 		};
-		dialog.showMessageBoxSync(remote.win, options);
+		dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	}
 }
 
@@ -945,7 +945,7 @@ function eliminamail(){
 		title: 'Elimina',
 		noLink: true,
 		message: 'Vuoi eliminare?'}
-	var sce = dialog.showMessageBoxSync(remote.win, options);
+	var sce = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	if(sce==1){this.remove();}
 }
 
@@ -971,11 +971,11 @@ function controllaindirizzi(){
 	}
 	
 	if(el.length!==0){
-		var sce=dialog.showMessageBoxSync(remote.win, options1);
+		var sce=dialog.showMessageBoxSync(remote.getCurrentWindow(), options1);
 		if(sce==1){closeMenu(); printpdf('a')}
 		} else {
 			if($('#indmail').val()!==""){nuovamail(closeMenu, controllaindirizzi);}
-			//dialog.showMessageBoxSync(remote.win, options)
+			//dialog.showMessageBoxSync(remote.getCurrentWindow(), options)
 		}
 }
 
@@ -989,7 +989,7 @@ function controllafirme(){
 		noLink: true,
 		message: 'Il documento non è stato firmato'
 	}
-	if(ft=="white.png"){dialog.showMessageBoxSync(remote.win, options)} else {riaprimenumail();openMenu('menuMail');}
+	if(ft=="white.png"){dialog.showMessageBoxSync(remote.getCurrentWindow(), options)} else {riaprimenumail();openMenu('menuMail');}
 }
 
 function abilitaok(a){
@@ -1249,7 +1249,7 @@ function addsp(){
 						title: 'SharePoint',
 						message: 'Sondaggio caricato su SP',
 						};
-						dialog.showMessageBoxSync(remote.win, options);
+						dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 				})
 				//.catch(function(strErr){ console.error(strErr); });
 			} else {
@@ -1259,7 +1259,7 @@ function addsp(){
 				title: 'Errore',
 				message: 'Sondaggio già presente in SP',
 				};
-				dialog.showMessageBoxSync(remote.win, options);
+				dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 			}
 		})
 	}
@@ -1301,4 +1301,11 @@ function modifica(r){
 		document.getElementById("data1").value = a[2].innerText.substring(0,4) + "-" + a[2].innerText.substring(4,6)+ "-" + a[2].innerText.substring(6,8);
 	}
 	cancella(r);
+}
+
+function stampa(){
+	const op = { margins: 'none' }
+	remote.getCurrentWindow().webContents.print(op, (success, errorType) => {
+	if (!success) console.log(errorType)
+})
 }

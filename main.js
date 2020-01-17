@@ -48,6 +48,8 @@ function createWindow () {
 			{type: 'separator'},
 			{label:'Invia email', click(){win.webContents.send('mail')},accelerator: 'CmdOrCtrl+I'},
 			{type: 'separator'},
+			{label:'Stampa', click(){win.webContents.send('print')},accelerator: 'CmdOrCtrl+Shift+P'},
+			{type: 'separator'},
             {label:'Esci', click(){win.webContents.send('esci')}, accelerator: 'CmdOrCtrl+Q'}
         ]
 		},
@@ -94,26 +96,6 @@ app.on('ready', () => {
 
 ipc.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
-});
-
-
-// *Boom* Create PDF
-ipc.on('print-to-pdf', event => {
-  const pdfPath = path.join(os.tmpdir(), 'prova.pdf');
-  var winA = BrowserWindow.fromWebContents(event.sender);
-
-  winA.webContents.printToPDF({}, (error, data) => {
-    
-  
-    if (error) return console.log(error.message);
-
-    fs.writeFile(pdfPath, data, err => {
-      if (err) return console.log(err.message);
-      shell.openExternal('file://' + pdfPath);
-      event.sender.send('wrote-pdf', pdfPath);
-    })
-    
-  })
 });
 
 
