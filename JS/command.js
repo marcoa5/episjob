@@ -1195,7 +1195,7 @@ function addsp(){
 	var a=0;
 	risu.push($('#cliente11').text());
 	risu.push($('#matricola').text());
-	risu.push($('#nomecognome').val());
+	risu.push($('#contnomec').text());
 	risu.push($('#prodotto1').text());
 	risu.push($('#nom').text());
 	risu.push($('#rissondaggio').text().substring(0,1));
