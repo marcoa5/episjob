@@ -1,6 +1,6 @@
 body{
-	background-image: url(./img/logo.png);
-	background-size: 6%;
+	background-image: url(./img/back.jpg);
+	background-size: 50%;
 	/*background-image: url(./img/back.jpg);
     background-position: center;
     background-repeat: repeat;
@@ -8,8 +8,8 @@ body{
 }
 body::after {
   content: "";
-  background: rgb(255,205,0);
-  opacity: .95;
+  background: white;
+  opacity: .5;
   top: 0;
   left: 0;
   bottom: 0;
