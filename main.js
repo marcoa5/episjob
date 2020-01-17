@@ -63,7 +63,7 @@ function createWindow () {
 		},
 		{label: 'Impostazioni',submenu: [{label: 'Coefficiente km', accelerator: 'CmdOrCtrl+k', click(){win.webContents.send('km')}}]},
 		{label: 'Archivio',submenu: [{label: 'Apri Archivio S.L.', accelerator: 'CmdOrCtrl+a', click(){win.webContents.send('arch')}}]},
-		{label: 'View',submenu: [{label: 'DevTools', accelerator: 'CmdOrCtrl+Shift+I', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();}}, {label: 'Reload', accelerator: 'CmdOrCtrl+R', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.reload()}},]},
+		//{label: 'View',submenu: [{label: 'DevTools', accelerator: 'CmdOrCtrl+Shift+I', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();}}, {label: 'Reload', accelerator: 'CmdOrCtrl+R', click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.reload()}},]},
   ])
   
   
