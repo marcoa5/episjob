@@ -370,16 +370,30 @@
 </div>
 <!--finestre di dialogo-->
 <div name="finestre">
-<div class="ccc"><!--Matricola-->
+<div class="ccc"><!--SU-->
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuSU" style="position: relative;">
 					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai" style="max-height: 438px;">
+					<div class="finestrai" style="max-height: 797px;">
 						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
 						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
 						<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
 						<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
 						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
+						<!--<div style="border: 3px solid rgb(66, 85, 99); border-radius: 20px; width: 70%; padding: 20px; margin: 0 auto;">
+							<input id="susrcomponente" class="inser" placeholder="Seriale Componente..."> 
+							<input id="sucomponente" class="inser" placeholder="Componente..."> 
+							<div class="radiobtn">
+								<p style="margin: 5px; font-family: Arial; font-weight: 900">Tipo di  documento: </p>
+								<input type="radio" id="suext" name="doc" value="EXT" checked>
+								<label for="suext" style="font-size: 10px;">EXT</label>
+								<input type="radio" id="suoff" name="doc" value="OFF">
+								<label for="suoff"  style="font-size: 10px;">OFF</label><br><br>
+								
+							</div>
+							<input id="sunomefile" class="inser" placeholder="Nome file..."><br><br>
+							<button class="pulsante" onclick="">Carica in archivio</button>
+						</div>-->
 						<!--<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
 					</div>
 					<br>
@@ -389,10 +403,10 @@
 			</div> 
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuMatricola" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
-				<div class="finestrai" style="max-height: 438px;">
+				<div class="finestrai" style="max-height: 797px;">
 						<form id="inputmac">
 					
-								 <date-input value="{{value}}"></date-input>
+								 
 								<input type="date" name="bday" id="data2">
 								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
@@ -425,7 +439,7 @@
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuRapporto" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
-				<div class="finestrai" style="max-height: 438px;">
+				<div class="finestrai" style="max-height: 797px;">
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
@@ -439,7 +453,7 @@
 <div class="ccc"><!--Ore-->
 		<div class="finestra ui-draggable ui-draggable-handle" id="menuOre" style="position: relative;">
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
-				<div class="finestrai" id="htmlore" style="max-height: 438px;">
+				<div class="finestrai" id="htmlore" style="max-height: 797px;">
 						<table id="main">
 								<tbody><tr>
 										<th rowspan="3">TECNICO</th>
@@ -512,7 +526,7 @@
 <div class="ccc"><!--Email-->    
 	<div class="finestra ui-draggable ui-draggable-handle" id="menuMail" style="position: relative;">
 			<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-			<div class="finestrai" style="max-height: 438px;">
+			<div class="finestrai" style="max-height: 797px;">
 					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required=""><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 			</div>
