@@ -77,7 +77,7 @@ body::after {
     left:0;
 	margin:0;
 	padding:0;
-	height: 156px;
+	
 }
 
 .topleft, .topright{
@@ -258,11 +258,14 @@ body::after {
     width: 100%;
 }
 
+.centro, .dati, .tabset, #firmacc1, #firmatt1{
+	cursor: pointer;
+	transition: .5s;
+}
+
 @media not print {
 	.centro:hover, .dati:hover, .tabset:hover, #firmacc1:hover, #firmatt1:hover{
-		box-shadow: 0 0 10px 0 rgb(255,205,0);
-		background-color: rgb(255,255,204);
-		cursor: pointer;
+		box-shadow: 0 0 20px 0 black, 0 0 20px 0 rgb(255,205,0);
 	}
 }
 
