@@ -652,7 +652,7 @@
 				</tr>
 		</table>-->
 		
-		<div id="upd" oncontextmenu="if($('#user').text()!==''){openMenu('menuSU')}"></div><div id="user"></div>
+		<div id="upd"></div><div id="user"></div>
 		
 </div>
 
@@ -706,8 +706,7 @@ ipcRenderer.on('escisalva', function(){controllamodifiche('esci', function(){rem
 ipcRenderer.on('km', function(){coeffkm()});
 ipcRenderer.on('arch', function(){temp()});
 ipcRenderer.on('print', function(){stampa()})
-
-
+ipcRenderer.on('su', function(){adminmenu()})
 
 
 var data = ipcRenderer.sendSync('get-file-data');
