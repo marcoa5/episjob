@@ -295,7 +295,7 @@ function controllaore(n, id){
 
 //disabilita l'inserimento in base al giorno dell'anno
 function controlladata(){
-	var param = verificadata(convdata(document.getElementById('data1').value));
+	var param = verificadata(convdata($('#data1').val()));
 	if(param=="fest"){
 		document.getElementById('spov1').disabled= true;
 		document.getElementById('spol1').disabled= true;
@@ -319,6 +319,7 @@ function controlladata(){
 		document.getElementById('mnfv1').disabled= true;
 		document.getElementById('mnfl1').disabled= true;
 	} else {};
+	console.log('ok');
 }
 
 //Esporta PDF
@@ -425,13 +426,15 @@ function Apri(){
 		$.each(linee, function(n, elem) {
 			var record = elem.split("_");
 			var il = 'ele' + i;
-			var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
-			stringa += '<td>' + record[0] + '</td>';
-			stringa += '<td>' + record[1] + '</td>';
-			stringa += '<td>' + record[2] + '</td>';
-			stringa += '</tr>';
-			$('#listac').append(stringa);
-			i++;
+			if(record[0]!==""){
+				var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
+				stringa += '<td>' + record[0] + '</td>';
+				stringa += '<td>' + record[1] + '</td>';
+				stringa += '<td>' + record[2] + '</td>';
+				stringa += '</tr>';
+				$('#listac').append(stringa);
+				i++;
+			}
 		});
     });
 	$('#listam tr').remove();
@@ -441,14 +444,16 @@ function Apri(){
 		$.each(linee, function(n, elem) {
 			var record = elem.split("_")
 			var il = 'ele' + i
-			var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
-			stringa += '<td>' + record[0] + '</td>';
-			stringa += '<td>' + record[4] + '</td>';
-			stringa += '<td>' + record[1] + '</td>';
-			stringa += '<td>' + record[7] + '</td>';
-			stringa += '</tr>';
-			$('#listam').append(stringa);
-			i++;
+			if(record[0]!==""){
+				var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
+				stringa += '<td>' + record[0] + '</td>';
+				stringa += '<td>' + record[4] + '</td>';
+				stringa += '<td>' + record[1] + '</td>';
+				stringa += '<td>' + record[7] + '</td>';
+				stringa += '</tr>';
+				$('#listam').append(stringa);
+				i++;
+			}
 		});
 	});
 }
@@ -634,10 +639,13 @@ function oggi(){
 		var linee = data.split("\n");
 		$.each(linee, function(n, elem) {
 			var record = elem.split("_");
-			var stringa= '<option value="' + record[0] + '">' + record[1] + '</option>';
-			$('#tec').append(stringa);
-			i++;
+			if(record[0]!==""){
+				var stringa= '<option value="' + record[0] + '">' + record[1] + '</option>';
+				$('#tec').append(stringa);
+				i++;
+			}
 		});
+	controlladata();
 	});
 }
 
@@ -1167,22 +1175,25 @@ $( document ).ready(function(e) {
 		if(obj.Title!==undefined){
 			$('#user').text(obj.Title + str);
 		} else {
-			$('#user').text();
+			$('#user').text('External user');
 		}			
 	});
 	sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
-	.then(function(arr){
-		chiave = arr[0].GetContextWebInformation.FormDigestValue;
-		campi[0]=chiave;
-		sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: chiave }).cols()
-		.then(function(arrayResults){
-			colonne=arrayResults; 
-			colonne.forEach(function(id){
-				if(id.dataType=="Text"){
-					campi.push(id.dataName);
-				}
-			})
-		});
+	.then(function(arr,err){
+		if(arr==""){
+		} else {
+			chiave = arr[0].GetContextWebInformation.FormDigestValue;
+			campi[0]=chiave;
+			sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: chiave }).cols()
+			.then(function(arrayResults){
+				colonne=arrayResults; 
+				colonne.forEach(function(id){
+					if(id.dataType=="Text"){
+						campi.push(id.dataName);
+					}
+				})
+			});
+		}
 	})
 });
 
