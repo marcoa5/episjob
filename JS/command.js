@@ -592,14 +592,14 @@ function aprifile(a){
 		closeMenu()
 	} else {
 		$.get(a, function(data) {
-        document.getElementById('salva').innerHTML = data;
-		$('#modifiche').text("0");
-		$('#salvataggio').text(a);
-		$('#menuMatricola').draggable();
-		$('#menuRapporto').draggable();
-		$('#menuOre').draggable();
-		$('#menuSU').draggable();
-		$('#menuMail').draggable();
+			estraidati(JSON.parse(data));
+			$('#modifiche').text("0");
+			$('#salvataggio').text(a);
+			$('#menuMatricola').draggable();
+			$('#menuRapporto').draggable();
+			$('#menuOre').draggable();
+			$('#menuSU').draggable();
+			$('#menuMail').draggable();
         })
 	}
 }
@@ -1316,11 +1316,8 @@ function stampa(){
 }
 
 function adminmenu(){
-	if($('#user').text()!=='External user'){openMenu('menuSU')}
 	openMenu('menuSU');
 }
-
-
 
 function creasalvataggio(){
 	var s = {};
