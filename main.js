@@ -30,54 +30,54 @@ let fesci = false;
             submenu: [
 				{
 					label:'Nuovo', 
-					icon: "./img/menu/nuovo.png", 
+					icon: path.join(__dirname, "img/menu/nuovo.png"), 
 					click(){win.webContents.send('pulisci')}, 
 					accelerator: 'CmdOrCtrl+R'
 				},
 				{type: 'separator'},
 				{
 					label:'Salva', 
-					icon: "./img/menu/save.png", 
+					icon: path.join(__dirname, "img/menu/save.png"),  
 					click(){win.webContents.send('salva')}, 
 					accelerator: 'CmdOrCtrl+S'
 				},
 				{
 					label:'Salva con nome', 
-					icon: "./img/menu/save.png", 
+					icon: path.join(__dirname, "img/menu/save.png"),   
 					click(){win.webContents.send('salvacon')}, 
 					accelerator: 'CmdOrCtrl+Shift+S'
 				},
 				{
 					label:'Apri', 
-					icon: "./img/menu/apri.png", 
+					icon: path.join(__dirname, "img/menu/apri.png"),  
 					click(){win.webContents.send('apri')}, 
 					accelerator: 'CmdOrCtrl+O'
 				},
 				{type: 'separator'},
 				{
 					label:'Esporta PDF', 
-					icon: "./img/menu/pdf.png", 
+					icon: path.join(__dirname, "img/menu/pdf.png"), 
 					click(){win.webContents.send('pdf')}, 
 					accelerator: 'CmdOrCtrl+P'
 				},
 				{type: 'separator'},
 				{
 					label:'Invia email', 
-					icon: "./img/menu/mail.png", 
+					icon: path.join(__dirname, "img/menu/mail.png"),  
 					click(){win.webContents.send('mail')},
 					accelerator: 'CmdOrCtrl+I'
 				},
 				{type: 'separator'},
 				{
 					label:'Stampa', 
-					icon: "./img/menu/print.png", 
+					icon: path.join(__dirname, "img/menu/print.png"), 
 					click(){win.webContents.send('print')},
 					accelerator: 'CmdOrCtrl+Shift+P'
 				},
 				{type: 'separator'},
 				{
 					label:'Esci', 
-					icon: "./img/menu/close.png", 
+					icon: path.join(__dirname, "img/menu/close.png"), 
 					click(){win.webContents.send('esci')}, 
 					accelerator: 'CmdOrCtrl+Q'
 				}
@@ -88,26 +88,26 @@ let fesci = false;
             submenu: [
 				{
 					label:'Compila Dati', 
-					icon: "./img/menu/dati.png", 
+					icon: path.join(__dirname, "img/menu/dati.png"), 
 					click(){win.webContents.send('compilad')}, 
 					accelerator: 'CmdOrCtrl+Shift+D'
 				},
 				{
 					label:'Compila Commenti', 
-					icon: "./img/menu/dati.png", 
+					icon: path.join(__dirname, "img/menu/dati.png"), 
 					click(){win.webContents.send('compilac')}, 
 					accelerator: 'CmdOrCtrl+Shift+R'
 				},
 				{
 					label:'Compila Ore', 
-					icon: "./img/menu/dati.png", 
+					icon: path.join(__dirname, "img/menu/dati.png"), 
 					click(){win.webContents.send('compilao')}, 
 					accelerator: 'CmdOrCtrl+Shift+O'
 				},
 				{type: 'separator'},
 				{
 					label:'Admin Menu', 
-					icon: "./img/menu/admin.png", 
+					icon: path.join(__dirname, "img/menu/admin.png"), 
 					enabled: false, 
 					click(){win.webContents.send('su')}, 
 					accelerator: 'CmdOrCtrl+Shift+U'
@@ -118,13 +118,13 @@ let fesci = false;
 			submenu: [
 				{
 					label: 'Coefficiente km', 
-					icon: "./img/menu/car.png", 
+					icon: path.join(__dirname, "img/menu/car.png"), 
 					accelerator: 'CmdOrCtrl+k', 
 					click(){win.webContents.send('km')}
 				},
 				{
 					label: 'DevTools',
-					icon: "./img/menu/dev.png",					
+					icon: path.join(__dirname, "img/menu/dev.png"),					
 					enabled: false, 
 					accelerator: 'CmdOrCtrl+Shift+I', 
 					click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();},
@@ -135,7 +135,7 @@ let fesci = false;
 			submenu: [
 				{
 					label: 'Apri Archivio S.L.', 
-					icon: "./img/menu/archivio.png",	
+					icon: path.join(__dirname, "img/menu/archivio.png"),	
 					accelerator: 'CmdOrCtrl+a', 
 					click(){win.webContents.send('arch')}
 				}
@@ -212,7 +212,7 @@ ipc.on('get-file-data', function(event) {
 })
 
 ipc.on('attmenu', function(){
-	menu.items[1].submenu.items[3].enabled=true;
+	menu.items[1].submenu.items[4].enabled=true;
 	menu.items[2].submenu.items[1].enabled=true;
 })
 

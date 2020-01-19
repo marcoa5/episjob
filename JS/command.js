@@ -319,7 +319,6 @@ function controlladata(){
 		document.getElementById('mnfv1').disabled= true;
 		document.getElementById('mnfl1').disabled= true;
 	} else {};
-	console.log('ok');
 }
 
 //Esporta PDF
@@ -503,9 +502,8 @@ function salvafile(nome, callback){
 		var cartella =  dialog.showSaveDialogSync(options, "");
 	}
 	$('#modifiche').text("0");
-	$('#salvataggio').text(cartella);
-	var s = document.getElementById('salva').innerHTML;           
-	fs.writeFile(cartella, s, function(err) {
+	$('#salvataggio').text(cartella);        
+	fs.writeFile(cartella, creasalvataggio(), function(err) {
 		if(err) {return console.log(err)};
 		$('#modifiche').text("0");
 		$('#salvataggio').text(cartella);
@@ -518,7 +516,7 @@ function salvafile(nome, callback){
 		}
 	var f = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	callback();
-		})	
+		})
 }
 
 function esportapdf(){
@@ -579,7 +577,11 @@ function aprifile(a){
         }
 		var filename =  dialog.showOpenDialogSync(options, "");
 		if(filename!==undefined){
-        $.get(filename, function(data) {document.getElementById('salva').innerHTML = data})}
+			$.get(filename, function(data) {
+				estraidati(JSON.parse(data));
+				//document.getElementById('salva').innerHTML = data
+			})
+		}
 		$('#modifiche').text("0");
 		$('#salvataggio').text(filename);
 		$('#menuMatricola').draggable();
@@ -1314,6 +1316,58 @@ function stampa(){
 }
 
 function adminmenu(){
-	//if($('#user').text()!=='External user'){openMenu('menuSU')}
+	if($('#user').text()!=='External user'){openMenu('menuSU')}
 	openMenu('menuSU');
+}
+
+
+
+function creasalvataggio(){
+	var s = {};
+	s[$('#commessa1').attr('id')] = $('#commessa1').text();
+	s[$('#vsordine').attr('id')]= $('#vsordine').text();
+	s[$('#nsofferta1').attr('id')]= $('#nsofferta1').text();
+	s[$('#prodotto1').attr('id')]= $('#prodotto1').text();
+	s[$('#matricola').attr('id')]= $('#matricola').text();
+	s[$('#orem1').attr('id')]= $('#orem1').text();
+	s[$('#perc11').attr('id')]= $('#perc11').text();
+	s[$('#perc21').attr('id')]= $('#perc21').text();
+	s[$('#perc31').attr('id')]= $('#perc31').text();
+	s[$('#data11').attr('id')]= $('#data11').text();
+	s[$('#cliente11').attr('id')]= $('#cliente11').text();
+	s[$('#cliente12').attr('id')]= $('#cliente12').text();
+	s[$('#cliente13').attr('id')]= $('#cliente13').text();
+	s[$('#cantiere1').attr('id')]= $('#cantiere1').text();
+	s[$('#rappl1').attr('id')]= $('#rappl1').text();
+	s[$('#oss1').attr('id')]= $('#oss1').text();
+	s[$('#stdspe').attr('id')]= $('#stdspe').text();
+	s[$('#apbpcs').attr('id')]= $('#apbpcs').text();
+	s[$('#chbpcs').attr('id')]= $('#chbpcs').text();
+	s[$('#docbpcs').attr('id')]= $('#docbpcs').text();
+	s[$('#rissondaggio').attr('id')]= $('#rissondaggio').text();
+	s[$('#contnomec').attr('id')]= $('#contnomec').text();
+	s[$('#contfirmac').attr('id')]= $('#contfirmac').text();
+	s[$('#contsondc').attr('id')]= $('#contsondc').text();
+	s[$('#tabset').attr('id')]= $('#tabset').html();
+	s[$('#ris').attr('id')]= $('#ris').html();
+	s[$('#sondaggio').attr('id')]= $('#sondaggio').html();
+	s[$('#elencomail').attr('id')]= $('#elencomail').html();
+	s[$('#firmatt1').attr('id')]= $('#firmatt1').attr('src');
+	s[$('#firmacc1').attr('id')]= $('#firmacc1').attr('src');
+	var p = JSON.stringify(s);
+	return p;
+}
+
+function estraidati(a){
+	var p = Object.keys(a);
+	p.forEach(function(key){
+		if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1"){
+			$('#' + key).text(a[key]);
+		} else if(key=="sondaggio" | key=="ris" |  key=="tabset" | key=="elencomail"){
+			$('#' + key).html(a[key]);
+		}  else {
+			$('#' + key).attr('src', a[key]);
+		}
+	})
+	abilitainvia();
 }
