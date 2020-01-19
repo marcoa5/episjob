@@ -710,7 +710,7 @@ ipcRenderer.on('su', function(){adminmenu()})
 
 
 var data = ipcRenderer.sendSync('get-file-data');
-if (data!==null) {aprifile(data.toString());}
+if (data!==null) {aprifile(data);}
 
   
 $('body').on('mousewheel', function(event) {
