@@ -1167,7 +1167,8 @@ $( document ).ready(function(e) {
 		if(acc!==""){var str = " (" + acc + ")"}
 		if(obj.Title!==undefined){
 			$('#user').text(obj.Title + str);
-			ipcRenderer.send('attmenu');
+			var a = obj.Title;
+			if(a=="Marco Arato" | a =="Marco Fumagalli" | a=="Nicolo Tuppo" | a=="Mario Parravicini" | a=="Carlo Colombo"){ipcRenderer.send('attmenu');}
 		} else {
 			$('#user').text('External user');
 		}			
