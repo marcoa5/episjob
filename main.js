@@ -149,6 +149,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1200,
     height: 800,
+	show: false,
     icon: __dirname + 'icon.ico',
     webPreferences: {
       nodeIntegration: true
