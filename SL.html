@@ -707,7 +707,7 @@ ipcRenderer.on('km', function(){coeffkm()});
 ipcRenderer.on('arch', function(){temp()});
 ipcRenderer.on('print', function(){stampa()})
 ipcRenderer.on('su', function(){adminmenu()})
-
+ipcRenderer.on('vecchi', function(){vecchi()})
 
 var data = ipcRenderer.sendSync('get-file-data');
 if (data!==null) {aprifile(data);}

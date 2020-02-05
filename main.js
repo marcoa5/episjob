@@ -138,6 +138,13 @@ let fesci = false;
 					icon: path.join(__dirname, "img/menu/archivio.png"),	
 					accelerator: 'CmdOrCtrl+a', 
 					click(){win.webContents.send('arch')}
+				},
+				{
+					label: 'Apri File Vecchi',
+					enabled: false,
+					icon: path.join(__dirname, "img/menu/apri.png"),
+					accelerator: 'CmdOrCtrl+Shift+V',
+					click(){win.webContents.send('vecchi')}
 				}
 			]
 		},
@@ -215,6 +222,7 @@ ipc.on('get-file-data', function(event) {
 ipc.on('attmenu', function(){
 	menu.items[1].submenu.items[4].enabled=true;
 	menu.items[2].submenu.items[1].enabled=true;
+	menu.items[23].submenu.items[1].enabled=true;
 })
 
 
