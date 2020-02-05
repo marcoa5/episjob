@@ -31,6 +31,7 @@ function openMenu(n){
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
+	if(n=='menurisk'){Apri()};
     var iu = $('#stdspe').text();
     if(iu=='SPE'){document.getElementById('manspe').checked = true};
 	$("#pagina *").attr("disabled", "disabled").off('click');
@@ -377,18 +378,17 @@ function send_mail(a) {
 	mItm.Body = "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
 	mItm.Attachments.Add(nomef + ".pdf");    
 	mItm.GetInspector.WindowState = 2;
-	mItm.send();
+	//mItm.send();
 	var objO = new ActiveXObject('Outlook.Application');     
 	var objNS = objO.GetNameSpace('MAPI');     
 	var mItm = objO.CreateItem(0);     
 	mItm.Display();    
 	mItm.To = 'marco.fumagalli@epiroc.com; carlo.colombo@epiroc.com; mario.parravicini@epiroc.com';
 	mItm.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
-	mItm.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
+	mItm.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + '\n\n\nRisk Assessment \n' + riskass();
 	mItm.Attachments.Add(nomef + ".ma");    
 	mItm.GetInspector.WindowState = 2;
-	mItm.send();
-	
+	//mItm.send();
 }
 
 //Filtra elenco macchine
@@ -1353,6 +1353,14 @@ function creasalvataggio(){
 	s[$('#elencomail').attr('id')]= $('#elencomail').html();
 	s[$('#firmatt1').attr('id')]= $('#firmatt1').attr('src');
 	s[$('#firmacc1').attr('id')]= $('#firmacc1').attr('src');
+	var ar = [];
+	$('#rs input:radio').each(function (index) {
+
+		if($(this).is(':checked')){
+			ar.push($(this).attr('id'));
+		}
+	});
+	s['rs']=ar;
 	var p = JSON.stringify(s);
 	return p;
 }
@@ -1360,13 +1368,18 @@ function creasalvataggio(){
 function estraidati(a){
 	var p = Object.keys(a);
 	p.forEach(function(key){
-		if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1"){
+		if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1" && key!=="rs"){
 			$('#' + key).text(a[key]);
 		} else if(key=="sondaggio" | key=="ris" |  key=="tabset" | key=="elencomail"){
 			$('#' + key).html(a[key]);
-		}  else {
+		}  else if(key=="firmatt1" | key=="firmacc1"){
 			$('#' + key).attr('src', a[key]);
+		} else {
+			a[key].forEach(el =>{
+				$('#' + el).prop('checked', true);
+			});
 		}
+		
 	})
 	abilitainvia();
 }
@@ -1388,4 +1401,23 @@ function vecchi(){
 			document.getElementById('salva').innerHTML = data
 		})
 	}
+}
+
+function riskass(){
+	var a="";
+	var b = "";
+	var s={};
+	$('#rs tr').each(function (index) {
+		if($('#rs').find('tr').eq(index).find('input:radio').eq(0).is(':checked')){b = 'OK'}
+		if($('#rs').find('tr').eq(index).find('input:radio').eq(1).is(':checked')){b = 'NO'}
+		if($('#rs').find('tr').eq(index).find('input:radio').eq(2).is(':checked')){b = 'NA'}
+		if(b!==""){
+			a += b + "\t-\t" + $('#rs').find('tr').eq(index).find('td').eq(0).text() + '\n';
+		} else {
+			a += '\n';
+		}
+		b="";
+	});
+	return a;
+	
 }
