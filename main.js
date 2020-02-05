@@ -141,7 +141,6 @@ let fesci = false;
 				},
 				{
 					label: 'Apri File Vecchi',
-					enabled: false,
 					icon: path.join(__dirname, "img/menu/apri.png"),
 					accelerator: 'CmdOrCtrl+Shift+V',
 					click(){win.webContents.send('vecchi')}
