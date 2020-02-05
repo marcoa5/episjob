@@ -324,14 +324,13 @@ function controlladata(){
 //Esporta PDF
 function printpdf (a) {
 	if(a=="a"){
-		var s = document.getElementById('salva').innerHTML; 
 		tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
 			if (err) throw err;
 			var gin = path.indexOf("tmp");
 			path = path.substring(0, gin) + "ServiceJob";
 			mkdirp(path, function(err) {});
 			function ma(path, callback){
-				fs.writeFileSync(path + "\\Scheda Lavoro.ma", s);
+				fs.writeFileSync(path + "\\Scheda Lavoro.ma", creasalvataggio());
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(path + "\\Scheda Lavoro.pdf", data)});
 				callback();
 			}
@@ -628,6 +627,7 @@ function oggi(){
 	d = n.getDate();
 	$('#data1').val(convdata(today()));	
 	var i=1;
+	$('#tec').html("");
 	$.get('.\\tech.txt', function(data) {
 		var linee = data.split("\n");
 		$.each(linee, function(n, elem) {
@@ -1011,10 +1011,12 @@ function scrivikm(){
 			type: 'input'
 		})
 		.then((r) => {
-			if(r === null) {
-			} else {
+			console.log(r);
+			if(r == 0) {
+				$('#spv1').val('');
+			} else if(r!==null){
 				$('#spv1').val(parseFloat(r*data).toFixed(0) + ",00");
-			}
+			} else if(r==0){$('#spv1').val('')}
 		})
 		.catch(console.error);
 		$('#off1').focus();
@@ -1163,10 +1165,8 @@ $( document ).ready(function(e) {
 	.then(function(obj){
 		
 		var ch = obj.Email;
-		if(ch=="marco.fumagalli@epiroc.com" | ch=="mario.parravicini@epiroc.com" | ch=="marco.arato@epiroc.com" | ch=="carlo.colombo@epiroc.com" | ch=="nicolo.tuppo@epiroc.com") {acc = "admin"};
-		if(acc!==""){var str = " (" + acc + ")"}
 		if(obj.Title!==undefined){
-			$('#user').text(obj.Title + str);
+			$('#user').text(obj.Title);
 			var a = obj.Title;
 			if(a=="Marco Arato" | a =="Marco Fumagalli" | a=="Nicolo Tuppo" | a=="Mario Parravicini" | a=="Carlo Colombo"){ipcRenderer.send('attmenu');}
 		} else {
@@ -1306,6 +1306,7 @@ function modifica(r){
 		document.getElementById("tec").value = a[1].innerText
 		document.getElementById("data1").value = a[2].innerText.substring(0,4) + "-" + a[2].innerText.substring(4,6)+ "-" + a[2].innerText.substring(6,8);
 	}
+	controllaviaggi();
 	cancella(r);
 }
 
