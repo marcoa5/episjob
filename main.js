@@ -222,7 +222,7 @@ ipc.on('get-file-data', function(event) {
 ipc.on('attmenu', function(){
 	menu.items[1].submenu.items[4].enabled=true;
 	menu.items[2].submenu.items[1].enabled=true;
-	menu.items[23].submenu.items[1].enabled=true;
+	menu.items[3].submenu.items[1].enabled=true;
 })
 
 
