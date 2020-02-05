@@ -5,6 +5,7 @@ body{
     background-position: center;
     background-repeat: repeat;
     background-size: cover;*/
+	font-family: Arial;
 }
 body::after {
   content: "";
@@ -928,4 +929,52 @@ input[type=email]:valid{
 	line-height: 170%;
 }
 
+#rs{
+	margin: 20px;
+	margin-left: auto; margin-right: auto;
+	border-collapse: collapse;
+	font-size: 12px;
+}
 
+#rs td, #rs th{
+	padding: 5px;
+	font-weight: 600;
+}
+
+#rs tr{
+	border: 2px solid rgb(66,85,99);
+}
+
+#rs p{
+	margin: 0;
+	text-align: left;
+}
+
+#rs input[type="radio"]{
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+#rs input[type="radio"] + label{
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: rgb(66, 85, 99);
+    border: 3px solid rgb(66, 85, 99);
+    color: grey;
+    font-family: ARial;
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 10px;
+    opacity: 60%;
+}
+
+#rs input[type="radio"]:hover + label{
+    opacity: 100%;
+}
+
+#rs input[type="radio"]:checked + label{
+    background-color: rgb(255,205,0);
+    color: rgb(66, 85, 99);
+    opacity: 100%;
+}
