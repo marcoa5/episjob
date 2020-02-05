@@ -1370,3 +1370,22 @@ function estraidati(a){
 	})
 	abilitainvia();
 }
+
+function vecchi(){
+	var desk = finddesktop();
+	let options = {
+		title : "Seleziona File", 
+		defaultPath : desk,
+		buttonLabel : "Apri File", 
+		filters :[
+			{name: 'Schede Lavoro', extensions: ['ma']},
+		   ],   
+		properties: ['openFile']
+	}
+	var filename =  dialog.showOpenDialogSync(options, "");
+	if(filename!==undefined){
+		$.get(filename, function(data) {
+			document.getElementById('salva').innerHTML = data
+		})
+	}
+}
