@@ -493,7 +493,7 @@ function salvafile(nome, callback){
 	} else {
 		var desk = finddesktop().toString();
 		let options = {
-			title: "Salva con nome",
+			title: "Salva Scheda Lavoro con nome",
 			defaultPath : desk + '\\' + creanomefile() + ".ma",
 			buttonLabel : "Salva Scheda Lavoro",
 			filters :[{name: 'Scheda Lavoro', extensions: ['ma']}],
@@ -521,9 +521,9 @@ function salvafile(nome, callback){
 function esportapdf(){
 	var desk = finddesktop();
     let options = {
-        title: "Esporta PDF",
+        title: "Esporta Scheda Lavoro PDF",
         defaultPath : desk + '\\' + creanomefile() + ".pdf",
-        buttonLabel : "Esporta PDF",
+        buttonLabel : "Esporta Scheda Lavoro PDF",
         filters :[
 			{name: 'PDF', extensions: ['pdf']},
         ]
@@ -539,9 +539,9 @@ function controllamodifiche(a, callback){
 	if(c=="1"){
 		const options = {
 			type: 'question', 
-			buttons: ['Salva', 'Non Salvare', 'Annulla'], 
+			buttons: ['Salva Scheda Lavoro', 'Non Salvare', 'Annulla'], 
 			title: 'Salva', 
-			message: 'Vuoi Salvare le modifiche?', 
+			message: 'Vuoi Salvare le modifiche alla Scheda Lavoro?', 
 			noLink: true
 		};
 		var sce = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
@@ -566,9 +566,9 @@ function aprifile(a){
 	if(a=="a"){
 		var desk = finddesktop();
 		let options = {
-			title : "Seleziona File", 
+			title : "Seleziona Scheda Lavoro", 
 			defaultPath : desk,
-			buttonLabel : "Apri File", 
+			buttonLabel : "Apri Scheda Lavoro", 
 			filters :[
 				{name: 'Schede Lavoro', extensions: ['ma']},
 			   ],   
@@ -988,7 +988,7 @@ function controllafirme(){
 		buttons: ['Ok'],
 		title: 'Firme',
 		noLink: true,
-		message: 'Il documento non è stato firmato'
+		message: 'Il documento non è stato firmato dal tecnico Epiroc'
 	}
 	if(ft=="white.png"){dialog.showMessageBoxSync(remote.getCurrentWindow(), options)} else {riaprimenumail();openMenu('menuMail');}
 }
@@ -1387,9 +1387,9 @@ function estraidati(a){
 function vecchi(){
 	var desk = finddesktop();
 	let options = {
-		title : "Seleziona File", 
+		title : "Seleziona Scheda Lavoro", 
 		defaultPath : desk,
-		buttonLabel : "Apri File", 
+		buttonLabel : "Apri Scheda Lavoro", 
 		filters :[
 			{name: 'Schede Lavoro', extensions: ['ma']},
 		   ],   
