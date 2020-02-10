@@ -399,7 +399,7 @@
 						<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
 						<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
 						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
-						<div style="border: 3px solid rgb(66, 85, 99); border-radius: 20px; width: 70%; padding: 20px; margin: 0 auto;">
+						<!--<div style="border: 3px solid rgb(66, 85, 99); border-radius: 20px; width: 70%; padding: 20px; margin: 0 auto;">
 							<input id="susrcomponente" class="inser" placeholder="Seriale Componente..."> 
 							<input id="sucomponente" class="inser" placeholder="Componente..."> 
 							<div class="radiobtn">
@@ -413,7 +413,7 @@
 							<input id="sunomefile" class="inser" placeholder="Nome file..."><br><br>
 							<button class="pulsante" onclick="">Carica in archivio</button>
 						</div>
-						<!--<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
+						<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
 					</div>
 					<br>
 					<button class="pulsante" onclick="closeMenu()">Annulla</button>
@@ -818,6 +818,7 @@ $('#menuRapporto').draggable();
 $('#menuOre').draggable();
 $('#menuSU').draggable();
 $('#menuMail').draggable();
+$('#menurisk').draggable();
 
 const { ipcRenderer } = require('electron');
 const version = document.getElementById('upd');
