@@ -1088,7 +1088,7 @@ function mille(a){
 
 function coeffkm(){
 	const prompt = require('electron-prompt');
-	$.get('km.txt', function(data){
+	$.get(cart + '\\km.txt', function(data){
 	prompt({
 		title: 'Coefficiente km',
 		label: 'Imposta Coefficiente:',
@@ -1098,7 +1098,7 @@ function coeffkm(){
 	.then((r) => {
 		if(r === null) {
 		} else {
-			fs.writeFileSync('km.txt', r.replace(",","."));
+			fs.writeFileSync(cart + '\\km.txt', r.replace(",","."));
 		}
 	})
 	.catch(console.error);
