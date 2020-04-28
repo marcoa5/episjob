@@ -43,6 +43,7 @@
     "asar": "^2.0.3",
     "electron-download-manager": "^2.1.2",
     "electron-prompt": "^1.4.0",
+    "electron-rebuild": "^1.10.1",
     "electron-updater": "^4.2.0",
     "fs-extra": "^8.1.0",
     "mkdirp": "^0.5.1",
