@@ -1,4 +1,4 @@
-const electron = require('electron')
+const electron = require('electron');
 const fs = require('fs');
 const os = require('os');
 const app = electron.app;
