@@ -1,9 +1,7 @@
-var https = require('https');
 var remote = require('electron').remote;
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 const tmp = require('tmp');
-var winax = require('winax');
 const prompt = require('electron-prompt');
 const {shell} = require('electron');
 const process = require('process');
@@ -12,7 +10,9 @@ var sprLib = require("sprestlib");
 var campi = [];
 var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
-	
+
+
+
 function openMenu(n){
     $('#modifiche').text("1");;
     var f = document.getElementsByClassName("finestra")
@@ -893,19 +893,6 @@ function aggiorna(){
 	})
 }
 
-var cart = process.argv[5].substring(11);
-function aggiornamol(){
-	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/molupd.txt", function(data){fs.writeFileSync(cart + "\\mol.txt", data)})
-}
-
-function aggiornacli(){	
-	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/customersupd.txt", function(data){fs.writeFileSync(cart + "\\customers.txt", data)})
-}
-
-function aggiornatech(){	
-	$.get("https://raw.githubusercontent.com/marcoa5/episjob/master/techupd.txt", function(data){fs.writeFileSync(cart + "\\tech.txt", data)})
-}
-
 function nuovamail(a,b){
 	var te = document.getElementById('indmail').checkValidity();
 	if(te==true){
@@ -1003,7 +990,6 @@ function abilitaok(a){
 
 function scrivikm(){
 	$.get('km.txt', function(data){
-		const prompt = require('electron-prompt');
 		prompt({
 			title: 'KM',
 			label: 'Km di autostrada:',
@@ -1087,7 +1073,6 @@ function mille(a){
 }
 
 function coeffkm(){
-	const prompt = require('electron-prompt');
 	$.get(cart + '\\km.txt', function(data){
 	prompt({
 		title: 'Coefficiente km',
