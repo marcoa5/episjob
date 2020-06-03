@@ -779,7 +779,7 @@ function verificadata(g){
 	var mm=g.substring(3,5);
 	var an=g.substring(6,10);
 	g = mm+"/"+gg+"/"+g.substring(6,10);
-    var feste = ["01-01", "01-06", "04-25", "05-01", "06-02", "08-15", "08-16", "11-01", "12-07", "12-08", "12-24", "12-25", "12-26", "12-31"];
+    var feste = ["01/01", "01/06", "04/25", "05/01", "06/02", "08/15", "08/16", "11/01", "12/07", "12/08", "12/24", "12/25", "12/26", "12/31"];
     var dd = new Date(g);
     var pasqua = Easter(an);
     var gpasquetta = pasqua.substring(3,5)+1;
@@ -791,7 +791,7 @@ function verificadata(g){
     else if(wd==6){fest="sab"}
     else {fest = "fer"};
     var test = padout(dd.getMonth()+1) + "/" + padout(dd.getDate());
-    feste.forEach(function(el){if(el==test){fest="fest"}});
+    feste.forEach(function(el){if(el==test){fest="fest";}});
     return fest;
 }    
 
