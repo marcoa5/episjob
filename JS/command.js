@@ -996,7 +996,6 @@ function scrivikm(){
 			type: 'input'
 		})
 		.then((r) => {
-			console.log(r);
 			if(r == 0) {
 				$('#spv1').val('');
 			} else if(r!==null){
@@ -1072,6 +1071,7 @@ function mille(a){
 }
 
 function coeffkm(){
+	var cart = window.location.pathname.substr(0, window.location.pathname.lastIndexOf('/'));
 	$.get(cart + '\\km.txt', function(data){
 	prompt({
 		title: 'Coefficiente km',
@@ -1123,7 +1123,8 @@ function controllaviaggi(){
 	var a2 = $('#spsv1').val();
 	var a3 = $('#mntv1').val();
 	var a4 = $('#mnfv1').val();
-	if(a1!=="" | a2!=="" | a3!=="" | a4!==""){
+	var a5 = $('#mfv1').val();
+	if(a1!=="" | a2!=="" | a3!=="" | a4!=="" | a5!=""){
 		$('#km1').attr("disabled", false);
 		$('#spv1').attr("disabled", false);
 	} else {
