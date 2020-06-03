@@ -10,7 +10,7 @@ var sprLib = require("sprestlib");
 var campi = [];
 var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
-
+require('winax');
 
 
 function openMenu(n){
@@ -353,7 +353,6 @@ function send_mail(a) {
 	if(son.substring(0,1)=="u"){
 		son = ""
 	}
-	
 	var ora = new Date()
 	var anno = ora.getFullYear().toString();
 	var mese = (ora.getMonth()+1).toString();
