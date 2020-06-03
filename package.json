@@ -50,7 +50,7 @@
     "mkdirp": "^0.5.1",
     "node": "^13.5.0",
     "sprestlib": "^1.9.0",
-    "winax": "^1.13.0"
+    "winax": "^1.19.0"
   },
   "description": "service job",
   "repository": {
