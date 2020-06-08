@@ -309,6 +309,8 @@ function controlladata(){
 		document.getElementById('mfl1').disabled= false;
 		document.getElementById('mnfv1').disabled= false;
 		document.getElementById('mnfl1').disabled= false;
+		document.getElementById('off1').disabled= true;
+		document.getElementById('ofs1').disabled= false;
 	} else if (param=="fer"){
 		document.getElementById('spov1').disabled= false;
 		document.getElementById('spol1').disabled= false;
@@ -320,7 +322,22 @@ function controlladata(){
 		document.getElementById('mfl1').disabled= true;
 		document.getElementById('mnfv1').disabled= true;
 		document.getElementById('mnfl1').disabled= true;
-	} else {};
+		document.getElementById('off1').disabled= false;
+		document.getElementById('ofs1').disabled= false;
+	} else if (param=="sab"){
+		document.getElementById('spov1').disabled= true;
+		document.getElementById('spol1').disabled= true;
+		document.getElementById('spsv1').disabled= false;
+		document.getElementById('spsl1').disabled= false;
+		document.getElementById('mntv1').disabled= false;
+		document.getElementById('mntl1').disabled= false;
+		document.getElementById('mfv1').disabled= true;
+		document.getElementById('mfl1').disabled= true;
+		document.getElementById('mnfv1').disabled= true;
+		document.getElementById('mnfl1').disabled= true;
+		document.getElementById('off1').disabled= true;
+		document.getElementById('ofs1').disabled= false;
+	};
 }
 
 //Esporta PDF
@@ -659,7 +676,7 @@ function aggiungi() {
 		var ele = [document.getElementById('tec').value, mydate];
 		//controlla le festività
 		var fd=$('#data1').val();
-		var fest = verificadata(verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY")));
+		var fest = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
 		//copia tutti gli elementi "ore"
 		var orr = document.getElementsByClassName('ore');
 		//aggiunge le ore all'array ele
