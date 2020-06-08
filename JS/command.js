@@ -4,9 +4,9 @@ var mkdirp = require('mkdirp');
 const tmp = require('tmp');
 const prompt = require('electron-prompt');
 const {shell} = require('electron');
-const process = require('process');
 const homedir = require('os').homedir();
 var sprLib = require("sprestlib");
+var moment = require("moment");
 var campi = [];
 var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
@@ -296,7 +296,8 @@ function controllaore(n, id){
 
 //disabilita l'inserimento in base al giorno dell'anno
 function controlladata(){
-	var param = verificadata(convdata($('#data1').val()));
+	var fd = $('#data1').val();
+	var param = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
 	if(param=="fest"){
 		document.getElementById('spov1').disabled= true;
 		document.getElementById('spol1').disabled= true;
@@ -657,7 +658,8 @@ function aggiungi() {
 		document.getElementById('ris').appendChild(document.createElement("TR"));
 		var ele = [document.getElementById('tec').value, mydate];
 		//controlla le festività
-		var fest = verificadata(document.getElementById('data1').value);
+		var fd=$('#data1').val();
+		var fest = verificadata(verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY")));
 		//copia tutti gli elementi "ore"
 		var orr = document.getElementsByClassName('ore');
 		//aggiunge le ore all'array ele
@@ -773,24 +775,19 @@ function sortTable() {
 	}
 }
 		  
-function verificadata(g){
-	var gg= g.substring(0,2);
-	var mm=g.substring(3,5);
-	var an=g.substring(6,10);
-	g = mm+"/"+gg+"/"+g.substring(6,10);
-    var feste = ["01/01", "01/06", "04/25", "05/01", "06/02", "08/15", "08/16", "11/01", "12/07", "12/08", "12/24", "12/25", "12/26", "12/31"];
+function verificadata(g, gg,mm,an){
+    var feste = ["01/01", "06/01", "25/04", "05/01", "02/06", "15/08", "16/08", "01/11", "07/12", "08/12", "24/12", "25/12", "26/12", "31/12"];
     var dd = new Date(g);
     var pasqua = Easter(an);
-    var gpasquetta = pasqua.substring(3,5)+1;
-    var pasquetta =  pasqua.substring(0,3) + padout(pasqua.substring(3,5)*1+1);
-    feste.push(pasqua, pasquetta);
+    var pasquetta =  padout(pasqua.substring(0,2)*1+1) + "/" + padout(pasqua.substring(4,5));
+	feste.push(pasqua, pasquetta);
     var wd = dd.getDay();
-    var fest = false
+	var fest = false;
     if(wd==0){fest="fest"}
     else if(wd==6){fest="sab"}
     else {fest = "fer"};
-    var test = padout(dd.getMonth()+1) + "/" + padout(dd.getDate());
-    feste.forEach(function(el){if(el==test){fest="fest";}});
+	var test = gg + "/" + mm;
+	feste.forEach(function(el){if(el==test){fest="fest";}});
     return fest;
 }    
 
@@ -806,7 +803,7 @@ function Easter(Y) {
     var L = I - J;
     var M = 3 + Math.floor((L + 40)/44);
     var D = L + 28 - 31*Math.floor(M/4)-1;
-    return padout(M) + '/' + padout(D);
+    return padout(D) + '/' + padout(M);
 }
 
 function padout(number) { return (number < 10) ? '0' + number : number; }
