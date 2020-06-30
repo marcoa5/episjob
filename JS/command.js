@@ -204,6 +204,30 @@ function isNumber(evt) {
 	return true;
 }
 
+function isNumberHr(evt) {
+	evt = (evt) ? evt : window.event;
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	var a = $('#' + evt.target.id).val();
+	if(charCode==44 && a.length==0){$('#' + evt.target.id).val("0.");return false;}
+	if(charCode==44 && a.length>0 && a.length<2){$('#' + evt.target.id).val($('#' + evt.target.id).val()+".");return false;}
+
+	if(charCode==46 && a.length==0){
+		$('#' + evt.target.id).val("0")
+	} else if((a.length+1)<3){
+		if ((charCode > 47 && charCode < 58) || charCode==46) {return true}	else {return false;}
+	} else {
+		if(charCode == 53){return true} else {return false};
+	}
+}
+
+function controllaP(e){
+	var te = $('#' + e.target.id).val();
+	if(te.substring(te.length-1,2)=="."){
+		$('#' + e.target.id).val($('#' + e.target.id).val()+"5")
+	};
+	//$('#' + e.target.id).val($('#' + e.target.id).val() + "0")
+}
+
 //verifica l'inserimento delle ore nella maschera
 function controllaore(n, id){
 	const options = {
@@ -221,7 +245,7 @@ function controllaore(n, id){
 	if(n=='spo'){
 		var a = $('#spov1').val();
 		var b= $('#spol1').val();
-		if((a*1+b*1)<9){return} else {
+		if((a*1+b*1)<=8){return} else {
 		  dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('spov1').value = 8 - document.getElementById('spol1').value*1
@@ -233,7 +257,7 @@ function controllaore(n, id){
 	if(n=='sps'){
 		var a = document.getElementById('spsv1').value;
 		var b= document.getElementById('spsl1').value;
-		if((a*1+b*1)<9){return} else {
+		if((a*1+b*1)<=8){return} else {
 		  dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('spsv1').value = 8 - document.getElementById('spsl1').value*1
@@ -245,7 +269,7 @@ function controllaore(n, id){
 	if(n=='mnt'){
 		var a = document.getElementById('mntv1').value;
 		var b= document.getElementById('mntl1').value;
-		if((a*1+b*1)<9){return} else {
+		if((a*1+b*1)<=8){return} else {
 			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('mntv1').value = 8 - document.getElementById('mntl1').value*1
@@ -257,7 +281,7 @@ function controllaore(n, id){
 	if(n=='mf'){
 		var a = document.getElementById('mfv1').value;
 		var b= document.getElementById('mfl1').value;
-		if((a*1+b*1)<17){return} else {
+		if((a*1+b*1)<=16){return} else {
 			dialog.showMessageBox(remote.getCurrentWindow(), options2);
 			if(id=='1'){
 				document.getElementById('mfv1').value = 16 - document.getElementById('mfl1').value*1
@@ -269,7 +293,7 @@ function controllaore(n, id){
 	if(n=='mnf'){
 		var a = document.getElementById('mnfv1').value;
 		var b= document.getElementById('mnfl1').value;
-		if((a*1+b*1)<9){return} else {
+		if((a*1+b*1)<=8){return} else {
 			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			if(id=='1'){
 				document.getElementById('mnfv1').value = 8 - document.getElementById('mnfl1').value*1
@@ -280,14 +304,14 @@ function controllaore(n, id){
 	}
 	if(n=='off'){
 		var a = document.getElementById('off1').value;
-		if((a*1)<9){return} else {
+		if((a*1)<=8){return} else {
 			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			document.getElementById('off1').value = 8 
 		}
 	}
 	if(n=='ofs'){
 		var a = document.getElementById('ofs1').value;
-		if((a*1)<9){return} else {
+		if((a*1)<=8){return} else {
 			dialog.showMessageBox(remote.getCurrentWindow(), options);
 			document.getElementById('ofs1').value = 8 
 		}
@@ -647,6 +671,8 @@ function oggi(){
 	$('#tec').html("");
 	$.get('.\\tech.txt', function(data) {
 		var linee = data.split("\n");
+	var stringa= '<option value=""> </option>';
+	$('#tec').append(stringa);
 		$.each(linee, function(n, elem) {
 			var record = elem.split("_");
 			if(record[0]!==""){
@@ -666,69 +692,80 @@ function aggiungi() {
 		title: 'Errore',
 		message: 'Massimo 7 giorni',
 	};
-	var riga = document.getElementById('ris').getElementsByTagName('tr');
-	var ind = riga.length;
-	//verifica che le righe siano < 7
-	if(ind<=6){    
-		var parts = document.getElementById("data1").value.toString().split("-");
-		var mydate = parts[0]+ parts[1]+ parts[2]; 
-		document.getElementById('ris').appendChild(document.createElement("TR"));
-		var ele = [document.getElementById('tec').value, mydate];
-		//controlla le festività
-		var fd=$('#data1').val();
-		var fest = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
-		//copia tutti gli elementi "ore"
-		var orr = document.getElementsByClassName('ore');
-		//aggiunge le ore all'array ele
-		for(t=0;t<orr.length;t++){ele.push(orr[t].value)};
-		//crea l'indice di riga nella prima colonna
-		var n = document.createElement('TD');
-		var t = document.createTextNode(ind+1);
-		document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
-		n.appendChild(t); 
-		//aggiunge tutti gli elementi contenuti in 'ele' all'interno della tabella 'ris'   
-		for(var i=0; i<ele.length;i++){
-			n = document.createElement('TD');
-			var t = document.createTextNode(ele[i]);
-			if(i>1){
-				var att = document.createAttribute("class");
-				att.value= "ores";
-				n.setAttributeNode(att);
-			}
-			n.appendChild(t);
+	const options1 = {
+		type: 'error',
+		buttons: ['OK'],
+		title: 'Errore',
+		message: 'Seleziona il nome del tecnico',
+	};
+	//verifica presenza tecnico
+	var ttt = $('#tec').val();
+	if (ttt==""){
+		dialog.showMessageBox(remote.getCurrentWindow(), options1);
+	} else {
+		var riga = document.getElementById('ris').getElementsByTagName('tr');
+		var ind = riga.length;
+		//verifica che le righe siano < 7
+		if(ind<=6){    
+			var parts = document.getElementById("data1").value.toString().split("-");
+			var mydate = parts[0]+ parts[1]+ parts[2]; 
+			document.getElementById('ris').appendChild(document.createElement("TR"));
+			var ele = [document.getElementById('tec').value, mydate];
+			//controlla le festività
+			var fd=$('#data1').val();
+			var fest = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
+			//copia tutti gli elementi "ore"
+			var orr = document.getElementsByClassName('ore');
+			//aggiunge le ore all'array ele
+			for(t=0;t<orr.length;t++){ele.push(orr[t].value)};
+			//crea l'indice di riga nella prima colonna
+			var n = document.createElement('TD');
+			var t = document.createTextNode(ind+1);
 			document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
-		}
-		//aggiunge il modifica riga
-		var n = document.createElement('TD');
-		var t = document.createTextNode("Modifica");
-		n.appendChild(t);
-		att = document.createAttribute("class");
-		att.value="elim";
-		n.setAttributeNode(att);
-		att = document.createAttribute("onClick");
-		att.value="modifica(this.parentNode.rowIndex)";
-		n.setAttributeNode(att);
-		document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
-		//aggiunge l'elimina riga
-		var n = document.createElement('TD');
-		var t = document.createTextNode("Elimina");
-		n.appendChild(t);
-		att = document.createAttribute("class");
-		att.value="elim";
-		n.setAttributeNode(att);
-		att = document.createAttribute("onClick");
-		att.value="cancella(this.parentNode.rowIndex)";
-		n.setAttributeNode(att);
-		document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
-		//canCella le ore
-		clearore();
-		sortTable();
-		var numrig = document.getElementById('ris').getElementsByTagName('tr');
-		for(var z=0;z<numrig.length;z++){
-			numrig[z].getElementsByTagName('td')[0].innerText = z+1;
-		}             
-	} else {dialog.showMessageBox(remote.getCurrentWindow(), options);}
-	
+			n.appendChild(t); 
+			//aggiunge tutti gli elementi contenuti in 'ele' all'interno della tabella 'ris'   
+			for(var i=0; i<ele.length;i++){
+				n = document.createElement('TD');
+				var t = document.createTextNode(ele[i]);
+				if(i>1){
+					var att = document.createAttribute("class");
+					att.value= "ores";
+					n.setAttributeNode(att);
+				}
+				n.appendChild(t);
+				document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
+			}
+			//aggiunge il modifica riga
+			var n = document.createElement('TD');
+			var t = document.createTextNode("Modifica");
+			n.appendChild(t);
+			att = document.createAttribute("class");
+			att.value="elim";
+			n.setAttributeNode(att);
+			att = document.createAttribute("onClick");
+			att.value="modifica(this.parentNode.rowIndex)";
+			n.setAttributeNode(att);
+			document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
+			//aggiunge l'elimina riga
+			var n = document.createElement('TD');
+			var t = document.createTextNode("Elimina");
+			n.appendChild(t);
+			att = document.createAttribute("class");
+			att.value="elim";
+			n.setAttributeNode(att);
+			att = document.createAttribute("onClick");
+			att.value="cancella(this.parentNode.rowIndex)";
+			n.setAttributeNode(att);
+			document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
+			//canCella le ore
+			clearore();
+			sortTable();
+			var numrig = document.getElementById('ris').getElementsByTagName('tr');
+			for(var z=0;z<numrig.length;z++){
+				numrig[z].getElementsByTagName('td')[0].innerText = z+1;
+			}             
+		} else {dialog.showMessageBox(remote.getCurrentWindow(), options);}
+	}
 }
 
 function cancella(n){
