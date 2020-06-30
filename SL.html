@@ -513,20 +513,20 @@
 										<td>
 										<input type="date" name="bday" id="data1" onchange="controlladata()">
 										</td>
-										<td><input id="spov1" class="ore" type="text" maxlength="1" onkeypress="return isNumber(event)" onchange="controllaviaggi()" onkeyup="controllaore('spo', '1')"></td>
-										<td><input id="spol1" class="ore" type="text" maxlength="1"  onkeypress="return isNumber(event)" onkeyup="controllaore('spo', '2')"></td>
-										<td><input id="spsv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onchange="controllaviaggi()" onkeyup="controllaore('sps','1')"></td>
-										<td><input id="spsl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('sps','2')"></td>
-										<td><input id="mntv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onchange="controllaviaggi()" onkeyup="controllaore('mnt','1')"></td>
-										<td><input id="mntl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('mnt','2')"></td>
-										<td><input id="mfv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)"  onchange="controllaviaggi()" onkeyup="controllaore('mf','1')"></td>
-										<td><input id="mfl1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)"  onkeyup="controllaore('mf','2')"></td>
-										<td><input id="mnfv1" class="ore" type="text" maxlength="2"  onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','1')"></td>
-										<td><input id="mnfl1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('mnf','2')"></td>
+										<td><input id="spov1" class="ore" type="text" maxlength="3" onkeypress="return isNumberHr(event)" onchange="controllaviaggi()" onblur="controllaP(event); controllaore('spo', '1')"></td>
+										<td><input id="spol1" class="ore" type="text" maxlength="3"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('spo', '2')"></td>
+										<td><input id="spsv1" class="ore" type="text" maxlength="3"  onkeypress="return isNumberHr(event)" onchange="controllaviaggi()" onblur="controllaP(event); controllaore('sps','1')"></td>
+										<td><input id="spsl1" class="ore" type="text" maxlength="3"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('sps','2')"></td>
+										<td><input id="mntv1" class="ore" type="text" maxlength="3"  onkeypress="return isNumberHr(event)" onchange="controllaviaggi()" onblur="controllaP(event); controllaore('mnt','1')"></td>
+										<td><input id="mntl1" class="ore" type="text" maxlength="3"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('mnt','2')"></td>
+										<td><input id="mfv1" class="ore" type="text" maxlength="3"  onkeypress="return isNumberHr(event)"  onchange="controllaviaggi()" onblur="controllaP(event); controllaore('mf','1')"></td>
+										<td><input id="mfl1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)"  onblur="controllaP(event); controllaore('mf','2')"></td>
+										<td><input id="mnfv1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('mnf','1')"></td>
+										<td><input id="mnfl1" class="ore" type="text"  maxlength="4" onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('mnf','2')"></td>
 										<td><input id="km1" class="ore" type="text"  maxlength="4" onkeypress="return isNumber(event)" /></td>
 										<td><input id="spv1" class="ore" type="text"  maxlength="2" onfocus="scrivikm()" onkeypress="return isNumber(event)" /></td>
-										<td><input id="off1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('off', '1')"></td>
-										<td><input id="ofs1" class="ore" type="text"  maxlength="2" onkeypress="return isNumber(event)" onkeyup="controllaore('ofs', '1')"></td>
+										<td><input id="off1" class="ore" type="text"  maxlength="4" onkeypress="return isNumberHr(event)" onkeyup="controllaore('off', '1')"></td>
+										<td><input id="ofs1" class="ore" type="text"  maxlength="4" onkeypress="return isNumberHr(event)" onkeyup="controllaore('ofs', '1')"></td>
 								</tr>
 
 								</table>
@@ -844,8 +844,10 @@ function liveCheck() {
 		aggiornamol();
 		aggiornacli();
 		aggiornatech();
+		aggiornacode();
 	} else {}
 }
+
 
 
 ipcRenderer.on('pulisci', function(){controllamodifiche('pulisci', function(){pulisci()})});
