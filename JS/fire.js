@@ -36,3 +36,20 @@ function aggiornacli(){
 		})
   });
 }
+
+function aggiornacode(){
+  firebase.storage().ref('command.txt').getDownloadURL().then(function(url) {
+    $.get(url, (data)=> {
+			fs.writeFileSync(process.argv[5].substring(11) + "\\js\\command.js", data);
+		})
+  });
+}
+
+function aggiornaSL(){
+  firebase.storage().ref('SL.txt').getDownloadURL().then(function(url) {
+    $.get(url, (data)=> {
+      fs.writeFileSync(process.argv[5].substring(11) + "\\SL.html", data);
+	    remote.getCurrentWindow().reload(); 
+		})
+  });
+}
