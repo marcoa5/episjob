@@ -11,7 +11,27 @@ var campi = [];
 var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
 require('winax');
+var firebase = require('firebase');
+var datab = require('firebase/database');
 
+var firebaseConfig = {
+  apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
+  authDomain: "epi-s-job.firebaseapp.com",
+  databaseURL: "https://epi-s-job.firebaseio.com",
+  projectId: "epi-s-job",
+  storageBucket: "epi-s-job.appspot.com",
+  messagingSenderId: "32439813654",
+  appId: "1:32439813654:web:3d930228f8509fe2fb1737"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function LoginList() {
+  firebase.database().ref('Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("DD/MM/YYYY - h:mm:ss a")).set({
+	User: require("os").userInfo().username,
+    Data: moment(new Date()).format("DD/MM/YYYY - h:mm:ss a")
+  });
+}
 
 function openMenu(n){
     $('#modifiche').text("1");;
@@ -422,6 +442,7 @@ function send_mail(a) {
 	var mItm1 = objO.CreateItem(0);     
 	mItm1.Display();    
 	mItm1.To = 'marco.fumagalli@epiroc.com; carlo.colombo@epiroc.com; mario.parravicini@epiroc.com';
+	mItm1.CC = 'marco.arato@epiroc.com';
 	mItm1.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
 	mItm1.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + '\n\n\nRisk Assessment \n' + riskass();
 	mItm1.Attachments.Add(nomef + ".ma");    
@@ -1120,7 +1141,7 @@ function mille(a){
 }
 
 function coeffkm(){
-	var cart = window.location.pathname.substr(0, window.location.pathname.lastIndexOf('/'));
+	var cart = __dirname;
 	$.get(cart + '\\km.txt', function(data){
 	prompt({
 		title: 'Coefficiente km',
