@@ -1,6 +1,6 @@
 {
   "name": "ServiceJob",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -33,11 +33,11 @@
   "author": "Marco A",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^7.1.7",
+    "electron": "^7.2.4",
     "electron-builder": "^21.2.0",
     "electron-packager": "^14.1.1",
-    "electron-winstaller": "^4.0.0",
     "electron-rebuild": "^1.10.1",
+    "electron-winstaller": "^4.0.0",
     "electron-wix-msi": "^2.2.0"
   },
   "dependencies": {

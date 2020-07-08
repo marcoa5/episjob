@@ -440,7 +440,8 @@ function send_mail(a) {
 	var nomef = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
 	fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
 	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
-	var objO = new ActiveXObject('Outlook.Application');     
+	setTimeout(()=>{
+		var objO = new ActiveXObject('Outlook.Application');     
 	var objNS = objO.GetNameSpace('MAPI');     
 	var mItm = objO.CreateItem(0);     
 	mItm.Display();   
@@ -463,6 +464,7 @@ function send_mail(a) {
 	mItm1.GetInspector.WindowState = 2;
 	mItm.send();
 	mItm1.send();
+	},1500)
 }
 
 //Filtra elenco macchine
@@ -989,7 +991,7 @@ function nuovamail(a,b){
 		document.getElementById('indmail').value="";
 		document.getElementById('indmail').focus();
 		var elem = document.getElementsByClassName('mail');
-		a();
+		//a();
 		b();
 	} else {
 		const options = {
