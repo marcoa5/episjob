@@ -12,25 +12,38 @@ var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
 require('winax');
 var firebase = require('firebase');
-var datab = require('firebase/database');
-
-var firebaseConfig = {
-  apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
-  authDomain: "epi-s-job.firebaseapp.com",
-  databaseURL: "https://epi-s-job.firebaseio.com",
-  projectId: "epi-s-job",
-  storageBucket: "epi-s-job.appspot.com",
-  messagingSenderId: "32439813654",
-  appId: "1:32439813654:web:3d930228f8509fe2fb1737"
-};
-
-firebase.initializeApp(firebaseConfig);
 
 function LoginList() {
   firebase.database().ref('Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("DD/MM/YYYY - h:mm:ss a")).set({
 	User: require("os").userInfo().username,
     Data: moment(new Date()).format("DD/MM/YYYY - h:mm:ss a")
   });
+}
+
+function UpFiles(){
+	/**/
+	  tmp.dir(function tep(err,path){
+		var gin = path.indexOf("tmp");
+			path = path.substring(0, gin) + "ServiceJob";
+			mkdirp(path, function(err) {
+				fs.readdir(path, function (err, files) {
+					if (err) {
+						return console.log('Unable to scan directory: ' + err);
+					}
+					files.forEach((file)=> {
+						if(file.substring(file.length-2) == "ma"){
+							$.get(path + "/" + file,(d)=>{
+								var ref= firebase.storage().ref().child(require("os").userInfo().username + "/" + file)
+								var ch = ref.getDownloadURL().then((url)=> {}).catch((err)=>{
+									ref.putString(d).then((snapshot)=> {
+									});
+								})								
+							})
+						}
+					});
+				});
+			});
+	}) 
 }
 
 function openMenu(n){

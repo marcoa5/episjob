@@ -49,7 +49,6 @@ function aggiornaSL(){
   firebase.storage().ref('SL.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
       fs.writeFileSync(__dirname + "\\SL.html", data);
-	    remote.getCurrentWindow().reload(); 
-		})
+	})
   });
 }
