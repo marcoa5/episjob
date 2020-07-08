@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
         
 <head>
@@ -848,8 +848,6 @@ function liveCheck() {
 	} else {}
 }
 
-
-
 ipcRenderer.on('pulisci', function(){controllamodifiche('pulisci', function(){pulisci()})});
 ipcRenderer.on('apri', function(){controllamodifiche('apri', function(){aprifile('a')})});
 ipcRenderer.on('mail', function(){controllafirme()});
@@ -869,7 +867,6 @@ ipcRenderer.on('vecchi', function(){vecchi()})
 
 var data = ipcRenderer.sendSync('get-file-data');
 if (data!==null) {aprifile(data);}
-
   
 $('body').on('mousewheel', function(event) {
     if(event.ctrlKey && $('firmac1').css('display', 'none') && $('firmat1').css('display', 'none')){
@@ -878,6 +875,8 @@ $('body').on('mousewheel', function(event) {
 		webFrame.setZoomFactor(webFrame.getZoomFactor() - zoom/6);}
 	}
 });
+
+setTimeout(()=>LoginList(),3000);
 
 	
 </script>
