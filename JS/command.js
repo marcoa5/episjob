@@ -14,9 +14,10 @@ require('winax');
 var firebase = require('firebase');
 
 function LoginList() {
-  firebase.database().ref('Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("DD/MM/YYYY - h:mm:ss a")).set({
+  firebase.database().ref('Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("DD-MM-YYYY - h:mm:ss a")).set({
 	User: require("os").userInfo().username,
-    Data: moment(new Date()).format("DD/MM/YYYY - h:mm:ss a")
+    Data: moment(new Date()).format("DD/MM/YYYY - h:mm:ss a"),
+	AppVersion: remote.app.getVersion()
   });
 }
 
@@ -606,7 +607,7 @@ function esportapdf(){
 	printpdf(cartella);
 }
 
-//controlla se il file è stato modificato
+//controlla se il file Ã¨ stato modificato
 function controllamodifiche(a, callback){
 	var c = $('#modifiche').text();
 	if(c=="1"){
@@ -743,7 +744,7 @@ function aggiungi() {
 			var mydate = parts[0]+ parts[1]+ parts[2]; 
 			document.getElementById('ris').appendChild(document.createElement("TR"));
 			var ele = [document.getElementById('tec').value, mydate];
-			//controlla le festività
+			//controlla le festivitÃ 
 			var fd=$('#data1').val();
 			var fest = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
 			//copia tutti gli elementi "ore"
@@ -954,7 +955,7 @@ function aggiorna(){
 		$.each( data, function( key, val ) {
 			if(key=="name"){
 				if(val!==$('#upd').text().substring(1)){
-					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavvierà automaticamente...";
+					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavvierÃ  automaticamente...";
 					document.getElementById('restart-button').classList.add('hidden');
 					document.getElementById('close-button').classList.add('hidden');
 					require("electron").remote.require("electron-download-manager").download({
@@ -1057,7 +1058,7 @@ function controllafirme(){
 		buttons: ['Ok'],
 		title: 'Firme',
 		noLink: true,
-		message: 'Il documento non è stato firmato dal tecnico Epiroc'
+		message: 'Il documento non Ã¨ stato firmato dal tecnico Epiroc'
 	}
 	if(ft=="white.png"){dialog.showMessageBoxSync(remote.getCurrentWindow(), options)} else {riaprimenumail();openMenu('menuMail');}
 }
@@ -1331,7 +1332,7 @@ function addsp(){
 				type: 'error',
 				buttons: ['OK'],
 				title: 'Errore',
-				message: 'Sondaggio già presente in SP',
+				message: 'Sondaggio giÃ  presente in SP',
 				};
 				dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 			}
