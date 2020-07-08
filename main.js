@@ -125,7 +125,7 @@ let fesci = false;
 				{
 					label: 'DevTools',
 					icon: path.join(__dirname, "img/menu/dev.png"),					
-					enabled: false, 
+					enabled: true, 
 					accelerator: 'CmdOrCtrl+Shift+I', 
 					click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();},
 				}
@@ -156,7 +156,7 @@ function createWindow () {
     width: 1200,
     height: 800,
 	show: false,
-    icon: __dirname + 'icon.ico',
+    icon: __dirname + '\\icon.ico',
     webPreferences: {
       nodeIntegration: true
     }

@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 function aggiornatech(){
   firebase.storage().ref('techupd.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
-			fs.writeFileSync(process.argv[5].substring(11) + "\\tech.txt", data)
+			fs.writeFileSync(__dirname + "\\tech.txt", data)
 		})
   });
 }
@@ -24,7 +24,7 @@ function aggiornatech(){
 function aggiornamol(){
   firebase.storage().ref('molupd.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
-			fs.writeFileSync(process.argv[5].substring(11) + "\\mol.txt", data)
+			fs.writeFileSync(__dirname + "\\mol.txt", data)
 		})
   });
 }
@@ -32,7 +32,7 @@ function aggiornamol(){
 function aggiornacli(){
   firebase.storage().ref('customersupd.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
-			fs.writeFileSync(process.argv[5].substring(11) + "\\customers.txt", data)
+			fs.writeFileSync(__dirname + "\\customers.txt", data)
 		})
   });
 }
@@ -40,7 +40,7 @@ function aggiornacli(){
 function aggiornacode(){
   firebase.storage().ref('command.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
-			fs.writeFileSync(process.argv[5].substring(11) + "\\js\\command.js", data);
+			fs.writeFileSync(__dirname + "\\js\\command.js", data);
 		})
   });
 }
@@ -48,7 +48,7 @@ function aggiornacode(){
 function aggiornaSL(){
   firebase.storage().ref('SL.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
-      fs.writeFileSync(process.argv[5].substring(11) + "\\SL.html", data);
+      fs.writeFileSync(__dirname + "\\SL.html", data);
 	    remote.getCurrentWindow().reload(); 
 		})
   });
