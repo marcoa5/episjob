@@ -418,7 +418,7 @@ function send_mail(a) {
 	mItm.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
 	mItm.Body = "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
 	mItm.Attachments.Add(nomef + ".pdf");    
-	mItm.GetInspector.WindowState = 2;
+	mItm.GetInspector.WindowState = 2;     
 	var mItm1 = objO.CreateItem(0);     
 	mItm1.Display();    
 	mItm1.To = 'marco.fumagalli@epiroc.com; carlo.colombo@epiroc.com; mario.parravicini@epiroc.com';
