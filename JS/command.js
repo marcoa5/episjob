@@ -469,6 +469,16 @@ function send_mail(a) {
 
 //Filtra elenco macchine
 function myFunction() {
+	var ma = $('#matricolas').val();
+	var ch = $('#myinput').val();
+	if(ma!==ch){
+		$('#matricolas').val('');
+		$('#prodotto').val('');
+		$('#cliente').val('');
+		$('#cantiere').val('');
+		$('#clientead1').val('');
+		$('#clientead2').val('');
+		}
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myinput");
     filter = input.value.toUpperCase();
@@ -1491,4 +1501,20 @@ function riskass(){
 	});
 	return a;
 	
+}
+
+function chMatricola(){
+	var ma = $('#matricolas').val();
+	var ch = $('#myinput').val();
+	if(ma!=="" && ma!==ch){
+		$('#myinput').val($('#matricolas').val());
+		myFunction();
+		$('#prodotto').val('');
+		$('#cliente').val('');
+		$('#cantiere').val('');
+		$('#clientead1').val('');
+		$('#clientead2').val('');
+	} else if(ma==""){
+		$('#matricolas').val($('#myinput').val());
+	}
 }
