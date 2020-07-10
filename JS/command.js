@@ -1,4 +1,4 @@
-var remote = require('electron').remote;
+﻿var remote = require('electron').remote;
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 const tmp = require('tmp');
@@ -14,9 +14,10 @@ require('winax');
 var firebase = require('firebase');
 
 function LoginList() {
-  firebase.database().ref('Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("DD-MM-YYYY - h:mm:ss a")).set({
+  firebase.database().ref('Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("YYYYMMDDHHmmss")).set({
 	User: require("os").userInfo().username,
-    Data: moment(new Date()).format("DD/MM/YYYY - h:mm:ss a"),
+    Data: moment(new Date()).format("DD/MM/YYYY - HH:mm:ss"),
+	hostname: require("os").hostname(),
 	AppVersion: remote.app.getVersion()
   });
 }
