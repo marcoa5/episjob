@@ -1,4 +1,4 @@
-﻿var remote = require('electron').remote;
+var remote = require('electron').remote;
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 const tmp = require('tmp');
@@ -531,10 +531,10 @@ function Apri(){
 			var il = 'ele' + i
 			if(record[0]!==""){
 				var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
-				stringa += '<td>' + record[0] + '</td>';
 				stringa += '<td>' + record[4] + '</td>';
-				stringa += '<td>' + record[1] + '</td>';
-				stringa += '<td>' + record[7] + '</td>';
+				stringa += '<td>' + record[2] + '</td>';
+				stringa += '<td>' + record[0] + '</td>';
+				stringa += '<td>' + record[5] + '</td>';
 				stringa += '</tr>';
 				$('#listam').append(stringa);
 				i++;
