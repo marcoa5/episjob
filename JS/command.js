@@ -912,6 +912,10 @@ function indirizzo_cliente(){
 	var elclienti = document.getElementById('listac');
 	var clienti = elclienti.rows
 	var cliente = document.getElementById('cliente').value;
+	$('#clientead1').val('');
+	$('#clientead2').val('');
+	$('#cliente12').val('');
+	$('#cliente13').val('');
 	for(var i = 0; i<clienti.length;i++){
 		if(cliente==clienti[i].getElementsByTagName('td')[0].innerText){
 			document.getElementById('clientead1').value= clienti[i].getElementsByTagName('td')[1].innerText;
