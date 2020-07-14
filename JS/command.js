@@ -461,7 +461,8 @@ function send_mail(a) {
 	mItm1.CC = 'marco.arato@epiroc.com';
 	mItm1.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
 	mItm1.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + '\n\n\nRisk Assessment \n' + riskass();
-	mItm1.Attachments.Add(nomef + ".ma");    
+	mItm1.Attachments.Add(nomef + ".ma");
+	mItm1.Attachments.Add(nomef + ".pdf");
 	mItm1.GetInspector.WindowState = 2;
 	mItm.send();
 	mItm1.send();
