@@ -1,4 +1,4 @@
-var remote = require('electron').remote;
+﻿var remote = require('electron').remote;
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 const tmp = require('tmp');
@@ -466,8 +466,8 @@ function send_mail(a) {
 	mItm1.CC = 'marco.arato@epiroc.com';
 	mItm1.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
 	mItm1.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + '\n\n\nRisk Assessment \n' + riskass();
-	mItm1.Attachments.Add(nomef + ".ma");
 	mItm1.Attachments.Add(nomef + ".pdf");
+	mItm1.Attachments.Add(nomef + ".ma");
 	mItm1.GetInspector.WindowState = 2;
 	mItm.send();
 	mItm1.send();
@@ -537,10 +537,10 @@ function Apri(){
 			var il = 'ele' + i
 			if(record[0]!==""){
 				var stringa= '<tr id=' + il + ' onclick="copia(' + "'" + il + "'" + ')">';
-				stringa += '<td>' + record[4] + '</td>';
-				stringa += '<td>' + record[2] + '</td>';
 				stringa += '<td>' + record[0] + '</td>';
-				stringa += '<td>' + record[5] + '</td>';
+				stringa += '<td>' + record[4] + '</td>';
+				stringa += '<td>' + record[1] + '</td>';
+				stringa += '<td>' + record[7] + '</td>';
 				stringa += '</tr>';
 				$('#listam').append(stringa);
 				i++;
@@ -626,7 +626,7 @@ function esportapdf(){
 	printpdf(cartella);
 }
 
-//controlla se il file ÃƒÂ¨ stato modificato
+//controlla se il file ÃƒÆ’Ã‚Â¨ stato modificato
 function controllamodifiche(a, callback){
 	var c = $('#modifiche').text();
 	if(c=="1"){
@@ -763,7 +763,7 @@ function aggiungi() {
 			var mydate = parts[0]+ parts[1]+ parts[2]; 
 			document.getElementById('ris').appendChild(document.createElement("TR"));
 			var ele = [document.getElementById('tec').value, mydate];
-			//controlla le festivitÃƒ 
+			//controlla le festivitÃƒÆ’ 
 			var fd=$('#data1').val();
 			var fest = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
 			//copia tutti gli elementi "ore"
@@ -978,7 +978,7 @@ function aggiorna(){
 		$.each( data, function( key, val ) {
 			if(key=="name"){
 				if(val!==$('#upd').text().substring(1)){
-					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavvierÃƒ  automaticamente...";
+					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavvierÃƒÆ’  automaticamente...";
 					document.getElementById('restart-button').classList.add('hidden');
 					document.getElementById('close-button').classList.add('hidden');
 					require("electron").remote.require("electron-download-manager").download({
@@ -1074,6 +1074,8 @@ function controllaindirizzi(){
 }
 
 function controllafirme(){
+	var Mp = $('#nom').text()
+	console.log(Mp);
 	var ft = document.getElementById('firmatt1').getAttribute('src');
 	ft = ft.substring(ft.length - 9, ft.length);
 	const options = {
@@ -1081,9 +1083,34 @@ function controllafirme(){
 		buttons: ['Ok'],
 		title: 'Firme',
 		noLink: true,
-		message: "Il documento non risulta firmato dal tecnico Epiroc"
+		message: "Il documento non è stato firmato dal tecnico Epiroc"
 	}
-	if(ft=="white.png"){dialog.showMessageBoxSync(remote.getCurrentWindow(), options)} else {riaprimenumail();openMenu('menuMail');}
+	if(Mp!=="MICHEL PASCAL"){
+		if(ft=="white.png"){dialog.showMessageBoxSync(remote.getCurrentWindow(), options)} else {riaprimenumail();openMenu('menuMail');}
+	} else {
+		riaprimenumail();
+		openMenu('menuMail');
+		var mmp = $('.mail');
+		var Ch='n';
+		for(var i=0;i<mmp.length;i++){
+			if(mmp[i].innerText=='michel.pascal@epiroc.com'){
+				Ch='mp';
+			}
+		}
+		setTimeout(() => {
+			if(Ch=="n"){
+				Michel();
+			}
+		}, 50);
+	}
+	
+}
+
+function Michel(){
+	$('#indmail').val("michel.pascal@epiroc.com");
+		setTimeout(()=>{
+			nuovamail()
+		}, 50)
 }
 
 function abilitaok(a){
@@ -1355,7 +1382,7 @@ function addsp(){
 				type: 'error',
 				buttons: ['OK'],
 				title: 'Errore',
-				message: 'Sondaggio giÃƒ  presente in SP',
+				message: 'Sondaggio giÃƒÆ’  presente in SP',
 				};
 				dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 			}
