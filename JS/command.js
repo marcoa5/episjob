@@ -434,15 +434,16 @@ function send_mail(a) {
 	var son = $('#rissondaggio').text();
 	if(son.substring(0,1)=="u"){
 		son = ""
+    }
+    var rap = '';
+    if($('#rappl1').text()!=''){
+        rap +=  "\n\nRapporto di Lavoro:\n" + $('#rappl1').text();
+    }
+    if($('#oss1').text()!=''){
+        rap +=  "\n\nOsservazioni:\n" + $('#oss1').text();
 	}
-	var ora = new Date()
-	var anno = ora.getFullYear().toString();
-	var mese = (ora.getMonth()+1).toString();
-	var giorno = ora.getDate().toString();
-	var hr = ora.getHours().toString();
-	var mi = ora.getMinutes().toString();
-	var se = ora.getSeconds().toString();
-	var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0')+hr.padStart(2,'0')+mi.padStart(2,'0')+se.padStart(2,'0'); 
+	
+	var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
 	var nomef = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
 	fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
 	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
@@ -465,7 +466,7 @@ function send_mail(a) {
 	mItm1.To = 'marco.fumagalli@epiroc.com; carlo.colombo@epiroc.com; mario.parravicini@epiroc.com';
 	mItm1.CC = 'marco.arato@epiroc.com';
 	mItm1.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
-	mItm1.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + '\n\n\nRisk Assessment \n' + riskass();
+	mItm1.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass();
 	mItm1.Attachments.Add(nomef + ".pdf");
 	mItm1.Attachments.Add(nomef + ".ma");
 	mItm1.GetInspector.WindowState = 2;
