@@ -557,7 +557,7 @@ function copia(a){
 		document.getElementById("matricolas").value = elementi[0].innerText;
 		document.getElementById("myinput").value = elementi[0].innerText;
 		document.getElementById("prodotto").value = elementi[1].innerText;
-		document.getElementById("cliente").value = elementi[2].innerText;
+		document.getElementById("cliente").value = elementi[2].innerText.replace("/","-");
 		document.getElementById("cantiere").value = elementi[3].innerText;
     }
 	indirizzo_cliente();
