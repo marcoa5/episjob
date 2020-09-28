@@ -1,4 +1,4 @@
-﻿var remote = require('electron').remote;
+var remote = require('electron').remote;
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 const tmp = require('tmp');
@@ -71,7 +71,7 @@ function openMenu(n){
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
-	if(n=='menurisk'){Apri()};
+	if(n=='menurisk'){};
     var iu = $('#stdspe').text();
     if(iu=='SPE'){document.getElementById('manspe').checked = true};
 	$("#pagina *").attr("disabled", "disabled").off('click');
@@ -124,9 +124,14 @@ function init(h){
 	}
 	canvas=document.getElementById(h);
 	function resizeCanvas(){
-		var ratio =  Math.max(window.devicePixelRatio || 1, 1);
-		canvas.width = "700";
-		canvas.height = "300";
+		$('#firmat1').css('margin-top',20)
+		$('#firmat1').css('maxWidth',5000);
+		$('#firmat1').width("100%");
+		$('#firmac1').css('margin-top',20)
+		$('#firmac1').css('maxWidth',5000);
+		$('#firmac1').width("100%");
+		canvas.width = $('#firmat1').width()*.98;
+		canvas.height = $('#firmat1').width()/7*2.8;
 	}
 	//window.onresize = resizeCanvas;
 	resizeCanvas();
@@ -145,17 +150,7 @@ function init(h){
 		signaturePad.clear();
 		$('#' + sa).attr("disabled", true);
 		$('#' + fi).attr('src', "./img/white.png");
-		$('#contfirmac').text('');
-		$('#contnomec').text('');
-		$('#contsondc').text('');
-		$('#nomecognome').val('');
-		for(var i=0;i<5;i++){
-			document.getElementsByName('int')[i].checked=false;
-			document.getElementsByName('ric')[i].checked=false;
-			document.getElementsByName('ese')[i].checked=false;
-		}
-		$('#rissondaggio').text('');
-		
+		$('#contfirmac').text('');		
 	});
 	document.getElementById(sa).addEventListener('click', function () {
 		var dataURL = canvas.toDataURL();
@@ -170,7 +165,7 @@ function init(h){
 		} else {
 		}
 	});  
-	canvas.getContext("2d").drawImage(document.getElementById(fi),0,0);
+	canvas.getContext("2d").drawImage(document.getElementById(fi),0,0,canvas.width,canvas.height);
 }
 
 function salvadati(){
@@ -1144,7 +1139,7 @@ function scrivikm(){
 
 function controllafirmac(){
 	$('#contfirmac').text('1');
-	abilitainvia();
+	abilitainvia1();
 }
 
 function controllanomec(){
@@ -1155,7 +1150,6 @@ function controllanomec(){
 		}
 	abilitainvia()
 }
-
 
 function controllasondc(){
 	var int1 = document.getElementsByName("int");
@@ -1172,7 +1166,15 @@ function controllasondc(){
 }
 
 function abilitainvia(){
-	if($('#contfirmac').text()!=="" && $('#contsondc').text()!=="" && $('#contnomec').text()!==""){
+	if($('#contsondc').text()!=="" && $('#contnomec').text()!==""){
+		$('#gofirmac').attr("disabled", false);
+	} else {
+		$('#gofirmac').attr("disabled", true);
+	}
+}
+
+function abilitainvia1(){
+	if($('#contfirmac').text()!==""){
 		$('#save2').attr("disabled", false);
 	} else {
 		$('#save2').attr("disabled", true);

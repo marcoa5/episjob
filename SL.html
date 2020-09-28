@@ -376,7 +376,7 @@
 				</tr>
 				<tr>
 					<td class="firma"><img height="60" width="138" alt="Firma" id="firmatt1" onclick="openMenu('menurisk')" style="cursor: pointer" src="img/white.png"></td>
-					<td class="firma"><img height="60" width="138" alt="Firma " id="firmacc1" onclick="openMenu('firmac1')" style="cursor: pointer" src="img/white.png"></td>
+					<td class="firma"><img height="60" width="138" alt="Firma " id="firmacc1" onclick="openMenu('sond1a')" style="cursor: pointer" src="img/white.png"></td>
 					<td class="firma"><div id="apbpcs"></div></td>
 					<td class="firma"><div id="chbpcs"></div></td>
 					<td class="firma"><div id="docbpcs"></div></td>
@@ -717,11 +717,11 @@
 				<br><br>
 		</div>        
 </div>
-<div class="ccc" id="sigc"><!--Firma Cliente-->
-	<div class="finestra" id="firmac1">
-			<div class="barrat"><div class="g"><p class="tt">Firma Cliente</p></div></div>
-			<input id="nomecognome" type="text" placeholder="Nome e Cognome" class="inser" style="width: 40%" onchange="controllanomec()">
-			<canvas id="firmac" width="100" height="100" onpointerdown="controllafirmac()"></canvas>
+
+<div class="ccc" ><!--Sondaggio-->
+	<div class="finestra" id="sond1a" style="min-width: 650px;">
+			<div class="barrat"><div class="g"><p class="tt">Sondaggio</p></div></div>
+			<input id="nomecognome" type="text" placeholder="Nome e Cognome" class="inser" style="width: 60%" onchange="controllanomec()">
 			<div id="sondaggio"  style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
 					<p style="margin: 1px; font-family: Arial; font-weight: 900">Organizzazione Intervento: </p>
@@ -762,9 +762,23 @@
 					<input type="radio" id="ese5" name="ese" value="5">
 					<label for="ese5" onclick="controllasondc()">5</label>
 				</div>
-				<p style="font-size:9pt;">Legenda:  1=Insoddisfacente   2=Scarso   3=Sufficiente   4=Buono   5=Ottimo</p>
+				<p style="font-size:9pt;">Legenda:  1=Insoddisfacente  2=Scarso  3=Sufficiente  4=Buono  5=Ottimo</p>
 			</div><br>
-			<button class="pulsante1" onclick="closeMenu()">Annulla</button>
+			<button class="pulsante" onclick="closeMenu()">Annulla</button>
+			<button class="pulsante" id="gofirmac" onclick="openMenu('firmac1')" disabled>Firma</button>
+			
+			<br><br>
+	</div>        
+</div>
+</div>
+
+
+<div class="ccc" id="sigc"><!--Firma Cliente-->
+	<div class="finestra" id="firmac1">
+			<div class="barrat"><div class="g"><p class="tt">Firma Cliente</p></div></div>
+			<canvas id="firmac" width="100" height="100" onpointerdown="controllafirmac()"></canvas>
+		
+			<button class="pulsante1" onclick="closeMenu();">Annulla</button>
 			<button id="erase2" class="pulsante1">Elimina Firma</button>
 			<button id="save2" class="pulsante1" disabled>Salva e Invia Scheda Lavoro</button>
 			
@@ -772,6 +786,8 @@
 	</div>        
 </div>
 </div>
+
+
 <!--Salvataggio-->
 <div id="risk" style="display: none"></div>
 <div id="salvataggio" style="display: none"></div>
@@ -818,6 +834,7 @@ $('#menuOre').draggable();
 $('#menuSU').draggable();
 $('#menuMail').draggable();
 $('#menurisk').draggable();
+$('#sond1a').draggable();
 
 function Upd(){
 	if(navigator.onLine){
