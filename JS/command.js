@@ -65,13 +65,17 @@ function openMenu(n){
 	var x=window.scrollX;
     var y=window.scrollY;
     window.onscroll=function(){window.scrollTo(x, y);}
-    if(n == 'firmac1'){init("firmac")};
+    if(n == 'firmac1'){init("firmac");abilitainvia1()};
     if(n == 'firmat1'){init("firmat")};
     if(n=='menuRapporto'){$('#rappl').focus()};
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
 	if(n=='menurisk'){};
+	if(n=='sond1a'){
+		$('#nomecognome').val($('#contnomec').text())
+		caricasond();
+	};
     var iu = $('#stdspe').text();
     if(iu=='SPE'){document.getElementById('manspe').checked = true};
 	$("#pagina *").attr("disabled", "disabled").off('click');
@@ -118,10 +122,6 @@ function closeMenu(){
 var canvas, ctx = false
 
 function init(h){
-	if(h=='firmac'){
-		$('#nomecognome').val($('#contnomec').text())
-		caricasond();
-	}
 	canvas=document.getElementById(h);
 	function resizeCanvas(){
 		$('#firmat1').css('margin-top',20)
