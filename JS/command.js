@@ -498,6 +498,14 @@ async function contEconf(){
 							transport.sendMail(mailOptionInt,(err,info)=>{
 								if(err){console.log(err);} else {
 									fs.unlinkSync(path + '\\' + file);
+									var filema = items.att2[1].filename;
+									$.get(path + '\\' + items.att2[1].filename,(d)=>{
+										var ref= firebase.storage().ref().child(require("os").userInfo().username + "/" + filema)
+										var ch = ref.getDownloadURL().then((url)=> {}).catch((err)=>{
+											ref.putString(d).then((snapshot)=> {
+											});
+										})								
+									})
 									contaSchede();
 								}
 							})
@@ -541,8 +549,8 @@ function preparaMail() {
 			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
 			path: nomef + '.pdf' // stream this file
 		},
-		"marco.fumagalli@epiroc.com",
-		"marco.arato@epiroc.com; mario.parravicini@epiroc.com; carlo.colombo@epiroc.com",
+		"marco.arato@epiroc.com", //"marco.fumagalli@epiroc.com",
+		"", //"marco.arato@epiroc.com; mario.parravicini@epiroc.com; carlo.colombo@epiroc.com",
 		"Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass(),
 		[{   // file on disk as an attachment
 			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
@@ -554,52 +562,6 @@ function preparaMail() {
 		}]
 		).then(contEconf(a))
 
-	/*
-	var transport = nodemailer.createTransport({
-		service: 'Gmail',
-		auth: {
-		  user: "episerjob@gmail.com",
-		  pass: "Epiroc2020"
-		}
-	});
-	var elenco = document.getElementsByClassName('mail');
-	var lista = "";
-	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +"; "}
-	const mailOption={
-		from:'episerjob@gmail.com',
-		to: lista, // list of receivers
-		subject: "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text(),
-		text: "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3),
-		attachments:{   // file on disk as an attachment
-			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
-			path: nomef + '.pdf' // stream this file
-		}		
-	}
-	transport.sendMail(mailOption,(err,info)=>{
-		if(err){console.log(err)} else {
-			const mailOptionInt={
-				from:'episerjob@gmail.com',
-				to: "marco.arato@epiroc.com", // list of receivers
-				subject: "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text(),
-				text: "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass(),
-				attachments:[{   // file on disk as an attachment
-					filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
-					path: nomef + '.pdf' // stream this file
-				},
-				{   // file on disk as an attachment
-					filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".ma",
-					path: nomef + '.ma' // stream this file
-				}]		
-			}
-			transport.sendMail(mailOptionInt,(err,info)=>{
-				if(err){console.log(err)} else {
-					var nomef1 = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
-					fs.rename(nomef + '.pdf', nomef1 + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
-					fs.rename(nomef + '.ma', nomef1 + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
-				}
-			})
-		}
-	})*/
 }
 
 //Filtra elenco macchine
