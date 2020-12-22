@@ -549,8 +549,8 @@ function preparaMail() {
 			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
 			path: nomef + '.pdf' // stream this file
 		},
-		"marco.arato@epiroc.com", //"marco.fumagalli@epiroc.com",
-		"", //"marco.arato@epiroc.com; mario.parravicini@epiroc.com; carlo.colombo@epiroc.com",
+		"marco.fumagalli@epiroc.com",
+		"marco.arato@epiroc.com; mario.parravicini@epiroc.com; carlo.colombo@epiroc.com",
 		"Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass(),
 		[{   // file on disk as an attachment
 			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
