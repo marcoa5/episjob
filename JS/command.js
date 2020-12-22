@@ -1106,7 +1106,7 @@ function aggiorna(){
 		$.each( data, function( key, val ) {
 			if(key=="name"){
 				if(val!==$('#upd').text().substring(1)){
-					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavvierÃƒÆ’  automaticamente...";
+					document.getElementById('message').innerText = "Download in corso. Al termine l'applicazione si riavviera'  automaticamente...";
 					document.getElementById('restart-button').classList.add('hidden');
 					document.getElementById('close-button').classList.add('hidden');
 					require("electron").remote.require("electron-download-manager").download({
