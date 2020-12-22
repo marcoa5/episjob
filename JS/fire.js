@@ -2,13 +2,14 @@ var firebase = require('firebase');
 var storage = require('firebase/firebase-storage');
 
 var firebaseConfig = {
-  apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
-  authDomain: "epi-s-job.firebaseapp.com",
-  databaseURL: "https://epi-s-job.firebaseio.com",
-  projectId: "epi-s-job",
-  storageBucket: "epi-s-job.appspot.com",
-  messagingSenderId: "32439813654",
-  appId: "1:32439813654:web:3d930228f8509fe2fb1737"
+    apiKey: "AIzaSyCUEh7I9hVCBNIqYTlw-GraIa_fwjcGQrA",
+    authDomain: "epi-service-job.firebaseapp.com",
+    databaseURL: "https://epi-service-job-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "epi-service-job",
+    storageBucket: "epi-service-job.appspot.com",
+    messagingSenderId: "604272791108",
+    appId: "1:604272791108:web:dd4e4325d527e064f03611",
+    measurementId: "G-RY0TXPGRSB"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -47,7 +48,7 @@ function aggiornacli(){
 }
 
 function aggiornacode(){
-  firebase.storage().ref('command.txt').getDownloadURL().then(function(url) {
+  firebase.storage().ref('command.js').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\js\\command.js", data);
 		})
@@ -58,7 +59,7 @@ function aggiornacode(){
 }
 
 function aggiornaSL(){
-  firebase.storage().ref('SL.txt').getDownloadURL().then(function(url) {
+  firebase.storage().ref('SL.html').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
       fs.writeFileSync(__dirname + "\\SL.html", data);
 	})
