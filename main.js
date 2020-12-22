@@ -125,7 +125,7 @@ let fesci = false;
 				{
 					label: 'DevTools',
 					icon: path.join(__dirname, "img/menu/dev.png"),					
-					enabled: true, 
+					enabled: false, 
 					accelerator: 'CmdOrCtrl+Shift+I', 
 					click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();},
 				}

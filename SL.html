@@ -820,7 +820,7 @@
 						<td onclick="pulisci()"><img src="img/comm.png" class="imgmenu" alt="ORe" height="20" width ="20"><br>Pulisci</td>
 				</tr>
 		</table>-->
-		<div id="unsent"></div>
+		<div id="unsentCount">Schede in uscita:   <span id="unsent"></span></div>
 		<span>|</span>
 		<div id="user"></div>
 		<span>|</span>
@@ -837,18 +837,21 @@ $('#menuOre').draggable();
 $('#menuSU').draggable();
 $('#menuMail').draggable();
 $('#menurisk').draggable();
-$('#sond1a').draggable();
 
 function Upd(){
-	if(navigator.onLine){
-		contaSchede();
-		contEconf();
-		aggiornamol();
-		aggiornacli();
-		aggiornatech();
-		//aggiornacode();
-		//aggiornaSL();
-	}	
+	contaSchede();
+	require('dns').lookup('google.com',(err)=> {
+        if (err && err.code == "ENOTFOUND") {
+			//console.log('Offline')
+        } else {
+			contEconf();
+			aggiornamol();
+			aggiornacli();
+			aggiornatech();
+			aggiornacode();
+			aggiornaSL();
+		}
+	})	
 }
 
 

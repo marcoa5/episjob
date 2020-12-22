@@ -842,13 +842,20 @@ text-align: center;
 }
 
 
-#upd, #user, #unsent {
+#upd, #user, #unsentCount {
 	float: right;
     background-color: none;
     font-family: Arial;
     font-size: 10px;
     font-weight: 900;
-    margin: 0 10px;
+    margin: 0 20px;
+}
+
+#unsent{
+    background-color: black;
+    color:white;
+    padding: 0 5px;
+    border-radius: 50%;
 }
 
 #notification {

@@ -18,7 +18,10 @@ function aggiornatech(){
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\tech.txt", data)
 		})
-  });
+  })
+  .catch(err=>{
+    console.log('ERROR: ' + err)
+  })
 }
 
 function aggiornamol(){
@@ -26,7 +29,10 @@ function aggiornamol(){
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\mol.txt", data)
 		})
-  });
+  })
+  .catch(err=>{
+    console.log('ERROR: ' + err)
+  })
 }
 
 function aggiornacli(){
@@ -34,7 +40,10 @@ function aggiornacli(){
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\customers.txt", data)
 		})
-  });
+  })
+  .catch(err=>{
+    console.log('ERROR: ' + err)
+  })
 }
 
 function aggiornacode(){
@@ -42,7 +51,10 @@ function aggiornacode(){
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\js\\command.js", data);
 		})
-  });
+  })
+  .catch(err=>{
+    console.log('ERROR: ' + err)
+  })
 }
 
 function aggiornaSL(){
@@ -50,5 +62,8 @@ function aggiornaSL(){
     $.get(url, (data)=> {
       fs.writeFileSync(__dirname + "\\SL.html", data);
 	})
-  });
+  })
+  .catch(err=>{
+    console.log('ERROR: ' + err)
+  })
 }

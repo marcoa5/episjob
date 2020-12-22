@@ -18,43 +18,56 @@ const pathfs = require('path');
 const os = require('os');
 
 function LoginList() {
-	var id = 'Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("YYYYMMDDHHmmss");
-	var uName = require("os").userInfo().username;
-	var aData = moment(new Date()).format("DD/MM/YYYY - HH:mm:ss");
-	var hName = require("os").hostname();
-	var aVer = remote.app.getVersion();
-  firebase.database().ref(id).set({
-	User: uName,
-    Data: aData,
-	hostname: hName,
-	AppVersion: aVer
-  });
+	require('dns').lookup('google.com',(err)=> {
+        if (err && err.code == "ENOTFOUND") {
+			//console.log('Offline')
+        } else {
+            var id = 'Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("YYYYMMDDHHmmss");
+			var uName = require("os").userInfo().username;
+			var aData = moment(new Date()).format("DD/MM/YYYY - HH:mm:ss");
+			var hName = require("os").hostname();
+			var aVer = remote.app.getVersion();
+				firebase.database().ref(id).set({
+				User: uName,
+				Data: aData,
+				hostname: hName,
+				AppVersion: aVer
+			});
+        }
+    })
+	
+
 }
 
 function UpFiles(){
-	/**/
-	  tmp.dir(function tep(err,path){
-		var gin = path.indexOf("tmp");
-			path = path.substring(0, gin) + "ServiceJob";
-			mkdirp(path, function(err) {
-				fs.readdir(path, function (err, files) {
-					if (err) {
-						return console.log('Unable to scan directory: ' + err);
-					}
-					files.forEach((file)=> {
-						if(file.substring(file.length-2) == "ma"){
-							$.get(path + "/" + file,(d)=>{
-								var ref= firebase.storage().ref().child(require("os").userInfo().username + "/" + file)
-								var ch = ref.getDownloadURL().then((url)=> {}).catch((err)=>{
-									ref.putString(d).then((snapshot)=> {
-									});
-								})								
-							})
+	require('dns').lookup('google.com',(err)=> {
+        if (err && err.code == "ENOTFOUND") {
+			//console.log('Offline')
+        } else {
+		tmp.dir(function tep(err,path){
+			var gin = path.indexOf("tmp");
+				path = path.substring(0, gin) + "ServiceJob";
+				mkdirp(path, function(err) {
+					fs.readdir(path, function (err, files) {
+						if (err) {
+							return console.log('Unable to scan directory: ' + err);
 						}
+						files.forEach((file)=> {
+							if(file.substring(file.length-2) == "ma"){
+								$.get(path + "/" + file,(d)=>{
+									var ref= firebase.storage().ref().child(require("os").userInfo().username + "/" + file)
+									var ch = ref.getDownloadURL().then((url)=> {}).catch((err)=>{
+										ref.putString(d).then((snapshot)=> {
+										});
+									})								
+								})
+							}
+						});
 					});
 				});
-			});
-	}) 
+		}) 
+	}
+})
 }
 
 function openMenu(n){
@@ -444,7 +457,7 @@ async function contaSchede(){
 		})
 	})
 	setTimeout(() => {
-		$('#unsent').text('Schede in uscita: ' + con)
+		$('#unsent').text(con)
 	}, 500);
 }
 
@@ -797,9 +810,9 @@ function aprifile(a){
 		$('#menuSU').draggable();
 		$('#menuMail').draggable();
 		closeMenu()
-	} else {
-		$.get(a, function(data) {
-			estraidati(JSON.parse(data));
+	} else if(a!=".") {
+		$.get(a, (dat)=> {
+			estraidati(JSON.parse(dat));
 			$('#modifiche').text("0");
 			$('#salvataggio').text(a);
 			$('#menuMatricola').draggable();
@@ -807,7 +820,7 @@ function aprifile(a){
 			$('#menuOre').draggable();
 			$('#menuSU').draggable();
 			$('#menuMail').draggable();
-        })
+		})
 	}
 }
 
@@ -829,27 +842,27 @@ function ver_pulisci(){
 }
 		
 function oggi(){
-	n =  new Date();
-	y = n.getFullYear();
-	m = n.getMonth() + 1;
-	d = n.getDate();
+	/*var n =  new Date();
+	var y = n.getFullYear();
+	var m = n.getMonth() + 1;
+	var d = n.getDate();*/
 	$('#data1').val(convdata(today()));	
 	var i=1;
 	$('#tec').html("");
-	$.get('.\\tech.txt', function(data) {
+	$.get('.//tech.txt', (data) =>{
 		var linee = data.split("\n");
-	var stringa= '<option value=""> </option>';
-	$('#tec').append(stringa);
-		$.each(linee, function(n, elem) {
-			var record = elem.split("_");
-			if(record[0]!==""){
-				var stringa= '<option value="' + record[0] + '">' + record[1] + '</option>';
-				$('#tec').append(stringa);
-				i++;
-			}
+		var stringa= '<option value=""> </option>';
+		$('#tec').append(stringa);
+			$.each(linee, function(n, elem) {
+				var record = elem.split("_");
+				if(record[0]!==""){
+					var stringa= '<option value="' + record[0] + '">' + record[1] + '</option>';
+					$('#tec').append(stringa);
+					i++;
+				}
+			});
+		controlladata();
 		});
-	controlladata();
-	});
 }
 
 function aggiungi() {
@@ -1402,7 +1415,7 @@ $( document ).ready(function(e) {
 	var chiave ="";
 	var colonne = [];
 	sprLib.user({'baseUrl': murl}).info()
-	.then(function(obj){
+	.then((obj)=>{
 		
 		var ch = obj.Email;
 		if(obj.Title!==undefined){
@@ -1412,6 +1425,9 @@ $( document ).ready(function(e) {
 		} else {
 			$('#user').text('External user');
 		}			
+	})
+	.catch(()=>{
+		$('#user').text('Offline');
 	});
 	sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
 	.then(function(arr,err){
