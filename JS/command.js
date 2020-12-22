@@ -1,3 +1,5 @@
+"use strict";
+
 var remote = require('electron').remote;
 var fs = require('fs');
 var mkdirp = require('mkdirp');
@@ -10,8 +12,10 @@ var moment = require("moment");
 var campi = [];
 var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
-require('winax');
 var firebase = require('firebase');
+const nodemailer = require('nodemailer');
+const pathfs = require('path');
+const os = require('os');
 
 function LoginList() {
 	var id = 'Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("YYYYMMDDHHmmss");
@@ -412,7 +416,7 @@ function printpdf (a) {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(path + "\\Scheda Lavoro.pdf", data)});
 				callback();
 			}
-			ma(path, function(){setTimeout(function(){send_mail(path)}, 3000)});
+			ma(path, ()=>{setTimeout(()=>{preparaMail()}, 3000)});
 		})
 	}else {
 		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
@@ -424,8 +428,77 @@ function printpdf (a) {
 	
 }
 
+async function createEconf(nomeF, subject, to1, body1,att1,to2, cc2, body2,att2){
+    var dati = [{subject: subject, to1 : to1, body1: body1, att1: att1, to2: to2, cc2: cc2, body2: body2, att2:att2}];
+    fs.writeFileSync(nomeF,JSON.stringify(dati))
+}
+
+async function contaSchede(){
+	var con = 0;
+	var path = os.tmpdir() + '\\ServiceJob';
+	fs.readdir(path, (err, files)=>{
+		files.forEach(file=>{
+			if(pathfs.extname(file)=='.econf'){
+				con+=1;
+			}
+		})
+	})
+	setTimeout(() => {
+		$('#unsent').text('Schede in uscita: ' + con)
+	}, 500);
+}
+
+async function contEconf(){
+	contaSchede();
+	require('dotenv').config();
+	var con = 0;
+	var path = os.tmpdir() + '\\ServiceJob';
+	var transport = nodemailer.createTransport({
+		service: 'Gmail',
+		auth: {
+		  user: "episerjob@gmail.com",
+		  pass: process.env.PWD
+		}
+	});
+	fs.readdir(path, (err, files)=>{
+		files.forEach(file=>{
+			if(pathfs.extname(file)=='.econf'){
+				$.get(path + '\\' + file, data=>{
+					var items =JSON.parse(data)[0]
+					const mailOption={
+						from:'Epiroc Service <episerjob@gmail.com>',
+						to: items.to1, 
+						subject: items.subject,
+						text: items.body1,
+						attachments: items.att1,
+					}
+					transport.sendMail(mailOption,(err,info)=>{
+						if(err){console.log(err);contaSchede()} else {
+							const mailOptionInt={
+								from:'Epiroc Service <episerjob@gmail.com>',
+								to: items.to2,
+								cc: items.cc2, // list of receivers
+								subject: items.subject,
+								text: items.body2,
+								attachments: items.att2	
+							}
+							transport.sendMail(mailOptionInt,(err,info)=>{
+								if(err){console.log(err);} else {
+									fs.unlinkSync(path + '\\' + file);
+									contaSchede();
+								}
+							})
+						}
+					})
+				})
+			}
+		})
+	})
+}
+
 //Invia Mail
-function send_mail(a) { 	
+function preparaMail() { 	
+	var a = os.tmpdir() + '\\ServiceJob'; 
 	var son = $('#rissondaggio').text();
 	if(son.substring(0,1)=="u"){
 		son = ""
@@ -437,37 +510,83 @@ function send_mail(a) {
     if($('#oss1').text()!=''){
         rap +=  "\n\nOsservazioni:\n" + $('#oss1').text();
 	}
-	
+		
 	var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
 	var nomef = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
+	
 	fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
 	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
-	setTimeout(()=>{
-		var objO = new ActiveXObject('Outlook.Application');     
-	var objNS = objO.GetNameSpace('MAPI');     
-	var mItm = objO.CreateItem(0);     
-	mItm.Display();   
-	//aggiunge gli indirizzi mail
+	var elenco = $('.mail');
+	var lista = "";
+	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +"; "}
+	
+	createEconf(nomef + ".econf",
+		"Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text(),
+		lista,
+		"In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3),
+		{   // file on disk as an attachment
+			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
+			path: nomef + '.pdf' // stream this file
+		},
+		"marco.arato@epiroc.com",
+		"marco.arato@epiroc.com",
+		"Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass(),
+		[{   // file on disk as an attachment
+			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
+			path: nomef + '.pdf' // stream this file
+		},
+		{   // file on disk as an attachment
+			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".ma",
+			path: nomef + '.ma' // stream this file
+		}]
+		).then(contEconf(a))
+
+	/*
+	var transport = nodemailer.createTransport({
+		service: 'Gmail',
+		auth: {
+		  user: "episerjob@gmail.com",
+		  pass: "Epiroc2020"
+		}
+	});
 	var elenco = document.getElementsByClassName('mail');
 	var lista = "";
 	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +"; "}
-	mItm.To = lista;
-	mItm.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
-	mItm.Body = "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3);
-	mItm.Attachments.Add(nomef + ".pdf");    
-	mItm.GetInspector.WindowState = 2;     
-	var mItm1 = objO.CreateItem(0);     
-	mItm1.Display();    
-	mItm1.To = 'marco.fumagalli@epiroc.com; carlo.colombo@epiroc.com; mario.parravicini@epiroc.com';
-	mItm1.CC = 'marco.arato@epiroc.com';
-	mItm1.Subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text();
-	mItm1.Body = "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass();
-	mItm1.Attachments.Add(nomef + ".pdf");
-	mItm1.Attachments.Add(nomef + ".ma");
-	mItm1.GetInspector.WindowState = 2;
-	mItm.send();
-	mItm1.send();
-	},1500)
+	const mailOption={
+		from:'episerjob@gmail.com',
+		to: lista, // list of receivers
+		subject: "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text(),
+		text: "In allegato scheda lavoro relativa all'intervento da noi effettuato.\nVi ringraziamo qualora abbiate aderito al nostro sondaggio."  + "\n\n\nRisultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3),
+		attachments:{   // file on disk as an attachment
+			filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
+			path: nomef + '.pdf' // stream this file
+		}		
+	}
+	transport.sendMail(mailOption,(err,info)=>{
+		if(err){console.log(err)} else {
+			const mailOptionInt={
+				from:'episerjob@gmail.com',
+				to: "marco.arato@epiroc.com", // list of receivers
+				subject: "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text(),
+				text: "Risultato sondaggio:\n\nOrganizzazione intervento: " + son.substring(0,1) + "\nConsegna Ricambi: " + son.substring(1,2) + "\nEsecuzione Intervento: " + son.substring(2,3) + rap + '\n\n\nRisk Assessment \n' + riskass(),
+				attachments:[{   // file on disk as an attachment
+					filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".pdf",
+					path: nomef + '.pdf' // stream this file
+				},
+				{   // file on disk as an attachment
+					filename: datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text() + ".ma",
+					path: nomef + '.ma' // stream this file
+				}]		
+			}
+			transport.sendMail(mailOptionInt,(err,info)=>{
+				if(err){console.log(err)} else {
+					var nomef1 = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
+					fs.rename(nomef + '.pdf', nomef1 + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
+					fs.rename(nomef + '.ma', nomef1 + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
+				}
+			})
+		}
+	})*/
 }
 
 //Filtra elenco macchine
@@ -1071,7 +1190,6 @@ function controllaindirizzi(){
 
 function controllafirme(){
 	var Mp = $('#nom').text()
-	console.log(Mp);
 	var ft = document.getElementById('firmatt1').getAttribute('src');
 	ft = ft.substring(ft.length - 9, ft.length);
 	const options = {
@@ -1228,10 +1346,10 @@ function coeffkm(){
 
 
 function temp(){
-	tmp.dir(function tep(err,path){
+	tmp.dir((err,path)=>{
 		var gin = path.indexOf("tmp");
-			path = path.substring(0, gin) + "ServiceJob";
-			mkdirp(path, function(err) {shell.openItem(path)});
+		path = path.substring(0, gin) + "ServiceJob";
+		mkdirp(path, function(err) {shell.openItem(path)});
 	})
 }
 
@@ -1559,3 +1677,4 @@ function chMatricola(){
 		$('#matricolas').val($('#myinput').val());
 	}
 }
+

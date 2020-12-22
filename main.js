@@ -13,7 +13,7 @@ const url = require('url');
 const shell = electron.shell;
 const { autoUpdater } = require('electron-updater');
 const DownloadManager = require("electron-download-manager");
- 
+
 DownloadManager.register({
     downloadFolder: app.getPath("downloads") + "\\my-app"
 });
@@ -125,7 +125,7 @@ let fesci = false;
 				{
 					label: 'DevTools',
 					icon: path.join(__dirname, "img/menu/dev.png"),					
-					enabled: false, 
+					enabled: true, 
 					accelerator: 'CmdOrCtrl+Shift+I', 
 					click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();},
 				}

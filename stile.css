@@ -29,6 +29,9 @@ body::after {
     transition: 0.7s;
     text-align: center;
     margin:0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .foglio{
@@ -839,18 +842,13 @@ text-align: center;
 }
 
 
-#upd, #user {
-    position: inline;
+#upd, #user, #unsent {
 	float: right;
-    top: 5px; right: 10px;
-    margin-right: 20px;
-	height: 10px;
     background-color: none;
     font-family: Arial;
     font-size: 10px;
     font-weight: 900;
-    text-align: right;
-    
+    margin: 0 10px;
 }
 
 #notification {

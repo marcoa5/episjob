@@ -42,17 +42,21 @@
   },
   "dependencies": {
     "asar": "^2.0.3",
+    "dotenv": "^8.2.0",
     "electron-download-manager": "^2.1.2",
     "electron-prompt": "^1.4.0",
     "electron-updater": "^4.2.0",
     "firebase": "^7.14.2",
     "fs-extra": "^8.1.0",
+    "handlebars": "^4.7.6",
+    "mailgun-js": "^0.22.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.26.0",
     "node": "^13.5.0",
+    "nodemailer": "^6.4.17",
+    "nodemailer-mailgun-transport": "^2.0.2",
     "sprestlib": "^1.9.0",
-    "websocket-extensions": "^0.1.4",
-    "winax": "^1.19.0"
+    "websocket-extensions": "^0.1.4"
   },
   "description": "service job",
   "repository": {
