@@ -37,11 +37,11 @@ body::after {
 .foglio{
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color:white;
     width: 21cm;
     height: 29.7cm;
-    box-shadow: 0px 0px 25px 0px black;
     transition: 0.2s;
+    border: 1px solid white;
 }
 
 .margini{ 
@@ -268,8 +268,12 @@ body::after {
 }
 
 @media not print {
-	.centro:hover, .dati:hover, .tabset:hover, #firmacc1:hover, #firmatt1:hover{
-		box-shadow: 0 0 20px 0 black, 0 0 20px 0 rgb(255,205,0);
+    .foglio{
+        box-shadow: 0px 0px 25px 0px black;
+    }
+    .centro:hover, .dati:hover, .tabset:hover, #firmacc1:hover, #firmatt1:hover{
+        box-shadow: 0 0 20px 0 black, 0 0 20px 0 rgb(255,205,0);
+        
 	}
 }
 
@@ -495,7 +499,7 @@ canvas{
     display: none;
     max-width: 500px;
 	margin-bottom:1000px;
-	margin-top: 40px;
+    margin-top: 40px;
 }
 .finestrai{
     overflow:auto;
@@ -668,6 +672,7 @@ label{
 @media print {
     body * {
       visibility: hidden;
+      
     }
     .foglio, .foglio * {
       visibility: visible;
@@ -967,7 +972,7 @@ input[type=email]:valid{
     background-color: rgb(66, 85, 99);
     border: 3px solid rgb(66, 85, 99);
     color: grey;
-    font-family: ARial;
+    font-family: Arial;
     font-weight: 900;
     cursor: pointer;
     border-radius: 10px;
@@ -982,4 +987,44 @@ input[type=email]:valid{
     background-color: rgb(255,205,0);
     color: rgb(66, 85, 99);
     opacity: 100%;
+}
+
+#notContainer{
+    position: fixed;
+    display: flex;
+    right: 5px;
+    top: 25px;
+    max-width: 600px;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index:1;
+}
+
+.not{
+    display:flex;
+    justify-content: flex-start;
+    width: 75%;
+    min-width: 250px;
+    max-width: 600px;
+    border: 1px solid rgb(66, 85, 99);
+    margin: 5px;
+    padding: 5px 10px;
+    background-color:rgb(255, 205,0);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    font-family: Arial;
+    color: rgb(66, 85, 99);
+    font-weight: 900; 
+    font-size: 60%;
+    box-shadow: 0 5px 10px black;
+    justify-content: space-between;   
+    align-items: center;
+    z-index: 5;
+}
+
+.pnot{
+    background-color: rgb(66, 85, 99);
+    color:rgb(255, 205,0);
+    border-radius: 50%;
+    padding: 0 5px;
 }
