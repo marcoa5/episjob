@@ -202,7 +202,7 @@ function update(){
 			fs.writeFileSync(path + '\\js\\fire.js', b)
 		})
 	})
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/SL.html")
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(path + '\\SL.html', b)
