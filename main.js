@@ -213,7 +213,7 @@ async function update(){
 
 
 app.on('ready', async () => {
-	update().then(console.log('updated'))
+	await update().then(console.log('updated'))
 	setTimeout(()=>{
 		createWindow()
 		autoUpdater.checkForUpdatesAndNotify()
