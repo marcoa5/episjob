@@ -139,7 +139,5 @@ async function callEmail(urlPdf, urlMa, nome){
 }
 
 function test(){
-	$.get('https://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js', data=>{
-		fs.writeFileSync('c:\\users\\iycma\\desktop\\command.js', data)
-	})
+	
 }
