@@ -121,7 +121,7 @@ async function callEmail(urlPdf, urlMa, nome){
 		t['urlPdf'] = urlPdf
 		t['urlMa'] = urlMa
 		t['fileN'] = n
-		const url = 'https://stormy-dusk-64800.herokuapp.com/mail'
+		const url = 'https://episjobreq.herokuapp.com/mail'
 		var request = $.ajax({
 			url: url,
 			type: 'GET',
