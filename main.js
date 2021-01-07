@@ -185,17 +185,22 @@ function createWindow () {
 function update(){
 
 	const path = 'c:\\users\\iycma\\desktop'
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
+	/*fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.unlink(path + '\\js\\command.js')
-			fs.writeFileSync(path + '\\js\\command.js', b)
+			fs.unlink(path + '\\js\\command.js',()=>{
+				fs.writeFileSync(path + '\\js\\command.js', b)
+			})
+			
 		})
-	})
+	})*/
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.unlink(path + '\\js\\mail.js',()=>{
+			console.log(b)
+		})
+	})
+			/*fs.unlink(path + '\\js\\mail.js',()=>{
 				fs.writeFileSync(path + '\\js\\mail.js', b)
 			})
 			
@@ -218,7 +223,7 @@ function update(){
 			})
 			
 		})
-	})
+	})*/
 }
 
 
