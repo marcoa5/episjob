@@ -182,30 +182,30 @@ function createWindow () {
 
 }
 
-async function update(){
-	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
+function update(){
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\command.js', b)
 		})
 	})
 
-	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\mail.js', b)
 		})
 	})
-	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\fire.js', b)
 		})
 	})
-	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.writeFileSync(__dirname + '\\sl.html', b)
+			fs.writeFileSync(__dirname + '\\SL.html', b)
 		})
 	})
 }
@@ -213,7 +213,7 @@ async function update(){
 
 
 app.on('ready', async () => {
-	await update().then(console.log('updated'))
+	await update()
 	setTimeout(()=>{
 		createWindow()
 		autoUpdater.checkForUpdatesAndNotify()
