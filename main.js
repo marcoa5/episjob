@@ -213,14 +213,7 @@ async function update(){
 
 
 app.on('ready', async () => {
-	var detectDebug = function() {
-		return process.env.NODE_ENV !== 'production';
-	};
-	if(!detectDebug){
-		update().then(console.log('Updated'))
-	} else {
-		console.log('Debug Mode: Not updated')
-	}
+	update().then(console.log('updated'))
 	setTimeout(()=>{
 		createWindow()
 		autoUpdater.checkForUpdatesAndNotify()
