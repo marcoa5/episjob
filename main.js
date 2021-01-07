@@ -183,8 +183,7 @@ function createWindow () {
 }
 
 function update(){
-
-	const path = 'c:\\users\\iycma\\desktop'
+	const path = __dirname
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
@@ -218,9 +217,6 @@ app.on('ready', async () => {
 	createWindow()
 	autoUpdater.checkForUpdatesAndNotify()	
 });
-
-//TEST
-
 
 ipc.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
