@@ -188,25 +188,35 @@ function update(){
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
+			fs.unlink(path + '\\js\\command.js')
 			fs.writeFileSync(path + '\\js\\command.js', b)
 		})
 	})
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.writeFileSync(path + '\\js\\mail.js', b)
+			fs.unlink(path + '\\js\\mail.js',()=>{
+				fs.writeFileSync(path + '\\js\\mail.js', b)
+			})
+			
 		})
 	})
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.writeFileSync(path + '\\js\\fire.js', b)
+			fs.unlink(path + '\\js\\fire.js',()=>{
+				fs.writeFileSync(path + '\\js\\fire.js', b)
+			})
+			
 		})
 	})
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.writeFileSync(path + '\\SL.html', b)
+			fs.unlink(path + '\\SL.html',()=>{
+				fs.writeFileSync(path + '\\SL.html', b)
+			})
+			
 		})
 	})
 }
