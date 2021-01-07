@@ -421,7 +421,7 @@ function printpdf (a) {
 		tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
 			if (err) throw err;
 			var gin = path.indexOf("tmp");
-			path = path.substring(0, gin) + "ServiceJob";
+			path = path.substring(0, gin) + "ServiceJobTemp";
 			mkdirp(path, function(err) {});
 			function ma(path, callback){
 				fs.writeFileSync(path + "\\Scheda Lavoro.ma", creasalvataggio());

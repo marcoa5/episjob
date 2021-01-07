@@ -7,7 +7,7 @@ async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss){
 
 async function contaSchede(){
 	var con = 0;
-	var path = os.tmpdir() + '\\ServiceJob';
+	var path = os.tmpdir() + '\\ServiceJobTemp';
 	fs.readdir(path, (err, files)=>{
 		files.forEach(file=>{
 			if(pathfs.extname(file)=='.econf'){
@@ -23,7 +23,7 @@ async function contaSchede(){
 async function contEconf(){
 	contaSchede();
 	require('dotenv').config();
-	var path = os.tmpdir() + '\\ServiceJob';
+	var path = os.tmpdir() + '\\ServiceJobTemp';
 	fs.readdir(path, (err, files)=>{
 		files.forEach(file=>{
 			if(pathfs.extname(file)=='.econf'){
@@ -66,7 +66,7 @@ async function contEconf(){
 
 //Invia Mail
 function preparaMail() { 	
-	var a = os.tmpdir() + '\\ServiceJob'; 
+	var a = os.tmpdir() + '\\ServiceJobTemp'; 
 	var son = $('#rissondaggio').text();
 	if(son.substring(0,1)=="u"){
 		son = ""
@@ -129,6 +129,8 @@ async function callEmail(urlPdf, urlMa, nome){
 			contentType: 'application/json; charset=utf-8',
 			success: res=>{
 				fs.unlinkSync(nome + '.econf')
+				fs.renameSync(nome + '.pdf', os.tmpdir() + '\\ServiceJob\\' + n + '.pdf')
+				fs.renameSync(nome + '.ma', os.tmpdir() + '\\ServiceJob\\' + n + '.ma')
 				contaSchede()
 				Notif(res)
 			}
@@ -137,5 +139,7 @@ async function callEmail(urlPdf, urlMa, nome){
 }
 
 function test(){
-	Notif('ciao')
+	$.get('https://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js', data=>{
+		fs.writeFileSync('c:\\users\\iycma\\desktop\\command.js', data)
+	})
 }

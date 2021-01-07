@@ -13,6 +13,7 @@ const url = require('url');
 const shell = electron.shell;
 const { autoUpdater } = require('electron-updater');
 const DownloadManager = require("electron-download-manager");
+const fe = require('node-fetch')
 
 DownloadManager.register({
     downloadFolder: app.getPath("downloads") + "\\my-app"
@@ -181,11 +182,43 @@ function createWindow () {
 
 }
 
+function update(){
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(__dirname + '\\js\\command.js', b)
+		})
+	})
+
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(__dirname + '\\js\\mail.js', b)
+		})
+	})
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(__dirname + '\\js\\fire.js', b)
+		})
+	})
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/sl.html")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(__dirname + '\\sl.html', b)
+		})
+	})
+}
+
 
 
 app.on('ready', () => {
-  createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+	var detectDebug = function() {
+		return process.env.NODE_ENV !== 'production';
+	};
+	if(!detectDebug){update()} else { console.log('Debug Mode: Not updated')}
+	createWindow();
+	autoUpdater.checkForUpdatesAndNotify();
 });
 
 //TEST

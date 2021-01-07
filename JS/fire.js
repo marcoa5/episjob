@@ -46,7 +46,7 @@ function aggiornacli(){
   })
 }
 
-function aggiornacode(){
+/*function aggiornacode(){
   firebase.storage().ref('command.js').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\js\\command.js", data);
@@ -66,4 +66,4 @@ function aggiornaSL(){
   .catch(err=>{
     console.log('ERROR: ' + err)
   })
-}
+}*/
