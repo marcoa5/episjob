@@ -183,28 +183,24 @@ function createWindow () {
 }
 
 function update(){
+
+	const path = 'c:\\users\\iycma\\desktop'
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.writeFileSync(__dirname + '\\js\\command.js', b)
-			fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
-			.then(a=>{
-				a.text().then(b=>{
-					fs.writeFileSync(__dirname + '\\js\\mail.js', b)
-					fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
-					.then(a=>{
-						a.text().then(b=>{
-							fs.writeFileSync(__dirname + '\\js\\fire.js', b)
-							fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
-							.then(a=>{
-								a.text().then(b=>{
-									fs.writeFileSync(__dirname + '\\SL.html', b)
-								})
-							})
-						})
-					})
-				})
-			})
+			fs.writeFileSync(path + '\\js\\command.js', b)
+		})
+	})
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(path + '\\js\\mail.js', b)
+		})
+	})
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(path + '\\js\\fire.js', b)
 		})
 	})
 }
