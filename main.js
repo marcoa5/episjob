@@ -182,27 +182,27 @@ function createWindow () {
 
 }
 
-function update(){
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
+async function update(){
+	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\command.js', b)
 		})
 	})
 
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
+	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\mail.js', b)
 		})
 	})
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
+	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\fire.js', b)
 		})
 	})
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/sl.html")
+	await fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\sl.html', b)
@@ -212,13 +212,20 @@ function update(){
 
 
 
-app.on('ready', () => {
+app.on('ready', async () => {
 	var detectDebug = function() {
 		return process.env.NODE_ENV !== 'production';
 	};
-	if(!detectDebug){update()} else { console.log('Debug Mode: Not updated')}
-	createWindow();
-	autoUpdater.checkForUpdatesAndNotify();
+	if(!detectDebug){
+		update().then(console.log('Updated'))
+	} else {
+		console.log('Debug Mode: Not updated')
+	}
+	setTimeout(()=>{
+		createWindow()
+		autoUpdater.checkForUpdatesAndNotify()
+	},500)
+	
 });
 
 //TEST
