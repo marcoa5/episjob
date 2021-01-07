@@ -185,45 +185,30 @@ function createWindow () {
 function update(){
 
 	const path = 'c:\\users\\iycma\\desktop'
-	/*fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/command.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.unlink(path + '\\js\\command.js',()=>{
-				fs.writeFileSync(path + '\\js\\command.js', b)
-			})
-			
+			fs.writeFileSync(path + '\\js\\command.js', b)
 		})
-	})*/
+	})
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
 	.then(a=>{
 		a.text().then(b=>{
-			console.log(b)
-		})
-	})
-			/*fs.unlink(path + '\\js\\mail.js',()=>{
-				fs.writeFileSync(path + '\\js\\mail.js', b)
-			})
-			
+			fs.writeFileSync(path + '\\js\\mail.js', b)
 		})
 	})
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.unlink(path + '\\js\\fire.js',()=>{
-				fs.writeFileSync(path + '\\js\\fire.js', b)
-			})
-			
+			fs.writeFileSync(path + '\\js\\fire.js', b)
 		})
 	})
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/SL.html")
 	.then(a=>{
 		a.text().then(b=>{
-			fs.unlink(path + '\\SL.html',()=>{
-				fs.writeFileSync(path + '\\SL.html', b)
-			})
-			
+			fs.writeFileSync(path + '\\SL.html', b)
 		})
-	})*/
+	})
 }
 
 
