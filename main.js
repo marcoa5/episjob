@@ -187,25 +187,24 @@ function update(){
 	.then(a=>{
 		a.text().then(b=>{
 			fs.writeFileSync(__dirname + '\\js\\command.js', b)
-		})
-	})
-
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
-	.then(a=>{
-		a.text().then(b=>{
-			fs.writeFileSync(__dirname + '\\js\\mail.js', b)
-		})
-	})
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
-	.then(a=>{
-		a.text().then(b=>{
-			fs.writeFileSync(__dirname + '\\js\\fire.js', b)
-		})
-	})
-	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
-	.then(a=>{
-		a.text().then(b=>{
-			fs.writeFileSync(__dirname + '\\SL.html', b)
+			fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/mail.js")
+			.then(a=>{
+				a.text().then(b=>{
+					fs.writeFileSync(__dirname + '\\js\\mail.js', b)
+					fe("http://raw.githubusercontent.com/marcoa5/episjob/master/JS/fire.js")
+					.then(a=>{
+						a.text().then(b=>{
+							fs.writeFileSync(__dirname + '\\js\\fire.js', b)
+							fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
+							.then(a=>{
+								a.text().then(b=>{
+									fs.writeFileSync(__dirname + '\\SL.html', b)
+								})
+							})
+						})
+					})
+				})
+			})
 		})
 	})
 }
@@ -214,11 +213,8 @@ function update(){
 
 app.on('ready', async () => {
 	await update()
-	setTimeout(()=>{
-		createWindow()
-		autoUpdater.checkForUpdatesAndNotify()
-	},500)
-	
+	createWindow()
+	autoUpdater.checkForUpdatesAndNotify()	
 });
 
 //TEST
