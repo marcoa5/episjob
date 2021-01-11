@@ -10,12 +10,11 @@ var moment = require("moment");
 var campi = [];
 var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
-var firebase = require('firebase');
 const pathfs = require('path');
 const os = require('os');
 
 
-function LoginList() {
+/*function LoginList() {
 	
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
@@ -34,9 +33,7 @@ function LoginList() {
 			});
         }
     })
-	
-
-}
+}*/
 
 function UpFiles(){
 	require('dns').lookup('google.com',(err)=> {
@@ -152,11 +149,12 @@ function init(h){
 	//window.onresize = resizeCanvas;
 	resizeCanvas();
 	var signaturePad = new SignaturePad(canvas, {});
-	var er, sa, fi = false
+	var er, sa, fi,se = false
 	if(h=="firmat"){
 		er = "erase1";
 		sa = "save1";
 		fi = "firmatt1"
+		if($('#userS')){$('#save1').attr('disabled',false)}
 	} else if(h=="firmac"){
 		er = "erase2";
 		sa = "save2";
@@ -164,7 +162,6 @@ function init(h){
 	}
 	document.getElementById(er).addEventListener('click', function () {
 		signaturePad.clear();
-		$('#' + sa).attr("disabled", true);
 		$('#' + fi).attr('src', "./img/white.png");
 		$('#contfirmac').text('');		
 	});
@@ -176,7 +173,9 @@ function init(h){
 			closeMenu();
 			controllafirme();
 		} else if(h=="firmat"){
-			document.getElementById("firmatt1").src = dataURL;
+			$('#userS').text(dataURL);
+			writeSign(dataURL);
+			$('#firmatt1').attr('src', dataURL);
 			closeMenu();
 		} else {
 		}
@@ -699,6 +698,7 @@ function oggi(){
 					i++;
 				}
 			});
+		setTech();
 		controlladata();
 		});
 }
@@ -1250,7 +1250,7 @@ $(document).keyup(function(e){
 
 
 $( document ).ready(function(e) {
-	var chiave ="";
+	/*var chiave ="";
 	var colonne = [];
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
@@ -1271,7 +1271,7 @@ $( document ).ready(function(e) {
 				$('#user').text('External User')
 			});
 		}
-	})
+	})*/
 	sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
 	.then(function(arr,err){
 		if(arr==""){
@@ -1537,3 +1537,8 @@ function chMatricola(){
 	}
 }
 
+function setTech(){
+	var NC = $('#userN').text().toUpperCase() + ' ' + $('#userC').text().toUpperCase()
+	console.log(NC)
+	$('#tec').val("ANDREA LAINI")
+}

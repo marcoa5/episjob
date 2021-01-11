@@ -1028,3 +1028,114 @@ input[type=email]:valid{
     border-radius: 50%;
     padding: 0 5px;
 }
+
+.login{
+    position: fixed;top:0;left:0;
+    width:100%;height:100%;
+    background-color: lightgrey;
+    z-index: 1200;
+    display:flex;
+    justify-content: center;
+}
+
+.form{
+    background-color: rgb(66, 85, 99);
+    box-shadow: 0 0 20px 0 rgb(66, 85, 99);
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formH{
+    font-weight: 800;
+    color: rgb(255, 205,0)
+}
+
+.formB{
+    width: 60%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+}
+.inputLogin,.inputPass{
+    text-align: left;
+    padding: 0 10px;
+    background-color: rgb(255, 205,0);
+    height: 20px;
+    font-weight: 800;
+}
+
+.inputLogin{
+    width:100%;   
+    margin: 0 0px;
+}
+
+.inputPass{
+    width:100%;
+}
+
+.labelLogin{
+    margin: 20px 0 0 0;
+    color: rgb(66, 85, 99);
+    font-size: 70%;
+}
+
+.divPass{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.eye{
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.logBody{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    background-color: white;
+    height:100%;
+}
+
+.loginBut{
+    margin: 30px 0;
+    width: 100%;
+}
+
+.loginPulsante{
+    width: 50%;
+    margin: 30px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(66,85,99);
+    border-radius: 10px;
+    padding: 3px;
+    font-weight: 800;
+    font-size: 7pt;  
+    border-style: no;
+    cursor: pointer; 
+	background-color: rgb(255,205,0) ;
+    color: rgb(66,85,99) ;
+}
+
+.loginPulsante:hover{
+    background-color: rgb(66, 85, 99);
+    color: rgb(255, 205,0);
+}
+
+.loginPulsante:disabled{
+    background-color: rgb(66, 85, 99);
+    color: lightgrey;
+}
+
+.warn{
+    color: white;
+    font-weight: 800;
+    font-size: 60%;
+}

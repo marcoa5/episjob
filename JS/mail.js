@@ -1,7 +1,7 @@
 const { unlink } = require('fs-extra');
 
-async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss){
-    var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss}];
+async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
+    var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
     fs.writeFileSync(nomeF,JSON.stringify(dati))
 }
 
@@ -22,7 +22,6 @@ async function contaSchede(){
 
 async function contEconf(){
 	contaSchede();
-	require('dotenv').config();
 	var path = os.tmpdir() + '\\ServiceJobTemp';
 	fs.readdir(path, (err, files)=>{
 		files.forEach(file=>{

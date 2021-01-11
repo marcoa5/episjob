@@ -126,7 +126,7 @@ let fesci = false;
 				{
 					label: 'DevTools',
 					icon: path.join(__dirname, "img/menu/dev.png"),					
-					enabled: false, 
+					enabled: true, 
 					accelerator: 'CmdOrCtrl+Shift+I', 
 					click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();},
 				}
@@ -151,7 +151,7 @@ let fesci = false;
   ])
   
 
-function createWindow () {
+async function createWindow () {
   // Crea la finestra del browser
   win = new BrowserWindow({
     width: 1200,
@@ -162,17 +162,13 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+
+
+win.loadFile('SL.html')
+Menu.setApplicationMenu(menu)
+win.maximize();
   
-  
-  
-  // e carica l'index.html dell'app.
-  win.loadFile('SL.html');
-  Menu.setApplicationMenu(menu);
-  win.maximize();
-  
-  
-  
-	win.on('close', function(e){
+	win.on('close', e=>{
 		if(!fesci){
 			e.preventDefault();
 			e.sender.send('escisalva')
@@ -251,6 +247,10 @@ ipc.on('attmenu', function(){
 	menu.items[3].submenu.items[1].enabled=true;
 })
 
+async function getUser(){
+	var userConf = require('path').join(require('os').homedir(), 'documents', 'ServiceJobConfig', 'user.conf')
+	return fs.readFileSync(userConf, 'utf-8')
+}
 
 
 

@@ -777,6 +777,7 @@
 </div>
 
 
+
 <div class="ccc" id="sigc"><!--Firma Cliente-->
 	<div class="finestra" id="firmac1">
 			<div class="barrat"><div class="g"><p class="tt">Firma Cliente</p></div></div>
@@ -831,10 +832,44 @@
 		<div id="upd"></div>
 		
 </div>
+<div style="display:none">
+	<div id="userN"></div>
+	<div id="userC"></div>
+	<div id="userM"></div>
+	<div id="userP"></div>
+	<div id="userS"></div>	
+</div>
+
+<div class="login" id="logCont">
+	<div class="form">
+		<div class="formH">
+			<h1>Login</h1>
+		</div>
+		<div class="logBody">
+			<div class="formB">
+			<label for="usermail" class="labelLogin">E-mail:</label>
+			<input id="usermail" class="inputLogin" type="text" onkeyup="able()">
+			<label for="pass" class="labelLogin">Password</label>
+			<div class="divPass">
+				<input id="pass" class="inputPass" type="password" onkeyup="able()">
+				<img class="eye" src="img/login/on.svg" width="20px" height="20px" onclick="hideP()">
+			</div>
+			<p class="warn">Autenticazione Fallita</p>
+			<div class="loginBut">
+				<button class="loginPulsante" onclick="loginFire()" disabled>Login</button>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
 
 </body>
 
 <script>
+$('#salva').hide()
+chLogin()
 $('#menuMatricola').draggable();
 $('#menuRapporto').draggable();
 $('#menuOre').draggable();
@@ -902,7 +937,7 @@ $('body').on('mousewheel', function(event) {
 	}
 });
 
-setTimeout(()=>LoginList(),3000);
+//setTimeout(()=>LoginList(),3000);
 //UpFiles();
 	
 </script>

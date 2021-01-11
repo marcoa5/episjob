@@ -1,6 +1,8 @@
 var firebase = require('firebase');
-var storage = require('firebase/firebase-storage');
-
+var a = require('firebase/storage');
+var auth = require('firebase/auth');
+var da = require('firebase/database');
+const { error } = require('console');
 var firebaseConfig = {
   apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
   authDomain: "epi-s-job.firebaseapp.com",
@@ -12,6 +14,7 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 
 function aggiornatech(){
   firebase.storage().ref('techupd.txt').getDownloadURL().then(function(url) {
@@ -46,24 +49,84 @@ function aggiornacli(){
   })
 }
 
-/*function aggiornacode(){
-  firebase.storage().ref('command.js').getDownloadURL().then(function(url) {
-    $.get(url, (data)=> {
-			fs.writeFileSync(__dirname + "\\js\\command.js", data);
-		})
+var eye = true
+
+function hideP(){
+  if(eye){
+    $('.eye').attr('src','img/login/off.svg')
+    $('#pass').attr('type', 'text')
+    eye=!eye
+  } else {
+    $('.eye').attr('src','img/login/on.svg')
+    $('#pass').attr('type', 'password')
+    eye=!eye
+  }
+}
+
+function able(){
+  var mail = $('#usermail').val()
+  var pass = $('#pass').val()
+  if(mail && pass){
+    $('.loginPulsante').prop('disabled', false)
+  } else {
+    $('.loginPulsante').attr('disabled', true)
+  }
+}
+
+function loginFire(){
+  var mail = $('#usermail').val()
+  var pass = $('#pass').val()
+  firebase.auth().signInWithEmailAndPassword(mail,pass)
+  .then(a=>{
+    $('#salva').show()
+    $('#logCont').hide()
+    getUserData(a.user.uid)
   })
   .catch(err=>{
-    console.log('ERROR: ' + err)
+    console.error(err.message)
+    $('.warn').css('color', 'red')
+  })
+  
+}
+
+function getUserData(id){
+  firebase.default.database().ref('Users/' + id).once('value',data=>{
+    var a = data.val()
+    if(a.Sign){var si = a.Sign} else {var si = ''}
+    var info = {Nome: a.Nome, Cognome: a.Cognome, Mail:a.Mail, Pos:a.Pos, Sign:si}
+    var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+    fs.writeFileSync(path, JSON.stringify(info))
+    $('#user').text(info.Nome + ' ' + info.Cognome)
+    writeUserData(a.Nome,a.Cognome,a.Mail,a.Pos,a.Sign)
   })
 }
 
-function aggiornaSL(){
-  firebase.storage().ref('SL.html').getDownloadURL().then(function(url) {
-    $.get(url, (data)=> {
-      fs.writeFileSync(__dirname + "\\SL.html", data);
-	})
+function chLogin(){
+  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+  require('fs').readFile(path, 'utf-8',(a,b)=>{
+    if (a) throw error
+    $('.login').hide()
+    $('#salva').show()
+    var c = JSON.parse(b)
+    writeUserData(c.Nome,c.Cognome,c.Mail,c.Pos,c.Sign)
   })
-  .catch(err=>{
-    console.log('ERROR: ' + err)
-  })
-}*/
+}
+
+function writeUserData(N,C,M,P,S){
+  $('#userN').text(N)
+  $('#userC').text(C)
+  $('#userP').text(P)
+  $('#userM').text(M)
+  $('#userS').text(S)
+  if(S){$('#firmatt1').attr('src',S)}
+  $('#user').text(N +' ' +C)
+}
+
+function writeSign(sig){
+  var c
+  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+  var a = require('fs').readFileSync(path, 'utf-8')
+  var b = JSON.parse(a)
+  b.Sign = sig
+  require('fs').writeFileSync(path, JSON.stringify(b))
+}
