@@ -114,11 +114,16 @@ function getUserData(id){
 function chLogin(){
   var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
   require('fs').readFile(path, 'utf-8',(a,b)=>{
-    if (a) throw error
-    $('.login').hide()
-    $('#salva').show()
-    var c = JSON.parse(b)
-    writeUserData(c.Nome,c.Cognome,c.Mail,c.Pos,c.Sign)
+    if (a) {
+      $('.login').show()
+      $('#salva').hide()
+    } else {
+      $('.login').hide()
+      $('#salva').show()
+      var c = JSON.parse(b)
+      writeUserData(c.Nome,c.Cognome,c.Mail,c.Pos,c.Sign)
+    }
+    
   })
 }
 
