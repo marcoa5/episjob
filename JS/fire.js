@@ -133,6 +133,8 @@ function writeUserData(N,C,M,P,S){
   $('#userP').text(P)
   $('#userM').text(M)
   $('#userS').text(S)
+  var a = N + ' ' + C
+  if(a=="Marco Arato" | a=="Marco Fumagalli" | a=="Nicolo Tuppo" | a=="Mario Parravicini" | a=="Carlo Colombo"){ipcRenderer.send('attmenu');}
   if(S){$('#firmatt1').attr('src',S)}
   $('#user').text(N +' ' +C)
 }
