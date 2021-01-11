@@ -1036,7 +1036,6 @@ input[type=email]:valid{
     z-index: 1200;
     display:flex;
     justify-content: center;
-    visibility: hidden;
 }
 
 .form{
