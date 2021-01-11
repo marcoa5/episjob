@@ -140,3 +140,7 @@ function writeSign(sig){
   b.Sign = sig
   require('fs').writeFileSync(path, JSON.stringify(b))
 }
+
+function goOn(e){
+  if(e.key =='Enter'){loginFire()}
+}

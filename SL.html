@@ -848,10 +848,10 @@
 		<div class="logBody">
 			<div class="formB">
 			<label for="usermail" class="labelLogin">E-mail:</label>
-			<input id="usermail" class="inputLogin" type="text" onkeyup="able()">
+			<input id="usermail" class="inputLogin" type="text" onkeyup="able(); goOn(event)">
 			<label for="pass" class="labelLogin">Password</label>
 			<div class="divPass">
-				<input id="pass" class="inputPass" type="password" onkeyup="able()">
+				<input id="pass" class="inputPass" type="password" onkeyup="able(); goOn(event)">
 				<img class="eye" src="img/login/on.svg" width="20px" height="20px" onclick="hideP()">
 			</div>
 			<p class="warn">Autenticazione Fallita</p>
