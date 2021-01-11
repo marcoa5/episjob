@@ -1,5 +1,3 @@
-const { unlink } = require('fs-extra');
-
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
     var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
     fs.writeFileSync(nomeF,JSON.stringify(dati))
@@ -93,7 +91,10 @@ function preparaMail() {
     var son2 = son.substring(1,2)
     var son3  =son.substring(2,3)
 	var rAss = riskass()
-	createEconf(nomeL,subject, to1, son1, son2, son3,rap, rAss)
+	var userN = $('#userN').text()
+	var userC= $('#userC').text()
+	var userM = $('#userM').text()
+	createEconf(nomeL,subject, to1, son1, son2, son3,rap, rAss, userN, userC,userM)
 	.then(contEconf(a))
 }
 
