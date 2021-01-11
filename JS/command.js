@@ -1537,8 +1537,13 @@ function chMatricola(){
 	}
 }
 
-function setTech(){
+async function setTech(){
 	var NC = $('#userN').text().toUpperCase() + ' ' + $('#userC').text().toUpperCase()
-	console.log(NC)
-	$('#tec').val("ANDREA LAINI")
+	var options = $('#tec option')
+	var o = await $.map(options,(a)=>{
+		return(a.value)
+	})
+	if(NC.indexOf(o)){
+		$('#tec').val(NC)
+	}
 }
