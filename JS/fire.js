@@ -75,15 +75,15 @@ function able(){
 
 function loginFire(){
   var dir1= require('path').join(require('os').homedir(),'Documents','ServiceJobConfig')
-  if(!require('fs').existsSync(dir1)){require('fs').mkdir(dir1)}
+  if(!require('fs').existsSync(dir1)){require('fs').mkdirSync(dir1)}
 
   var dir2 = os.tmpdir() + '\\ServiceJobTemp'
-  if(!require('fs').existsSync(dir2)){require('fs').mkdir(dir2)}
+  if(!require('fs').existsSync(dir2)){require('fs').mkdirSync(dir2)}
 
   var dir3 = os.tmpdir() + '\\ServiceJob'
-  if(!require('fs').existsSync(dir3)){require('fs').mkdir(dir3)}
+  if(!require('fs').existsSync(dir3)){require('fs').mkdirSync(dir3)}
 
-  
+
   var mail = $('#usermail').val()
   var pass = $('#pass').val()
   firebase.auth().signInWithEmailAndPassword(mail,pass)
