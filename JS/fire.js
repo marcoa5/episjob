@@ -4,13 +4,14 @@ var auth = require('firebase/auth');
 var da = require('firebase/database');
 const { error } = require('console');
 var firebaseConfig = {
-  apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
-  authDomain: "epi-s-job.firebaseapp.com",
-  databaseURL: "https://epi-s-job.firebaseio.com",
-  projectId: "epi-s-job",
-  storageBucket: "epi-s-job.appspot.com",
-  messagingSenderId: "32439813654",
-  appId: "1:32439813654:web:3d930228f8509fe2fb1737"
+  apiKey: "AIzaSyCUEh7I9hVCBNIqYTlw-GraIa_fwjcGQrA",
+    authDomain: "epi-service-job.firebaseapp.com",
+    databaseURL: "https://epi-service-job-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "epi-service-job",
+    storageBucket: "epi-service-job.appspot.com",
+    messagingSenderId: "604272791108",
+    appId: "1:604272791108:web:dd4e4325d527e064f03611",
+    measurementId: "G-RY0TXPGRSB"
 };
 
 firebase.initializeApp(firebaseConfig);
