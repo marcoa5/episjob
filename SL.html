@@ -832,7 +832,7 @@
 		<div id="upd"></div>
 		
 </div>
-<div style="display:none">
+<div style="display: none;">
 	<div id="userN"></div>
 	<div id="userC"></div>
 	<div id="userM"></div>
@@ -856,7 +856,7 @@
 			</div>
 			<p class="warn">Autenticazione Fallita</p>
 			<div class="loginBut">
-				<button class="loginPulsante" onclick="loginFire()" disabled>Login</button>
+				<button class="loginPulsante" onclick="fireLogin()" disabled>Login</button>
 			</div>
 		</div>
 		
@@ -869,7 +869,8 @@
 
 <script>
 $('#salva').hide()
-chLogin()
+$('#logCont').hide()
+login()
 $('#menuMatricola').draggable();
 $('#menuRapporto').draggable();
 $('#menuOre').draggable();

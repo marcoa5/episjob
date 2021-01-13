@@ -50,6 +50,7 @@ function aggiornacli(){
 }
 
 var eye = true
+var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
 
 function hideP(){
   if(eye){
@@ -73,6 +74,83 @@ function able(){
   }
 }
 
+function goOn(e){
+  if(e.key =='Enter'){fireLogin()}
+}
+
+function User(Nome, Cognome, Mail, Pos, Sign){
+  this.Nome = Nome
+  this.Cognome = Cognome
+  this.Mail = Mail
+  this.Pos = Pos
+  this.Sign = Sign
+  this.NomeL = Nome + ' ' + Cognome
+}
+
+function login(){
+  var dir1= require('path').join(require('os').homedir(),'Documents','ServiceJobConfig')
+  if(!require('fs').existsSync(dir1)){require('fs').mkdirSync(dir1)}
+
+  var dir2 = os.tmpdir() + '\\ServiceJobTemp'
+  if(!require('fs').existsSync(dir2)){require('fs').mkdirSync(dir2)}
+
+  var dir3 = os.tmpdir() + '\\ServiceJob'
+  if(!require('fs').existsSync(dir3)){require('fs').mkdirSync(dir3)}
+
+  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+  require('fs').readFile(path, 'utf-8',(a,b)=>{
+    if (a) {
+      console.log(a)
+      $('#logCont').show()
+    } else {
+      $('#salva').show()
+      readConf()
+    }
+  })
+}
+
+function fireLogin(){
+  var mail = $('#usermail').val()
+  var pass = $('#pass').val()
+  firebase.default.auth().signInWithEmailAndPassword(mail,pass)
+  .then(a=>{
+    $('#logCont').hide()
+    $('#salva').show()
+    readRealTimeDB(a.user.uid)
+  })
+}
+
+function readRealTimeDB(id){
+  firebase.default.database().ref('Users/' + id).once('value',async snapshot=>{
+    var v= snapshot.val()
+    await writeConf(v)
+    readConf()
+  })
+}
+
+function writeConf(user){
+  require('fs').writeFileSync(path, JSON.stringify(user))
+}
+
+function readConf(){
+  var user = JSON.parse(require('fs').readFileSync(path, 'utf-8')) 
+  Object.keys(user).forEach(key=>{
+    $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
+  })
+  $('#user').text(`${user.Nome} ${user.Cognome}`)
+}
+
+function writeSign(sig){
+  var c
+  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+  var a = require('fs').readFileSync(path, 'utf-8')
+  var b = JSON.parse(a)
+  b.Sign = sig
+  require('fs').writeFileSync(path, JSON.stringify(b))
+}
+
+
+/*
 function loginFire(){
   var dir1= require('path').join(require('os').homedir(),'Documents','ServiceJobConfig')
   if(!require('fs').existsSync(dir1)){require('fs').mkdirSync(dir1)}
@@ -150,4 +228,4 @@ function writeSign(sig){
 
 function goOn(e){
   if(e.key =='Enter'){loginFire()}
-}
+}*/

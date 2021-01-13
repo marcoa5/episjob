@@ -134,7 +134,7 @@ function closeMenu(){
 
 var canvas, ctx = false
 
-function init(h){
+async function init(h){
 	canvas=document.getElementById(h);
 	function resizeCanvas(){
 		$('#firmat1').css('margin-top',20)
@@ -180,7 +180,10 @@ function init(h){
 		} else {
 		}
 	});  
+	if(fi=='firmatt1') await $('#firmatt1').attr('src',$('#userS').text())
 	canvas.getContext("2d").drawImage(document.getElementById(fi),0,0,canvas.width,canvas.height);
+
+	
 }
 
 function salvadati(){
