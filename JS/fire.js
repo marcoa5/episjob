@@ -1,17 +1,17 @@
 var firebase = require('firebase');
-var a = require('firebase/storage');
+var storage = require('firebase/storage');
 var auth = require('firebase/auth');
-var da = require('firebase/database');
+var database = require('firebase/database');
 const { error } = require('console');
-var firebaseConfig = {
-  apiKey: "AIzaSyCUEh7I9hVCBNIqYTlw-GraIa_fwjcGQrA",
-    authDomain: "epi-service-job.firebaseapp.com",
-    databaseURL: "https://epi-service-job-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "epi-service-job",
-    storageBucket: "epi-service-job.appspot.com",
-    messagingSenderId: "604272791108",
-    appId: "1:604272791108:web:dd4e4325d527e064f03611",
-    measurementId: "G-RY0TXPGRSB"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
+  authDomain: "epi-s-job.firebaseapp.com",
+  databaseURL: "https://epi-s-job.firebaseio.com",
+  projectId: "epi-s-job",
+  storageBucket: "epi-s-job.appspot.com",
+  messagingSenderId: "32439813654",
+  appId: "1:32439813654:web:3d930228f8509fe2fb1737"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -79,15 +79,6 @@ function goOn(e){
   if(e.key =='Enter'){fireLogin()}
 }
 
-function User(Nome, Cognome, Mail, Pos, Sign){
-  this.Nome = Nome
-  this.Cognome = Cognome
-  this.Mail = Mail
-  this.Pos = Pos
-  this.Sign = Sign
-  this.NomeL = Nome + ' ' + Cognome
-}
-
 function login(){
   var dir1= require('path').join(require('os').homedir(),'Documents','ServiceJobConfig')
   if(!require('fs').existsSync(dir1)){require('fs').mkdirSync(dir1)}
@@ -123,11 +114,14 @@ function fireLogin(){
 }
 
 function readRealTimeDB(id){
-  firebase.default.database().ref('Users/' + id).once('value',async snapshot=>{
+  firebase.database().ref('Users/' + id).once('value')
+  .then(async snapshot=>{
     var v= snapshot.val()
-    console.log(v);
     await writeConf(v)
     readConf()
+  })
+  .catch(err=>{
+    console.log(err)
   })
 }
 
