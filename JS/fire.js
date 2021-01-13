@@ -137,7 +137,9 @@ function readConf(){
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
-  $('#user').text(`${user.Nome} ${user.Cognome}`)
+  var a = `${user.Nome} ${user.Cognome}`
+  if(a=="Marco Arato" | a=="Marco Fumagalli" | a=="Nicolo Tuppo" | a=="Mario Parravicini" | a=="Carlo Colombo"){ipcRenderer.send('attmenu');}
+  $('#user').text(a)
 }
 
 function writeSign(sig){
