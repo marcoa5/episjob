@@ -26,7 +26,7 @@ async function contEconf(){
 			if(pathfs.extname(file)=='.econf'){
 				var nome = file.substring(0,file.length - 6)
 				var nomeL = path + '\\' + nome
-				var user = `${user.Nome} ${user.Cognome}`
+				var user = `${$('#userN').text()} ${$('#userC').text()}`
 				var refpdf = firebase.storage().ref().child(user + '/' + nome + '.pdf')
 				var refma = firebase.storage().ref().child(user +'/' + nome + '.ma')
 				fetch(nomeL + '.pdf')
