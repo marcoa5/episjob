@@ -119,6 +119,7 @@ function fireLogin(){
     $('#logCont').hide()
     $('#salva').show()
     readRealTimeDB(a.user.uid)
+    console.log(a.user.uid)
   })
 }
 
