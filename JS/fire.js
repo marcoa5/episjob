@@ -119,13 +119,13 @@ function fireLogin(){
     $('#logCont').hide()
     $('#salva').show()
     readRealTimeDB(a.user.uid)
-    console.log(a.user.uid)
   })
 }
 
 function readRealTimeDB(id){
   firebase.default.database().ref('Users/' + id).once('value',async snapshot=>{
     var v= snapshot.val()
+    console.log(v)
     await writeConf(v)
     readConf()
   })
