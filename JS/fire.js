@@ -125,7 +125,7 @@ function fireLogin(){
 function readRealTimeDB(id){
   firebase.default.database().ref('Users/' + id).once('value',async snapshot=>{
     var v= snapshot.val()
-    console.log(v)
+    console.log(v);
     await writeConf(v)
     readConf()
   })
