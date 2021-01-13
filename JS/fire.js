@@ -102,6 +102,7 @@ function login(){
     if (a) {
       console.log(a)
       $('#logCont').show()
+      $('#logCont').css('display', 'flex')
     } else {
       $('#salva').show()
       readConf()

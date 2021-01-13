@@ -180,7 +180,7 @@ async function init(h){
 		} else {
 		}
 	});  
-	if(fi=='firmatt1') await $('#firmatt1').attr('src',$('#userS').text())
+	if(fi=='firmatt1' && $('#userS').text()) await $('#firmatt1').attr('src',$('#userS').text())
 	canvas.getContext("2d").drawImage(document.getElementById(fi),0,0,canvas.width,canvas.height);
 
 	
