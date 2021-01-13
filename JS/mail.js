@@ -99,7 +99,8 @@ function preparaMail() {
 	.then(contEconf(a))
 }
 
-async function Notif(to){
+async function Notif(to1){
+	var to = to1.replace("; ", " ")
 	var i = 5;
 	var len = $('div', $('#notContainer')).length+1;
 	var wo = moment(new Date()).format("YYYYMMDDHHmmss") + Math.round(Math.random()*100)
