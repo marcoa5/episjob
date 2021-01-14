@@ -111,8 +111,8 @@ function fireLogin(){
     $('#salva').show()
     readRealTimeDB(a.user.uid)
   })
-  .catch(err=>{
-    console.error(err.message)
+  .catch(error=>{
+    console.error(error.message)
     $('.warn').css('color', 'red')
   })
 }
