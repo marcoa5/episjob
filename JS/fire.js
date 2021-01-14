@@ -1,7 +1,7 @@
 var firebase = require('firebase');
-var storage = require('firebase/storage');
-var auth = require('firebase/auth');
-var database = require('firebase/database');
+require('firebase/storage');
+require('firebase/auth');
+require('firebase/database');
 const { error } = require('console');
 
 var firebaseConfig = {
