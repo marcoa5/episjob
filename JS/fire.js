@@ -5,13 +5,13 @@ require('firebase/database');
 const { error } = require('console');
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCKS9waoMAR6NjpDZIMeaL4GezqqGgvxRs",
-  authDomain: "epi-s-job.firebaseapp.com",
-  databaseURL: "https://epi-s-job.firebaseio.com",
-  projectId: "epi-s-job",
-  storageBucket: "epi-s-job.appspot.com",
-  messagingSenderId: "32439813654",
-  appId: "1:32439813654:web:3d930228f8509fe2fb1737"
+  apiKey: "AIzaSyBtO5C1bOO70EL0IPPO-BDjJ40Kb03erj4",
+  authDomain: "epi-serv-job.firebaseapp.com",
+  databaseURL: "https://epi-serv-job-default-rtdb.firebaseio.com",
+  projectId: "epi-serv-job",
+  storageBucket: "epi-serv-job.appspot.com",
+  messagingSenderId: "793133030101",
+  appId: "1:793133030101:web:a79f477c42cb9e0a53a05c"
 };
 
 firebase.initializeApp(firebaseConfig);
