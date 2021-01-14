@@ -1043,7 +1043,7 @@ function controllaindirizzi(){
 }
 
 function controllafirme(){
-	var Mp = $('#nom').text()
+	var Mp = $('#userN').text()
 	var ft = document.getElementById('firmatt1').getAttribute('src');
 	ft = ft.substring(ft.length - 9, ft.length);
 	const options = {
