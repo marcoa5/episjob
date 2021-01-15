@@ -134,8 +134,8 @@ function readConf(){
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
-  var a = `${user.Nome} ${user.Cognome}`
-  if(a=="Marco Arato" | a=="Marco Fumagalli" | a=="Nicolo Tuppo" | a=="Mario Parravicini" | a=="Carlo Colombo"){ipcRenderer.send('attmenu');}
+  var a = $('#userP')
+  if(a=='admin' || a=='SU'){ipcRenderer.send('attmenu');}
   $('#user').text(a)
 }
 

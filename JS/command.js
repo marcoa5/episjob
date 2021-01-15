@@ -1365,7 +1365,7 @@ function addsp(){
 				type: 'error',
 				buttons: ['OK'],
 				title: 'Errore',
-				message: 'Sondaggio giÃƒÆ’  presente in SP',
+				message: 'Sondaggio gia’  presente in SP',
 				};
 				dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 			}
