@@ -50,6 +50,16 @@ function aggiornacli(){
   })
 }
 
+function aggiornamails(){
+  var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
+  firebase.default.database().ref('mails/' + $('#user').text()).once('value', (snap)=>{
+    if(snap.val()!=null) require('fs').writeFileSync(path1, snap.val())
+  })
+  .catch(err=>{
+    if (err) throw error
+  })
+}
+
 var eye = true
 var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
 
@@ -138,6 +148,8 @@ function readConf(){
   var a = $('#userP').text()
   if(a=='admin' || a=='SU'){ipcRenderer.send('attmenu');}
   $('#user').text(`${$('#userN').text()} ${$('#userC').text()}`)
+  aggiornamails()
+  caricaMails()
 }
 
 function writeSign(sig){

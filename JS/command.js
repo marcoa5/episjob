@@ -79,7 +79,8 @@ function openMenu(n){
     var y=window.scrollY;
     window.onscroll=function(){window.scrollTo(x, y);}
     if(n == 'firmac1'){init("firmac");abilitainvia1()};
-    if(n == 'firmat1'){init("firmat")};
+	if(n == 'firmat1'){init("firmat")};
+	if(n=='manuMail'){caricaMails()}
     if(n=='menuRapporto'){$('#rappl').focus()};
     if(n=='menuOre'){oggi()};
 	if(n=='menuSU'){openSU()};
@@ -982,7 +983,7 @@ function nuovamail(a,b){
 		document.getElementById('indmail').focus();
 		var elem = document.getElementsByClassName('mail');
 		//a();
-		b();
+		if(typeof(b)==='function')	b();
 	} else {
 		const options = {
 		type: 'error',

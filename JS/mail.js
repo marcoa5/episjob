@@ -1,19 +1,30 @@
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
     var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
-	require('fs').writeFileSync(nomeF,JSON.stringify(dati))
 	addMail(to1)
+	require('fs').writeFileSync(nomeF,JSON.stringify(dati))
+	
 }
 
 var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
 
 async function addMail(to){
+	console.log(to)
+	var a = ''
 	if(require('fs').existsSync(path1)){
-		var a = await require('fs').readFileSync(path1,'utf-8')
-		var nuovo = a + to
-		require('fs').writeFileSync(path1,nuovo)
+		a = await require('fs').readFileSync(path1,'utf-8').replace(' ','').replace(' ','')
+		var c = a.split(';')
+		var h = to.replace(' ','').split(';')
+		for(i in h){
+			if(c.indexOf(h[i])==-1){a+=h[i] + ';'}
+		}		
+		require('fs').writeFileSync(path1,a.replace(' ',''))
 	} else {
-		require('fs').writeFileSync(path1,to)
+		a=to
+		require('fs').writeFileSync(path1,a.replace(' ',''))
 	}
+	firebase.default.database().ref('mails/' + $('#user').text()).set(a.replace(' ',''))
+	.catch(err=>
+		console.log(err))
 }
 
 async function contaSchede(){
@@ -97,7 +108,7 @@ function preparaMail() {
 	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
 	var elenco = $('.mail');
 	var lista = "";
-	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +"; "}
+	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +";"}
     var nomeL = nomef + ".econf"
     var subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
     var to1 = lista
