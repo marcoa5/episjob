@@ -211,6 +211,12 @@ function update(){
 			fs.writeFileSync(path + '\\js\\listaEmail.js', b)
 		})
 	})
+	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/stile.css")
+	.then(a=>{
+		a.text().then(b=>{
+			fs.writeFileSync(path + '\\stile.css', b)
+		})
+	})
 	fe("http://raw.githubusercontent.com/marcoa5/episjob/master/SL.html")
 	.then(a=>{
 		a.text().then(b=>{
