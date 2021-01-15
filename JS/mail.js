@@ -1,6 +1,19 @@
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
     var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
-    fs.writeFileSync(nomeF,JSON.stringify(dati))
+	require('fs').writeFileSync(nomeF,JSON.stringify(dati))
+	addMail(to1)
+}
+
+var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
+
+async function addMail(to){
+	if(require('fs').existsSync(path1)){
+		var a = await require('fs').readFileSync(path1,'utf-8')
+		var nuovo = a + to
+		require('fs').writeFileSync(path1,nuovo)
+	} else {
+		require('fs').writeFileSync(path1,to)
+	}
 }
 
 async function contaSchede(){

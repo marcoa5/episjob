@@ -10,6 +10,7 @@
 	<script src="js/command.js"></script>
 	<script src="js/sign.js"></script>
 	<script src="js/fire.js"></script>
+	<script src="js/listaEmail.js"></script>
 	<script src="js/jqueryui.js"></script>
     <script>if (window.module) module = window.module;</script>
     <script>const { dialog } = require('electron').remote;</script>
@@ -549,8 +550,9 @@
 <div class="ccc"><!--Email-->    
 	<div class="finestra" id="menuMail">
 			<div class="barrat"><div class="g"></div><p class="tt">Indirizzi Mail</p></div>
-			<div class="finestrai">
-					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" required><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
+			<div class="container">
+					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" onkeyup="listaEmail(event)" required><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
+					<div id="listaMai"></div>	
 					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
 			</div>
 			<button class="pulsante" onclick="closeMenu()">Annulla</button>
@@ -889,6 +891,7 @@
 </body>
 
 <script>
+$('#listaMai').hide()
 $('#salva').hide()
 $('#logCont').hide()
 login()
