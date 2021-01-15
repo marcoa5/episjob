@@ -10,7 +10,7 @@
     "deploy": "electron-builder build --win --publish always"
   },
   "build": {
-    "asar": true,
+    "asar": false,
     "appId": "sjma",
     "mac": {
       "category": "your.app.category.type"
