@@ -394,35 +394,36 @@
 <div name="finestre">
 <div class="ccc" ><!--SU-->
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
-	<div class="finestra" id="menuSU">
-					<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
-					<div class="finestrai">
-						<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
-						<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
-						<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
-						<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
-						<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
-						<!--<div style="border: 3px solid rgb(66, 85, 99); border-radius: 20px; width: 70%; padding: 20px; margin: 0 auto;">
-							<input id="susrcomponente" class="inser" placeholder="Seriale Componente..."> 
-							<input id="sucomponente" class="inser" placeholder="Componente..."> 
-							<div class="radiobtn">
-								<p style="margin: 5px; font-family: Arial; font-weight: 900">Tipo di  documento: </p>
-								<input type="radio" id="suext" name="doc" value="EXT" checked>
-								<label for="suext" style="font-size: 10px;">EXT</label>
-								<input type="radio" id="suoff" name="doc" value="OFF">
-								<label for="suoff"  style="font-size: 10px;">OFF</label><br><br>
-								
-							</div>
-							<input id="sunomefile" class="inser" placeholder="Nome file..."><br><br>
-							<button class="pulsante" onclick="">Carica in archivio</button>
-						</div>
-						<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
+<div class="finestra" id="menuSU">
+			<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
+			<div class="finestrai">
+				<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
+				<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
+				<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
+				<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
+				<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
+				<!--<div style="border: 3px solid rgb(66, 85, 99); border-radius: 20px; width: 70%; padding: 20px; margin: 0 auto;">
+					<input id="susrcomponente" class="inser" placeholder="Seriale Componente..."> 
+					<input id="sucomponente" class="inser" placeholder="Componente..."> 
+					<div class="radiobtn">
+						<p style="margin: 5px; font-family: Arial; font-weight: 900">Tipo di  documento: </p>
+						<input type="radio" id="suext" name="doc" value="EXT" checked>
+						<label for="suext" style="font-size: 10px;">EXT</label>
+						<input type="radio" id="suoff" name="doc" value="OFF">
+						<label for="suoff"  style="font-size: 10px;">OFF</label><br><br>
+						
 					</div>
-					<br>
-					<button class="pulsante" onclick="closeMenu()">Annulla</button>
-					<button class="pulsante" onclick="closeSU()">Ok</button>
-					<br><br><br>
-			</div> 
+					<input id="sunomefile" class="inser" placeholder="Nome file..."><br><br>
+					<button class="pulsante" onclick="">Carica in archivio</button>
+				</div>
+				<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
+			</div>
+			<br>
+			<button class="pulsante" onclick="closeMenu()">Annulla</button>
+			<button class="pulsante" onclick="closeSU()">Ok</button>
+			<br><br><br>
+</div>
+</div> 
 		<div class="finestra" id="menuMatricola">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
 				<div class="finestrai">
@@ -814,6 +815,26 @@
 </div>
 </div>
 </div>
+
+<div class="ccc" ><!--UserAdmin-->
+<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
+<div class="finestra" id="UserAdmin">
+			<div class="barrat"><div class="g"></div><p class="tt">Users</p></div>
+			<div class="finestrai">
+				<div id="listaUtenti"></div>
+				<!--<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
+				<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
+				<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
+				<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
+				<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>-->
+			</div>
+			<br>
+			<button class="pulsante" onclick="closeMenu()">Annulla</button>
+			<button class="pulsante" onclick="closeSU()">Ok</button>
+			<br><br><br>
+</div>
+</div> 
+
 <!--barra gialla in alto-->
 <div id="menuA" class="menu">
 		<!--<table id="tabmenu">
@@ -924,7 +945,8 @@ ipcRenderer.on('escisalva', function(){controllamodifiche('esci', function(){rem
 ipcRenderer.on('km', function(){coeffkm()});
 ipcRenderer.on('arch', function(){temp()});
 ipcRenderer.on('print', function(){stampa()})
-ipcRenderer.on('su', function(){adminmenu()})
+ipcRenderer.on('su', function(){openMenu('menuSU')})
+ipcRenderer.on('UsersAdmin', function(){openMenu('UserAdmin')})
 ipcRenderer.on('vecchi', function(){vecchi()})
 
 var data = ipcRenderer.sendSync('get-file-data');

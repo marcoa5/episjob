@@ -1419,10 +1419,6 @@ function stampa(){
 })
 }
 
-function adminmenu(){
-	openMenu('menuSU');
-}
-
 function creasalvataggio(){
 	var s = {};
 	s[$('#commessa1').attr('id')] = $('#commessa1').text();
