@@ -109,7 +109,7 @@ function fireLogin(){
   .then(a=>{
     $('#logCont').hide()
     $('#salva').show()
-    readRealTimeDB(a.user.uid)
+    readRealTimeDB(a.user.uid, a.user.email)
   })
   .catch(error=>{
     console.error(error.message)
@@ -117,9 +117,10 @@ function fireLogin(){
   })
 }
 
-function readRealTimeDB(id){
+function readRealTimeDB(id, eMail){
   firebase.default.database().ref('Users/' + id).once('value', async snapshot=>{
     var v= snapshot.val();
+    v.Mail = eMail
     await writeConf(v)
     readConf()
   })
@@ -134,9 +135,9 @@ function readConf(){
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
-  var a = $('#userP')
+  var a = $('#userP').text()
   if(a=='admin' || a=='SU'){ipcRenderer.send('attmenu');}
-  $('#user').text(a)
+  $('#user').text(`${$('#userN').text()} ${$('#userC').text()}`)
 }
 
 function writeSign(sig){
@@ -147,84 +148,3 @@ function writeSign(sig){
   b.Sign = sig
   require('fs').writeFileSync(path, JSON.stringify(b))
 }
-
-
-/*
-function loginFire(){
-  var dir1= require('path').join(require('os').homedir(),'Documents','ServiceJobConfig')
-  if(!require('fs').existsSync(dir1)){require('fs').mkdirSync(dir1)}
-
-  var dir2 = os.tmpdir() + '\\ServiceJobTemp'
-  if(!require('fs').existsSync(dir2)){require('fs').mkdirSync(dir2)}
-
-  var dir3 = os.tmpdir() + '\\ServiceJob'
-  if(!require('fs').existsSync(dir3)){require('fs').mkdirSync(dir3)}
-
-
-  var mail = $('#usermail').val()
-  var pass = $('#pass').val()
-  firebase.auth().signInWithEmailAndPassword(mail,pass)
-  .then(a=>{
-    $('#salva').show()
-    $('#logCont').hide()
-    getUserData(a.user.uid)
-  })
-  .catch(err=>{
-    console.error(err.message)
-    $('.warn').css('color', 'red')
-  })
-  
-}
-
-function getUserData(id){
-  firebase.default.database().ref('Users/' + id).once('value',data=>{
-    var a = data.val()
-    if(a.Sign){var si = a.Sign} else {var si = ''}
-    var info = {Nome: a.Nome, Cognome: a.Cognome, Mail:a.Mail, Pos:a.Pos, Sign:si}
-    var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
-    fs.writeFileSync(path, JSON.stringify(info))
-    $('#user').text(info.Nome + ' ' + info.Cognome)
-    writeUserData(a.Nome,a.Cognome,a.Mail,a.Pos,a.Sign)
-  })
-}
-
-function chLogin(){
-  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
-  require('fs').readFile(path, 'utf-8',(a,b)=>{
-    if (a) {
-      $('.login').show()
-      $('#salva').hide()
-    } else {
-      $('.login').hide()
-      $('#salva').show()
-      var c = JSON.parse(b)
-      writeUserData(c.Nome,c.Cognome,c.Mail,c.Pos,c.Sign)
-    }
-    
-  })
-}
-
-function writeUserData(N,C,M,P,S){
-  $('#userN').text(N)
-  $('#userC').text(C)
-  $('#userP').text(P)
-  $('#userM').text(M)
-  $('#userS').text(S)
-  var a = N + ' ' + C
-  if(a=="Marco Arato" | a=="Marco Fumagalli" | a=="Nicolo Tuppo" | a=="Mario Parravicini" | a=="Carlo Colombo"){ipcRenderer.send('attmenu');}
-  if(S){$('#firmatt1').attr('src',S)}
-  $('#user').text(N +' ' +C)
-}
-
-function writeSign(sig){
-  var c
-  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
-  var a = require('fs').readFileSync(path, 'utf-8')
-  var b = JSON.parse(a)
-  b.Sign = sig
-  require('fs').writeFileSync(path, JSON.stringify(b))
-}
-
-function goOn(e){
-  if(e.key =='Enter'){loginFire()}
-}*/

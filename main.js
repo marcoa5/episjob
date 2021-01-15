@@ -113,6 +113,13 @@ let fesci = false;
 					click(){win.webContents.send('su')}, 
 					accelerator: 'CmdOrCtrl+Shift+U'
 				},
+				{
+					label:'SuperUser Menu', 
+					icon: path.join(__dirname, "img/menu/admin.png"), 
+					enabled: false, 
+					click(){win.webContents.send('UsersAdmin')}, 
+					accelerator: 'CmdOrCtrl+Shift+A'
+				},
 			]
 		},
 		{label: 'Impostazioni', 
@@ -126,7 +133,7 @@ let fesci = false;
 				{
 					label: 'DevTools',
 					icon: path.join(__dirname, "img/menu/dev.png"),					
-					enabled: true, 
+					enabled: false, 
 					accelerator: 'CmdOrCtrl+Shift+I', 
 					click: function(item, focusedWindow) {if (focusedWindow) focusedWindow.toggleDevTools();},
 				}
@@ -243,6 +250,7 @@ ipc.on('get-file-data', function(event) {
 
 ipc.on('attmenu', function(){
 	menu.items[1].submenu.items[4].enabled=true;
+	menu.items[1].submenu.items[5].enabled=true;
 	menu.items[2].submenu.items[1].enabled=true;
 	menu.items[3].submenu.items[1].enabled=true;
 })
