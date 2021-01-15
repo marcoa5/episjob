@@ -1,6 +1,6 @@
 {
   "name": "ServiceJob",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -10,7 +10,7 @@
     "deploy": "electron-builder build --win --publish always"
   },
   "build": {
-    "asar": false,
+    "asar": true,
     "appId": "sjma",
     "mac": {
       "category": "your.app.category.type"
