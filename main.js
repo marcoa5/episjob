@@ -228,7 +228,7 @@ function update(){
 
 
 app.on('ready', async () => {
-	await update()
+	// await update()
 	createWindow()
 	autoUpdater.checkForUpdatesAndNotify()	
 });
@@ -262,9 +262,12 @@ ipc.on('get-file-data', function(event) {
 
 ipc.on('attmenu', function(){
 	menu.items[1].submenu.items[4].enabled=true;
-	menu.items[1].submenu.items[5].enabled=true;
 	menu.items[2].submenu.items[1].enabled=true;
 	menu.items[3].submenu.items[1].enabled=true;
+})
+
+ipc.on('attSU', function(){
+	menu.items[1].submenu.items[5].enabled=true;
 })
 
 async function getUser(){

@@ -1,3 +1,8 @@
+const { get } = require('http');
+const { allowedNodeEnvironmentFlags } = require('process');
+var utenti=[]
+const url = 'https://episjobreq.herokuapp.com/'
+
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
     var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
 	addMail(to1)
@@ -147,9 +152,8 @@ async function callEmail(urlPdf, urlMa, nome){
 		t['urlPdf'] = urlPdf
 		t['urlMa'] = urlMa
 		t['fileN'] = n
-		const url = 'https://episjobreq.herokuapp.com/mail'
 		var request = $.ajax({
-			url: url,
+			url: url + 'mail/',
 			type: 'GET',
 			data: jQuery.param(t) ,
 			contentType: 'application/json; charset=utf-8',
@@ -166,4 +170,102 @@ async function callEmail(urlPdf, urlMa, nome){
 
 function test(){
 	readConf()
+}
+
+function getUsers(){
+	utenti=[]
+	$('#listaUtenti').html('')
+	$('#listaUtenti').append('<div id="nUtente"></div>')
+	$('#nUtente').append('<p class="userTesto">Nuovo Utente</p>')
+	$('#nUtente').append('<div id="nuovoUtente"></div>')
+	$('#nuovoUtente').append('<input id="uNome" type="text" placeholder="Nome" onkeyup="chComp()">')
+	$('#nuovoUtente').append('<input id="uCognome" type="text" placeholder="Cognome" onkeyup="chComp()">')
+	$('#nuovoUtente').append('<input id="uMail" type="text" placeholder="email" onkeyup="chComp()">')
+	$('#nuovoUtente').append('<select id="uPos"  onkeyup="chComp()" onchange="chComp()"><option></option><option>tech</option><option>admin</option></select>')
+	$('#nUtente').append('<div id="userButton"></div>')
+	$('#userButton').append('<button class="pulsante" style="width: 40%;" onclick="userClean()">Pulisci</button>')
+	$('#userButton').append('<button id="userAddBut" class="pulsante" style="width: 40%;" onclick="userAdd(event)">Aggiungi</button>')
+	$('#userAddBut').prop('disabled',true)
+	$('#nUtente').append('<p class="userTesto" style="margin: 20px 0 0 0;">Utenti Attivi</p>')
+	$('#listaUtenti').append('<div id="ff"></div>')
+	$('#ff').append('<br><table class="tabUtenti" id="tabUtenti"></table>')
+	$('#tabUtenti').append('<th>Nome</th><th>Cognome</th><th>Ruolo</th><th colspan=2>Mail</th><th>Elimina</th>')
+	$.get(url + 'getusers', (data,err)=>{
+		if(err) console.log(err)
+		data.forEach(a=>{
+			var info = $.ajax({
+				url: url + 'getuserinfo',
+				type: 'GET',
+				data: jQuery.param({id: a.uid}),
+				success: res=>{
+					utenti.push({uid: a.uid, mail: a.email, nome: res.Nome, cognome:res.Cognome, pos:res.Pos})
+					if (utenti.length==data.length){
+						utenti.forEach(ut=>{
+							if(ut.pos!='SU'){
+								$('#tabUtenti').append('<tr><td>'+ut.nome+'</td><td>'+ut.cognome+'</td><td>'+ut.pos+'</td><td colspan=2>' + ut.mail + '</td><td><button class="pulsante" onclick="userDel(\'' + ut.uid + '\')">E</button></td></tr>')
+							}
+						})
+					}
+				}
+			})
+		})
+	})
+}
+
+function userClean(){
+	$('#uNome').val('')
+	$('#uCognome').val('')
+	$('#uMail').val('')
+	$('#uPos').val('')
+	$('#userAddBut').text('Aggiungi')
+	$('#userAddBut').prop('disabled',true)
+}
+
+function userAdd(e){
+	var p = {Nome: $('#uNome').val(), Cognome:$('#uCognome').val(),Mail:$('#uMail').val(),Pos:$('#uPos').val()}
+	$.ajax({
+		url: url + 'createuser',
+		type: 'GET',
+		data: jQuery.param(p),
+		success: res=>{
+			getUsers()
+		}
+	})	
+}
+
+function chComp(){
+	var a = $('#uNome').val()
+	var b = $('#uCognome').val()
+	var c = $('#uMail').val()
+	var d = $('#uPos').val()
+	if(a=='' || b=='' || c=='' || d==''){
+		$('#userAddBut').prop('disabled',true)
+	} else {
+		$('#userAddBut').prop('disabled',false)
+	}
+}
+
+function userDel(a){
+	utenti.find((item,i)=>{
+		if(item.uid==a){
+			const options = {
+				type: 'question',
+				buttons: ['No', 'Si'],
+				title: 'Eliminazione',
+				message: `Vuoi eliminare ${item.nome} ${item.cognome}?`,
+				noLink: true,
+			};
+			var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
+			if(sc==1){
+				console.log(url + 'delete')
+			$.get(url + 'delete', {id:a})
+			.done(()=>{
+				getUsers()
+			})
+			.fail((e)=>{
+				console.log(e)
+			})
+			}
+		}
+	})
 }

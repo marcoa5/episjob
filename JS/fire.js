@@ -146,7 +146,8 @@ function readConf(){
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
   var a = $('#userP').text()
-  if(a=='admin' || a=='SU'){ipcRenderer.send('attmenu');}
+  if(a=='admin'){ipcRenderer.send('attmenu');}
+  if(a=='SU'){ipcRenderer.send('attmenu');ipcRenderer.send('attSU');}
   $('#user').text(`${$('#userN').text()} ${$('#userC').text()}`)
   aggiornamails()
   caricaMails()
