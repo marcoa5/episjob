@@ -13,7 +13,6 @@ async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN
 var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
 
 async function addMail(to){
-	console.log(to)
 	var a = ''
 	if(require('fs').existsSync(path1)){
 		a = await require('fs').readFileSync(path1,'utf-8').replace(' ','').replace(' ','')
@@ -146,14 +145,30 @@ async function Notif(to1){
 
 
 async function callEmail(urlPdf, urlMa, nome){
+	var urlp=url + 'mail/'
+	const options = {
+		type: 'question',
+		buttons: ['No', 'Si'],
+		title: 'Mail',
+		message: `Utilizzare Debug Mode?`,
+		noLink: true,
+	};
 	var n = require('path').basename(nome)
 	await $.get(nome + '.econf', dati=>{
 		var t = JSON.parse(dati)[0]
 		t['urlPdf'] = urlPdf
 		t['urlMa'] = urlMa
 		t['fileN'] = n
+		if($('#userP').text()=='SU'){
+			var w = dialog.showMessageBoxSync(remote.getCurrentWindow(), options)
+			if (w==0){
+				urlp = url + 'mail/'
+			} else if(w==1){
+				urlp = url + 'maildebug/'
+			}
+		}                    
 		var request = $.ajax({
-			url: url + 'mail/',
+			url: urlp,
 			type: 'GET',
 			data: jQuery.param(t) ,
 			contentType: 'application/json; charset=utf-8',
@@ -257,7 +272,6 @@ function userDel(a){
 			};
 			var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 			if(sc==1){
-				console.log(url + 'delete')
 			$.get(url + 'delete', {id:a})
 			.done(()=>{
 				getUsers()
