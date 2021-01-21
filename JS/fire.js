@@ -62,7 +62,7 @@ function aggiornamails(){
 
 var eye = true
 var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
-
+var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
 function hideP(){
   if(eye){
     $('.eye').attr('src','img/login/off.svg')
@@ -131,14 +131,14 @@ function readRealTimeDB(id, eMail){
   firebase.default.database().ref('Users/' + id).once('value', async snapshot=>{
     var v= snapshot.val();
     v.Mail = eMail
-    await writeConf(v)
+    await require('fs').writeFileSync(path, JSON.stringify(v))
+    firebase.default.database().ref(`mails/${v.Nome} ${v.Cognome}`).once('value', async mailList=>{
+      await require('fs').writeFileSync(path1,mailList.val())
+    })
     readConf()
   })
 }
 
-function writeConf(user){
-  require('fs').writeFileSync(path, JSON.stringify(user))
-}
 
 function readConf(){
   var user = JSON.parse(require('fs').readFileSync(path, 'utf-8')) 
