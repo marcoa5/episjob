@@ -1091,17 +1091,19 @@ function abilitaok(a){
 }
 
 function scrivikm(){
+	var t = parseFloat($('#userK').text())
+	console.log(t, isNumber(t))
 		prompt({
 			title: 'KM',
 			label: 'Km di autostrada:',
-			value: parseFloat(($('#spv1').val()).replace(",",".")/$('userK').text()).toFixed(0),
+			value: parseFloat(($('#spv1').val()).replace(",",".")/t).toFixed(0),
 			type: 'input'
 		})
 		.then((r) => {
 			if(r == 0) {
 				$('#spv1').val('');
 			} else if(r!==null){
-				$('#spv1').val(parseFloat(r*$('userK').text()).toFixed(0) + ",00");
+				$('#spv1').val(parseFloat(r*t).toFixed(0) + ",00");
 			} else if(r==0){$('#spv1').val('')}
 		})
 		.catch(console.error);
