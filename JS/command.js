@@ -1193,6 +1193,7 @@ function coeffkm(){
 			var a = JSON.parse(data)
 			a.km = r.replace(",",".")
 			fs.writeFileSync(cart, JSON.stringify(a));
+			$('#userK').text(r)
 		}
 	})
 	.catch(console.error);

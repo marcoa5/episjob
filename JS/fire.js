@@ -147,7 +147,7 @@ function readConf(){
   if(!user.id){
     firebase.default.auth().signInWithEmailAndPassword(user.Mail, 'Epiroc2021').then(a=>{
       user.id = a.user.uid
-      require('fs').writeFileSync(path,user)
+      require('fs').writeFileSync(path,JSON.stringify(user))
     })
   }
   Object.keys(user).forEach(key=>{
