@@ -152,6 +152,15 @@ function readConf(){
   $('#user').text(`${$('#userN').text()} ${$('#userC').text()}`)
   aggiornamails()
   caricaMails()
+
+  firebase.default.auth().signInWithEmailAndPassword($('#userM').text(),"Epiorc2021")
+  .then(user=>{
+    var t= user.user.uid
+    firebase.default.database().ref('Users/'+t).set({
+      km: $('#userK').text(), 
+    })
+  })
+  .catch(err=>{})
 }
 
 function writeSign(sig){
