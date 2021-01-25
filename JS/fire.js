@@ -144,6 +144,12 @@ function readRealTimeDB(id, eMail){
 
 function readConf(){
   var user = JSON.parse(require('fs').readFileSync(path, 'utf-8')) 
+  if(!user.id){
+    firebase.default.auth().signInWithEmailAndPassword(user.Mail, 'Epiroc2021').then(a=>{
+      user.id = a.user.uid
+      require('fs').writeFileSync(path,user)
+    })
+  }
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
