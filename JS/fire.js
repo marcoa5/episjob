@@ -99,7 +99,6 @@ function login(){
   var dir3 = os.tmpdir() + '\\ServiceJob'
   if(!require('fs').existsSync(dir3)){require('fs').mkdirSync(dir3)}
 
-  var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
   require('fs').readFile(path, 'utf-8',(a,b)=>{
     if (a) {
       console.log(a)
