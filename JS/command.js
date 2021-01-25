@@ -1092,7 +1092,6 @@ function abilitaok(a){
 
 function scrivikm(){
 	var t = parseFloat($('#userK').text())
-	console.log(t, isNumber(t))
 		prompt({
 			title: 'KM',
 			label: 'Km di autostrada:',
