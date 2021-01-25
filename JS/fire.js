@@ -130,6 +130,7 @@ function readRealTimeDB(id, eMail){
   firebase.default.database().ref('Users/' + id).once('value', async snapshot=>{
     var v= snapshot.val();
     v.Mail = eMail
+    v.Id = id
     await require('fs').writeFileSync(path, JSON.stringify(v))
     firebase.default.database().ref(`mails/${v.Nome} ${v.Cognome}`).once('value', async mailList=>{
       if(mailList.val()!=null) {
@@ -152,15 +153,15 @@ function readConf(){
   $('#user').text(`${$('#userN').text()} ${$('#userC').text()}`)
   aggiornamails()
   caricaMails()
-
-  firebase.default.auth().signInWithEmailAndPassword($('#userM').text(),"Epiorc2021")
-  .then(user=>{
-    var t= user.user.uid
+  var t= $('#userI').text()
+  if(t){
     firebase.default.database().ref('Users/'+t).set({
-      km: $('#userK').text(), 
+      km: $('#userK').text(),
+      Nome: $('#userN').text(), 
+      Cognome: $('#userC').text(),
+      Pos: $('#userP').text()
     })
-  })
-  .catch(err=>{})
+  }
 }
 
 function writeSign(sig){
