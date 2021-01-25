@@ -1091,23 +1091,21 @@ function abilitaok(a){
 }
 
 function scrivikm(){
-	$.get('km.txt', function(data){
 		prompt({
 			title: 'KM',
 			label: 'Km di autostrada:',
-			value: parseFloat(($('#spv1').val()).replace(",",".")/data).toFixed(0),
+			value: parseFloat(($('#spv1').val()).replace(",",".")/$('userK').text()).toFixed(0),
 			type: 'input'
 		})
 		.then((r) => {
 			if(r == 0) {
 				$('#spv1').val('');
 			} else if(r!==null){
-				$('#spv1').val(parseFloat(r*data).toFixed(0) + ",00");
+				$('#spv1').val(parseFloat(r*$('userK').text()).toFixed(0) + ",00");
 			} else if(r==0){$('#spv1').val('')}
 		})
 		.catch(console.error);
 		$('#off1').focus();
-	})
 }
 
 function controllafirmac(){
@@ -1181,18 +1179,19 @@ function mille(a){
 }
 
 function coeffkm(){
-	var cart = __dirname;
-	$.get(cart + '\\km.txt', function(data){
+	var cart = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+	$.get(cart, function(data){
 	prompt({
 		title: 'Coefficiente km',
 		label: 'Imposta Coefficiente:',
-		value: data,
+		value: JSON.parse(data).km || '' ,
 		type: 'input'
 	})
 	.then((r) => {
-		if(r === null) {
-		} else {
-			fs.writeFileSync(cart + '\\km.txt', r.replace(",","."));
+		if(r != null) {
+			var a = JSON.parse(data)
+			a.km = r.replace(",",".")
+			fs.writeFileSync(cart, JSON.stringify(a));
 		}
 	})
 	.catch(console.error);

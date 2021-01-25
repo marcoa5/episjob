@@ -218,6 +218,7 @@ function getUsers(){
 						utenti.forEach(ut=>{
 							if(ut.pos!='SU'){
 								$('#tabUtenti').append('<tr><td>'+ut.nome+'</td><td>'+ut.cognome+'</td><td>'+ut.pos+'</td><td colspan=2>' + ut.mail + '</td><td><button class="pulsante" onclick="userDel(\'' + ut.uid + '\')">E</button></td></tr>')
+								sortUserTable(0)
 							}
 						})
 					}
@@ -237,7 +238,7 @@ function userClean(){
 }
 
 function userAdd(e){
-	var p = {Nome: $('#uNome').val(), Cognome:$('#uCognome').val(),Mail:$('#uMail').val(),Pos:$('#uPos').val()}
+	var p = {Nome: $('#uNome').val(), Cognome:$('#uCognome').val(),Mail:$('#uMail').val(),Pos:$('#uPos').val(),km:0.05}
 	$.ajax({
 		url: url + 'createuser',
 		type: 'GET',
