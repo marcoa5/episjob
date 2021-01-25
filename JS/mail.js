@@ -204,7 +204,7 @@ function getUsers(){
 	$('#nUtente').append('<p class="userTesto" style="margin: 20px 0 0 0;">Utenti Attivi</p>')
 	$('#listaUtenti').append('<div id="ff"></div>')
 	$('#ff').append('<br><table class="tabUtenti" id="tabUtenti"></table>')
-	$('#tabUtenti').append('<th>Nome</th><th>Cognome</th><th>Ruolo</th><th colspan=2>Mail</th><th>Elimina</th>')
+	$('#tabUtenti').append('<th onclick="sortUserTable(0)">Nome</th><th onclick="sortUserTable(1)">Cognome</th><th onclick="sortUserTable(2)">Ruolo</th><th onclick="sortUserTable(3)" colspan=2>Mail</th><th>Elimina</th>')
 	$.get(url + 'getusers', (data,err)=>{
 		if(err) console.log(err)
 		data.forEach(a=>{
@@ -282,4 +282,40 @@ function userDel(a){
 			}
 		}
 	})
+}
+
+function sortUserTable(q) {
+	var table, rows, switching, i, x1, x, y, shouldSwitch;
+	table = document.getElementById("tabUtenti");
+	switching = true;
+	/*Make a loop that will continue until
+	no switching has been done:*/
+	while (switching) {
+	  //start by saying: no switching is done:
+	  switching = false;
+	  rows = table.rows;
+	  /*Loop through all table rows (except the
+	  first, which contains table headers):*/
+	  for (i = 0; i < (rows.length-1); i++) {
+		//start by saying there should be no switching:
+		shouldSwitch = false;
+		/*Get the two elements you want to compare,
+		one from current row and one from the next:*/
+		x = rows[i].getElementsByTagName("TD")[q].innerText;
+		y = rows[i + 1].getElementsByTagName("TD")[q].innerText;
+		//check if the two rows should switch place:
+		if (x.toLowerCase() > y.toLowerCase()) {
+		  //if so, mark as a switch and break the loop:
+		  shouldSwitch = true;
+		  break;
+		}
+	  }
+	  if (shouldSwitch) {
+		/*If a switch has been marked, make the switch
+		and mark that a switch has been done:*/
+		rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+		switching = true;
+	  }
+	  
+	}
 }

@@ -1224,9 +1224,12 @@ input[type=email]:valid{
 #tabUtenti th{
     vertical-align: middle;
     background-color: rgb(255, 205,0);
+    text-align: center;
+    cursor: pointer;
 }
 
 #tabUtenti td{
+    text-align: left;
     border-radius: 10px;
 }
 
@@ -1236,7 +1239,6 @@ input[type=email]:valid{
     padding: auto;
     width: 20%;
     font-weight: 900;
-    text-align: center;
     height: 30px;
     box-sizing: border-box;
     border: 1px solid rgb(66, 85, 99);
