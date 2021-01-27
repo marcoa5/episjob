@@ -27,7 +27,7 @@
                         <div class="foglio" id="pagina">
                                 <div class="margini">
                                         <div class="int">
-                                                <div class="logo" onclick="test()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
+                                                <div class="logo" onclick="loadMOL()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. EUR 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.it</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
@@ -822,16 +822,20 @@
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 <div class="finestra" id="UserAdmin">
 			<div class="barrat"><div class="g"></div><p class="tt">Users</p></div>
-			<div class="finestrai">
-				<div id="listaUtenti"></div>
-				<!--<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
-				<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
-				<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
-				<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
-				<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>-->
+			<button class="pulsante" onclick="showUsers()">Utenti</button>
+			<button class="pulsante" onclick="showRigs()">Macchine</button>
+			<div id="newUt"></div>
+			<div id="cercaMac" style="font-size: 50%;"></div>
+			<div class="finestrao" id="tabUtMac">
+				<div id="addB">
+					
+					<!---->
+				</div>
+				<div id="listaUtenti" style="overflow: hidden;" ></div>
+				<div id="listaMacchine"></div>
 			</div>
 			<br>
-			<button class="pulsante" onclick="closeMenu()">Annulla</button>
+			<!--<button class="pulsante" onclick="closeMenu()">Annulla</button>-->
 			<button class="pulsante" onclick="closeSU()">Ok</button>
 			<br><br><br>
 </div>
@@ -916,6 +920,7 @@ function Upd(){
 			aggiornamol();
 			aggiornacli();
 			aggiornatech();
+			loadMOL()
 		}
 	})
 }

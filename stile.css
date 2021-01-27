@@ -503,7 +503,7 @@ canvas{
 	margin-bottom:1000px;
     margin-top: 40px;
 }
-.finestrai{
+.finestrai, .finestrao{
     overflow:auto;
 }
 .barrat{
@@ -1205,7 +1205,7 @@ input[type=email]:valid{
     color: rgb(66, 85, 99);
 }
 
-#listaUtenti{
+#listaUtenti, #listaMacchine{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1213,12 +1213,11 @@ input[type=email]:valid{
     overflow: auto;
 }
 
-#tabUtenti{
+#tabUtenti, #tabRig{
     font-size: 60%;
     box-sizing: border-box;
     border-collapse: collapse;
     height: 100%;
-    
 }
 
 #tabUtenti th{
@@ -1285,4 +1284,24 @@ input[type=email]:valid{
 .userTesto{
     font-size: 60%;
     font-weight: 900;
+}
+
+#listaMacchine{
+    padding: 10px 0;
+}
+
+.inputNewRig{
+    margin:10px 0; max-width: 15%;
+}
+
+#tabRig{
+    width: 80%;
+}
+
+#tabRig td, #tabRig th{
+    border-collapse: collapse;
+    border: 1px solid rgb(66, 85, 99);
+    width: 20%;
+    min-width: 20%;
+    overflow:hidden;
 }

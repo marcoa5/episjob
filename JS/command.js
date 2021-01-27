@@ -86,6 +86,7 @@ function openMenu(n){
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
 	if(n=='menurisk'){};
+	if(n=='UserAdmin'){showUsers()};
 	if(n=='sond1a'){
 		$('#nomecognome').val($('#contnomec').text())
 		caricasond();
@@ -121,6 +122,10 @@ function dimen(){
   var fff = $(".finestrai")
   for(var u=0;u<fff.length;u++){
       fff[u].style.maxHeight = window.innerHeight- 200 +"px";
+  }
+  var ff1 = $(".finestrao")
+  for(var u=0;u<ff1.length;u++){
+      ff1[u].style.maxHeight = window.innerHeight- 300 +"px";
   }
 }
 
@@ -497,7 +502,7 @@ function Apri(){
 			}
 		});
     });
-	$('#listam tr').remove();
+	/*$('#listam tr').remove();
 	var i = 1
 	$.get('.\\mol.txt', function(data) {
 		var linee = data.split("\n");
@@ -515,21 +520,7 @@ function Apri(){
 				i++;
 			}
 		});
-	});
-}
-
-function copia(a){
-    var riga = document.getElementById(a)
-    var elementi = riga.getElementsByTagName('td');
-    for (var t=0; t<elementi.length;t++){
-		document.getElementById("matricolas").value = elementi[0].innerText;
-		document.getElementById("myinput").value = elementi[0].innerText;
-		document.getElementById("prodotto").value = elementi[1].innerText;
-		document.getElementById("cliente").value = elementi[2].innerText.replace("/","-");
-		document.getElementById("cantiere").value = elementi[3].innerText;
-    }
-	indirizzo_cliente();
-    myFunction();
+	});*/
 }
 
 //Crea nome del file in base al giorno
@@ -1548,3 +1539,4 @@ async function setTech(){
 		$('#tec').val(NC)
 	}
 }
+

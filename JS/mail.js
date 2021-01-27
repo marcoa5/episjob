@@ -11,6 +11,7 @@ async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN
 }
 
 var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
+var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','mol.list')
 
 async function addMail(to){
 	var a = ''
@@ -190,7 +191,8 @@ function test(){
 function getUsers(){
 	utenti=[]
 	$('#listaUtenti').html('')
-	$('#listaUtenti').append('<div id="nUtente"></div>')
+	$('#newUt').html('')
+	$('#newUt').append('<div id="nUtente"></div>')
 	$('#nUtente').append('<p class="userTesto">Nuovo Utente</p>')
 	$('#nUtente').append('<div id="nuovoUtente"></div>')
 	$('#nuovoUtente').append('<input id="uNome" type="text" placeholder="Nome" onkeyup="chComp()">')
@@ -204,7 +206,7 @@ function getUsers(){
 	$('#nUtente').append('<p class="userTesto" style="margin: 20px 0 0 0;">Utenti Attivi</p>')
 	$('#listaUtenti').append('<div id="ff"></div>')
 	$('#ff').append('<br><table class="tabUtenti" id="tabUtenti"></table>')
-	$('#tabUtenti').append('<th onclick="sortUserTable(0)">Nome</th><th onclick="sortUserTable(1)">Cognome</th><th onclick="sortUserTable(2)">Ruolo</th><th onclick="sortUserTable(3)" colspan=2>Mail</th><th>Elimina</th>')
+	$('#tabUtenti').append('<th onclick="sortUserTable(0, \'tabUtenti\')">Nome</th><th onclick="sortUserTable(1, \'tabUtenti\')">Cognome</th><th onclick="sortUserTable(2, \'tabUtenti\')">Ruolo</th><th onclick="sortUserTable(3, \'tabUtenti\')" colspan=2>Mail</th><th>Elimina</th>')
 	$.get(url + 'getusers', (data,err)=>{
 		if(err) console.log(err)
 		data.forEach(a=>{
@@ -218,7 +220,7 @@ function getUsers(){
 						utenti.forEach(ut=>{
 							if(ut.pos!='SU'){
 								$('#tabUtenti').append('<tr><td>'+ut.nome+'</td><td>'+ut.cognome+'</td><td>'+ut.pos+'</td><td colspan=2>' + ut.mail + '</td><td style="text-align: center;"><button class="pulsante" onclick="userDel(\'' + ut.uid + '\')">E</button></td></tr>')
-								sortUserTable(0)
+								sortUserTable(0, 'tabUtenti')
 							}
 						})
 					}
@@ -285,9 +287,9 @@ function userDel(a){
 	})
 }
 
-function sortUserTable(q) {
+function sortUserTable(q, tabN) {
 	var table, rows, switching, i, x1, x, y, shouldSwitch;
-	table = document.getElementById("tabUtenti");
+	table = document.getElementById(tabN);
 	switching = true;
 	/*Make a loop that will continue until
 	no switching has been done:*/
@@ -316,7 +318,127 @@ function sortUserTable(q) {
 		and mark that a switch has been done:*/
 		rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
 		switching = true;
-	  }
-	  
+	  } 
 	}
+}
+
+function showUsers(){
+	$('#cercaMac').hide()
+	$('#listaUtenti').show()
+	$('#listaMacchine').hide()
+	$('#nUtente').show()
+	$('#UserAdmin').css('max-width','500px')
+	$('#UserAdmin').width('44%')
+}
+
+function showRigs(){
+	$('#cercaMac').show()
+	$('#cercaMac').html('')
+	$('#cercaMac').append('<p style="font-weight: 900; margin-bottom: 0;">Nuova Macchina</p>'
+	+'<label for="newSn">s/n</label>'
+	+'<input class="inputNewRig" type="text" id="newSn" onkeyup="chRig()">'
+	+'<label for="newMo">Modello</label>'
+	+'<input class="inputNewRig" type="text" id="newMo" onkeyup="chRig()">'
+	+'<label for="newCu">Cliente</label>'
+	+'<input class="inputNewRig" type="text" id="newCu" onkeyup="chRig()">'
+	+'<label for="newSi">Cantiere</label>'
+	+'<input class="inputNewRig" id="newSi" onkeyup="chRig()">'
+	+'<button onclick="addRig()" id="butPiu" class="pulsante" style="margin-bottom: 5px; max-width: 40px;" disabled>+</button>'
+	+'<br><label for="rigFilter">Filtro</label>'
+	+'<input class="inputNewRig" id="rigFilter" onkeyup="filterRigs(event)">')
+	$('#listaUtenti').hide()
+	$('#listaMacchine').show()
+	$('#nUtente').hide()
+	$('#UserAdmin').css('max-width','1200px')
+	$('#UserAdmin').width('80%')
+	loadRigs()
+}
+
+async function loadRigs(){
+	var rigs = require('fs').readFileSync(pathmol, 'utf-8')
+	$('#listaMacchine').html('')
+	$('#listaMacchine').append('<table id="tabRig"></table>')
+	//$('#tabRig').append('<tr><th>s/n</th><th>Modello</th><th>Cliente</th><th>Cantiere</th></tr>')
+	$.each(JSON.parse(rigs), (i,v)=>{
+		$('#tabRig').append('<tr><td style="width:20%">'+v.sn+'</td><td style="width:20%">'+v.model+'</td><td style="width:20%">'+v.customer+'</td><td style="width:20%">'+v.site+'</td>'
+		+'<td style="width:10%"><button onclick="modRig(\''+v.sn+'\',\''+v.model+'\',\''+v.customer+'\',\''+v.site+'\')" class="pulsante">M</td style="width:10%"><td><button  onclick="delRig(\''+v.sn+'\')"  class="pulsante">E</td></tr>')	
+	})
+	sortUserTable(0,'tabRig')
+}
+
+function filterRigs(e){
+	var filter = e.target.value.toUpperCase();
+    var rows = document.querySelector("#tabRig").rows;
+    
+    for (var i = 0; i < rows.length; i++) {
+        var c0 = rows[i].cells[0].textContent.toUpperCase();
+		var c1 = rows[i].cells[1].textContent.toUpperCase();
+		var c2 = rows[i].cells[2].textContent.toUpperCase();
+		var c3 = rows[i].cells[3].textContent.toUpperCase();
+        if (c0.indexOf(filter) > -1 || c1.indexOf(filter) > -1 || c2.indexOf(filter) > -1 || c3.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }      
+    }
+}
+
+function chRig(){
+	var a = $('#newSn').val()
+	var b = $('#newMo').val()
+	var c=$('#newCu').val()
+	var d=$('#newSi').val()
+	if(a=='' || b=='' || c=='' || d==''){
+		$('#butPiu').prop('disabled', true)
+	} else {
+		$('#butPiu').prop('disabled', false)
+	}
+}
+
+function addRig(){
+	var a = $('#newSn').val()
+	var b = $('#newMo').val()
+	var c=$('#newCu').val()
+	var d=$('#newSi').val()
+	firebase.default.database().ref('MOL/' + a).set({
+		customer: c,
+		site: d,
+		sn: a,
+		model: b
+	})
+	.then((err,a)=>{
+		$('#listaMacchine').html('')
+		aggiornamol()
+		setTimeout(() => {
+			showRigs()
+		}, 1500);
+	})	
+}
+
+function delRig(e){
+	const options = {
+		type: 'question',
+		buttons: ['No', 'Si'],
+		title: 'Eliminare',
+		message: `Vuoi eliminare ${e}?`,
+		noLink: true,
+	};
+	var w = dialog.showMessageBoxSync(remote.getCurrentWindow(), options)
+	if(w==1){
+		firebase.default.database().ref('MOL/' + e).remove()
+		.then(()=>{
+			$('#listaMacchine').html('')
+			aggiornamol()
+			setTimeout(() => {
+				showRigs()
+			}, 1500);
+		})
+	}
+}
+
+function modRig(sn,model,customer,site){
+	$('#newSn').val(sn)
+	$('#newMo').val(model)
+	$('#newCu').val(customer)
+	$('#newSi').val(site)
 }

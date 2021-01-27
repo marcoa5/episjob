@@ -15,7 +15,9 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
+var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','mol.list')
 
 function aggiornatech(){
   firebase.storage().ref('techupd.txt').getDownloadURL().then(function(url) {
@@ -28,14 +30,23 @@ function aggiornatech(){
   })
 }
 
-function aggiornamol(){
-  firebase.storage().ref('molupd.txt').getDownloadURL().then(function(url) {
+async function aggiornamol(){
+  /*firebase.storage().ref('molupd.txt').getDownloadURL().then(function(url) {
     $.get(url, (data)=> {
 			fs.writeFileSync(__dirname + "\\mol.txt", data)
 		})
   })
   .catch(err=>{
     console.log('ERROR: ' + err)
+  })*/
+  firebase.default.database().ref('MOL/').once('value',sn=>{
+    require('fs').writeFileSync(pathmol,JSON.stringify(sn.val()))
+  })
+  .then(()=>{
+    loadMOL()
+  })
+  .catch(err=>{
+    console.log(err)
   })
 }
 
@@ -61,8 +72,7 @@ function aggiornamails(){
 }
 
 var eye = true
-var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
-var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
+
 function hideP(){
   if(eye){
     $('.eye').attr('src','img/login/off.svg')
@@ -177,4 +187,33 @@ function writeSign(sig){
   var b = JSON.parse(a)
   b.Sign = sig
   require('fs').writeFileSync(path, JSON.stringify(b))
+}
+
+
+async function loadMOL(){
+  var mol = require('fs').readFileSync(pathmol,'utf-8')
+  $('#listam tr').remove();
+  var i = 1
+  $.each(JSON.parse(mol), (sn,v)=>{
+    var stringa= '<tr id=' + 'ele' + i + ' onclick="copia(' + "'" + 'ele' + i + "'" + ')">';
+				stringa += '<td id="ele' + i + 'sn">' + v.sn + '</td>';
+				stringa += '<td id="ele' + i + 'customer">' + v.customer + '</td>';
+				stringa += '<td id="ele' + i + 'model">' + v.model + '</td>';
+				stringa += '<td id="ele' + i + 'site">' + v.site + '</td>';
+				stringa += '</tr>';
+        $('#listam').append(stringa);
+        i++
+        sortUserTable(0,'listam')
+  })
+  
+}
+
+function copia(a){
+  $('#matricolas').val($('#' + a + 'sn').text())
+  $('#myinput').val($('#' + a + 'sn').text())
+  $('#prodotto').val($('#' + a + 'model').text())
+  $('#cliente').val($('#' + a + 'customer').text())
+  $('#cantiere').val($('#' + a + 'site').text())
+  indirizzo_cliente();
+  myFunction();
 }
