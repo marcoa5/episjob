@@ -1291,7 +1291,7 @@ input[type=email]:valid{
 }
 
 .inputNewRig{
-    margin:10px 0; max-width: 15%;
+    margin:10px 0; max-width: 100%;
 }
 
 #tabRig{
@@ -1305,3 +1305,26 @@ input[type=email]:valid{
     min-width: 20%;
     overflow:hidden;
 }
+
+#cercaMac{
+    display:flex;
+    flex-direction: column;
+}
+
+.rigTitolo{
+    margin: 10px 0 0 0;
+    width:100%;
+    font-weight: 900;
+    font-size: 8pt;
+}
+
+.rigNuova{
+    display: flex;
+    flex-direction: row;
+    background-color: rosybrown;
+}
+
+.rigInput{
+    display: flex;
+}
+

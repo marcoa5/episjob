@@ -1,3 +1,5 @@
+const { timeStamp } = require('console');
+const { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } = require('constants');
 const { get } = require('http');
 const { allowedNodeEnvironmentFlags } = require('process');
 var utenti=[]
@@ -323,35 +325,12 @@ function sortUserTable(q, tabN) {
 }
 
 function showUsers(){
-	$('#cercaMac').hide()
-	$('#listaUtenti').show()
-	$('#listaMacchine').hide()
-	$('#nUtente').show()
-	$('#UserAdmin').css('max-width','500px')
-	$('#UserAdmin').width('44%')
+	openMenu('UserAdmin')
 }
 
 function showRigs(){
-	$('#cercaMac').show()
-	$('#cercaMac').html('')
-	$('#cercaMac').append('<p style="font-weight: 900; margin-bottom: 0;">Nuova Macchina</p>'
-	+'<label for="newSn">s/n</label>'
-	+'<input class="inputNewRig" type="text" id="newSn" onkeyup="chRig()">'
-	+'<label for="newMo">Modello</label>'
-	+'<input class="inputNewRig" type="text" id="newMo" onkeyup="chRig()">'
-	+'<label for="newCu">Cliente</label>'
-	+'<input class="inputNewRig" type="text" id="newCu" onkeyup="chRig()">'
-	+'<label for="newSi">Cantiere</label>'
-	+'<input class="inputNewRig" id="newSi" onkeyup="chRig()">'
-	+'<button onclick="addRig()" id="butPiu" class="pulsante" style="margin-bottom: 5px; max-width: 40px;" disabled>+</button>'
-	+'<br><label for="rigFilter">Filtro</label>'
-	+'<input class="inputNewRig" id="rigFilter" onkeyup="filterRigs(event)">')
-	$('#listaUtenti').hide()
-	$('#listaMacchine').show()
-	$('#nUtente').hide()
-	$('#UserAdmin').css('max-width','1200px')
-	$('#UserAdmin').width('80%')
-	loadRigs()
+	openMenu('RigAdmin')
+	
 }
 
 async function loadRigs(){
@@ -441,4 +420,10 @@ function modRig(sn,model,customer,site){
 	$('#newMo').val(model)
 	$('#newCu').val(customer)
 	$('#newSi').val(site)
+}
+
+function caricaCust(){
+	firebase.default.database().ref('Customers').once('value',s=>{
+		console.log(JSON.stringify(s.val()))
+	})
 }

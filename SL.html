@@ -27,7 +27,7 @@
                         <div class="foglio" id="pagina">
                                 <div class="margini">
                                         <div class="int">
-                                                <div class="logo" onclick="loadMOL()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
+                                                <div class="logo" onclick="caricaCust()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. EUR 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.it</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
@@ -825,13 +825,62 @@
 			<button class="pulsante" onclick="showUsers()">Utenti</button>
 			<button class="pulsante" onclick="showRigs()">Macchine</button>
 			<div id="newUt"></div>
-			<div id="cercaMac" style="font-size: 50%;"></div>
 			<div class="finestrao" id="tabUtMac">
-				<div id="addB">
-					
-					<!---->
-				</div>
 				<div id="listaUtenti" style="overflow: hidden;" ></div>
+			</div>
+			<br>
+			<!--<button class="pulsante" onclick="closeMenu()">Annulla</button>-->
+			<button class="pulsante" onclick="closeSU()">Ok</button>
+			<br><br><br>
+</div>
+</div> 
+
+<div class="ccc" ><!--RigAdmin-->
+<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
+<div class="finestra" id="RigAdmin" style="max-width:1200px; width:80%;">
+			<div class="barrat"><div class="g"></div><p class="tt">Macchine</p></div>
+			<button class="pulsante" onclick="showUsers()">Utenti</button>
+			<button class="pulsante" onclick="showRigs()">Macchine</button>
+			<div id="cercaMac" style="font-size: 50%;">
+				<div class="rigTitolo">Nuova Macchina</div>
+				<div class="rigNuova">
+					<div id="rigInput">
+						<div class="rigCol">
+							<label for="newSn">s/n</label>
+							<input class="inputNewRig" type="text" id="newSn" onkeyup="chRig()">
+						</div>
+						<div class="rigCol">
+							<label for="newMo">Modello</label>
+							<input class="inputNewRig" type="text" id="newMo" onkeyup="chRig()">
+						</div>
+					</div>
+					<div class="rigInput">
+						<div class="rigCol">
+							<label for="newCu">Cliente</label>
+							<input class="inputNewRig" type="text" id="newCu" onkeyup="chRig()">
+						</div>
+						<div class="rigCol">
+							<label for="newSi">Cantiere</label>
+							<input class="inputNewRig" id="newSi" onkeyup="chRig()">
+						</div>
+					</div>
+					<div id="rigAdd"></div>
+				</div>
+				
+
+
+				<!--
+				
+				
+				<div class="srigCol">
+					<button onclick="addRig()" id="butPiu" class="pulsante" style="margin-bottom: 5px; max-width: 40px;" disabled>+</button>
+				</div>
+				
+				
+				
+				<!---<br><label for="rigFilter">Filtro</label><input class="inputNewRig" id="rigFilter" onkeyup="filterRigs(event)">	-->
+			</div>
+			<div class="finestrao" id="tabUtMac">
 				<div id="listaMacchine"></div>
 			</div>
 			<br>
@@ -840,6 +889,9 @@
 			<br><br><br>
 </div>
 </div> 
+
+
+
 
 <!--barra gialla in alto-->
 <div id="menuA" class="menu">
@@ -869,7 +921,7 @@
 	<div id="userI"></div>
 </div>
 
-<div id="elencoM" style="display: none;"></div>
+<div id="elencoC" style="display: none;"></div>
 
 <div class="login" id="logCont">
 	<div class="form">
@@ -920,7 +972,6 @@ function Upd(){
 			aggiornamol();
 			aggiornacli();
 			aggiornatech();
-			loadMOL()
 		}
 	})
 }

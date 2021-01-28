@@ -86,7 +86,8 @@ function openMenu(n){
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
 	if(n=='menurisk'){};
-	if(n=='UserAdmin'){showUsers()};
+	if(n=='UserAdmin'){getUsers()};
+	if(n=='RigAdmin'){}//loadRigs()};
 	if(n=='sond1a'){
 		$('#nomecognome').val($('#contnomec').text())
 		caricasond();
@@ -283,7 +284,7 @@ function isNumberHr(evt) {
 			return false;
 		}
 	} else {
-		if((charCode == 53 && a.length==3 && a.substring(a.length-1,a.length)==2)||(charCode == 50 && a.length==2)||(charCode == 53 && a.length==2)){return true} else {return false};
+		if((charCode == 53 && a.length==3 && (a.substring(a.length-1,a.length)==2 || a.substring(a.length-1,a.length)==2))||(charCode == 50 && a.length==2)||(charCode == 53 && a.length==2)){return true} else {return false};
 	}
 }
 
@@ -884,20 +885,13 @@ function Easter(Y) {
 function padout(number) { return (number < 10) ? '0' + number : number; }
 
 function indirizzo_cliente(){
-	var elclienti = document.getElementById('listac');
-	var clienti = elclienti.rows
-	var cliente = document.getElementById('cliente').value;
-	$('#clientead1').val('');
-	$('#clientead2').val('');
-	$('#cliente12').val('');
-	$('#cliente13').val('');
-	for(var i = 0; i<clienti.length;i++){
-		if(cliente==clienti[i].getElementsByTagName('td')[0].innerText){
-			document.getElementById('clientead1').value= clienti[i].getElementsByTagName('td')[1].innerText;
-			document.getElementById('clientead2').value= clienti[i].getElementsByTagName('td')[2].innerText;
-			break;
+	var elC = JSON.parse($('#elencoC').text())
+	$.each(elC, (i,v)=>{
+		if(v.c1==$('#cliente').val()){
+			$('#clientead1').val(v.c2)
+			$('#clientead2').val(v.c3)	
 		}
-	}
+	})
 }
 
 function openSU(){	 

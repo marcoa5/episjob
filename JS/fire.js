@@ -18,6 +18,7 @@ firebase.initializeApp(firebaseConfig);
 var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
 var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
 var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','mol.list')
+var pathcus = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','cus.list')
 
 function aggiornatech(){
   firebase.storage().ref('techupd.txt').getDownloadURL().then(function(url) {
@@ -26,6 +27,7 @@ function aggiornatech(){
 		})
   })
   .catch(err=>{
+    loadMOL()
     console.log('ERROR: ' + err)
   })
 }
@@ -46,18 +48,21 @@ async function aggiornamol(){
     loadMOL()
   })
   .catch(err=>{
+    loadMOL()
     console.log(err)
   })
 }
 
 function aggiornacli(){
-  firebase.storage().ref('customersupd.txt').getDownloadURL().then(function(url) {
-    $.get(url, (data)=> {
-			fs.writeFileSync(__dirname + "\\customers.txt", data)
-		})
+  firebase.default.database().ref('Customers').once('value',sn=>{
+    require('fs').writeFileSync(pathcus,JSON.stringify(sn.val()))
+  })
+  .then(()=>{
+    loadCus()
   })
   .catch(err=>{
-    console.log('ERROR: ' + err)
+    loadCus()
+    console.log(err)
   })
 }
 
@@ -206,6 +211,10 @@ async function loadMOL(){
         sortUserTable(0,'listam')
   })
   
+}
+
+function loadCus(){
+  $('#elencoC').text(require('fs').readFileSync(pathcus,'utf-8'))
 }
 
 function copia(a){
