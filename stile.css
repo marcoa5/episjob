@@ -1291,7 +1291,7 @@ input[type=email]:valid{
 }
 
 .inputNewRig{
-    margin:10px 0; max-width: 100%;
+    margin:10px 0; max-width: 60%;
 }
 
 #tabRig{
@@ -1302,6 +1302,9 @@ input[type=email]:valid{
     border-collapse: collapse;
     border: 1px solid rgb(66, 85, 99);
     width: 20%;
+    font-size:80%;
+    color: rgb(66,85,99);
+    font-weight: 900;
     min-width: 20%;
     overflow:hidden;
 }
@@ -1320,11 +1323,26 @@ input[type=email]:valid{
 
 .rigNuova{
     display: flex;
-    flex-direction: row;
-    background-color: rosybrown;
+    justify-content: center;
+    width:100%;
 }
 
 .rigInput{
     display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+.rigPiu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+}
+
+.rigRow{
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
 }
 
