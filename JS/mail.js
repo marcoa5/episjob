@@ -330,7 +330,10 @@ function showUsers(){
 
 function showRigs(){
 	openMenu('RigAdmin')
-	
+}
+
+function showCust(){
+	openMenu('CustAdmin')
 }
 
 async function loadRigs(){
@@ -425,5 +428,15 @@ function modRig(sn,model,customer,site){
 function caricaCust(){
 	firebase.default.database().ref('Customers').once('value',s=>{
 		console.log(JSON.stringify(s.val()))
+	})
+}
+
+function loadCust(){
+	$('#CustList').append('<table id="tabCust"></table>')
+	firebase.default.database().ref('Customers').once('value', a=>{
+		a.forEach(b=>{
+			var str = `<tr><td>${b.val().c1}</td><td>${b.val().c2}</td><td>${b.val().c3}</td></tr>`
+			$('#tabCust').append(str)
+		})
 	})
 }

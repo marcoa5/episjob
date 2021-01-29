@@ -1205,7 +1205,7 @@ input[type=email]:valid{
     color: rgb(66, 85, 99);
 }
 
-#listaUtenti, #listaMacchine{
+#listaUtenti, #listaMacchine, #CustList{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1213,7 +1213,7 @@ input[type=email]:valid{
     overflow: auto;
 }
 
-#tabUtenti, #tabRig{
+#tabUtenti, #tabRig, #tabCust{
     font-size: 60%;
     box-sizing: border-box;
     border-collapse: collapse;
@@ -1233,7 +1233,7 @@ input[type=email]:valid{
 }
 
 
-#tabUtenti td, #tabUtenti th{
+#tabUtenti td, #tabUtenti th, #tabRig td, #tabCust td{
     margin: auto;
     padding: auto;
     width: 20%;
@@ -1291,23 +1291,15 @@ input[type=email]:valid{
 }
 
 .inputNewRig{
-    margin:10px 0; max-width: 60%;
+    margin:10px 0; 
+    width:80%;
+    max-width: 100%;
 }
 
 #tabRig{
     width: 80%;
 }
 
-#tabRig td, #tabRig th{
-    border-collapse: collapse;
-    border: 1px solid rgb(66, 85, 99);
-    width: 20%;
-    font-size:80%;
-    color: rgb(66,85,99);
-    font-weight: 900;
-    min-width: 20%;
-    overflow:hidden;
-}
 
 #cercaMac{
     display:flex;
@@ -1330,7 +1322,7 @@ input[type=email]:valid{
 .rigInput{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 40%;
 }
 .rigPiu{
     display: flex;
@@ -1342,7 +1334,23 @@ input[type=email]:valid{
 
 .rigRow{
     display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
+    justify-content: center;
 }
+
+.butGroup{
+    padding: 0 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.pMenu{
+    width:30%;
+}
+
+.AdMenu{
+    max-width:1200px; width:80%;
+}
+
 

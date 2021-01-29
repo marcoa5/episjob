@@ -87,6 +87,7 @@ function openMenu(n){
 	if(n=='menuMatricola'){Apri()};
 	if(n=='menurisk'){};
 	if(n=='UserAdmin'){getUsers()};
+	if(n=='CustAdmin'){loadCust()};
 	if(n=='RigAdmin'){loadRigs()};
 	if(n=='sond1a'){
 		$('#nomecognome').val($('#contnomec').text())
