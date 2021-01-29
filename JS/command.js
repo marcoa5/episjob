@@ -273,7 +273,26 @@ function isNumberHr(evt) {
 
 	if(charCode==46 && a.length==0){
 		$('#' + evt.target.id).val("0")
-	} else if((a.length+1)<3){
+	}else if ((evt.target.id !=='mfl1' || evt.target.id !=='mfv1')&&((charCode>48 && charCode<57) && a.length==0)||(charCode==46 && a.length==1) || ((charCode==50||charCode==53||charCode==55) && a.length==2) ||(charCode==53 && a.length==3 && ((a.substring(a.length-1,a.length)=="2")||(a.substring(a.length-1,a.length)=="7")))){
+		return true
+	} else if (
+		(evt.target.id =='mfl1' || evt.target.id =='mfv1')&&(
+			((a.length==0) && (charCode>=48 && charCode<=57))
+			||
+			((a.length==1) && ((charCode>=48 && charCode<=57) || (charCode==46)))
+			|| 
+			((a.length==2) && (a.substring(a.length-1,a.length)==".") && ((charCode>=48 && charCode<=57)))
+			||
+			((a.length==2) && (a.substring(a.length-1,a.length)!==".") && (charCode=46))
+			||
+			((a.length==3) && ((a.substring(a.length-1,a.length)==".") && charCode==53))
+			
+	)){
+		return true
+	} else {
+		return false
+	}
+	/*} else if((a.length+1)<3){
 		if ((charCode > 47 && charCode < 58) || charCode==46) {
 			if ((a.length+2)<4){
 				if ((charCode > 47 && charCode < 58) || charCode==46){
@@ -285,7 +304,7 @@ function isNumberHr(evt) {
 		}
 	} else {
 		if((charCode == 53 && a.length==3 && (a.substring(a.length-1,a.length)==2 || a.substring(a.length-1,a.length)==2))||(charCode == 50 && a.length==2)||(charCode == 53 && a.length==2)){return true} else {return false};
-	}
+	}*/
 }
 
 function controllaP(e){
