@@ -419,11 +419,8 @@
 				</div>
 				<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
 			</div>
-			<br>
 			<button class="pulsante" onclick="closeMenu()">Annulla</button>
 			<button class="pulsante" onclick="closeSU()">Ok</button>
-			<br><br><br>
-
 </div> 
 		<div class="finestra" id="menuMatricola">
 				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
@@ -454,10 +451,8 @@
 								</div>
 						</form>
 				</div>
-				<br>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="salvadati()">Ok</button>
-				<br><br>
 		</div>        
 </div>
 <div class="ccc"><!--Rapporto-->    
@@ -467,11 +462,8 @@
 						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
 						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
 				</div>
-				<br>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
-				<button class="pulsante" onclick="salvacomm()">Ok</button>
-				<br><br>
-		
+				<button class="pulsante" onclick="salvacomm()">Ok</button>		
 		</div>
 </div>
 <div class="ccc"><!--Ore-->
@@ -539,11 +531,10 @@
 								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
 								<br><br>
 								<table id="ris" style="color: white;">
-						</table><br><br>  
+						</table>
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="copiaore()">OK</button>
-				<br><br>
 		</div>    
 
 
@@ -553,11 +544,10 @@
 			<div class="container">
 					<input id="indmail" type="email" class="inser" placeholder="Indirizzo Mail..." style="width: 70%;" onkeydown="if(event.keyCode==13){nuovamail()}" onkeyup="listaEmail(event)" required><!--<button id="aggmail" class="pulsante" style="width: 10%; height: 90%" onclick="nuovamail()">OK</button>--><br>
 					<div id="listaMai"></div>	
-					<div id="elencomail" style="max-width: 80%; margin: auto"></div><br>
+					<div id="elencomail" style="max-width: 80%; margin: auto"></div>
 			</div>
 			<button class="pulsante" onclick="closeMenu()">Annulla</button>
-			<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>
-			<br><br>		
+			<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>		
 	</div>
 </div>	
 <div class="ccc"><!--RiskAssessment-->    
@@ -707,21 +697,19 @@
 						<td><input id="rt3" type="radio" name="r22" value="3"><label for="rt3"></label></td>
 					</tr>						
 				</table>
-			</div><br><br>
+			</div>
 			<button class="pulsante" onclick="closeMenu()">Annulla</button>
-			<button class="pulsante" onclick="openMenu('firmat1')">Firma</button>
-			<br><br>		
+			<button class="pulsante" onclick="openMenu('firmat1')">Firma</button>	
 	</div>
 </div>		
 </div>
 <div class="ccc" id="sigt"><!--Firma Tecnico-->
 		<div class="finestra" id="firmat1">
 				<div class="barrat"><div class="g"><p class="tt">Firma Tecnico</p></div></div>
-				<canvas id="firmat" width="100" height="100" onpointerdown="abilitaok('t')"></canvas><br><br>
+				<canvas id="firmat" width="100" height="100" onpointerdown="abilitaok('t')"></canvas>
 				<button class="pulsante1" onclick="closeMenu()">Annulla</button>
 				<button id="erase1" class="pulsante1">Elimina Firma</button>
 				<button id="save1" class="pulsante1" disabled>Salva Firma</button>
-				<br><br>
 		</div>        
 </div>
 
@@ -770,11 +758,9 @@
 					<label for="ese5" onclick="controllasondc()">5</label>
 				</div>
 				<p style="font-size:9pt;">Legenda:  1=Insoddisfacente  2=Scarso  3=Sufficiente  4=Buono  5=Ottimo</p>
-			</div><br>
+			</div>
 			<button class="pulsante" onclick="closeMenu()">Annulla</button>
 			<button class="pulsante" id="gofirmac" onclick="openMenu('firmac1')" disabled>Firma</button>
-			
-			<br><br>
 	</div>        
 </div>
 </div>
@@ -789,8 +775,6 @@
 			<button class="pulsante1" onclick="closeMenu();">Annulla</button>
 			<button id="erase2" class="pulsante1">Elimina Firma</button>
 			<button id="save2" class="pulsante1" disabled>Salva e Invia Scheda Lavoro</button>
-			
-			<br><br>
 	</div>        
 </div>
 </div>
@@ -823,20 +807,11 @@
 <div class="finestra AdMenu" id="UserAdmin" style="max-width:1200px; width:80%;">
 	<div class="barrat"><div class="g"></div><p class="tt">Utenti</p></div>
 
-	<div class="butGroup">
-		<button class="pulsante pMenu" onclick="showUsers()">Utenti</button>
-		<button class="pulsante pMenu" onclick="showRigs()">Macchine</button>
-		<button class="pulsante pMenu" onclick="showCust()">Clienti</button>
+	<div style="width: 100%; height: 100%;background-color: aqua;">a
 	</div>
-	
-	<div id="newUt"></div>
-	<div class="finestrao" id="tabUtMac">
-		<div id="listaUtenti" style="overflow: hidden;" ></div>
-	</div>
-	<br>
-	<!--<button class="pulsante" onclick="closeMenu()">Annulla</button>-->
+
+
 	<button class="pulsante" onclick="closeSU()">Ok</button>
-	<br><br><br>
 </div> 
 
 <div class="ccc" ><!--RigAdmin-->
@@ -879,10 +854,7 @@
 	<div class="finestrao" id="tabUtMac">
 		<div id="listaMacchine"></div>
 	</div>
-	<br>
 	<button class="pulsante" onclick="closeSU()">Ok</button>
-	
-	<br><br><br>
 </div>
 
 <div class="ccc" ><!--CustAdmin-->
@@ -898,10 +870,7 @@
 	<div class="finestrao">
 		<div id="CustList"></div>
 	</div>
-	<br>
-	<!--<button class="pulsante" onclick="closeMenu()">Annulla</button>-->
 	<button class="pulsante" onclick="closeSU()">Ok</button>
-	<br><br><br>
 </div> 
 
 
