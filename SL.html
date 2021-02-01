@@ -803,19 +803,23 @@
 </div>
 
 <div class="ccc" ><!--UserAdmin-->
-<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
-<div class="finestra AdMenu" id="UserAdmin" style="max-width:1200px; width:80%;">
+<div class="inser"></div>
+<div class="finestra AdMenu" id="UserAdmin">
 	<div class="barrat"><div class="g"></div><p class="tt">Utenti</p></div>
-
-	<div style="width: 100%; height: 100%;background-color: aqua;">a
+	<div class="contGr">
+		<div class="butGroup">
+			<button class="pulsante pMenu" onclick="showUsers()">Utenti</button>
+			<button class="pulsante pMenu" onclick="showRigs()">Macchine</button>
+			<button class="pulsante pMenu" onclick="showCust()">Clienti</button>
+		</div>
+		<div id="listaUtenti"></div>
+		<button class="pulsante" onclick="closeSU()">Ok</button>
 	</div>
-
-
-	<button class="pulsante" onclick="closeSU()">Ok</button>
+	
 </div> 
 
 <div class="ccc" ><!--RigAdmin-->
-<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
+<div class="inser"><table id="listac"></table></div>
 <div class="finestra AdMenu" id="RigAdmin">
 	<div class="barrat"><div class="g"></div><p class="tt">Macchine</p></div>
 	<div class="butGroup">

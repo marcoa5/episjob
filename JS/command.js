@@ -129,6 +129,11 @@ function dimen(){
   for(var u=0;u<ff1.length;u++){
       ff1[u].style.maxHeight = window.innerHeight- 300 +"px";
   }
+  var ff2 = $(".finestra")
+  for(var u=0;u<ff2.length;u++){
+	  $('.contGr')[0].style.height = window.innerHeight- 120 +"px"
+      ff2[u].style.height = window.innerHeight- 80 +"px";
+  }
 }
 
 function closeMenu(){
