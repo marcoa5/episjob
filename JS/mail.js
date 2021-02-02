@@ -322,10 +322,32 @@ function showAdmin(){
 	} else {
 		$('#salva').hide()
 		$('#contSU').css( "display", "flex" )
+		getUsers()
 		showSU=!showSU
 	}
 }
 
 function getUsers(){
-	
+	$('#usersTab').html('<tr><th>Nome</th><th>Cognome</th><th>Pos</th><th>Mail</th><th>Elimina</th></tr>')
+	utenti=[]
+	$.get(url + 'getusers', (data,err)=>{
+		if(err) console.log(err)
+		data.forEach(a=>{
+			var info = $.ajax({
+				url: url + 'getuserinfo',
+				type: 'GET',
+				data: jQuery.param({id: a.uid}),
+				success: res=>{
+					utenti.push({uid: a.uid, mail: a.email, nome: res.Nome, cognome:res.Cognome, pos:res.Pos})
+					if (utenti.length==data.length){
+						utenti.forEach(ut=>{
+							if(ut.pos!='SU'){
+								$('#usersTab').append('<tr><td>'+ut.nome+'</td><td>'+ut.cognome+'</td><td>'+ut.pos+'</td><td>' + ut.mail + '</td><td style="text-align: center;"><button class="pulsante pulEl" onclick="userDel(\'' + ut.uid + '\')">E</button></td></tr>')
+							}
+						})
+					}
+				}
+			})
+		})
+	})
 }
