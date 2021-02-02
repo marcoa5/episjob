@@ -187,10 +187,7 @@ async function callEmail(urlPdf, urlMa, nome){
 	})
 }
 
-function test(){
-	readConf()
-}
-
+/*
 function getUsers(){
 	utenti=[]
 	$('#listaUtenti').html('')
@@ -288,25 +285,19 @@ function userDel(a){
 			}
 		}
 	})
-}
+}*/
 
 function sortUserTable(q, tabN) {
 	var table, rows, switching, i, x1, x, y, shouldSwitch;
 	table = document.getElementById(tabN);
 	switching = true;
-	/*Make a loop that will continue until
-	no switching has been done:*/
 	while (switching) {
 	  //start by saying: no switching is done:
 	  switching = false;
 	  rows = table.rows;
-	  /*Loop through all table rows (except the
-	  first, which contains table headers):*/
 	  for (i = 0; i < (rows.length-1); i++) {
 		//start by saying there should be no switching:
 		shouldSwitch = false;
-		/*Get the two elements you want to compare,
-		one from current row and one from the next:*/
 		x = rows[i].getElementsByTagName("TD")[q].innerText;
 		y = rows[i + 1].getElementsByTagName("TD")[q].innerText;
 		//check if the two rows should switch place:
@@ -317,15 +308,13 @@ function sortUserTable(q, tabN) {
 		}
 	  }
 	  if (shouldSwitch) {
-		/*If a switch has been marked, make the switch
-		and mark that a switch has been done:*/
 		rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
 		switching = true;
 	  } 
 	}
 }
 
-function showUsers(){
+function showAdmin(){
 	if(showSU){
 		$('#salva').show()
 		$('#contSU').css( "display", "none" )
@@ -337,115 +326,6 @@ function showUsers(){
 	}
 }
 
-function showRigs(){
-	openMenu('RigAdmin')
-}
-
-function showCust(){
-	openMenu('CustAdmin')
-}
-
-async function loadRigs(){
-	var rigs = require('fs').readFileSync(pathmol, 'utf-8')
-	$('#listaMacchine').html('')
-	$('#listaMacchine').append('<table id="tabRig"></table>')
-	//$('#tabRig').append('<tr><th>s/n</th><th>Modello</th><th>Cliente</th><th>Cantiere</th></tr>')
-	$.each(JSON.parse(rigs), (i,v)=>{
-		$('#tabRig').append('<tr><td style="width:20%">'+v.sn+'</td><td style="width:20%">'+v.model+'</td><td style="width:20%">'+v.customer+'</td><td style="width:20%">'+v.site+'</td>'
-		+'<td style="width:10%"><button onclick="modRig(\''+v.sn+'\',\''+v.model+'\',\''+v.customer+'\',\''+v.site+'\')" class="pulsante">M</td style="width:10%"><td><button  onclick="delRig(\''+v.sn+'\')"  class="pulsante">E</td></tr>')	
-	})
-	sortUserTable(0,'tabRig')
-}
-
-function filterRigs(e){
-	var filter = e.target.value.toUpperCase();
-    var rows = document.querySelector("#tabRig").rows;
-    
-    for (var i = 0; i < rows.length; i++) {
-        var c0 = rows[i].cells[0].textContent.toUpperCase();
-		var c1 = rows[i].cells[1].textContent.toUpperCase();
-		var c2 = rows[i].cells[2].textContent.toUpperCase();
-		var c3 = rows[i].cells[3].textContent.toUpperCase();
-        if (c0.indexOf(filter) > -1 || c1.indexOf(filter) > -1 || c2.indexOf(filter) > -1 || c3.indexOf(filter) > -1) {
-            rows[i].style.display = "";
-        } else {
-            rows[i].style.display = "none";
-        }      
-    }
-}
-
-function chRig(){
-	var a = $('#newSn').val()
-	var b = $('#newMo').val()
-	var c=$('#newCu').val()
-	var d=$('#newSi').val()
-	if(a=='' || b=='' || c=='' || d==''){
-		$('#butPiu').prop('disabled', true)
-	} else {
-		$('#butPiu').prop('disabled', false)
-	}
-}
-
-function addRig(){
-	var a = $('#newSn').val()
-	var b = $('#newMo').val()
-	var c=$('#newCu').val()
-	var d=$('#newSi').val()
-	firebase.default.database().ref('MOL/' + a).set({
-		customer: c,
-		site: d,
-		sn: a,
-		model: b
-	})
-	.then((err,a)=>{
-		$('#listaMacchine').html('')
-		aggiornamol()
-		setTimeout(() => {
-			showRigs()
-		}, 1500);
-	})	
-}
-
-function delRig(e){
-	const options = {
-		type: 'question',
-		buttons: ['No', 'Si'],
-		title: 'Eliminare',
-		message: `Vuoi eliminare ${e}?`,
-		noLink: true,
-	};
-	var w = dialog.showMessageBoxSync(remote.getCurrentWindow(), options)
-	if(w==1){
-		firebase.default.database().ref('MOL/' + e).remove()
-		.then(()=>{
-			$('#listaMacchine').html('')
-			aggiornamol()
-			setTimeout(() => {
-				showRigs()
-			}, 1500);
-		})
-	}
-}
-
-function modRig(sn,model,customer,site){
-	$('#newSn').val(sn)
-	$('#newMo').val(model)
-	$('#newCu').val(customer)
-	$('#newSi').val(site)
-}
-
-function caricaCust(){
-	firebase.default.database().ref('Customers').once('value',s=>{
-		console.log(JSON.stringify(s.val()))
-	})
-}
-
-function loadCust(){
-	$('#CustList').append('<table id="tabCust"></table>')
-	firebase.default.database().ref('Customers').once('value', a=>{
-		a.forEach(b=>{
-			var str = `<tr><td>${b.val().c1}</td><td>${b.val().c2}</td><td>${b.val().c3}</td></tr>`
-			$('#tabCust').append(str)
-		})
-	})
+function getUsers(){
+	
 }

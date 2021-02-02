@@ -804,7 +804,59 @@
 
 <div id="contSU">
 	<div id="usersCont">
-		<div class="contH">Users</div>
+		<div class="contH">Utenti</div>
+		<div class="contNew">
+			<div class="aNew">
+				<p class="newHeader">Nuovo Utente</p>
+			</div>
+			<div class="bNew">
+				<input class="inputNew" placeholder="Nome">
+				<input class="inputNew" placeholder="Cognome">
+				<input class="inputNew" placeholder="Mail">
+				<input class="inputNew"  placeholder="Ruolo">
+			</div>
+			<div class="cNew">
+				<button class="pulsante">Ok</button>
+			</div>
+			
+		</div>
+		<div class="contList">
+			<div class="usersT">
+				<table class="usersTab">
+					<tr>
+						<th>Nome</th>
+						<th>Cognome</th>
+						<th>Mail</th>
+						<th>Pos</th>
+					</tr>					
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+					<tr><td>a</td><td>a</td><td>a</td><td>a</td></tr>
+				</table>
+			</div>
+		</div>
 	</div>
 	<div id="rigsCont">
 		<div class="contH">Macchine</div>
@@ -1011,7 +1063,7 @@ ipcRenderer.on('km', function(){coeffkm()});
 ipcRenderer.on('arch', function(){temp()});
 ipcRenderer.on('print', function(){stampa()})
 ipcRenderer.on('su', function(){openMenu('menuSU')})
-ipcRenderer.on('UsersAdmin', function(){showUsers()})
+ipcRenderer.on('UsersAdmin', function(){showAdmin()})
 ipcRenderer.on('vecchi', function(){vecchi()})
 
 var data = ipcRenderer.sendSync('get-file-data');
