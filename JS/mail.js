@@ -4,6 +4,7 @@ const { get } = require('http');
 const { allowedNodeEnvironmentFlags } = require('process');
 var utenti=[]
 const url = 'https://episjobreq.herokuapp.com/'
+var showSU = false
 
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
     var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
@@ -325,7 +326,15 @@ function sortUserTable(q, tabN) {
 }
 
 function showUsers(){
-	openMenu('UserAdmin')
+	if(showSU){
+		$('#salva').show()
+		$('#contSU').css( "display", "none" )
+		showSU=!showSU
+	} else {
+		$('#salva').hide()
+		$('#contSU').css( "display", "flex" )
+		showSU=!showSU
+	}
 }
 
 function showRigs(){

@@ -4,7 +4,7 @@
 <head>
 	<title>Epiroc Italia s.r.l. - Service Job</title>
     <link rel="stylesheet" type="text/css" href="stile.css">
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 	<script src="js/jquery.js"></script>
 	<script src="js/mail.js"></script> 
 	<script src="js/command.js"></script>
@@ -802,7 +802,22 @@
 </div>
 </div>
 
-<div class="ccc" ><!--UserAdmin-->
+<div id="contSU">
+	<div id="usersCont">
+		<div class="contH">Users</div>
+	</div>
+	<div id="rigsCont">
+		<div class="contH">Macchine</div>
+	</div>
+	<div id="customersCont">
+		<div class="contH">Clienti</div>
+	</div>
+	<div id="techCont">
+		<div class="contH">Tecnici</div>
+	</div>
+</div>
+
+<!--div class="ccc" >
 <div class="inser"></div>
 <div class="finestra AdMenu" id="UserAdmin">
 	<div class="barrat"><div class="g"></div><p class="tt">Utenti</p></div>
@@ -818,7 +833,7 @@
 	
 </div> 
 
-<div class="ccc" ><!--RigAdmin-->
+<div class="ccc" >
 <div class="inser"><table id="listac"></table></div>
 <div class="finestra AdMenu" id="RigAdmin">
 	<div class="barrat"><div class="g"></div><p class="tt">Macchine</p></div>
@@ -861,7 +876,7 @@
 	<button class="pulsante" onclick="closeSU()">Ok</button>
 </div>
 
-<div class="ccc" ><!--CustAdmin-->
+<div class="ccc" >
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 <div class="finestra AdMenu" id="CustAdmin">
 	<div class="barrat"><div class="g"></div><p class="tt">Clienti</p></div>
@@ -875,7 +890,7 @@
 		<div id="CustList"></div>
 	</div>
 	<button class="pulsante" onclick="closeSU()">Ok</button>
-</div> 
+</div> -->
 
 
 
@@ -996,7 +1011,7 @@ ipcRenderer.on('km', function(){coeffkm()});
 ipcRenderer.on('arch', function(){temp()});
 ipcRenderer.on('print', function(){stampa()})
 ipcRenderer.on('su', function(){openMenu('menuSU')})
-ipcRenderer.on('UsersAdmin', function(){openMenu('UserAdmin'); getUsers()})
+ipcRenderer.on('UsersAdmin', function(){showUsers()})
 ipcRenderer.on('vecchi', function(){vecchi()})
 
 var data = ipcRenderer.sendSync('get-file-data');

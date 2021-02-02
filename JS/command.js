@@ -14,27 +14,6 @@ const pathfs = require('path');
 const os = require('os');
 
 
-/*function LoginList() {
-	
-	require('dns').lookup('google.com',(err)=> {
-        if (err && err.code == "ENOTFOUND") {
-			//console.log('Offline')
-        } else {
-            var id = 'Login/' + require("os").userInfo().username + "/" + moment(new Date()).format("YYYYMMDDHHmmss");
-			var uName = require("os").userInfo().username;
-			var aData = moment(new Date()).format("DD/MM/YYYY - HH:mm:ss");
-			var hName = require("os").hostname();
-			var aVer = remote.app.getVersion();
-				firebase.database().ref(id).set({
-				User: uName,
-				Data: aData,
-				hostname: hName,
-				AppVersion: aVer
-			});
-        }
-    })
-}*/
-
 function UpFiles(){
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
@@ -86,9 +65,6 @@ function openMenu(n){
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
 	if(n=='menurisk'){};
-	if(n=='UserAdmin'){getUsers()};
-	if(n=='CustAdmin'){loadCust()};
-	if(n=='RigAdmin'){loadRigs()};
 	if(n=='sond1a'){
 		$('#nomecognome').val($('#contnomec').text())
 		caricasond();
@@ -128,11 +104,6 @@ function dimen(){
   var ff1 = $(".finestrao")
   for(var u=0;u<ff1.length;u++){
       ff1[u].style.maxHeight = window.innerHeight- 300 +"px";
-  }
-  var ff2 = $(".finestra")
-  for(var u=0;u<ff2.length;u++){
-	  $('.contGr')[0].style.height = window.innerHeight- 120 +"px"
-      ff2[u].style.height = window.innerHeight- 80 +"px";
   }
 }
 
