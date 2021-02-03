@@ -19,14 +19,18 @@ var path = require('path').join(require('os').homedir(),'Documents','ServiceJobC
 var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
 var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','mol.list')
 var pathcus = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','cus.list')
+var pathtech = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','tech.list')
 
 function aggiornatech(){
   firebase.default.database().ref('Tech/').once('value', s=>{
-    $('#tec').html('')
-    $('#tec').append(new Option('','none'))
-    s.forEach(a=>{
-      $('#tec').append(new Option(a.val().s,a.key))
-    })
+    require('fs').writeFileSync(pathtech,JSON.stringify(s.val()))
+  })
+  .then(()=>{
+    loadtech()
+  })
+  .catch(err=>{
+    loadtech()
+    console.log(err)
   })
 }
 
@@ -48,6 +52,15 @@ async function aggiornamol(){
   .catch(err=>{
     loadMOL()
     console.log(err)
+  })
+}
+
+function loadtech(){
+  var tech = require('fs').readFileSync(pathtech,'utf-8')
+  $('#tec').html('')
+  $('#tec').append(new Option('','none'))
+  $.each(JSON.parse(tech), (a,i)=>{
+    $('#tec').append(new Option(i.s, a))
   })
 }
 
