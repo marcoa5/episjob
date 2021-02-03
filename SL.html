@@ -982,9 +982,9 @@ $('#menurisk').draggable();
 
 function Upd(){
 	contaSchede();
-	loadtech()
-	loadMOL()
-	loadCus()
+	loadtech();
+	loadMOL();
+	loadCus();
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
 			//console.log('Offline')
