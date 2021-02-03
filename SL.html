@@ -27,7 +27,7 @@
                         <div class="foglio" id="pagina">
                                 <div class="margini">
                                         <div class="int">
-                                                <div class="logo" onclick="caricaCust()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
+                                                <div class="logo" onclick=""><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. EUR 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.it</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
@@ -835,18 +835,21 @@
 				<p class="newHeader">Nuova Macchina</p>
 			</div>
 			<div class="bNew">
-				<input class="inputNew" placeholder="Nome">
-				<input class="inputNew" placeholder="Cognome">
-				<input class="inputNew" placeholder="Mail">
-				<input class="inputNew"  placeholder="Ruolo">
+				<input class="inputNew" placeholder="S/n" id="rigSnr" onkeyup="chRigComp()">
+				<input class="inputNew" placeholder="Modello" id="rigMod" onkeyup="chRigComp()">
+				<select class="inputNew" style="text-align: center;"  placeholder="Cliente" id="rigCus" onkeyup="chRigComp()">
+				<input class="inputNew"  placeholder="Cantiere" id="rigSit" onkeyup="chRigComp()">
 			</div>
 			<div class="cNew">
-				<button class="pulsante">Aggiungi</button>
+				<button class="pulsante" id="userClean" onclick="rigClean()">Pulisci</button>
+				<button class="pulsante" disabled id="rigAddBut" onclick="rigAdd()">Aggiungi</button>
 			</div>
 			
 		</div>
 		<div class="contList">
-			<input placeholder="filtro" onkeyup="filterRigs(event)">
+			<div class="contFil">
+				<input placeholder="Testo da cercare..." onkeyup="filterTab(event, 'rigsTab')" style="width: 60%; font-size: 7<pt; font-weight: 900;">
+			</div>
 			<div class="rigsT">
 				<img id="spinnerRigs" src="img/spinner.gif">
 				
@@ -854,91 +857,37 @@
 			</div>
 		</div>
 	</div>
-	<div id="customersCont">
+	<div id="custCont">
 		<div class="contH">Clienti</div>
+		<div class="contNew">
+			<div class="aNew">
+				<p class="newHeader">Nuovo Cliente</p>
+			</div>
+			<div class="bNew">
+				<input class="inputNew inputCust" placeholder="Ragione Sociale" id="custC1" onkeyup="chCustComp()">
+				<input class="inputNew inputCust" placeholder="Inidirizzo 1" id="custC2" onkeyup="chCustComp()">
+				<input class="inputNew inputCust" placeholder="Inidirizzo 2" id="custC3" onkeyup="chCustComp()">
+			</div>
+			<div class="cNew">
+				<button class="pulsante" id="userClean" onclick="custClean()">Pulisci</button>
+				<button class="pulsante" disabled id="custAddBut" onclick="custAdd()">Aggiungi</button>
+			</div>
+		</div>
+			<div class="contList">
+				<div class="contFil">
+					<input placeholder="Testo da cercare..." onkeyup="filterTab(event, 'custTab')" style="width: 60%; font-size: 7pt; font-weight: 900;">
+				</div>
+				<div class="custT">
+					<img id="spinnerCust" src="img/spinner.gif">
+					<table class="custTab" id="custTab"></table>
+				</div>
+			</div>
+
 	</div>
 	<div id="techCont">
 		<div class="contH">Tecnici</div>
 	</div>
 </div>
-
-<!--div class="ccc" >
-<div class="inser"></div>
-<div class="finestra AdMenu" id="UserAdmin">
-	<div class="barrat"><div class="g"></div><p class="tt">Utenti</p></div>
-	<div class="contGr">
-		<div class="butGroup">
-			<button class="pulsante pMenu" onclick="showUsers()">Utenti</button>
-			<button class="pulsante pMenu" onclick="showRigs()">Macchine</button>
-			<button class="pulsante pMenu" onclick="showCust()">Clienti</button>
-		</div>
-		<div id="listaUtenti"></div>
-		<button class="pulsante" onclick="closeSU()">Ok</button>
-	</div>
-	
-</div> 
-
-<div class="ccc" >
-<div class="inser"><table id="listac"></table></div>
-<div class="finestra AdMenu" id="RigAdmin">
-	<div class="barrat"><div class="g"></div><p class="tt">Macchine</p></div>
-	<div class="butGroup">
-		<button class="pulsante pMenu" onclick="showUsers()">Utenti</button>
-		<button class="pulsante pMenu" onclick="showRigs()">Macchine</button>
-		<button class="pulsante pMenu" onclick="showCust()">Clienti</button>
-	</div>
-	<div id="cercaMac" style="font-size: 50%;">
-		<div class="rigTitolo">Nuova Macchina</div>
-		<div class="rigNuova">
-			<div class="rigInput">
-				<div class="rigRow">
-					<input class="inputNewRig" placeholder="s/n" type="text" id="newSn" onkeyup="chRig()">
-				</div>
-				<div class="rigRow">
-					<input class="inputNewRig" placeholder="Modello" type="text" id="newMo" onkeyup="chRig()">
-				</div>
-
-			</div>
-			<div class="rigInput">
-				<div class="rigRow">
-					<input class="inputNewRig" placeholder="Cliente" type="text" id="newCu" onkeyup="chRig()">
-				</div>
-				<div class="rigRow">
-					<input class="inputNewRig" placeholder="Cantiere" id="newSi" onkeyup="chRig()">
-				</div>
-			</div>
-			<div class="rigPiu">
-				<button onclick="addRig()" id="butPiu" class="pulsante" disabled>+</button>
-			</div>
-		</div>
-		<div class="rigTitolo">
-			<input class="inputNewRig" placeholder="Filtro" style="width: 50%;" id="rigFilter" onkeyup="filterRigs(event)">
-		</div>	
-	</div>
-	<div class="finestrao" id="tabUtMac">
-		<div id="listaMacchine"></div>
-	</div>
-	<button class="pulsante" onclick="closeSU()">Ok</button>
-</div>
-
-<div class="ccc" >
-<div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
-<div class="finestra AdMenu" id="CustAdmin">
-	<div class="barrat"><div class="g"></div><p class="tt">Clienti</p></div>
-	<div class="butGroup">
-		<button class="pulsante pMenu" onclick="showUsers()">Utenti</button>
-		<button class="pulsante pMenu" onclick="showRigs()">Macchine</button>
-		<button class="pulsante pMenu" onclick="showCust()">Clienti</button>
-	</div>
-	<br>
-	<div class="finestrao">
-		<div id="CustList"></div>
-	</div>
-	<button class="pulsante" onclick="closeSU()">Ok</button>
-</div> -->
-
-
-
 
 <!--barra gialla in alto-->
 <div id="menuA" class="menu">
@@ -1018,7 +967,7 @@ function Upd(){
 			contEconf();
 			aggiornamol();
 			aggiornacli();
-			//aggiornatech();
+			aggiornatech();
 		}
 	})
 }

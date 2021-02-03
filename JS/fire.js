@@ -21,14 +21,11 @@ var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJ
 var pathcus = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','cus.list')
 
 function aggiornatech(){
-  firebase.storage().ref('techupd.txt').getDownloadURL().then(function(url) {
-    $.get(url, (data)=> {
-			fs.writeFileSync(__dirname + "\\tech.txt", data)
-		})
-  })
-  .catch(err=>{
-    loadMOL()
-    console.log('ERROR: ' + err)
+  $('#tec').append(new Option('','none'))
+  firebase.default.database().ref('Tech/').once('value', s=>{
+    s.forEach(a=>{
+      $('#tec').append(new Option(a.val().s,a.key))
+    })
   })
 }
 

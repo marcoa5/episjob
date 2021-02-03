@@ -679,28 +679,9 @@ function ver_pulisci(){
 }
 		
 function oggi(){
-	/*var n =  new Date();
-	var y = n.getFullYear();
-	var m = n.getMonth() + 1;
-	var d = n.getDate();*/
 	$('#data1').val(convdata(today()));	
-	var i=1;
-	$('#tec').html("");
-	$.get('.//tech.txt', (data) =>{
-		var linee = data.split("\n");
-		var stringa= '<option value=""> </option>';
-		$('#tec').append(stringa);
-			$.each(linee, function(n, elem) {
-				var record = elem.split("_");
-				if(record[0]!==""){
-					var stringa= '<option value="' + record[0] + '">' + record[1] + '</option>';
-					$('#tec').append(stringa);
-					i++;
-				}
-			});
 		setTech();
 		controlladata();
-		});
 }
 
 function aggiungi() {

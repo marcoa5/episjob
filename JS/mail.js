@@ -196,6 +196,21 @@ function userClean(){
 	$('#userAddBut').prop('disabled',true)
 }
 
+function rigClean(){
+	$('#rigSnr').val('')
+	$('#rigMod').val('')
+	$('#rigCus').val('')
+	$('#rigSit').val('')
+	$('#rigAddBut').prop('disabled',true)
+}
+
+function custClean(){
+	$('#custC1').val('')
+	$('#custC2').val('')
+	$('#custC3').val('')
+	$('#custAddBut').prop('disabled',true)
+}
+
 function userAdd(e){
 	var p = {Nome: $('#uNome').val(), Cognome:$('#uCognome').val(),Mail:$('#uMail').val(),Pos:$('#uPos').val(),km:0.05}
 	$.ajax({
@@ -208,6 +223,22 @@ function userAdd(e){
 	})	
 }
 
+function rigMod(a){
+	$('#rigSnr').val($('#r' + a + '1').text())
+	$('#rigMod').val($('#r' + a + '2').text())
+	$('#rigCus').val($('#r' + a + '3').text())
+	$('#rigSit').val($('#r' + a + '4').text())
+	$('#rigAddBut').prop('disabled',false)
+}
+
+function custMod(a){
+	console.log($('#c' + a + 1).text())
+	$('#custC1').val($('#c' + a + 1).text())
+	$('#custC2').val($('#c' + a + 2).text())
+	$('#custC3').val($('#c' + a + 3).text())
+	$('#custAddBut').prop('disabled',false)
+} 
+
 function chComp(){
 	var a = $('#uNome').val()
 	var b = $('#uCognome').val()
@@ -217,6 +248,29 @@ function chComp(){
 		$('#userAddBut').prop('disabled',true)
 	} else {
 		$('#userAddBut').prop('disabled',false)
+	}
+}
+
+function chRigComp(){
+	var a = $('#rigSnr').val()
+	var b = $('#rigMod').val()
+	var c = $('#rigCus').val()
+	var d = $('#rigSit').val()
+	if(a=='' || b=='' || c=='' || d==''){
+		$('#rigAddBut').prop('disabled',true)
+	} else {
+		$('#rigAddBut').prop('disabled',false)
+	}
+}
+
+function chCustComp(){
+	var a = $('#custC1').val()
+	var b = $('#custC2').val()
+	var c = $('#custC3').val()
+	if(a=='' || b=='' || c==''){
+		$('#custAddBut').prop('disabled',true)
+	} else {
+		$('#custAddBut').prop('disabled',false)
 	}
 }
 
@@ -241,6 +295,37 @@ function userDel(a){
 			})
 			}
 		}
+	})
+}
+
+function rigDel(a){
+	const options = {
+		type: 'question',
+		buttons: ['No', 'Si'],
+		title: 'Eliminazione',
+		message: `Vuoi eliminare ${$('#r' + a + '1').text()} - ${$('#r' + a + '2').text()}?`,
+		noLink: true,
+	};
+	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
+	if(sc==1){
+		firebase.default.database().ref('MOL/' + $('#r' + a + '1').text()).remove()
+		getRigs()
+	}
+}
+
+function rigAdd(){
+	var a = $('#rigSnr').val()
+	var b = $('#rigMod').val()
+	var c = $('#rigCus').val()
+	var d = $('#rigSit').val()
+	firebase.default.database().ref('MOL/' + a).set({
+		sn: a,
+		model: b,
+		customer: c,
+		site:d
+	})
+	.then(()=>{
+		getRigs()
 	})
 }
 
@@ -273,7 +358,7 @@ function sortSUTable(q, tabN) {
 	}
 }
 
-function showAdmin(){
+async function showAdmin(){
 	if(showSU){
 		$('#salva').show()
 		$('#contSU').css( "display", "none" )
@@ -281,8 +366,10 @@ function showAdmin(){
 	} else {
 		$('#salva').hide()
 		$('#contSU').css( "display", "flex" )
+		await getCust()
 		getUsers()
 		getRigs()
+		
 		showSU=!showSU
 	}
 }
@@ -317,28 +404,77 @@ function getUsers(){
 }
 
 function getRigs(){
-	$('#spinnerRigs').hide()
 	$('#rigsTab').html('')
-	$('#rigsTab').html('<tr><th>s/n</th><th>Modello</th><th>Cliente</th><th>Cantiere</th><th>M</th><th>E</th></tr>')
-	firebase.default.database().ref('MOL/').once('value',s=>{
+	firebase.default.database().ref('MOL/').on('value',s=>{
+		$('#spinnerRigs').hide()
+		$('#rigsTab').html('<tr><th>s/n</th><th>Modello</th><th>Cliente</th><th>Cantiere</th><th>M</th><th>E</th></tr>')
+		var i = 1
 		s.forEach(rigs=>{
 			var r = rigs.val()
-			$('#rigsTab').append('<tr><td>'+r.sn+'</td><td>'+r.model+'</td><td>'+r.customer+'</td><td>' + r.site + '</td><td class="tabB"><button class="pulsante pulEl" onclick="userDel(\'' + r.sn + '\')">M</button></td><td class="tabB"><button class="pulsante pulEl" onclick="userDel(\'' + r.sn + '\')">E</button></td></tr>')
+			$('#rigsTab').append('<tr><td id="r'+ i +'1">'+r.sn+'</td><td id="r'+ i +'2">'+r.model+'</td><td id="r'+ i +'3">'+r.customer+'</td><td id="r'+ i +'4">' + r.site + '</td><td class="tabB"><button class="pulsante pulEl" onclick="rigMod('+i+')">M</button></td><td class="tabB"><button class="pulsante pulEl" onclick="rigDel('+i+')">E</button></td></tr>')
+			i++
 		})
 	})
 }
 
-function filterRigs(e){
-	var filter = e.target.value.toUpperCase();
-    var rows = document.querySelector("#rigsTab").rows;
-    
-    for (var i = 0; i < rows.length; i++) {
-        var firstCol = rows[i].cells[0].textContent.toUpperCase();
-        var secondCol = rows[i].cells[1].textContent.toUpperCase();
-        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1) {
-            rows[i].style.display = "";
-        } else {
-            rows[i].style.display = "none";
-        }      
+function filterTab(e,a){
+	var input, filter, table, tr, td, i;
+  input = e.target.value;
+  filter = input.toUpperCase();
+  table = document.getElementById(a);
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    if(tr[i].getElementsByTagName("td")[0]) td = tr[i].getElementsByTagName("td")[0]; // for column one
+	if(tr[i].getElementsByTagName("td")[1]) td1 = tr[i].getElementsByTagName("td")[1];
+	if(tr[i].getElementsByTagName("td")[2]) td2 = tr[i].getElementsByTagName("td")[2];
+	if(tr[i].getElementsByTagName("td")[3]) td3 = tr[i].getElementsByTagName("td")[3]; // for column two
+/* ADD columns here that you want you to filter to be used on */
+    if (td) {
+      if ( (td.innerHTML.toUpperCase().indexOf(filter) > -1) || (td1.innerHTML.toUpperCase().indexOf(filter) > -1) || (td2.innerHTML.toUpperCase().indexOf(filter) > -1) ||(td3.innerHTML.toUpperCase().indexOf(filter) > -1) )  {            
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
     }
+  }
+}
+
+function custDel(a){
+	const options = {
+		type: 'question',
+		buttons: ['No', 'Si'],
+		title: 'Eliminazione',
+		message: `Vuoi eliminare ${$('#c' + a + '1').text()}?`,
+		noLink: true,
+	};
+	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
+	if(sc==1){
+		firebase.default.database().ref('Customers/' + $('#c' + a + '1').text()).remove()
+		getCust()
+	}
+}
+
+function getCust(){
+	firebase.default.database().ref('Customers').on('value',s=>{
+		$('#spinnerCust').hide()
+		$('#custTab').append('<tr><th>Rag Soc</th><th>Ind1</th><th>Ind2</th><th>M</th><th>E</th></tr>')
+		var i = 1
+		$('#rigCus').append(new Option('','none'))
+		s.forEach(a=>{
+			$('#custTab').append('<tr><td id="c' + i + '1">' + a.val().c1 + '</td><td id="c' + i + '2">' + a.val().c2 + '</td><td id="c' + i + '3">' + a.val().c3 + '</td><td class="tabB"><button class="pulsante pulEl"  onclick="custMod(\'' + i + '\')">M</button></td><td class="tabB"><button class="pulsante pulEl" onclick="custDel(\''+i+'\')">E</button></td></tr>')	
+			$('#rigCus').append(new Option(a.val().c1, a.val().c1));
+			i++
+		})
+		
+	})
+}
+
+function io(){
+	var s="ANDREA LAINI_A. LAINI-GIORGIO RIZZI_G. RIZZI-GABRIELE PICCIONI_G. PICCIONI-ROBERTO BOTRE_R. BOTRE-ENZO FELICI_E. FELICI-CLAUDIO MICHIELOTTO_C. MICHIELOTTO-WALTER BIAGIONI_W. BIAGIONI-RAFFAELE RECH_R. RECH-IVAN OVACIUC_I. OVACIUC-PIETRO CIANGOLI_P. CIANGOLI-SAID ELAKHRAS_S. ELAKHRAS-ALESSANDRO MOLLO_A. MOLLO-FABRIZIO VERNIA_F. VERNIA-GIANFRANCO MURA_G. MURA-FRANCESCO MURA_F. MURA-NATALINO CARUSO_N. CARUSO-ALESSANDRO ALESCIO_A. ALESCIO-VITO ERRICO_V. ERRICO-MAURIZIO BERARDI_M. BERARDI-MICHEL PASCAL_M. PASCAL"
+	var t = s.split("-")
+	t.forEach(e=>{
+		firebase.default.database().ref('Tech/' + e.split("_")[0]).set({
+			s: e.split("_")[1]
+		})
+	})
 }

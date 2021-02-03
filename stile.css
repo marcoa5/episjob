@@ -1390,9 +1390,9 @@ input[type=email]:valid{
     position: fixed;
     left:0; top: 0;
     display: none;
-    height: 100%;
+    height: 95%;
     width: 100%;
-    padding-top: 30px;
+    padding: 30px;
     background-color: white;
     flex-direction: row;
     justify-content: space-evenly;
@@ -1400,7 +1400,7 @@ input[type=email]:valid{
     overflow: auto;
 }
 
-#usersCont, #rigsCont, #customersCont, #techCont{
+#usersCont, #rigsCont, #custCont, #techCont{
     box-sizing: border-box;
     min-width: 500px;
     max-height: 500px;
@@ -1418,6 +1418,11 @@ input[type=email]:valid{
 #rigsCont{
     min-width: 750px;
 }
+
+#custCont{
+    min-width: 750px;
+}
+
 
 .contH{
     height:5%;
@@ -1449,8 +1454,7 @@ input[type=email]:valid{
     border-bottom-left-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-
+    justify-content: flex-start;
 }
 
 .inputNew{
@@ -1498,14 +1502,14 @@ input[type=email]:valid{
     margin:0;
 }
 
-.usersT, .rigsT{
+.usersT, .rigsT, .custT{
     margin: 10px;
     width: 100%;
     overflow-y: auto;
-    overflow-x: hidden;
+    height: 90%;
 }
 
-.usersTab, .rigsTab{
+.usersTab, .rigsTab, .custTab{
     width:85%;
     border-collapse: collapse;
     border: 1px solid rgb(66, 85, 99);
@@ -1514,12 +1518,12 @@ input[type=email]:valid{
     font-weight: 900;
 }
 
-.usersTab td, .usersTab th,.rigsTab td, .rigsTab th{
+.usersTab td, .usersTab th,.rigsTab td, .rigsTab th,.custTab td, .custTab th{
     border: 1px solid rgb(66, 85, 99);
     color: rgb(66, 85, 99);
 }
 
-.usersTab th,.rigsTab th{
+.usersTab th,.rigsTab th,.custTab th{
     background-color: rgb(66, 85, 99);
     color: rgb(255,205,0);
     cursor: pointer;
@@ -1528,4 +1532,12 @@ input[type=email]:valid{
 .tabB{
     text-align: center;
     min-width: 40px;
+}
+
+.contFil{
+    min-height: 20px;
+}
+
+.inputCust{
+    width: 30%;
 }
