@@ -218,6 +218,7 @@ function userAdd(e){
 		type: 'GET',
 		data: jQuery.param(p),
 		success: res=>{
+			userClean()
 			getUsers()
 		}
 	})	
@@ -232,7 +233,6 @@ function rigMod(a){
 }
 
 function custMod(a){
-	console.log($('#c' + a + 1).text())
 	$('#custC1').val($('#c' + a + 1).text())
 	$('#custC2').val($('#c' + a + 2).text())
 	$('#custC3').val($('#c' + a + 3).text())
@@ -309,6 +309,7 @@ function rigDel(a){
 	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	if(sc==1){
 		firebase.default.database().ref('MOL/' + $('#r' + a + '1').text()).remove()
+		aggiornamol()
 		getRigs()
 	}
 }
@@ -325,7 +326,9 @@ function rigAdd(){
 		site:d
 	})
 	.then(()=>{
+		aggiornamol()
 		getRigs()
+		rigClean()
 	})
 }
 
@@ -369,7 +372,7 @@ async function showAdmin(){
 		await getCust()
 		getUsers()
 		getRigs()
-		
+		getTech()
 		showSU=!showSU
 	}
 }
@@ -418,17 +421,16 @@ function getRigs(){
 }
 
 function filterTab(e,a){
-	var input, filter, table, tr, td, i;
+	var input, filter, table, tr, td, i, td1,td2,td3;
   input = e.target.value;
   filter = input.toUpperCase();
   table = document.getElementById(a);
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    if(tr[i].getElementsByTagName("td")[0]) td = tr[i].getElementsByTagName("td")[0]; // for column one
+    td = tr[i].getElementsByTagName("td")[0]; // for column one
 	if(tr[i].getElementsByTagName("td")[1]) td1 = tr[i].getElementsByTagName("td")[1];
 	if(tr[i].getElementsByTagName("td")[2]) td2 = tr[i].getElementsByTagName("td")[2];
-	if(tr[i].getElementsByTagName("td")[3]) td3 = tr[i].getElementsByTagName("td")[3]; // for column two
-/* ADD columns here that you want you to filter to be used on */
+	if(tr[i].getElementsByTagName("td")[3]) td3 = tr[i].getElementsByTagName("td")[3]; 
     if (td) {
       if ( (td.innerHTML.toUpperCase().indexOf(filter) > -1) || (td1.innerHTML.toUpperCase().indexOf(filter) > -1) || (td2.innerHTML.toUpperCase().indexOf(filter) > -1) ||(td3.innerHTML.toUpperCase().indexOf(filter) > -1) )  {            
         tr[i].style.display = "";
@@ -450,11 +452,13 @@ function custDel(a){
 	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	if(sc==1){
 		firebase.default.database().ref('Customers/' + $('#c' + a + '1').text()).remove()
+		aggiornacli()
 		getCust()
 	}
 }
 
 function getCust(){
+	$('#custTab').html('')
 	firebase.default.database().ref('Customers').on('value',s=>{
 		$('#spinnerCust').hide()
 		$('#custTab').append('<tr><th>Rag Soc</th><th>Ind1</th><th>Ind2</th><th>M</th><th>E</th></tr>')
@@ -469,12 +473,85 @@ function getCust(){
 	})
 }
 
-function io(){
-	var s="ANDREA LAINI_A. LAINI-GIORGIO RIZZI_G. RIZZI-GABRIELE PICCIONI_G. PICCIONI-ROBERTO BOTRE_R. BOTRE-ENZO FELICI_E. FELICI-CLAUDIO MICHIELOTTO_C. MICHIELOTTO-WALTER BIAGIONI_W. BIAGIONI-RAFFAELE RECH_R. RECH-IVAN OVACIUC_I. OVACIUC-PIETRO CIANGOLI_P. CIANGOLI-SAID ELAKHRAS_S. ELAKHRAS-ALESSANDRO MOLLO_A. MOLLO-FABRIZIO VERNIA_F. VERNIA-GIANFRANCO MURA_G. MURA-FRANCESCO MURA_F. MURA-NATALINO CARUSO_N. CARUSO-ALESSANDRO ALESCIO_A. ALESCIO-VITO ERRICO_V. ERRICO-MAURIZIO BERARDI_M. BERARDI-MICHEL PASCAL_M. PASCAL"
-	var t = s.split("-")
-	t.forEach(e=>{
-		firebase.default.database().ref('Tech/' + e.split("_")[0]).set({
-			s: e.split("_")[1]
+function chTechComp(){
+	var a = $('#inTechN').val()
+	var b = $('#inTechS').val()
+	if(a=='' || b ==''){
+		$('#techAddBut').prop('disabled',true)
+	} else {
+		$('#techAddBut').prop('disabled',false)
+	}
+}
+
+function techClean(){
+	$('#inTechN').val('')
+	$('#inTechS').val('')
+	$('#techAddBut').prop('disabled',true)
+}
+
+function getTech(){
+	$('#techTab').html('')
+	var i=1
+	firebase.default.database().ref('Tech').on('value',s=>{
+		$('#techTab').append('<tr><th>Nome</th><th>Short</th><th>M</th><th>M</th></tr>')
+		$('#spinnerTech').hide()
+		s.forEach(a=>{
+			$('#techTab').append('<tr><td id="t'+  i + '1">' + a.key + '</td><td id="t'+  i + '2">' + a.val().s + '</td><td class="tabB"><button class="pulsante pulEl"  onclick="techMod(\'' + i + '\')">M</button></td><td class="tabB"><button class="pulsante pulEl" onclick="techDel(\''+i+'\')">E</button></td></tr>')
+			i++
 		})
 	})
+}
+
+function techMod(a){
+	$('#inTechN').val($('#t' + a + '1').text())
+	$('#inTechS').val($('#t' + a + '2').text())
+	$('#techAddBut').prop('disabled',false)
+}
+
+function custAdd(){
+	var a = $('#custC1').val()
+	var b = $('#custC2').val()
+	var c = $('#custC3').val()
+	firebase.default.database().ref('Customers/' + a).set({
+		c1: a,
+		c2:b,
+		c3:c
+	})
+	.then(()=>{
+		aggiornacli()
+		custClean()
+		getCust()
+	})
+}
+
+function techAdd(){
+	var a = $('#inTechN').val()
+	var b = $('#inTechS').val()
+	firebase.default.database().ref('Tech/' + a).set({
+		s: b
+	})
+	.then(()=>{
+		aggiornatech()
+		techClean()
+		getTech()
+	})
+}
+
+function techDel(a){
+	const options = {
+		type: 'question',
+		buttons: ['No', 'Si'],
+		title: 'Eliminazione',
+		message: `Vuoi eliminare ${$('#t' + a + '1').text()}?`,
+		noLink: true,
+	};
+	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
+	if(sc==1){
+		firebase.default.database().ref('Tech/' + $('#t' + a + '1').text()).remove()
+		.then(()=>{
+			aggiornatech()
+			getTech()
+		})
+	}
+	
 }

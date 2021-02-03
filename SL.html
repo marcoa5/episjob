@@ -886,6 +886,28 @@
 	</div>
 	<div id="techCont">
 		<div class="contH">Tecnici</div>
+		<div class="contNew">
+			<div class="aNew">
+				<p class="newHeader">Nuovo Tecnico</p>
+			</div>
+			<div class="bNew">
+				<input class="inputNew" placeholder="Nome Cognome" id="inTechN" onkeyup="chTechComp()">
+				<input class="inputNew" placeholder="N. Cognome" id="inTechS" onkeyup="chTechComp()">
+			</div>
+			<div class="cNew">
+				<button class="pulsante" id="userClean" onclick="techClean()">Pulisci</button>
+				<button class="pulsante" disabled id="techAddBut" onclick="techAdd()">Aggiungi</button>
+			</div>
+		</div>
+		<div class="contList">
+				<div class="contFil">
+					<input placeholder="Testo da cercare..." onkeyup="filterTab(event, 'techTab')" style="width: 60%; font-size: 7pt; font-weight: 900;">
+				</div>
+				<div class="techT">
+					<img id="spinnerTech" src="img/spinner.gif">
+					<table class="techTab" id="techTab"></table>
+				</div>
+			</div>
 	</div>
 </div>
 

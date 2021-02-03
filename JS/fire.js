@@ -21,8 +21,9 @@ var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJ
 var pathcus = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','cus.list')
 
 function aggiornatech(){
-  $('#tec').append(new Option('','none'))
   firebase.default.database().ref('Tech/').once('value', s=>{
+    $('#tec').html('')
+    $('#tec').append(new Option('','none'))
     s.forEach(a=>{
       $('#tec').append(new Option(a.val().s,a.key))
     })

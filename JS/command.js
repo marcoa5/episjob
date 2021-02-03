@@ -491,7 +491,7 @@ function Apri(){
 
 	$('#listac tr').remove();
     var i = 1
-    $.get('.\\customers.txt', function(data) {
+    /*$.get('.\\customers.txt', function(data) {
 		var linee = data.split("\n");
 		$.each(linee, function(n, elem) {
 			var record = elem.split("_");

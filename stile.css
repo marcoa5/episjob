@@ -1502,14 +1502,14 @@ input[type=email]:valid{
     margin:0;
 }
 
-.usersT, .rigsT, .custT{
+.usersT, .rigsT, .custT, .techT{
     margin: 10px;
     width: 100%;
     overflow-y: auto;
     height: 90%;
 }
 
-.usersTab, .rigsTab, .custTab{
+.usersTab, .rigsTab, .custTab, .techTab{
     width:85%;
     border-collapse: collapse;
     border: 1px solid rgb(66, 85, 99);
@@ -1518,12 +1518,12 @@ input[type=email]:valid{
     font-weight: 900;
 }
 
-.usersTab td, .usersTab th,.rigsTab td, .rigsTab th,.custTab td, .custTab th{
+.usersTab td, .usersTab th,.rigsTab td, .rigsTab th,.custTab td, .custTab th,.techTab td, .techTab th{
     border: 1px solid rgb(66, 85, 99);
     color: rgb(66, 85, 99);
 }
 
-.usersTab th,.rigsTab th,.custTab th{
+.usersTab th,.rigsTab th,.custTab th, .techTab th{
     background-color: rgb(66, 85, 99);
     color: rgb(255,205,0);
     cursor: pointer;
