@@ -208,7 +208,7 @@ async function loadMOL(){
 				stringa += '</tr>';
         $('#listam').append(stringa);
         i++
-        sortUserTable(0,'listam')
+        sortSUTable(0,'listam')
   })
   
 }

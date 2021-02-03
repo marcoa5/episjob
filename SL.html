@@ -810,6 +810,31 @@
 				<p class="newHeader">Nuovo Utente</p>
 			</div>
 			<div class="bNew">
+				<input class="inputNew" placeholder="Nome" id="uNome" onkeyup="chComp()">
+				<input class="inputNew" placeholder="Cognome"  id="uCognome" onkeyup="chComp()">
+				<input class="inputNew" placeholder="Mail"  id="uMail" onkeyup="chComp()">
+				<input class="inputNew"  placeholder="Ruolo"  id="uPos" onkeyup="chComp()">
+			</div>
+			<div class="cNew">
+				<button class="pulsante" id="userClean" onclick="userClean()">Pulisci</button>
+				<button class="pulsante" disabled id="userAddBut">Aggiungi</button>
+			</div>
+			
+		</div>
+		<div class="contList">
+			<div class="usersT">
+				<img id="spinnerUsers" src="img/spinner.gif">
+				<table class="usersTab" id="usersTab"></table>
+			</div>
+		</div>
+	</div>
+	<div id="rigsCont">
+		<div class="contH">Macchine</div>
+		<div class="contNew">
+			<div class="aNew">
+				<p class="newHeader">Nuova Macchina</p>
+			</div>
+			<div class="bNew">
 				<input class="inputNew" placeholder="Nome">
 				<input class="inputNew" placeholder="Cognome">
 				<input class="inputNew" placeholder="Mail">
@@ -821,15 +846,13 @@
 			
 		</div>
 		<div class="contList">
-			<div class="usersT">
-				<table class="usersTab" id="usersTab">
-									
-				</table>
+			<input placeholder="filtro" onkeyup="filterRigs(event)">
+			<div class="rigsT">
+				<img id="spinnerRigs" src="img/spinner.gif">
+				
+				<table class="rigsTab" id="rigsTab"></table>
 			</div>
 		</div>
-	</div>
-	<div id="rigsCont">
-		<div class="contH">Macchine</div>
 	</div>
 	<div id="customersCont">
 		<div class="contH">Clienti</div>
@@ -995,7 +1018,7 @@ function Upd(){
 			contEconf();
 			aggiornamol();
 			aggiornacli();
-			aggiornatech();
+			//aggiornatech();
 		}
 	})
 }

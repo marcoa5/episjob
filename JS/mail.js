@@ -187,55 +187,12 @@ async function callEmail(urlPdf, urlMa, nome){
 	})
 }
 
-/*
-function getUsers(){
-	utenti=[]
-	$('#listaUtenti').html('')
-	$('#newUt').html('')
-	$('#newUt').append('<div id="nUtente"></div>')
-	$('#nUtente').append('<p class="userTesto">Nuovo Utente</p>')
-	$('#nUtente').append('<div id="nuovoUtente"></div>')
-	$('#nuovoUtente').append('<input id="uNome" type="text" placeholder="Nome" onkeyup="chComp()">')
-	$('#nuovoUtente').append('<input id="uCognome" type="text" placeholder="Cognome" onkeyup="chComp()">')
-	$('#nuovoUtente').append('<input id="uMail" type="text" placeholder="email" onkeyup="chComp()">')
-	$('#nuovoUtente').append('<select id="uPos"  onkeyup="chComp()" onchange="chComp()"><option></option><option>tech</option><option>admin</option></select>')
-	$('#nUtente').append('<div id="userButton"></div>')
-	$('#userButton').append('<button class="pulsante" style="width: 40%;" onclick="userClean()">Pulisci</button>')
-	$('#userButton').append('<button id="userAddBut" class="pulsante" style="width: 40%;" onclick="userAdd(event)">Aggiungi</button>')
-	$('#userAddBut').prop('disabled',true)
-	$('#nUtente').append('<p class="userTesto" style="margin: 20px 0 0 0;">Utenti Attivi</p>')
-	$('#listaUtenti').append('<div id="ff"></div>')
-	$('#ff').append('<br><table class="tabUtenti" id="tabUtenti"></table>')
-	$('#tabUtenti').append('<th onclick="sortUserTable(0, \'tabUtenti\')">Nome</th><th onclick="sortUserTable(1, \'tabUtenti\')">Cognome</th><th onclick="sortUserTable(2, \'tabUtenti\')">Ruolo</th><th onclick="sortUserTable(3, \'tabUtenti\')" colspan=2>Mail</th><th>Elimina</th>')
-	$.get(url + 'getusers', (data,err)=>{
-		if(err) console.log(err)
-		data.forEach(a=>{
-			var info = $.ajax({
-				url: url + 'getuserinfo',
-				type: 'GET',
-				data: jQuery.param({id: a.uid}),
-				success: res=>{
-					utenti.push({uid: a.uid, mail: a.email, nome: res.Nome, cognome:res.Cognome, pos:res.Pos})
-					if (utenti.length==data.length){
-						utenti.forEach(ut=>{
-							if(ut.pos!='SU'){
-								$('#tabUtenti').append('<tr><td>'+ut.nome+'</td><td>'+ut.cognome+'</td><td>'+ut.pos+'</td><td colspan=2>' + ut.mail + '</td><td style="text-align: center;"><button class="pulsante" onclick="userDel(\'' + ut.uid + '\')">E</button></td></tr>')
-								sortUserTable(0, 'tabUtenti')
-							}
-						})
-					}
-				}
-			})
-		})
-	})
-}
 
 function userClean(){
 	$('#uNome').val('')
 	$('#uCognome').val('')
 	$('#uMail').val('')
 	$('#uPos').val('')
-	$('#userAddBut').text('Aggiungi')
 	$('#userAddBut').prop('disabled',true)
 }
 
@@ -285,9 +242,9 @@ function userDel(a){
 			}
 		}
 	})
-}*/
+}
 
-function sortUserTable(q, tabN) {
+function sortSUTable(q, tabN) {
 	var table, rows, switching, i, x1, x, y, shouldSwitch;
 	table = document.getElementById(tabN);
 	switching = true;
@@ -296,17 +253,19 @@ function sortUserTable(q, tabN) {
 	  switching = false;
 	  rows = table.rows;
 	  for (i = 0; i < (rows.length-1); i++) {
-		//start by saying there should be no switching:
-		shouldSwitch = false;
-		x = rows[i].getElementsByTagName("TD")[q].innerText;
-		y = rows[i + 1].getElementsByTagName("TD")[q].innerText;
-		//check if the two rows should switch place:
-		if (x.toLowerCase() > y.toLowerCase()) {
-		  //if so, mark as a switch and break the loop:
-		  shouldSwitch = true;
-		  break;
-		}
-	  }
+			//start by saying there should be no switching:
+			shouldSwitch = false;
+			if(rows[i].getElementsByTagName("TD")[q]){
+				x = rows[i].getElementsByTagName("TD")[q].innerText;
+				y = rows[i + 1].getElementsByTagName("TD")[q].innerText;
+				//check if the two rows should switch place:
+				if (x.toLowerCase() > y.toLowerCase()) {
+				//if so, mark as a switch and break the loop:
+				shouldSwitch = true;
+				break;
+				}
+			}
+	  	}
 	  if (shouldSwitch) {
 		rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
 		switching = true;
@@ -323,12 +282,13 @@ function showAdmin(){
 		$('#salva').hide()
 		$('#contSU').css( "display", "flex" )
 		getUsers()
+		getRigs()
 		showSU=!showSU
 	}
 }
 
 function getUsers(){
-	$('#usersTab').html('<tr><th>Nome</th><th>Cognome</th><th>Pos</th><th>Mail</th><th>Elimina</th></tr>')
+	//$('#usersTab').html('')
 	utenti=[]
 	$.get(url + 'getusers', (data,err)=>{
 		if(err) console.log(err)
@@ -340,9 +300,13 @@ function getUsers(){
 				success: res=>{
 					utenti.push({uid: a.uid, mail: a.email, nome: res.Nome, cognome:res.Cognome, pos:res.Pos})
 					if (utenti.length==data.length){
+						$('#spinnerUsers').hide()
+						$('#usersTab').html('<tr><th onclick="sortSUTable(0,\'usersTab\')">Nome</th><th onclick="sortSUTable(1,\'usersTab\')">Cognome</th><th onclick="sortSUTable(2,\'usersTab\')">Pos</th><th onclick="sortSUTable(3,\'usersTab\')">Mail</th><th>Elimina</th></tr>')
+						//.click(sortSUTable(0,'usersTab'))
 						utenti.forEach(ut=>{
 							if(ut.pos!='SU'){
 								$('#usersTab').append('<tr><td>'+ut.nome+'</td><td>'+ut.cognome+'</td><td>'+ut.pos+'</td><td>' + ut.mail + '</td><td style="text-align: center;"><button class="pulsante pulEl" onclick="userDel(\'' + ut.uid + '\')">E</button></td></tr>')
+								sortSUTable(0,'usersTab')
 							}
 						})
 					}
@@ -350,4 +314,31 @@ function getUsers(){
 			})
 		})
 	})
+}
+
+function getRigs(){
+	$('#spinnerRigs').hide()
+	$('#rigsTab').html('')
+	$('#rigsTab').html('<tr><th>s/n</th><th>Modello</th><th>Cliente</th><th>Cantiere</th><th>M</th><th>E</th></tr>')
+	firebase.default.database().ref('MOL/').once('value',s=>{
+		s.forEach(rigs=>{
+			var r = rigs.val()
+			$('#rigsTab').append('<tr><td>'+r.sn+'</td><td>'+r.model+'</td><td>'+r.customer+'</td><td>' + r.site + '</td><td class="tabB"><button class="pulsante pulEl" onclick="userDel(\'' + r.sn + '\')">M</button></td><td class="tabB"><button class="pulsante pulEl" onclick="userDel(\'' + r.sn + '\')">E</button></td></tr>')
+		})
+	})
+}
+
+function filterRigs(e){
+	var filter = e.target.value.toUpperCase();
+    var rows = document.querySelector("#rigsTab").rows;
+    
+    for (var i = 0; i < rows.length; i++) {
+        var firstCol = rows[i].cells[0].textContent.toUpperCase();
+        var secondCol = rows[i].cells[1].textContent.toUpperCase();
+        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }      
+    }
 }
