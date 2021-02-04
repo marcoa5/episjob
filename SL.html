@@ -982,13 +982,14 @@ $('#menurisk').draggable();
 
 function Upd(){
 	contaSchede();
-	loadtech();
-	loadMOL();
-	loadCus();
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
-			//console.log('Offline')
+			console.log('offline')
+			loadtech();
+			loadMOL();
+			loadCus();
         } else {
+			console.log('online')
 			contEconf();
 			aggiornamol();
 			aggiornacli();

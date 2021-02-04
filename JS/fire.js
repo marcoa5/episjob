@@ -35,14 +35,7 @@ function aggiornatech(){
 }
 
 async function aggiornamol(){
-  /*firebase.storage().ref('molupd.txt').getDownloadURL().then(function(url) {
-    $.get(url, (data)=> {
-			fs.writeFileSync(__dirname + "\\mol.txt", data)
-		})
-  })
-  .catch(err=>{
-    console.log('ERROR: ' + err)
-  })*/
+
   firebase.default.database().ref('MOL/').once('value',sn=>{
     require('fs').writeFileSync(pathmol,JSON.stringify(sn.val()))
   })
@@ -124,6 +117,10 @@ function login(){
 
   var dir3 = os.tmpdir() + '\\ServiceJob'
   if(!require('fs').existsSync(dir3)){require('fs').mkdirSync(dir3)}
+
+  if(!pathtech) fs.createWriteStream(pathtech, { overwrite: false })
+  if(!pathmol) fs.createWriteStream(pathmol, { overwrite: false })
+  if(!pathcus) fs.createWriteStream(pathcus, { overwrite: false })
 
   require('fs').readFile(path, 'utf-8',(a,b)=>{
     if (a) {
