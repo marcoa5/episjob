@@ -1403,7 +1403,7 @@ input[type=email]:valid{
 #usersCont, #rigsCont, #custCont, #techCont{
     box-sizing: border-box;
     min-width: 500px;
-    max-height: 900px;
+    max-height: 950px;
     box-shadow: 0 0 20px 0 rgb(66, 85, 99);
     display: flex;
     flex-direction: column;
