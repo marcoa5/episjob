@@ -362,27 +362,40 @@ function sortSUTable(q, tabN) {
 }
 
 async function showAdmin(){
-	if(showSU){
-		$('#salva').show()
-		$('#contSU').css( "display", "none" )
-		showSU=!showSU
-	} else {
-		$('#salva').hide()
-		$('#contSU').css( "display", "flex" )
-		$('#chBUSers').prop('checked',true)
-		$('#chBRigs').prop('checked',true)
-		$('#chBCust').prop('checked',true)
-		$('#chBTech').prop('checked',true)
-		$('#usersCont').show()
-		$('#rigsCont').show()
-		$('#custCont').show()
-		$('#techCont').show()
-		await getCust()
-		getUsers()
-		getRigs()
-		getTech()
-		showSU=!showSU
-	}
+	require('dns').lookup('google.com',async (err)=> {
+        if (err && err.code == "ENOTFOUND") {
+			const options = {
+				type: 'error',
+				buttons: ['Ok'],
+				title: 'Errore',
+				message: `Per accedere al menu devi essere connesso ad Internet`,
+				noLink: true,
+			};
+			dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
+		} else {
+			if(showSU){
+				$('#salva').show()
+				$('#contSU').css( "display", "none" )
+				showSU=!showSU
+			} else {
+				$('#salva').hide()
+				$('#contSU').css( "display", "flex" )
+				$('#chBUSers').prop('checked',true)
+				$('#chBRigs').prop('checked',true)
+				$('#chBCust').prop('checked',true)
+				$('#chBTech').prop('checked',true)
+				$('#usersCont').show()
+				$('#rigsCont').show()
+				$('#custCont').show()
+				$('#techCont').show()
+				await getCust()
+				getUsers()
+				getRigs()
+				getTech()
+				showSU=!showSU
+			}
+		}
+	})
 }
 
 function getUsers(){
