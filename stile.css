@@ -1403,12 +1403,11 @@ input[type=email]:valid{
 #usersCont, #rigsCont, #custCont, #techCont{
     box-sizing: border-box;
     min-width: 500px;
-    max-height: 950px;
     box-shadow: 0 0 20px 0 rgb(66, 85, 99);
     display: flex;
     flex-direction: column;
     width: 20%;
-    height:100%;
+    height:95%;
     justify-content: flex-start;
     align-items: center;
     margin: 20px;
@@ -1425,6 +1424,9 @@ input[type=email]:valid{
 
 
 .contH{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height:5%;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
@@ -1466,7 +1468,7 @@ input[type=email]:valid{
 .aNew, .bNew, .cNew{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     font-size: 50%;
     font-weight: 900;
     width: 100%;
@@ -1495,6 +1497,7 @@ input[type=email]:valid{
 }
 
 .newHeader{
+    font-size: 8pt;
     margin: 0;
 }
 
