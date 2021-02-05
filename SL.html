@@ -803,6 +803,28 @@
 </div>
 
 <div id="contSU">
+	<div id="contMenuBar" class="contMenuBar">
+	<div class="optMenuBar">
+		<input type="checkbox" id="chBUSers" class="chMenuBar" onchange="chShow(event, 'usersCont')">
+		<label for="chBUSers" class="chLabel">UTENTI</label>
+	</div>
+	<div class="optMenuBar">
+		<input type="checkbox" id="chBRigs" class="chMenuBar" onchange="chShow(event, 'rigsCont')">
+		<label for="chBRigs" class="chLabel">MACCHINE</label>
+	</div>
+	<div class="optMenuBar">
+		<input type="checkbox" id="chBCust" class="chMenuBar"  onchange="chShow(event, 'custCont')">
+		<label for="chBCust" class="chLabel">CLIENTI</label>
+	</div>
+	<div class="optMenuBar">
+		<input type="checkbox"  id="chBTech" class="chMenuBar" onchange="chShow(event, 'techCont')">
+		<label for="chBTech" class="chLabel">TECNICI</label>
+	</div>
+	<div class="optMenuBar">
+		<button class="pulsante butMenuBar" onclick="showAdmin()">Chiudi</button>
+	</div>
+	
+	</div>
 	<div id="usersCont">
 		<div class="contH">Utenti</div>
 		<div class="contNew">

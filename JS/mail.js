@@ -369,6 +369,14 @@ async function showAdmin(){
 	} else {
 		$('#salva').hide()
 		$('#contSU').css( "display", "flex" )
+		$('#chBUSers').prop('checked',true)
+		$('#chBRigs').prop('checked',true)
+		$('#chBCust').prop('checked',true)
+		$('#chBTech').prop('checked',true)
+		$('#usersCont').show()
+		$('#rigsCont').show()
+		$('#custCont').show()
+		$('#techCont').show()
 		await getCust()
 		getUsers()
 		getRigs()
@@ -553,5 +561,12 @@ function techDel(a){
 			getTech()
 		})
 	}
-	
+}
+
+function chShow(e,a){
+	if(e.target.checked){
+		$('#'+a).show()
+	} else {
+		$('#'+a).hide()
+	}
 }
