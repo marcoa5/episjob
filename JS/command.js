@@ -1164,6 +1164,7 @@ function coeffkm(){
 			a.km = r.replace(",",".")
 			fs.writeFileSync(cart, JSON.stringify(a));
 			$('#userK').text(r)
+			updKm()
 		}
 	})
 	.catch(console.error);
