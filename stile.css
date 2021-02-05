@@ -1392,7 +1392,7 @@ input[type=email]:valid{
     display: none;
     height: 95%;
     width: 100%;
-    padding: 70px 0;
+    padding: 70px 0 70px 0;
     background-color: white;
     flex-direction: row;
     justify-content: space-evenly;
@@ -1402,7 +1402,7 @@ input[type=email]:valid{
 
 #usersCont, #rigsCont, #custCont, #techCont{
     box-sizing: border-box;
-    min-width: 700px;
+    min-width: 750px;
     box-shadow: 0 0 20px 0 rgb(66, 85, 99);
     display: flex;
     flex-direction: column;
@@ -1508,7 +1508,7 @@ input[type=email]:valid{
     border-collapse: collapse;
     border: 1px solid rgb(66, 85, 99);
     margin: 0 auto;
-    font-size: 6pt;
+    font-size: 7pt;
     font-weight: 900;
 }
 
