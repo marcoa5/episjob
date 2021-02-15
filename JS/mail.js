@@ -211,8 +211,8 @@ function custClean(){
 	$('#custAddBut').prop('disabled',true)
 }
 
-function userAdd(e){
-	var p = {Nome: $('#uNome').val(), Cognome:$('#uCognome').val(),Mail:$('#uMail').val(),Pos:$('#uPos').val(),km:0.05}
+function userAdd(){
+	var p = {Nome: $('#uNome').val(), Cognome:$('#uCognome').val(),Mail:$('#uMail').val(),Pos:$('#uPos').val(),km:0.07}
 	$.ajax({
 		url: url + 'createuser',
 		type: 'GET',
