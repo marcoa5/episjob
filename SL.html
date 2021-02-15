@@ -835,7 +835,7 @@
 				<input class="inputNew" placeholder="Nome" id="uNome" onkeyup="chComp()">
 				<input class="inputNew" placeholder="Cognome"  id="uCognome" onkeyup="chComp()">
 				<input class="inputNew" placeholder="Mail"  id="uMail" onkeyup="chComp()">
-				<select class="inputNew" placeholder="Ruolo"  id="uPos" onclick="chComp()">
+				<select class="inputNew" placeholder="Ruolo"  id="uPos" onkeyup="chComp()" onclick="chComp()">
 					<option val=""></option>
 					<option val="admin">admin</option>
 					<option val="tech">tech</option>
@@ -843,7 +843,7 @@
 			</div>
 			<div class="cNew">
 				<button class="pulsante" id="userClean" onclick="userClean()">Pulisci</button>
-				<button class="pulsante" disabled id="userAddBut" userAdd()>Aggiungi</button>
+				<button class="pulsante" disabled id="userAddBut" onclick="userAdd()">Aggiungi</button>
 			</div>
 			
 		</div>
