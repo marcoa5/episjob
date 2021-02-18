@@ -2,6 +2,7 @@ const { timeStamp } = require('console');
 const { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } = require('constants');
 const { get } = require('http');
 const { allowedNodeEnvironmentFlags } = require('process');
+const f = new DOMParser()
 var utenti=[]
 const url = 'https://episjobreq.herokuapp.com/'
 var showSU = false
@@ -581,5 +582,36 @@ function chShow(e,a){
 		$('#'+a).show()
 	} else {
 		$('#'+a).hide()
+	}
+}
+
+function renderHtml(){
+	let options = {
+		title : "Seleziona Scheda Lavoro", 
+		defaultPath : require('path').join(require('os').homedir(),'Desktop'),
+		buttonLabel : "Apri Scheda Lavoro", 
+		filters :[
+			{name: 'Schede Lavoro', extensions: ['ma']},
+		   ],   
+		properties: ['openFile']
+	}
+	var filename =  dialog.showOpenDialogSync(options, "");
+	if(filename!==undefined){
+		$.get(filename, data=> {
+			var g = JSON.parse(data)
+			g.ris=''
+			g.sondaggio=''
+			var request = $.post(url + 'rendersj', g)
+			.done(data=>{console.log(data)})
+			/*$.ajax({
+				url: url + 'rendersj',
+				type: 'POST',
+				data: jQuery.param(g) ,
+				contentType: 'application/json; charset=utf-8',
+				success: res=>{
+					console.log(res)
+				}
+			})*/
+		})
 	}
 }

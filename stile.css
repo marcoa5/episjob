@@ -1553,6 +1553,7 @@ input[type=email]:valid{
     width: 150px;
     display: flex;
     align-items: center;
+    margin: 0 10px;
 }
 
 .chMenuBar{

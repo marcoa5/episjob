@@ -202,7 +202,7 @@ function copiaore(){
 	var righeout = datioutput.getElementsByTagName('tr');
 	for(var i=3;i<10;i++){
 	  for(var j=0;j<22;j++){
-		  righeout[i].getElementsByTagName('td')[j].innerText="";
+		  righeout[i].getElementsByTagName('td')[j].innerText='';
 	  }
 	}
 	var elenco=[];
@@ -444,11 +444,11 @@ function printpdf (a) {
 			ma(path, ()=>{setTimeout(()=>{preparaMail()}, 3000)});
 		})
 	}else {
-		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: 0}).then(data => {
 			fs.writeFileSync(a, data, (err) => {
 				if (err) throw err;
 			})
-			  shell.openItem(a);
+			  shell.openPath(a);
 		})}
 	
 }
@@ -1176,7 +1176,7 @@ function temp(){
 	tmp.dir((err,path)=>{
 		var gin = path.indexOf("tmp");
 		path = path.substring(0, gin) + "ServiceJob";
-		mkdirp(path, function(err) {shell.openItem(path)});
+		mkdirp(path, function(err) {shell.openPath(path)});
 	})
 }
 
@@ -1418,7 +1418,13 @@ function creasalvataggio(){
 	s[$('#contnomec').attr('id')]= $('#contnomec').text();
 	s[$('#contfirmac').attr('id')]= $('#contfirmac').text();
 	s[$('#contsondc').attr('id')]= $('#contsondc').text();
-	s[$('#tabset').attr('id')]= $('#tabset').html();
+	//s[$('#tabset').attr('id')]= $('#tabset').html();
+	var sup = getHrTableIds()
+	var k = Object.keys(sup)
+	k.forEach(key=>{
+		s[key] = sup[key]
+		//console.log(key, sup[key])
+	})
 	s[$('#ris').attr('id')]= $('#ris').html();
 	s[$('#sondaggio').attr('id')]= $('#sondaggio').html();
 	s[$('#elencomail').attr('id')]= $('#elencomail').html();
@@ -1520,3 +1526,14 @@ async function setTech(){
 	}
 }
 
+function getHrTableIds(){
+	var val = {}
+	for(var i = 3; i<10;i++){
+		for(var o = 0; o<22; o++){
+			var k = $('#tabset tr:eq('+ i +') td:eq('+o+')').attr('id')
+			var v = $('#tabset tr:eq('+ i +') td:eq('+o+')').text()
+			val[k]=v
+		}
+	}
+	return val
+}
