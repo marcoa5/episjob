@@ -448,7 +448,7 @@ function printpdf (a) {
 			fs.writeFileSync(a, data, (err) => {
 				if (err) throw err;
 			})
-			  shell.openPath(a);
+			  shell.openItem(a);
 		})}
 	
 }
@@ -1176,7 +1176,7 @@ function temp(){
 	tmp.dir((err,path)=>{
 		var gin = path.indexOf("tmp");
 		path = path.substring(0, gin) + "ServiceJob";
-		mkdirp(path, function(err) {shell.openPath(path)});
+		mkdirp(path, function(err) {shell.openItem(path)});
 	})
 }
 
