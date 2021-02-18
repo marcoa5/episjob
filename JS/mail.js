@@ -1,8 +1,3 @@
-const { timeStamp } = require('console');
-const { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } = require('constants');
-const { get } = require('http');
-const { allowedNodeEnvironmentFlags } = require('process');
-const f = new DOMParser()
 var utenti=[]
 const url = 'https://episjobreq.herokuapp.com/'
 var showSU = false
@@ -586,7 +581,7 @@ function chShow(e,a){
 }
 
 function renderHtml(){
-	let options = {
+	let optionsOpen = {
 		title : "Seleziona Scheda Lavoro", 
 		defaultPath : require('path').join(require('os').homedir(),'Desktop'),
 		buttonLabel : "Apri Scheda Lavoro", 
@@ -595,23 +590,35 @@ function renderHtml(){
 		   ],   
 		properties: ['openFile']
 	}
-	var filename =  dialog.showOpenDialogSync(options, "");
+	
+	var filename =  dialog.showOpenDialogSync(optionsOpen, "");
 	if(filename!==undefined){
 		$.get(filename, data=> {
+			var fullFN = require('path').parse(filename.toString())
+			var n = fullFN.name
 			var g = JSON.parse(data)
 			g.ris=''
 			g.sondaggio=''
 			var request = $.post(url + 'rendersj', g)
-			.done(data=>{console.log(data)})
-			/*$.ajax({
-				url: url + 'rendersj',
-				type: 'POST',
-				data: jQuery.param(g) ,
-				contentType: 'application/json; charset=utf-8',
-				success: res=>{
-					console.log(res)
+			.done(data=>{
+				let optionsSave = {
+					title : "Salva HTML", 
+					defaultPath : require('path').join(require('os').homedir(),'Desktop', n + '.html'),
+					buttonLabel : "Salva HTML", 
+					filters :[
+						{name: 'html', extensions: ['html']},
+					   ],   
+					properties: ['saveFile']
 				}
-			})*/
+				var htmlName = dialog.showSaveDialogSync(optionsSave, "")
+				if(htmlName!=undefined){
+					if(!pathtech) fs.createWriteStream(htmlName, { overwrite: false })
+					require('fs').writeFile(htmlName, data, (err)=>{
+						if(err) console.log (err)
+						var wan = window.open(htmlName)
+					})
+				}
+			})
 		})
 	}
 }
