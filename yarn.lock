@@ -1427,10 +1427,10 @@
     "lodash" "^4.17.15"
     "uuid" "^3.3.3"
 
-"electron@^7.3.3":
-  "integrity" "sha512-PrJEsuRiaAhTDHtbH3EM+RIne+nZ6ifGChUadmtmPqHUQ+rIhf4jSi2ZN768IgBDw4SidMJiCrvQRiuDha9+Ew=="
-  "resolved" "https://registry.npmjs.org/electron/-/electron-7.3.3.tgz"
-  "version" "7.3.3"
+"electron@^9.4.0":
+  "integrity" "sha512-hOC4q0jkb+UDYZRy8vrZ1IANnq+jznZnbkD62OEo06nU+hIbp2IrwDRBNuSLmQ3cwZMVir0WSIA1qEVK0PkzGA=="
+  "resolved" "https://registry.npmjs.org/electron/-/electron-9.4.0.tgz"
+  "version" "9.4.0"
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
