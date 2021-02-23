@@ -28,7 +28,7 @@
                         <div class="foglio" id="pagina">
                                 <div class="margini">
                                         <div class="int">
-                                                <div class="logo" onclick="prova()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
+                                                <div class="logo" onclick="getFiles()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
                                                 <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. EUR 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.it</p></div>
                                                 <div class="topr">SCHEDA LAVORO</div>
                                         </div>
@@ -822,12 +822,16 @@
 		<label for="chBTech" class="chLabel">TECNICI</label>
 	</div>
 	<div class="optMenuBar">
+		<input type="checkbox"  id="chBFiles" class="chMenuBar" onchange="chShow(event, 'filesCont')">
+		<label for="chBFiles" class="chLabel">FILES</label>
+	</div>
+	<div class="optMenuBar">
 		<button class="pulsante butMenuBar" onclick="showAdmin()">Chiudi</button>
 	</div>
 	<div class="optMenuBar">
 		<button class="pulsante butMenuBar" onclick="renderHtml()">Ottieni HTML</button>
 	</div>
-	
+
 	</div>
 	<div id="usersCont">
 		<div class="contH">Utenti</div>
@@ -881,7 +885,7 @@
 				<input placeholder="Testo da cercare..." onkeyup="filterTab(event, 'rigsTab')" style="width: 60%; font-size: 7pt; font-weight: 900;">
 			</div>
 			<div class="rigsT">
-				<img id="spinnerRigs" src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif" height=200 width=200>
+				<img id="spinnerRigs" src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif" height="200" width="200">
 				
 				<table class="rigsTab" id="rigsTab"></table>
 			</div>
@@ -936,6 +940,21 @@
 				<div class="techT">
 					<img id="spinnerTech" src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif">
 					<table class="techTab" id="techTab"></table>
+				</div>
+			</div>
+	</div>
+	<div id="filesCont">
+		<div class="contH">Elenco Files</div>
+		<div class="contList" id="contFileList">
+				<div class="contFil" id="contFileFil">
+					<button class="pulsante back" id="backBut" onclick="getFolders()"><img src="https://cdn4.iconfinder.com/data/icons/arrow-68/48/36-512.png" width="20" height="20"></button>
+					<input id="searchFile" placeholder="Testo da cercare..." onkeyup="searchFile(event)" style="width: 60%; font-size: 7pt; font-weight: 900;">
+					</div>
+				<div class="filesT">
+					
+					<img id="spinnerFiles" src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif">
+					<div class="folderList" id="folderList"></div>
+					<div class="fileList" id="fileList"></div>
 				</div>
 			</div>
 	</div>

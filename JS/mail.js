@@ -380,6 +380,7 @@ async function showAdmin(){
 				$('#chBRigs').prop('checked',true)
 				$('#chBCust').prop('checked',true)
 				$('#chBTech').prop('checked',true)
+				$('#chBFiles').prop('checked',true)
 				$('#usersCont').show()
 				$('#rigsCont').show()
 				$('#custCont').show()
@@ -388,6 +389,7 @@ async function showAdmin(){
 				getUsers()
 				getRigs()
 				getTech()
+				getFolders()
 				showSU=!showSU
 			}
 		}
@@ -621,4 +623,64 @@ function renderHtml(){
 			})
 		})
 	}
+}
+
+function getFolders(){
+	$('#fileList').hide()
+	$('#folderList').show()
+	$('#folderList').html('')
+	$('#contFileFil').hide()
+	var ref = firebase.default.storage().ref()
+	ref.listAll()
+	.then(a=>{
+		a.prefixes.forEach(b=>{
+			$('#spinnerFiles').hide()
+			$('#folderList').append('<div class="folder" name="'+b.name+'" onclick="openFolder(\''+ b.name + '\', event)">'+
+			'<img src="https://www.astille.fr/wp-content/plugins/ee-simple-file-list-pro/images/thumbnails/folder.svg" width="50" height="50">'+
+			'<p class="folderName">'+b.name+'</p></div>')
+		})
+	})
+}
+
+function openFolder(Nom ,e){
+	var nome = e.target.parentNode.children[1].innerText
+	$('#folderList').hide()
+	$('#fileList').show()
+	$('#contFileFil').show()
+	$('#fileList').html('')
+	var ref = firebase.default.storage().ref(nome).listAll()
+	.then(a=>{
+		a.items.forEach(b=>{
+			var nome = b.name
+			if(nome.substring(nome.length-2,nome.length)=='df'){
+				$('#fileList').append('<div class="file" id="'+b.name+'"name="'+b.name+'" onclick="openFile(\''+ Nom +'\',event)">'+
+				'<img src="https://artigianatopadovano.org/wp-content/uploads/2019/02/pdf-icon.png" width="45" height="45">'+
+				'<p class="fileName">'+b.name+'</p></div>')
+			} else {
+				$('#fileList').append('<div class="file" name="'+b.name+'" onclick="openFile(\''+ Nom +'\',event)">'+
+				'<img src="./img/docicon.ico" width="45" height="45">'+
+				'<p class="fileName">'+b.name+'</p></div>')
+			}
+			
+		})
+	})
+}
+
+function openFile(a,e){
+	firebase.default.storage().ref(a + '/' + e.target.parentNode.children[1].innerText).getDownloadURL()
+	.then(url=>{
+		console.log(url)		
+	})
+}
+
+function searchFile(e){
+	var bm = e.target.value.toLowerCase()
+	$('#fileList')[0].childNodes.forEach(y=>{
+		var g = y.innerText.toLowerCase()
+		if(g.includes(bm)){
+			$('div[name="' + y.innerText + '"]').show()
+		} else {
+			$('div[name="' + y.innerText + '"]').hide()
+		}
+	})
 }
