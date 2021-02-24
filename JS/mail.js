@@ -669,7 +669,24 @@ function openFolder(Nom ,e){
 function openFile(a,e){
 	firebase.default.storage().ref(a + '/' + e.target.parentNode.children[1].innerText).getDownloadURL()
 	.then(url=>{
-		console.log(url)		
+		var est = require('path').extname(require('url').parse(url).pathname)
+		var ext = est.substring(1,est.length)
+		let optionsSave = {
+			title : "Salva File", 
+			defaultPath : require('path').join(require('os').homedir(),'Desktop', e.target.innerText),
+			buttonLabel : "Salva File", 
+			filters :[
+				{name: ext, extensions: [ext]},
+			   ],   
+			properties: ['saveFile']
+		}
+		var fileName = dialog.showSaveDialogSync(optionsSave, "")
+		if(fileName){
+			var gh = require('fs').createWriteStream(fileName)
+			require('https').get(url, (data)=>{
+			data.pipe(gh)
+			})
+		}
 	})
 }
 
