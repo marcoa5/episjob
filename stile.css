@@ -1387,6 +1387,7 @@ input[type=email]:valid{
 }*/
 
 #contSU{
+    transition: 0.5s;
     position: fixed;
     left:0; top: 0;
     display: none;
@@ -1395,7 +1396,7 @@ input[type=email]:valid{
     padding: 70px 0 70px 0;
     background-color: white;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
     overflow: auto;
 }
@@ -1501,6 +1502,10 @@ input[type=email]:valid{
     width: 100%;
     overflow-y: auto;
     height: 90%;
+}
+
+.filesT{
+    padding: 20px;
 }
 
 #contFileList{
