@@ -443,7 +443,7 @@ function printpdf (a) {
 			}
 			ma(path, ()=>{setTimeout(()=>{preparaMail()}, 3000)});
 		})
-	}else {
+	}else if(a){
 		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: 0}).then(data => {
 			fs.writeFileSync(a, data, (err) => {
 				if (err) throw err;
@@ -587,7 +587,7 @@ function esportapdf(){
         ]
        }
     var cartella =  dialog.showSaveDialogSync(options, "");
-	var che = cartella.substring(cartella.length-2,cartella.length);
+	//var che = cartella.substring(cartella.length-2,cartella.length);
 	printpdf(cartella);
 }
 
@@ -972,13 +972,13 @@ function riaprimenumail(){
 	}
 }
 
-function eliminamail(){
+function eliminamail(e){
 	const options = {
 		type: 'question',
 		buttons: ['No','Si'],
 		title: 'Elimina',
 		noLink: true,
-		message: 'Vuoi eliminare?'}
+		message: `Vuoi eliminare ${e.target.innerText} dall'elenco?`}
 	var sce = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
 	if(sce==1){this.remove();}
 }

@@ -32,6 +32,7 @@ body::after {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    color: rgb(66, 85, 99);
 }
 
 .foglio{
@@ -860,7 +861,7 @@ text-align: center;
 }
 
 #unsent{
-    background-color: black;
+    background-color: rgb(66, 85, 99);
     color:white;
     padding: 0 5px;
     border-radius: 50%;
@@ -1399,6 +1400,7 @@ input[type=email]:valid{
     justify-content: space-evenly;
     flex-wrap: wrap;
     overflow: auto;
+    align-self: flex-start;
 }
 
 #usersCont, #rigsCont, #custCont, #techCont, #filesCont{
@@ -1498,8 +1500,8 @@ input[type=email]:valid{
 }
 
 .usersT, .rigsT, .custT, .techT, .filesT{
-    margin: 10px;
-    width: 100%;
+    margin: 10px 0;
+    max-width: 100%;
     overflow-y: auto;
     height: 90%;
 }
@@ -1644,4 +1646,11 @@ input[type=email]:valid{
 
 #searchFile{
     margin: auto 0 auto 20px;
+}
+
+.yb{
+    max-width: 85px;
+    margin: 0 20px;
+    padding: 0;
+    justify-self: flex-start;
 }
