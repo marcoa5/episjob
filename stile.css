@@ -1391,12 +1391,12 @@ input[type=email]:valid{
     position: fixed;
     left:0; top: 0;
     display: none;
-    height: 95%;
+    height: 94%;
     width: 100%;
     padding: 70px 0 70px 0;
     background-color: white;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     overflow: auto;
 }
