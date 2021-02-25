@@ -1396,7 +1396,7 @@ input[type=email]:valid{
     padding: 70px 0 70px 0;
     background-color: white;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
     overflow: auto;
 }
