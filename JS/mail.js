@@ -1,6 +1,13 @@
 var utenti=[]
-const url = 'https://episjobreq.herokuapp.com/'
+const url = 'https://episjobreq.herokuapp.com/'//'http://localhost:3000/' 
 var showSU = false
+
+function test(){
+	$.get(url + 'getusers', (err,data)=>{
+		console.log(err)
+		console.log(data)
+	})
+}
 
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
     var dati = [{subject: subject, to1 : to1, son1: son1, son2:son2, son3:son3, rap:rap, rAss:rAss, userN:userN,userC:userC,userM:userM}];
