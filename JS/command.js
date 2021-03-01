@@ -431,17 +431,19 @@ function controlladata(){
 //Esporta PDF
 function printpdf (a) {
 	if(a=="a"){
+		var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
+		var nomef = require('os').tmpdir() + '\\ServiceJobTemp\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
 		tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
 			if (err) throw err;
 			var gin = path.indexOf("tmp");
 			path = path.substring(0, gin) + "ServiceJobTemp";
 			mkdirp(path, function(err) {});
 			function ma(path, callback){
-				fs.writeFileSync(path + "\\Scheda Lavoro.ma", creasalvataggio());
-				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(path + "\\Scheda Lavoro.pdf", data)});
+				fs.writeFileSync(nomef + '.ma', creasalvataggio());
+				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(nomef + '.pdf', data)});
 				callback();
 			}
-			ma(path, ()=>{setTimeout(()=>{preparaMail()}, 3000)});
+			ma(path, ()=>{setTimeout(()=>{preparaMail(nomef)}, 3000)});
 		})
 	}else if(a){
 		remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: 0}).then(data => {

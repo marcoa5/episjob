@@ -91,7 +91,7 @@ async function contEconf(){
 
 
 //Invia Mail
-function preparaMail() { 	
+function preparaMail(r) { 	
 	var a = os.tmpdir() + '\\ServiceJobTemp'; 
 	var son = $('#rissondaggio').text();
 	if(son.substring(0,1)=="u"){
@@ -105,15 +105,15 @@ function preparaMail() {
         rap +=  "\n\nOsservazioni:\n" + $('#oss1').text();
 	}
 		
-	var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
+	/*var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
 	var nomef = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
 	
-	fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
-	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});
+	/*fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
+	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});*/
 	var elenco = $('.mail');
 	var lista = "";
 	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +";"}
-    var nomeL = nomef + ".econf"
+    var nomeL = r + ".econf"
     var subject = "Scheda Lavoro - " + $('#data11').text() + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
     var to1 = lista
     var son1 = son.substring(0,1)
