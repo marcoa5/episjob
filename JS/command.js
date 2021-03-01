@@ -431,9 +431,7 @@ function controlladata(){
 //Esporta PDF
 function printpdf (a) {
 	if(a=="a"){
-		var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
-		var nomef = require('os').tmpdir() + '\\ServiceJobTemp\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
-		nomef = nomef.replace('\\','')
+		var nomef = require('os').tmpdir() + '\\ServiceJobTemp\\' + creanomefile()
 		tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
 			if (err) throw err;
 			var gin = path.indexOf("tmp");
@@ -533,16 +531,17 @@ function Apri(){
 
 //Crea nome del file in base al giorno
 function creanomefile(){
-	var ora = new Date()
+	/*var ora = new Date()
     var anno = ora.getFullYear().toString();
     var mese = (ora.getMonth()+1).toString();
-    var giorno = ora.getDate().toString();
-    var datalo = anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0');
-    var cli = document.getElementById('cliente11').innerText;
+    var giorno = ora.getDate().toString();*/
+    var datalo = moment(new Date()).format('YYYYMMDDhhmmss')
+	//anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0');
+    var cli = $('#cliente11').text().replace('/','');
     if(cli!==""){datalo += " - " + cli};
-    var mac = document.getElementById('prodotto1').innerText;
+    var mac = $('#prodotto1').text();
     if(mac!==""){datalo += " - " + mac};
-    var mat = document.getElementById('matricola').innerText;
+    var mat = $('#matricola').text();
     if(mat!==""){datalo += " - " + mat};
 	return datalo;
 }
