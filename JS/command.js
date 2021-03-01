@@ -433,6 +433,7 @@ function printpdf (a) {
 	if(a=="a"){
 		var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
 		var nomef = require('os').tmpdir() + '\\ServiceJobTemp\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
+		nomef = nomef.replace('\\','')
 		tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
 			if (err) throw err;
 			var gin = path.indexOf("tmp");
