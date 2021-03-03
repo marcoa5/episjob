@@ -535,7 +535,7 @@ function creanomefile(){
     var anno = ora.getFullYear().toString();
     var mese = (ora.getMonth()+1).toString();
     var giorno = ora.getDate().toString();*/
-    var datalo = moment(new Date()).format('YYYYMMDDhhmmss')
+    var datalo = moment(new Date()).format('YYYYMMDDHHmmss')
 	//anno.padStart(4,'0')+mese.padStart(2,'0')+giorno.padStart(2,'0');
     var cli = $('#cliente11').text().replace('/','');
     if(cli!==""){datalo += " - " + cli};
