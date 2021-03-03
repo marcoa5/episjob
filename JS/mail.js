@@ -113,12 +113,6 @@ function preparaMail(r) {
     if($('#oss1').text()!=''){
         rap +=  "\n\nOsservazioni:\n" + $('#oss1').text();
 	}
-		
-	/*var datalo = moment(new Date()).format("YYYYMMDDHHmmss")
-	var nomef = a + '\\' + datalo + " - " + $('#cliente11').text() + " - " + $('#prodotto1').text() + " - " + $('#matricola').text()
-	
-	/*fs.rename(a + '\\Scheda Lavoro.pdf', nomef + ".pdf", function(err) {if ( err ) console.log('ERROR: ' + err);});
-	fs.rename(a + '\\Scheda Lavoro.ma', nomef + ".ma", function(err) {if ( err ) console.log('ERROR: ' + err);});*/
 	var elenco = $('.mail');
 	var lista = "";
 	for(var i=0;i<elenco.length;i++){lista += elenco[i].innerText +";"}
