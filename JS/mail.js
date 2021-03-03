@@ -64,33 +64,35 @@ async function contEconf(){
 				var user = `${$('#userN').text()} ${$('#userC').text()}`
 				var refpdf = firebase.storage().ref().child(user + '/' + nome + '.pdf')
 				var refma = firebase.storage().ref().child(user +'/' + nome + '.ma')
-				fetch(nomeL + '.pdf')
-				.then((a)=>{
-					a.blob().then(b=>{
-						refpdf.put(b)
-						.catch(err=>{
-							console.error(err.message)
-						})
-						.then(()=>{
-							fetch(nomeL + '.ma')
-							.then(c=>{
-								c.blob().then(d=>{
-									refma.put(d)
-									.then(async ()=>{
-										var urlPdf = ''
-										await refpdf.getDownloadURL().then((url)=> {urlPdf = url})
-										var urlMa = ''
-										await refma.getDownloadURL().then((url)=> {urlMa = url})
-										await callEmail(urlPdf, urlMa, nomeL)
-									})
-									.catch((err)=>{
-										console.error(err.message)
+				if (user && refpdf && refma) {
+					fetch(nomeL + '.pdf')
+					.then((a)=>{
+						a.blob().then(b=>{
+							refpdf.put(b)
+							.catch(err=>{
+								console.error(err.message)
+							})
+							.then(()=>{
+								fetch(nomeL + '.ma')
+								.then(c=>{
+									c.blob().then(d=>{
+										refma.put(d)
+										.then(async ()=>{
+											var urlPdf = ''
+											await refpdf.getDownloadURL().then((url)=> {urlPdf = url})
+											var urlMa = ''
+											await refma.getDownloadURL().then((url)=> {urlMa = url})
+											await callEmail(urlPdf, urlMa, nomeL)
+										})
+										.catch((err)=>{
+											console.error(err.message)
+										})
 									})
 								})
 							})
 						})
 					})
-				})
+				}
             }
         })
     })    
