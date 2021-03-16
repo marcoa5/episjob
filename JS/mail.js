@@ -379,11 +379,11 @@ async function showAdmin(){
 			} else {
 				$('#salva').hide()
 				$('#contSU').css( "display", "flex" )
-				$('#chBUSers').prop('checked',true)
+				$('#chBUSers').prop('checked',false)
 				$('#chBRigs').prop('checked',true)
 				$('#chBCust').prop('checked',true)
 				$('#chBTech').prop('checked',true)
-				$('#chBFiles').prop('checked',true)
+				$('#chBFiles').prop('checked',false)
 				$('#usersCont').show()
 				$('#rigsCont').show()
 				$('#custCont').show()
