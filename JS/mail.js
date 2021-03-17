@@ -706,3 +706,46 @@ function searchFile(e){
 		}
 	})
 }
+
+function renderPdf(){
+	let optionsOpen = {
+		title : "Seleziona Scheda Lavoro", 
+		defaultPath : require('path').join(require('os').homedir(),'Desktop'),
+		buttonLabel : "Apri Scheda Lavoro", 
+		filters :[
+			{name: 'Schede Lavoro', extensions: ['ma']},
+		   ],   
+		properties: ['openFile']
+	}
+	
+	var filename =  dialog.showOpenDialogSync(optionsOpen, "");
+	if(filename!==undefined){
+		$.get(filename, data=> {
+			var fullFN = require('path').parse(filename.toString())
+			var n = fullFN.name
+			var g = JSON.parse(data)
+			g.ris=''
+			g.sondaggio=''
+			var request = $.post(url + 'sjpdf',g)
+			.done(a=>{
+				let optionsSave = {
+					title : "Salva PDF", 
+					defaultPath : require('path').join(require('os').homedir(),'Desktop', n + '.pdf'),
+					buttonLabel : "Salva PDF", 
+					filters :[
+						{name: 'pdf', extensions: ['pdf']},
+					   ],   
+					properties: ['saveFile']
+				}
+				var pdfName = dialog.showSaveDialogSync(optionsSave, "")
+				if(pdfName!=undefined){
+					var h = Buffer.from(a.data)
+					require('fs').writeFile(pdfName,h,(err)=>{
+						if(err) console.log (err)
+						shell.openItem(pdfName)
+					})
+				}
+			})
+		})
+	}
+}
