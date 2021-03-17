@@ -726,8 +726,10 @@ function renderPdf(){
 			var g = JSON.parse(data)
 			g.ris=''
 			g.sondaggio=''
-			var request = $.post(url + 'sjpdf',g)
-			.done(a=>{
+			$.post(url + 'sjpdffile',g,(a,b,c)=>{
+				console.log(c)
+			})
+			/*.done(a=>{
 				let optionsSave = {
 					title : "Salva PDF", 
 					defaultPath : require('path').join(require('os').homedir(),'Desktop', n + '.pdf'),
@@ -745,7 +747,7 @@ function renderPdf(){
 						shell.openItem(pdfName)
 					})
 				}
-			})
+			})*/
 		})
 	}
 }
