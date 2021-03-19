@@ -314,55 +314,55 @@
 			<table style="border:0px solid black; width: 100%; margin: 0;  " >
 				<th class="tabset2" colspan="10">RIFERIMENTI</th>
 				<tr class="legenda1" ><br>
-						<td style=" width: 3%; font-weight: bold">spo</td>
+						<td style=" width: 3%; font-weight: bold">SPO</td>
 						<td style="  width:22%">Manodopera Specialistica Ordinaria</td>  
 						<td style=" width: 25%">(08.00-17.00)</td>    
-						<td style=" width: 3%;font-weight: bold">km</td>
+						<td style=" width: 3%;font-weight: bold">KM</td>
 						<td style=" width: 22%">Chilometri</td>  
 						<td style=" width: 25%"></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td><b>sps</b> </td>
+						<td><b>SPS</b> </td>
 						<td >Manodopera Specialistica Straordinaria</td>  
 						<td >(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>    
-						<td ><b>spv</b></td>
+						<td ><b>SPV</b></td>
 						<td >Spese viaggio</td>  
 						<td ></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td><b>std</b> </td>
+						<td><b>STD</b> </td>
 						<td>Manodopera Standard</td>  
 						<td>(08.00-17.00)</td>    
-						<td><b>off</b></td>
+						<td><b>OFF</b></td>
 						<td>Manodopera Officina </td>  
 						<td>(08.00-17.00)</td>       
 				</tr>
 				<tr class="legenda1" >
-						<td><b>str</b></td>
+						<td><b>STR</b></td>
 						<td>Manodopera Straordinaria</td>  
 						<td>(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>    
-						<td><b>ofs</b></td>
+						<td><b>OFS</b></td>
 						<td>Manodopera Officina Straordinaria</td>  
 						<td>(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>   
 				</tr>    
 				<tr class="legenda1" >
-						<td ><b>mnt</b></td>
+						<td ><b>MNT</b></td>
 						<td>Manodopera Notturna</td>  
 						<td>(22.00-06.00)</td>    
-						<td><b>v</b></td>
+						<td><b>V</b></td>
 						<td>Viaggio</td>  
 						<td></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td ><b>mf</b></td>
+						<td ><b>MF</b></td>
 						<td >Manodopera Festiva </td>  
 						<td>(06.00-22.00)</td>    
-						<td ><b>l</b></td>
+						<td ><b>L</b></td>
 						<td>Lavoro</td>  
 						<td></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td ><b>mnf</b></td>
+						<td ><b>MNF</b></td>
 						<td>Manodopera Festiva Notturna</td>  
 						<td>(22.00-06.00)</td>    
 						<td ></td>
@@ -409,7 +409,7 @@
 					<input id="susrcomponente" class="inser" placeholder="Seriale Componente..."> 
 					<input id="sucomponente" class="inser" placeholder="Componente..."> 
 					<div class="radiobtn">
-						<p style="margin: 5px; font-family: Arial; font-weight: 900">Tipo di  documento: </p>
+						<p style="margin: 5px; font-weight: 900">Tipo di  documento: </p>
 						<input type="radio" id="suext" name="doc" value="EXT" checked>
 						<label for="suext" style="font-size: 10px;">EXT</label>
 						<input type="radio" id="suoff" name="doc" value="OFF">
@@ -445,7 +445,7 @@
 								<input id="perc3" class="inser1" placeholder="Percussione 3..."  onkeypress="return isNumber(event)"><br>
 								<input id="ordine" class="inser" placeholder="Vs.Ordine...">
 								<div class="radiobtn">
-										<p style="margin: 5px; font-family: Arial; font-weight: 900">Manodopera: </p>
+										<p style="margin: 5px; font-weight: 900">Manodopera: </p>
 										<input type="radio" id="manstd" name="man" value="Standard" checked>
 										<label for="manstd">Standard</label>
 										<input type="radio" id="manspe" name="man" value="Specialistica">
@@ -461,8 +461,8 @@
 		<div class="finestra" id="menuRapporto">
 				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
 				<div class="finestrai">
-						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; font-family: Arial;" rows="13"></textarea>
-						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; font-family: Arial;" rows="3"></textarea>
+						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; " rows="13"></textarea>
+						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; " rows="3"></textarea>
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
 				<button class="pulsante" onclick="salvacomm()">Ok</button>		
@@ -718,9 +718,9 @@
 	<div class="finestra" id="sond1a" style="min-width: 650px;">
 			<div class="barrat"><div class="g"><p class="tt">Sondaggio</p></div></div>
 			<input id="nomecognome" type="text" placeholder="Nome e Cognome" class="inser" style="width: 60%" onchange="controllanomec()">
-			<div id="sondaggio"  style="font-family: Arial; font-weight:900; font-size: 15px; ">Sondaggio<br>
+			<div id="sondaggio"  style="font-weight:900; font-size: 15px; ">Sondaggio<br>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
-					<p style="margin: 1px; font-family: Arial; font-weight: 900">Organizzazione Intervento: </p>
+					<p style="margin: 1px; font-weight: 900">Organizzazione Intervento: </p>
 					<input type="radio" id="int1" name="int" value="1">
 					<label for="int1" onclick="controllasondc()">1</label>
 					<input type="radio" id="int2" name="int" value="2">
@@ -733,7 +733,7 @@
 					<label for="int5" onclick="controllasondc()">5</label>
 				</div>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
-					<p style="margin: 1px; font-family: Arial; font-weight: 900">Consegna ricambi puntuale: </p>
+					<p style="margin: 1px; font-weight: 900">Consegna ricambi puntuale: </p>
 					<input type="radio" id="ric1" name="ric" value="1">
 					<label for="ric1" onclick="controllasondc()">1</label>
 					<input type="radio" id="ric2" name="ric" value="2">
@@ -746,7 +746,7 @@
 					<label for="ric5" onclick="controllasondc()">5</label>
 				</div>
 				<div class="radiobtn1" style="margin: 10px; font-size: 10px; display: inline-table;">
-					<p style="margin: 2px; font-family: Arial; font-weight: 900">Esecuzione intervento: </p>
+					<p style="margin: 2px; font-weight: 900">Esecuzione intervento: </p>
 					<input type="radio" id="ese1" name="ese" value="1">
 					<label for="ese1" onclick="controllasondc()">1</label>
 					<input type="radio" id="ese2" name="ese" value="2">

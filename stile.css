@@ -1,5 +1,5 @@
 * {
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Arial';
 }
 
 body{
@@ -53,7 +53,8 @@ body::after {
 }
 
 .int{
-    
+    display: flex;
+    align-items: center;
     width: 100%;
 }
 
@@ -69,9 +70,9 @@ body::after {
 .topr{
     text-align: right;
     display: inline-block;
-    width: 8cm;
+    right:0;
     vertical-align: middle;
-    
+    width:100%;
     font-weight: 900;
     font-style: italic;
     color: rgb(66, 85, 99);  
@@ -392,6 +393,10 @@ body::after {
     overflow: hidden;
 }
 
+.legenda td{
+    white-space: nowrap;
+}
+
 
 .tabcell, .tabcell1, .tabcell2, .tabcell3 {
     padding: 0;
@@ -602,6 +607,7 @@ label{
 }
 
 .nome{
+    width: 250px;
     text-align: left;
 }
 
