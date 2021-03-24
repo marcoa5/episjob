@@ -1542,10 +1542,17 @@ function getHrTableIds(){
 
 function i18n(l){
 	document.title = tra.doc_title[l]
-	for(var i = 0;i<1000;i++){
+	for(var i = 0;i<2000;i++){
 		if($('#_' + i).length && i!=10){
 			$('#_'+i).text(tra['_'+i][l])
 		}
 	}
+	for(var h = 0;h<1000;h++){
+		if($('input[name="__' + h + '"]').length && h!=23 && h!=24){
+			$('input[name="__' + h + '"]').attr('placeholder', tra['__'+h][l])
+		}
+	}
 	$('#_10').html(tra._10[l])
+	$('textarea[name="__23"]').attr('placeholder', tra['__23'][l])
+	$('textarea[name="__24"]').attr('placeholder', tra['__24'][l])
 }

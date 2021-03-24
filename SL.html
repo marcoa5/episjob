@@ -398,74 +398,58 @@
 <div class="ccc" ><!--SU-->
 <div class="inser" style="position: fixed; font-size: 5px; display: none"><table id="listac"></table></div>
 <div class="finestra" id="menuSU">
-			<div class="barrat"><div class="g"></div><p class="tt">Extra info</p></div>
+			<div class="barrat"><div class="g"></div><p class="tt" id="_900"></p></div>
 			<div class="finestrai">
-				<input id="sucommessa" class="inser" placeholder="Commessa..."><br>
-				<input id="sunsofferta" class="inser" placeholder="Ns Offerta..."><br>
-				<input type="date" id="suapbpcs" class="inser" placeholder="Apertura BPCS..."><br>
-				<input type="date" id="suchbpcs" class="inser" placeholder="Chiusura BPCS..."><br>
-				<input id="sudocbpcs" class="inser" placeholder="Documento BPCS..."><br>
-				<!--<div style="border: 3px solid rgb(66, 85, 99); border-radius: 20px; width: 70%; padding: 20px; margin: 0 auto;">
-					<input id="susrcomponente" class="inser" placeholder="Seriale Componente..."> 
-					<input id="sucomponente" class="inser" placeholder="Componente..."> 
-					<div class="radiobtn">
-						<p style="margin: 5px; font-weight: 900">Tipo di  documento: </p>
-						<input type="radio" id="suext" name="doc" value="EXT" checked>
-						<label for="suext" style="font-size: 10px;">EXT</label>
-						<input type="radio" id="suoff" name="doc" value="OFF">
-						<label for="suoff"  style="font-size: 10px;">OFF</label><br><br>
-						
-					</div>
-					<input id="sunomefile" class="inser" placeholder="Nome file..."><br><br>
-					<button class="pulsante" onclick="">Carica in archivio</button>
-				</div>
-				<button class="pulsante" id="addtosp" onclick="addsp()" disabled>Carica Sondaggio</button>-->
+				<input id="sucommessa" name="__10" class="inser"><br>
+				<input id="sunsofferta" name="__11" class="inser"><br>
+				<input type="date" id="suapbpcs" class="inser"><br>
+				<input type="date" id="suchbpcs" class="inser"><br>
+				<input id="sudocbpcs" class="inser" name="__12"><br>
+			
 			</div>
-			<button class="pulsante" onclick="closeMenu()">Annulla</button>
-			<button class="pulsante" onclick="closeSU()">Ok</button>
+			<button class="pulsante" onclick="closeMenu()" id="_910"></button>
+			<button class="pulsante" onclick="closeSU()" id="_920"></button>
 </div> 
 		<div class="finestra" id="menuMatricola">
-				<div class="barrat"><div class="g"></div><p class="tt">MACCHINA / CLIENTE</p></div>
+				<div class="barrat"><div class="g"></div><p class="tt" id="_930"></p></div>
 				<div class="finestrai">
 						<form id="inputmac">
-					
-								 
 								<input type="date" name="bday" id="data2">
-								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" placeholder="Cerca Matricola..." style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
+								<input onkeyup="myFunction()" id="myinput" class="inser" type="text" name="__13" style="background-image: 'searchicon.png'; background-position: 10px 12px; background-repeat: no-repeat;">
 								<div class="inser" id="mmm"><table id="listam"></table></div>
-								<input onkeyup="chMatricola()" id="matricolas" class="inser" placeholder="Matricola...">
-								<input id="prodotto" class="inser" placeholder="Prodotto...">
-								<input id="cliente" class="inser" placeholder="Cliente...">
+								<input onkeyup="chMatricola()" id="matricolas" class="inser" name="__14">
+								<input id="prodotto" class="inser" name="__15">
+								<input id="cliente" class="inser" name="__16">
 								<input id="clientead1" class="inser" style="display: none">
 								<input id="clientead2" class="inser" style="display: none">
-								<input id="cantiere" class="inser" placeholder="Cantiere...">
-								<input id="orem" class="inser" placeholder="Ore Motore..." onkeypress="return isNumber(event)">
-								<input id="perc1" class="inser1" placeholder="Percussione 1..." onkeypress="return isNumber(event)">
-								<input id="perc2" class="inser1" placeholder="Percussione 2..." onkeypress="return isNumber(event)" >
-								<input id="perc3" class="inser1" placeholder="Percussione 3..."  onkeypress="return isNumber(event)"><br>
-								<input id="ordine" class="inser" placeholder="Vs.Ordine...">
+								<input id="cantiere" class="inser" name="__17">
+								<input id="orem" class="inser" name="__18" onkeypress="return isNumber(event)">
+								<input id="perc1" class="inser1" name="__19" onkeypress="return isNumber(event)">
+								<input id="perc2" class="inser1" name="__20" onkeypress="return isNumber(event)" >
+								<input id="perc3" class="inser1" name="__21"  onkeypress="return isNumber(event)"><br>
+								<input id="ordine" class="inser" name="__22">
 								<div class="radiobtn">
-										<p style="margin: 5px; font-weight: 900">Manodopera: </p>
+										<p style="margin: 5px; font-weight: 900" id="_940">Manodopera: </p>
 										<input type="radio" id="manstd" name="man" value="Standard" checked>
-										<label for="manstd">Standard</label>
+										<label for="manstd" id="_950"></label>
 										<input type="radio" id="manspe" name="man" value="Specialistica">
-										<label for="manspe">Specialistica</label>
+										<label for="manspe" id="_960"></label>
 								</div>
 						</form>
 				</div>
-				<button class="pulsante" onclick="closeMenu()">Annulla</button>
-				<button class="pulsante" onclick="salvadati()">Ok</button>
+				<button class="pulsante" onclick="closeMenu()" id="_970"></button>
+				<button class="pulsante" onclick="salvadati()" id="_980"></button>
 		</div>        
 </div>
 <div class="ccc"><!--Rapporto-->    
 		<div class="finestra" id="menuRapporto">
-				<div class="barrat"><div class="g"></div><p class="tt">COMMENTI</p></div>
+				<div class="barrat"><div class="g"></div><p class="tt" id="_990"></p></div>
 				<div class="finestrai">
-						<textarea id="rappl" class="inser" placeholder="Rapporto Lavoro..." style="height: 250px; " rows="13"></textarea>
-						<textarea id="oss" class="inser" placeholder="Osservazioni..." style="height: 150px; " rows="3"></textarea>
+						<textarea id="rappl" class="inser" name="__23" style="height: 250px; " rows="13"></textarea>
+						<textarea id="oss" class="inser" name="__24" style="height: 150px; " rows="3"></textarea>
 				</div>
-				<button class="pulsante" onclick="closeMenu()">Annulla</button>
-				<button class="pulsante" onclick="salvacomm()">Ok</button>		
+				<button class="pulsante" onclick="closeMenu()" id="_1000"></button>
+				<button class="pulsante" onclick="salvacomm()" id="_1010"></button>		
 		</div>
 </div>
 <div class="ccc"><!--Ore-->
@@ -1019,6 +1003,7 @@
 </body>
 
 <script>
+i18n('it')
 $('#listaMai').hide()
 $('#salva').hide()
 $('#logCont').hide()

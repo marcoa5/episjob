@@ -1,11 +1,22 @@
+
+var cancel ={
+    it:'Annulla',
+    en:'Cancel'
+}
+
+var okay = {
+    it:'Ok',
+    en:'Ok'
+}
+
 var a1= {
-    it: 'Scheda Lavoro',
-    en: 'Service Job'
+    it: 'SCHEDA LAVORO',
+    en: 'SERVICE JOB'
 }
 
  var a2={
     it: 'COMMESSA',
-    en:'SERVICE JOB NR'
+    en: 'SERVICE JOB NR'
 }
 
 var a3={
@@ -79,6 +90,101 @@ var a15={
 var a16={
     it:'STANDARD',
     en:'STANDARD'
+}
+
+var a17={
+    it: 'RIFERIMENTI',
+    en: 'REFERENCES'
+}
+
+var a18 ={
+    it:'Manodopera Specialistica Ordinaria',
+    en: '???'
+}
+
+var a19 ={
+    it: 'Chilometri',
+    en: 'Kilometers'
+}
+
+var a20 ={
+    it:'Manodopera Specialistica Straordinaria',
+    en:'???'
+}
+
+var a21 ={
+    it: 'Spese viaggio',
+    en: 'Travel expenses'
+}
+
+var a22 ={
+    it:'Manodopera Standard',
+    en:'Standard Labor'
+}
+
+var a23 ={
+    it : 'Manodopera Officina',
+    en: 'Workshop Labor'
+}
+
+var a24={
+    it: 'Manodopera Straordinaria',
+    en: 'Overtime Labor'
+}
+
+var a25 = {
+    it: 'Manodopera Officina Straordinaria',
+    en: 'Overtime Workshop Labor'
+}
+
+var a26={
+    it:'Manodopera Notturna',
+    en:'Night Labor'
+}
+
+var a27={
+    it: 'Viaggio',
+    en: 'Travel'
+}
+
+var a28={
+    it:'Manodopera Festiva',
+    en: 'Holyday Labor'
+}
+
+var a29={
+    it:'Lavoro',
+    en: 'Job'
+}
+
+var a30={
+    it:'Manodopera Festiva Notturna',
+    en:'Holyday Night Labor'
+}
+
+var a31={
+    it:'FIRMA TECNICO',
+    en:'TECHNICIAN SIGNATURE'
+}
+
+var a32={
+    it:'FIRMA CLIENTE',
+    en:'CUSTOMER SIGNATURE'
+}
+
+var a33={
+    it:'APERTURA BPCS',
+    en:'???'
+}
+
+var a34={
+    it:'CHIUSURA BPCS',
+    en:'???'
+}
+
+var a35 ={
+    it:'DOCUMENTO BPCS',
+    en:'???'
 }
 
 var legal={
@@ -218,6 +324,109 @@ var fhrs = {
     en:'(6am - 10pm)'
 }
 
+var a36={
+    it: 'Extra Info',
+    en:'Extra Info'
+}
+
+var a37={
+    it:'Commessa...',
+    en:'Service Job Nr...'
+}
+
+var a38={
+    it:'Ns Offerta...',
+    en:'Our Offer...'
+}
+
+var a39={
+    it:'Documento BPCS...',
+    en:'BPCS Document...'
+}
+
+var a40={
+    it: 'MACCHINA / CLIENTE',
+    en: 'EQUIPMENT / CUSTOMER'
+}
+
+var a41={
+    it:'Cerca Matricola...',
+    en:'Find Serial Nr ...'
+}
+
+var a42={
+    it:'Matricola...',
+    en:'Serial Nr...'
+}
+
+var a43={
+    it:'Prodotto...',
+    en:'Equipment...'
+}
+
+var a44={
+    it:'Cliente...',
+    en:'Customer...'
+}
+var a45={
+    it:'Cantiere...',
+    en:'Site...'
+}
+
+var a46={
+    it:'Ore Motore...',
+    en: 'Engine hrs...'
+}
+
+var a47={
+    it:'Percussione1...',
+    en: 'Percussion1...'
+}
+var a48={
+    it:'Percussione2...',
+    en: 'Percussion2...'
+}
+var a49={
+    it:'Percussione3...',
+    en: 'Percussion3...'
+}
+var a50={
+    it:'Vs Ordine...',
+    en: 'PO Number...'
+}
+
+var a51={
+    it:'Manodopera: ',
+    en: 'Job Type: '
+}
+
+var a52={
+    it: 'Standard',
+    en:'Standard'
+}
+
+var a53={
+    it:'Specialistica',
+    en: 'Specialized'
+}
+
+var a54={
+    it:'COMMENTI',
+    en: 'SERVICE REPORT'
+}
+
+var a55={
+    it:'Rapporto Lavoro...',
+    en: 'Service Report...'
+}
+
+var a56={
+    it:'Osservazioni...',
+    en: 'Customer\'s comments'
+}
+
+
+
 module.exports.doc_title = titolo
 module.exports._10=legal
 module.exports._20 = a1
@@ -267,109 +476,73 @@ module.exports._450 =v
 module.exports._460 =l
 module.exports._470 =v
 module.exports._480 =l
-module.exports._490 = {
-    it: 'RIFERIMENTI',
-    en: 'REFERENCES'
-}
-
+module.exports._490 = a17
 module.exports._500 = spo
-module.exports._510 = {
-    it:'Manodopera Specialistica Ordinaria',
-    en: '???'
-}
-
+module.exports._510 = a18
 module.exports._520 = stdhrs
-
 module.exports._530 = km
-module.exports._540 = {
-    it: 'Chilometri',
-    en: 'Kilometers'
-}
-
+module.exports._540 = a19
 module.exports._550 = sps
-module.exports._560 = {
-    it:'Manodopera Specialistica Straordinaria',
-    en:'???'
-}
+module.exports._560 = a20
 module.exports._570 = othrs
-
 module.exports._580= spv
-module.exports._590 = {
-    it: 'Spese viaggio',
-    en: 'Travel expenses'
-}
+module.exports._590 = a21
 module.exports._600=std
-module.exports._610={
-    it:'Manodopera Standard',
-    en:'Standard Labor'
-}
-
+module.exports._610=a22
 module.exports._620 = stdhrs
-
 module.exports._630 = off
-module.exports._640 = {
-    it : 'Manodopera Officina',
-    en: 'Workshop Labor'
-}
+module.exports._640 = a23
 module.exports._650 = stdhrs
 module.exports._660 = str
-module.exports._670 = {
-    it: 'Manodopera Straordinaria',
-    en: 'Overtime Labor'
-}
+module.exports._670 = a24
 module.exports._680 = othrs
 module.exports._690 = ofs
-module.exports._700 = {
-    it: 'Manodopera Officina Straordinaria',
-    en: 'Overtime Workshop Labor'
-}
+module.exports._700 = a25
 module.exports._710=othrs
 module.exports._720=mnt
-module.exports._730= {
-    it:'Manodopera Notturna',
-    en:'Night Labor'
-}
+module.exports._730= a26
 module.exports._740 = nhrs
 module.exports._750 = v
-module.exports._760 = {
-    it: 'Viaggio',
-    en: 'Travel'
-}
+module.exports._760 = a27
 module.exports._770 = mf
-module.exports._780 = {
-    it:'Manodopera Festiva',
-    en: 'Holyday Labor'
-}
+module.exports._780 = a28
 module.exports._790 = fhrs
 module.exports._800 = l
-module.exports._810 = {
-    it:'Lavoro',
-    en: 'Job'
-}
+module.exports._810 = a29
 module.exports._820 = mnf
-module.exports._830={
-    it:'Manodopera Festiva Notturna',
-    en:'Holyday Night Labor'
-}
+module.exports._830 = a30
 module.exports._840 = nhrs
-module.exports._850 = {
-    it:'FIRMA TECNICO',
-    en:'TECHNICIAN SIGNATURE'
-}
-module.exports._860 = {
-    it:'FIRMA CLIENTE',
-    en:'CUSTOMER SIGNATURE'
-}
+module.exports._850 = a31
+module.exports._860 = a32
+module.exports._870 = a33
+module.exports._880 = a34
+module.exports._890 = a35
+module.exports._900 = a36
+module.exports._910 = cancel
+module.exports._920 = okay
+module.exports._930 = a40
+module.exports._940 = a51
+module.exports._950 = a52
+module.exports._960 = a53
+module.exports._970 = cancel
+module.exports._980 = okay
+module.exports._990 = a54
+module.exports._1000 = cancel
+module.exports._1010 = okay
 
-module.exports._870 = {
-    it:'APERTURA BPCS',
-    en:'???'
-}
-module.exports._880 = {
-    it:'CHIUSURA BPCS',
-    en:'???'
-}
-module.exports._890 = {
-    it:'DOCUMENTO BPCS',
-    en:'???'
-}
+
+module.exports.__10 = a37
+module.exports.__11 = a38
+module.exports.__12 = a39
+module.exports.__13 = a41
+module.exports.__14 = a42
+module.exports.__15 = a43
+module.exports.__16 = a44
+module.exports.__17 = a45
+module.exports.__18 = a46
+module.exports.__19 = a47
+module.exports.__20 = a48
+module.exports.__21 = a49
+module.exports.__22 = a50
+module.exports.__23 = a55
+module.exports.__24 = a56
