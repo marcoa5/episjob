@@ -13,6 +13,7 @@
 	<script src="js/fire.js"></script>
 	<script src="js/listaEmail.js"></script>
 	<script src="js/jqueryui.js"></script>
+	<script>var tra = require('./js/locales/lang.js')</script>
     <script>if (window.module) module = window.module;</script>
     <script>const { dialog } = require('electron').remote;</script>
 	<script>const {webFrame} = require('electron'); webFrame.setZoomFactor(1);</script>
@@ -28,26 +29,26 @@
                         <div class="foglio" id="pagina">
                                 <div class="margini">
                                         <div class="int">
-                                                <div class="logo" onclick="test()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
-                                                <div class="logo"><p class="nome"><strong style="font-size: 6pt">Epiroc Italia Srl</strong><br>Cap. Soc. EUR 1.000.000,00 int. vers.<br>Sede legale e amministrativa<br>Via Galileo Galilei, 40 - 20092 Cinisello B.mo (MI) - Telefono 02 6606731<br>Reg. Impr. di MI, C.F. e P. IVA 09938280964- R.E.A. MI-2123103<br>epiroc.it</p></div>
-                                                <div class="topr">Service Job</div>
+                                                <div class="logo" onclick="i18n()"><img src="img/logo.png" alt="Logo Epiroc" height="93" width="200"></div>
+                                                <div class="logo"><p id="_10" class="nome"></p></div>
+                                                <div class="topr" id="_20"></div>
                                         </div>
                                         <div class="dati" id="aamatricola" onclick="openMenu('menuMatricola')">
                                                 <div id="tl" class="topleft">
                                                         <table class="tabella">
-                                                                <tr><td class="a1" colspan="6">COMMESSA</td></tr>
+                                                                <tr><td class="a1" colspan="6" id="_30"> </td></tr>
                                                                 <tr><td class="a2" colspan="6"><div id="commessa1"></div></td></tr>
                                                                 <tr><td class="a3" colspan="6"></td></tr>
                                                                 <tr class="spazio"></tr>
-                                                                <tr><td class="a1" colspan="3">VS. ORDINE</td><td class="a1" colspan="3">NS. OFFERTA</td></tr>
+                                                                <tr><td class="a1" colspan="3" id="_40"> </td><td class="a1" colspan="3" id="_50"> </td></tr>
                                                                 <tr><td class="a2" colspan="3"><div class= "in" id="vsordine"></div></td><td class="a2" colspan="3"><div id="nsofferta1"></div></td></tr>
                                                                 <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                 <tr class="spazio"></tr>
-                                                                <tr><td class="a1" colspan="3">PRODOTTO</td><td class="a1" colspan="3">MATRICOLA</td></tr>
+                                                                <tr><td class="a1" colspan="3" id="_60"> </td><td class="a1" colspan="3" id="_70"> </td></tr>
                                                                 <tr><td class="a2" colspan="3"><div class= "in" id="prodotto1"></div></td><td class="a2" colspan="3"><div class= "in" id="matricola"></div></td></tr>
                                                                 <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                 <tr class="spazio"></tr>
-                                                                <tr><td class="a1" colspan="3">ORE MOTORE</td><td class="a1" colspan="3">ORE PERCUSSIONE</td></tr>
+                                                                <tr><td class="a1" colspan="3" id="_80"> </td><td class="a1" colspan="3" id="_90"> </td></tr>
                                                                 <tr><td class="a2" colspan="3"><div id="orem1"></div></td><td class="a4" ><div class="in" id="perc11"></div></td><td class="a4" ><div class="in" id="perc21"></div></td><td class="a6" ><div class="in" id="perc31"></div></td></tr>
                                                                 <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                         </table>
@@ -55,17 +56,17 @@
                                                 <div class="topcenter"></div>
                                                 <div id="tr" class="topright">
                                                                 <table class="tabella">
-                                                                        <tr><td class="a1" colspan="3">DATA</td><td class="a1" colspan="3">PAGINA</td></tr>
-                                                                        <tr><td class="a2" colspan="3"><div class="in" id="data11"></div></td><td class="a2" colspan="3"><div class="in">1  di  1</div></td></tr>
+                                                                        <tr><td class="a1" colspan="3" id="_100"></td><td class="a1" colspan="3" id="_110"></td></tr>
+                                                                        <tr><td class="a2" colspan="3"><div class="in" id="data11"></div></td><td class="a2" colspan="3"><div class="in" id="_120"></div></td></tr>
                                                                         <tr><td class="a3" colspan="3"></td><td class="a3" colspan="3"></td></tr>
                                                                         <tr class="spazio"></tr>
-                                                                        <tr><td class="a1" colspan="6">CLIENTE</td></tr>
+                                                                        <tr><td class="a1" colspan="6" id="_130"></td></tr>
                                                                         <tr><td class="a5" colspan="6"><div class="in" id="cliente11"></div></td></tr>
                                                                         <tr><td class="a5" colspan="6"><div class="in" id="cliente12"></div></td></tr>
                                                                         <tr><td class="a5" colspan="6"><div class="in" id="cliente13"></div></td></tr>
                                                                         <tr><td class="a3" colspan="6"></td></tr>
                                                                         <tr class="spazio"></tr>
-                                                                        <tr><td class="a1" colspan="6">CANTIERE</td></tr>
+                                                                        <tr><td class="a1" colspan="6" id="_140"></td></tr>
                                                                         <tr><td class="a2" colspan="6"><div id="cantiere1"></div></td></tr>
                                                                         <tr><td class="a3" colspan="6"></td></tr>
                                                                 </table>
@@ -73,7 +74,7 @@
                                         </div>
                                         <object style="height: 3px;"></object>
                                         <div class="centro" id="aarapporto" onclick="openMenu('menuRapporto')">
-                                                <div class="header"><div class="headertext">RAPPORTO LAVORO</div></div>
+                                                <div class="header"><div class="headertext" id="_150"></div></div>
                                                     <div class="notetext">
 														<div id="rappl1" style="height: 225px;"></div>
 														<div class="righe"></div>
@@ -91,7 +92,7 @@
 														<div class="righe"></div>
 														<div class="righe" style="border-bottom: none"></div>
 													</div>
-												<div class="header"><div class="headertext">OSSERVAZIONI</div></div>
+												<div class="header"><div class="headertext" id="_160"></div></div>
                                                     <div class="notetext">
 														<div id="oss1" style="height: 65px;"></div>
 															<div class="righe"></div>
@@ -103,42 +104,42 @@
 	<div class="settimana"><!--Tabella Ore-->
 		<table id="tabset" class="tabset" onclick="openMenu('menuOre')">
 			<tr class="tabrow" style="font-weight: 800;">
-							<td class="tabcell" rowspan="3">TECNICO</td>
-							<td class="tabcell" colspan="3" rowspan="2">DATA</td>
-							<td class="tabcell" colspan="4">SPECIALISTICA</td>
-							<td class="tabcell" colspan="4">STANDARD</td>
-							<td class="tabcell" colspan="2" rowspan="2">MNT</td>
-							<td class="tabcell" colspan="2" rowspan="2">MF</td>
-							<td class="tabcell" colspan="2" rowspan="2">MNF</td>
-							<td class="tabcell" rowspan="3">KM</td>
-							<td class="tabcell" rowspan="3">SPV</td>
-							<td class="tabcell" rowspan="3">OFF</td>
-							<td class="tabcell" rowspan="3">OFS</td>	
+							<td class="tabcell" rowspan="3" id="_170"></td>
+							<td class="tabcell" colspan="3" rowspan="2" id="_180"></td>
+							<td class="tabcell" colspan="4" id="_190"></td>
+							<td class="tabcell" colspan="4" id="_200"></td>
+							<td class="tabcell" colspan="2" rowspan="2" id="_210"></td>
+							<td class="tabcell" colspan="2" rowspan="2" id="_220"></td>
+							<td class="tabcell" colspan="2" rowspan="2" id="_230"></td>
+							<td class="tabcell" rowspan="3" id="_240"></td>
+							<td class="tabcell" rowspan="3" id="_250"></td>
+							<td class="tabcell" rowspan="3" id="_260"></td>
+							<td class="tabcell" rowspan="3" id="_270"></td>	
 			</tr>
 			<tr class="tabrow" style="font-weight: 800;">
-							<td class="tabcell" colspan="2">SPO</td>
-							<td class="tabcell" colspan="2">SPS</td>
-							<td class="tabcell" colspan="2">STD</td>
-							<td class="tabcell" colspan="2">STR</td>
+							<td class="tabcell" colspan="2" id="_280"></td>
+							<td class="tabcell" colspan="2" id="_290"></td>
+							<td class="tabcell" colspan="2" id="_300"></td>
+							<td class="tabcell" colspan="2" id="_310"></td>
 			</tr>
 			<tr class="tabrow" style="font-weight: 800;">
-							<td class="tabcell">GG</td>
-							<td class="tabcell">MM</td>
-							<td class="tabcell">AA</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
-							<td class="tabcell">V</td>
-							<td class="tabcell">L</td>
+							<td class="tabcell" id="_320"></td>
+							<td class="tabcell" id="_330"></td>
+							<td class="tabcell" id="_340"></td>
+							<td class="tabcell" id="_350"></td>
+							<td class="tabcell" id="_360"></td>
+							<td class="tabcell" id="_370"></td>
+							<td class="tabcell" id="_380"></td>
+							<td class="tabcell" id="_390"></td>
+							<td class="tabcell" id="_400"></td>
+							<td class="tabcell" id="_410"></td>
+							<td class="tabcell" id="_420"></td>
+							<td class="tabcell" id="_430"></td>
+							<td class="tabcell" id="_440"></td>
+							<td class="tabcell" id="_450"></td>
+							<td class="tabcell" id="_460"></td>
+							<td class="tabcell" id="_470"></td>
+							<td class="tabcell" id="_480"></td>
 			</tr>
 			<tr class="tabrow">
 							<td class="tabcell1"  style="text-align: left; padding-left: 10px;" id="tecnico11"></td>
@@ -312,59 +313,59 @@
 		</table>
 		<div class="legenda"><!--Legenda-->                                
 			<table style="border:0px solid black; width: 100%; margin: 0;  " >
-				<th class="tabset2" colspan="10">RIFERIMENTI</th>
+				<th class="tabset2" colspan="10" id="_490"></th>
 				<tr class="legenda1" ><br>
-						<td style=" width: 3%; font-weight: bold">SPO</td>
-						<td style="  width:22%">Manodopera Specialistica Ordinaria</td>  
-						<td style=" width: 25%">(08.00-17.00)</td>    
-						<td style=" width: 3%;font-weight: bold">KM</td>
-						<td style=" width: 22%">Chilometri</td>  
+						<td style=" width: 3%; font-weight: bold" id="_500"></td>
+						<td style="  width:22%" id="_510"></td>  
+						<td style=" width: 25%" id="_520"></td>    
+						<td style=" width: 3%;font-weight: bold" id="_530"></td>
+						<td style=" width: 22%"id="_540"></td>  
 						<td style=" width: 25%"></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td><b>SPS</b> </td>
-						<td >Manodopera Specialistica Straordinaria</td>  
-						<td >(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>    
-						<td ><b>SPV</b></td>
-						<td >Spese viaggio</td>  
+						<td><b id="_550"></b> </td>
+						<td id="_560"></td>  
+						<td id="_570"></td>    
+						<td ><b id="_580"></b></td>
+						<td id="_590"></td>  
 						<td ></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td><b>STD</b> </td>
-						<td>Manodopera Standard</td>  
-						<td>(08.00-17.00)</td>    
-						<td><b>OFF</b></td>
-						<td>Manodopera Officina </td>  
-						<td>(08.00-17.00)</td>       
+						<td><b id="_600"></b> </td>
+						<td id="_610"></td>  
+						<td id="_620"></td>    
+						<td><b id="_630"></b></td>
+						<td id="_640"></td>  
+						<td id="_650"></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td><b>STR</b></td>
-						<td>Manodopera Straordinaria</td>  
-						<td>(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>    
-						<td><b>OFS</b></td>
-						<td>Manodopera Officina Straordinaria</td>  
-						<td>(06.00-08.00 e 17.00-22.00) - Sabato (06.00-22.00)</td>   
+						<td><b id="_660"></b></td>
+						<td id="_670"></td>  
+						<td id="_680"></td>    
+						<td><b id="_690"></b></td>
+						<td id="_700"></td>  
+						<td id="_710"></td>   
 				</tr>    
 				<tr class="legenda1" >
-						<td ><b>MNT</b></td>
-						<td>Manodopera Notturna</td>  
-						<td>(22.00-06.00)</td>    
-						<td><b>V</b></td>
-						<td>Viaggio</td>  
+						<td ><b id="_720"></b></td>
+						<td id="_730"></td>  
+						<td id="_740"></td>    
+						<td><b id="_750"></b></td>
+						<td id="_760"></td>  
 						<td></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td ><b>MF</b></td>
-						<td >Manodopera Festiva </td>  
-						<td>(06.00-22.00)</td>    
-						<td ><b>L</b></td>
-						<td>Lavoro</td>  
+						<td><b id="_770"></b></td>
+						<td id="_780"></td>  
+						<td id="_790"></td>    
+						<td ><b id="_800"></b></td>
+						<td id="_810"></td>  
 						<td></td>       
 				</tr>
 				<tr class="legenda1" >
-						<td ><b>MNF</b></td>
-						<td>Manodopera Festiva Notturna</td>  
-						<td>(22.00-06.00)</td>    
+						<td ><b id="_820"></b></td>
+						<td id="_830"></td>  
+						<td id="_840"></td>    
 						<td ></td>
 						<td></td>  
 						<td ></td>       
@@ -372,14 +373,13 @@
 			</table>
 		</div>
 		<div class="firme"><!--Firme-->
-			<!--<div class="tf">FIRMA TECNICO</div><div class="tf">FIRMA CLIENTE</div><div class="tf">APERTURA BPCS</div><div class="tf">CHIUSURA BPCS</div><div class="tf" style="border-right: 1px solid black">CHIUSURA BPCS</div>-->
 			<table style="width: 100%; border-collapse: collapse;">
 				<tr>
-					<td class="tf">FIRMA TECNICO</td>
-					<td class="tf">FIRMA CLIENTE</td>
-					<td class="tf">APERTURA BPCS</td>
-					<td class="tf">CHIUSURA BPCS</td>
-					<td class="tf">DOCUMENTO BPCS</td>
+					<td class="tf" id="_850"></td>
+					<td class="tf" id="_860"></td>
+					<td class="tf" id="_870"></td>
+					<td class="tf" id="_880"></td>
+					<td class="tf" id="_890"></td>
 				</tr>
 				<tr>
 					<td class="firma"><img height="60" width="138" alt="Firma" id="firmatt1" onclick="openMenu('menurisk')" style="cursor: pointer" src="img/white.png"></td>
@@ -965,6 +965,10 @@
 
 <!--barra gialla in alto-->
 <div id="menuA" class="menu">
+	<button class="pulsante yb" onclick="i18n('it')">IT</button>
+	<span>|</span>
+	<button class="pulsante yb" onclick="i18n('en')">EN</button>
+	<span>|</span>
 	<button class="pulsante yb" onclick="controllamodifiche('pulisci', function(){pulisci()})"><span style="font-family: 'Wingdings 3';">Q </span>Aggiorna</button>
 	<span>|</span>
 	<div id="unsentCount">Schede in uscita:   <span id="unsent"></span></div>

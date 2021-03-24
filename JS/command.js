@@ -1539,3 +1539,13 @@ function getHrTableIds(){
 	}
 	return val
 }
+
+function i18n(l){
+	document.title = tra.doc_title[l]
+	for(var i = 0;i<1000;i++){
+		if($('#_' + i).length && i!=10){
+			$('#_'+i).text(tra['_'+i][l])
+		}
+	}
+	$('#_10').html(tra._10[l])
+}
