@@ -470,6 +470,60 @@ var a65={
     en:'Send Mail'
 }
 
+var a66={
+    it:'Risk Assessment',
+    en:'Risk Assessment'
+}
+
+var a67={
+    it:'Ho informazioni sufficienti sul lavoro da svolgere?',
+    en: '????????'
+}
+
+var a68={
+    it:'Considero sicuro il metodo di lavoro concordato?',
+    en: '????????'
+}
+
+var a69={
+    it:'Ho letto e compreso il permesso?',
+    en:'?????????'
+}
+
+var a70={
+    it:'Sono stati rispettati tutti i termini e le condizioni dell\'autorizzazione?',
+    en: '????????'
+}
+
+var a71={
+    it:'Sono presenti ed in buone condizioni le attrezzature necessarie?',
+    en:'?????????'
+}
+
+var a72={
+    it:'Sono presenti tutti i DPI necessari?',
+    en:'?????????'
+}
+
+var a73 = {
+    it:'Luogo di lavoro idoneo allo svolgimento delle operazioni richieste?',
+    en:'?????????'
+}
+
+var a74 = {
+    it: 'Ci sono altri pericoli?',
+    en: '?????????'
+}
+
+var a75 = {
+    it: 'Pericolo di caduta o di inciampo?',
+    en: '?????????'
+}
+
+var a76={
+    it:'Rischio di lesioni da impatto?',
+    en:'??????????'
+}
 
 module.exports.doc_title = titolo
 module.exports._10=legal
@@ -603,6 +657,19 @@ module.exports._1280 = okay
 module.exports._1290 = a63
 module.exports._1300 = cancel
 module.exports._1310 = a65
+module.exports._1320 = a66
+module.exports._1330 = a66
+module.exports._1340 = a67
+module.exports._1350 = a68
+module.exports._1360 = a69
+module.exports._1370 = a70
+module.exports._1380 = a71
+module.exports._1390 = a72
+module.exports._1400 = a73
+module.exports._1410 = a74
+module.exports._1420 = a75
+module.exports._1430 = a76
+
 
 
 
