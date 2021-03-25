@@ -183,7 +183,7 @@ function salvadati(){
     $("#perc31").text(mille($("#perc3").val().toString()));
 	var aggdata = convdata($('#data2').val());
 	$("#data11").text(aggdata);
-    if(document.getElementById("manstd").checked){$('#stdspe').text("STD"); $('#spostd').text("STD"); $('#spsstr').text("STR")}else{$('#stdspe').text("SPE");$('#spostd').text("SPO");$('#spsstr').text("SPS")}
+    if(document.getElementById("manstd").checked){$('#stdspe').text("STD"); $('th[name="spostd"]').text("STD"); $('th[name="spsstr"]').text("STR")}else{$('#stdspe').text("SPE");$('th[name="spostd"]').text("SPO");$('th[name="spsstr"]').text("SPS")}
     closeMenu();
 	$("#vsordine").text($("#ordine").val());
 }
@@ -738,7 +738,7 @@ function aggiungi() {
 			}
 			//aggiunge il modifica riga
 			var n = document.createElement('TD');
-			var t = document.createTextNode("Modifica");
+			var t = document.createTextNode(tra.modifica['en']);
 			n.appendChild(t);
 			att = document.createAttribute("class");
 			att.value="elim";
@@ -749,7 +749,7 @@ function aggiungi() {
 			document.getElementById('ris').getElementsByTagName('tr')[ind].appendChild(n);
 			//aggiunge l'elimina riga
 			var n = document.createElement('TD');
-			var t = document.createTextNode("Elimina");
+			var t = document.createTextNode(tra.elimina['en']);
 			n.appendChild(t);
 			att = document.createAttribute("class");
 			att.value="elim";

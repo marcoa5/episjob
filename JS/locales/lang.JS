@@ -52,7 +52,7 @@ var a8={
     en:'PERCUSSION HRS'
 }
 
-var a9={
+/*var a9={
     it:'PAGINA',
     en:'PAGE'
 }
@@ -60,7 +60,7 @@ var a9={
 var a10={
     it:'1 di 1',
     en:'1 of 1'
-}
+}*/
 
 var a11={
     it:'CLIENTE',
@@ -425,6 +425,50 @@ var a56={
     en: 'Customer\'s comments'
 }
 
+var a57={
+    it:'ORE LAVORATE',
+    en:'HRS SUMMARY'
+}
+
+var a58={
+    it: 'ORE',
+    en: 'HRS'
+}
+
+var a59={
+    it: 'Aggiungi',
+    en: 'Add'
+}
+
+var a60={
+    it: 'Elimina Tutto',
+    en: 'Delete all'
+}
+
+var a61={
+    it: 'Modifica',
+    en: 'Edit'
+}
+
+var a62={
+    it: 'Cancella',
+    en: 'Delete'
+}
+
+var a63={
+    it:'Indirizzi Mail',
+    en:'Email Addresses'
+}
+
+var a64={
+    it:'Indirizzo Mail...',
+    en:'Email Address...'
+}
+
+var a65={
+    it:'Invia Mail',
+    en:'Send Mail'
+}
 
 
 module.exports.doc_title = titolo
@@ -438,8 +482,8 @@ module.exports._70 =a6
 module.exports._80 =a7
 module.exports._90 =a8
 module.exports._100 =date
-module.exports._110 =a9
-module.exports._120 =a10
+/*module.exports._110 =a9
+module.exports._120 =a10*/
 module.exports._130 =a11
 module.exports._140 =a12
 module.exports._150 = a13
@@ -529,6 +573,37 @@ module.exports._980 = okay
 module.exports._990 = a54
 module.exports._1000 = cancel
 module.exports._1010 = okay
+module.exports._1020 = a57
+module.exports._1030 = a15
+module.exports._1040 = date
+module.exports._1050 = a58
+module.exports._1060 = km
+module.exports._1070 = spv
+module.exports._1080 = off
+module.exports._1090 = ofs
+module.exports._1100 = std
+module.exports._1110 = str
+module.exports._1120 = mnt
+module.exports._1130 = mf
+module.exports._1140 = mnf
+module.exports._1150 = v
+module.exports._1160 = l
+module.exports._1170 = v
+module.exports._1180 = l
+module.exports._1190 = v
+module.exports._1200 = l
+module.exports._1210 = v
+module.exports._1220 = l
+module.exports._1230 = v
+module.exports._1240 = l
+module.exports._1250 = a59
+module.exports._1260 = a60
+module.exports._1270 = cancel
+module.exports._1280 = okay
+module.exports._1290 = a63
+module.exports._1300 = cancel
+module.exports._1310 = a65
+
 
 
 module.exports.__10 = a37
@@ -546,3 +621,7 @@ module.exports.__21 = a49
 module.exports.__22 = a50
 module.exports.__23 = a55
 module.exports.__24 = a56
+module.exports.__25 = a64
+
+module.exports.modifica = a61
+module.exports.elimina = a62
