@@ -232,8 +232,9 @@ function update(){
 app.on('ready', async () => {
 	//await update()
 	createWindow()
-	autoUpdater.checkForUpdatesAndNotify()	
+	autoUpdater.checkForUpdatesAndNotify()
 });
+
 
 ipc.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
