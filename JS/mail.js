@@ -62,7 +62,7 @@ async function contEconf(){
 				var nome = file.substring(0,file.length - 6)
 				var nomeL = path + '\\' + nome
 				var user = `${$('#userN').text()} ${$('#userC').text()}`
-				var refpdf = firebase.storage().ref().child(user + '/' + nome + '.pdf')
+				var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
 				var refma = firebase.storage().ref().child(user +'/' + nome + '.ma')
 				if (user && refpdf && refma) {
 					fetch(nomeL + '.pdf')
@@ -79,10 +79,20 @@ async function contEconf(){
 										refma.put(d)
 										.then(async ()=>{
 											var urlPdf = ''
-											await refpdf.getDownloadURL().then((url)=> {urlPdf = url})
-											var urlMa = ''
-											await refma.getDownloadURL().then((url)=> {urlMa = url})
-											await callEmail(urlPdf, urlMa, nomeL)
+											await refpdf.getDownloadURL().then((url)=> {
+												urlPdf = url
+												var urlMa = ''
+												refma.getDownloadURL().then((url)=> {
+													urlMa = url
+													callEmail(urlPdf, urlMa, nomeL)
+												})
+												.catch((err)=>{
+													console.error(err.message)
+												})
+											})
+											.catch((err)=>{
+												console.error(err.message)
+											})
 										})
 										.catch((err)=>{
 											console.error(err.message)

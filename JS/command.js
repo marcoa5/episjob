@@ -1539,3 +1539,14 @@ function getHrTableIds(){
 	}
 	return val
 }
+
+
+function test(){
+	firebase.default.storage().ref().child('test.aaa.txt').getDownloadURL()
+	.catch(err=>{
+		if (err) throw err
+	})
+	.then(()=>{
+		console.log('ciao')
+	})
+}
