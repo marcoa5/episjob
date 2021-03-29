@@ -764,7 +764,7 @@ async function test(){
 	setTimeout(() => {
 		let optionsSaveMa = {
 			title : "Salva Modificabile", 
-			defaultPath : `${cartel1}${fName}.ma`,
+			defaultPath : `${cartel1}`,
 			buttonLabel : "Salva", 
 			filters :[
 				{name: 'Modificabile', extensions: ['ma']},
@@ -775,7 +775,8 @@ async function test(){
 		if(maName!=undefined){
 			require('fs').writeFileSync(maName,creasalvataggio())
 		}
-	}, 150);
+	}, 150)
+	
 	
 	
 	
