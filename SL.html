@@ -474,7 +474,7 @@
 				<div class="finestrai" id="htmlore">
 						<table id="main">
 								<tr>
-										<th rowspan="3" onclick="test()">TECNICO</th>
+										<th rowspan="3">TECNICO</th>
 										<th rowspan="3">DATA</th>
 										<th colspan="10">ORE</th>
 										<th rowspan="3">KM</th>
@@ -1030,12 +1030,10 @@ function Upd(){
 	contaSchede();
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
-			console.log('offline')
 			loadtech();
 			loadMOL();
 			loadCus();
         } else {
-			console.log('online')
 			contEconf();
 			aggiornamol();
 			aggiornacli();
