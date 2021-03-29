@@ -754,7 +754,7 @@ function renderPdf(){
 
 async function salvaMaPdf(){
 	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
-	var fName = `${cartel1}${$('#docbpcs').text()} - `
+	var fName = `${$('#docbpcs').text()} - `
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			fName += `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
@@ -773,7 +773,7 @@ async function salvaMaPdf(){
 		}
 		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
 		if(maName!=undefined){
-			require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
+			require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())
 		}
 		/*let optionsSavePdf = {
 			title : "Salva Pdf", 
@@ -786,7 +786,7 @@ async function salvaMaPdf(){
 		}
 		var maName = dialog.showSaveDialogSync(optionsSaveMa, "")*/
 		if(maName!=undefined){
-			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
+			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
 		}
 	}, 150)
 }
