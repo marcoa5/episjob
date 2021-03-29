@@ -780,7 +780,7 @@ async function salvaMaPdf(){
 }
 
 function attBottone(){
-	if($('#sudocbpcs').val()!=''){
+	if($('#sudocbpcs').val().length ==6){
 		$('button[name="maPdf"]').prop('disabled', false)
 	} else {
 		$('button[name="maPdf"]').prop('disabled', true)
