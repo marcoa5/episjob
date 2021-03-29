@@ -748,3 +748,20 @@ function renderPdf(){
 		})
 	}
 }
+
+
+function test(){
+	let optionsSave = {
+		title : "Salva", 
+		defaultPath : require('path').join(require('os').homedir(),'Desktop', 'prova.txt'),
+		buttonLabel : "Salva", 
+		filters :[
+			{name: 'txt', extensions: ['txt']},
+		   ],   
+		properties: ['saveFile']
+	}
+	var htmlName = dialog.showSaveDialogSync(optionsSave, "")
+	if(htmlName!=undefined){
+		require('fs').writeFileSync(htmlName,'Prova')
+	}
+}

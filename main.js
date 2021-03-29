@@ -81,8 +81,8 @@ let fesci = false;
 					icon: path.join(__dirname, "img/menu/close.png"), 
 					click(){win.webContents.send('esci')}, 
 					accelerator: 'CmdOrCtrl+Q'
-				}
-			]
+				}				
+			],
 		},
 		{
 		label: 'Modifica',
