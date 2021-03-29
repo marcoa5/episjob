@@ -751,6 +751,8 @@ function renderPdf(){
 
 
 async function salvaMaPdf(){
+	await closeMenu()
+	$('#docbpcs').text($('#sudocbpcs').val())
 	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
@@ -761,7 +763,7 @@ async function salvaMaPdf(){
 	}
 	setTimeout(() => {
 		fName = fName.replace(/ /g,"%20")
-	}, 100)
+	}, 500)
 	setTimeout(() => {
 		let optionsSaveMa = {
 			title : "Salva Files", 
@@ -776,7 +778,11 @@ async function salvaMaPdf(){
 		if(maName!=undefined){
 			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}\\${fName}.pdf`, data)});
 		}
-	}, 150)
+		
+	}, 550)
+	setTimeout(() => {
+		openMenu('menuSU')
+	}, 600);
 }
 
 function attBottone(){
