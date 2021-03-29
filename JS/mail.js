@@ -773,7 +773,20 @@ async function test(){
 		}
 		var maName = dialog.showSaveDialogSync(optionsSaveMa, "")
 		if(maName!=undefined){
-			require('fs').writeFileSync(maName,creasalvataggio())
+			require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
+		}
+		/*let optionsSavePdf = {
+			title : "Salva Pdf", 
+			defaultPath : `${cartel1}${fName}.pdf`,
+			buttonLabel : "Salva Pdf", 
+			filters :[
+				{name: 'PDF', extensions: ['pdf']},
+			   ],   
+			properties: ['saveFile']
+		}
+		var maName = dialog.showSaveDialogSync(optionsSaveMa, "")*/
+		if(maName!=undefined){
+			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
 		}
 	}, 150)
 	
