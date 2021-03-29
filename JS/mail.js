@@ -60,7 +60,9 @@ async function contEconf(){
 		files.forEach(file=>{
 			if(pathfs.extname(file)=='.econf'){
 				var nome = file.substring(0,file.length - 6)
-				if (!localStorage.getItem(nome)){
+				if (localStorage.getItem(nome)){
+					console.log('Invio in corso....')
+				} else {
 					localStorage.setItem(nome, 'sending')
 					var nomeL = path + '\\' + nome
 					var user = `${$('#userN').text()} ${$('#userC').text()}`
@@ -193,12 +195,12 @@ async function callEmail(urlPdf, urlMa, nome, key){
 			data: jQuery.param(t) ,
 			contentType: 'application/json; charset=utf-8',
 			success: res=>{
+				localStorage.removeItem(key)
 				fs.unlinkSync(nome + '.econf')
 				fs.renameSync(nome + '.pdf', os.tmpdir() + '\\ServiceJob\\' + n + '.pdf')
 				fs.renameSync(nome + '.ma', os.tmpdir() + '\\ServiceJob\\' + n + '.ma')
 				contaSchede()
 				Notif(res)
-				localStorage.removeItem(key)
 			},
 			fail: err=>{
 				console.log(err)
@@ -753,8 +755,4 @@ function renderPdf(){
 			})
 		})
 	}
-}
-
-function test(){
-	localStorage.removeItem('20210329091337 - SCAVI E DEMOLIZIONI - ROC D7-11 - AVO03A773')
 }
