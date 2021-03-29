@@ -751,6 +751,7 @@ function renderPdf(){
 
 
 async function salvaMaPdf(){
+	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
