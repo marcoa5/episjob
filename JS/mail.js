@@ -752,7 +752,7 @@ function renderPdf(){
 }
 
 
-async function test(){
+async function salvaMaPdf(){
 	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
 	var fName = `${cartel1}${$('#docbpcs').text()} - `
 	for (var i = 7;i>0;i--){
@@ -789,10 +789,12 @@ async function test(){
 			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
 		}
 	}, 150)
-	
-	
-	
-	
-	
+}
 
+function attBottone(){
+	if($('#sudocbpcs').val()!=''){
+		$('button[name="maPdf"]').prop('disabled', false)
+	} else {
+		$('button[name="maPdf"]').prop('disabled', true)
+	}
 }

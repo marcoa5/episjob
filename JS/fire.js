@@ -100,7 +100,7 @@ function able(){
   if(mail && pass){
     $('.loginPulsante').prop('disabled', false)
   } else {
-    $('.loginPulsante').attr('disabled', true)
+    $('.loginPulsante').prop('disabled', true)
   }
 }
 
