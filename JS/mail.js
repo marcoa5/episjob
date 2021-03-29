@@ -752,22 +752,9 @@ function renderPdf(){
 }
 
 
-function test(){
-	/*let optionsSave = {
-		title : "Salva", 
-		defaultPath : 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents',
-		buttonLabel : "Salva", 
-		filters :[
-			{name: 'txt', extensions: ['txt']},
-		   ],   
-		properties: ['saveFile']
-	}
-	var htmlName = dialog.showSaveDialogSync(optionsSave, "")
-	if(htmlName!=undefined){
-		require('fs').writeFileSync(htmlName,'Prova')
-	}*/
-	var cartel = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
-	var fName = `${$('#docbpcs').text()} - `
+async function test(){
+	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	var fName = `${cartel1}${$('#docbpcs').text()} - `
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			fName += `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
@@ -775,8 +762,23 @@ function test(){
 		}
 	}
 	setTimeout(() => {
-		require('fs').writeFileSync(`${cartel}prova.ma`, creasalvataggio())
-	}, 4000);
+		let optionsSaveMa = {
+			title : "Salva Modificabile", 
+			defaultPath : `${cartel1}${fName}.ma`,
+			buttonLabel : "Salva", 
+			filters :[
+				{name: 'Modificabile', extensions: ['ma']},
+			   ],   
+			properties: ['saveFile']
+		}
+		var maName = dialog.showSaveDialogSync(optionsSaveMa, "")
+		if(maName!=undefined){
+			require('fs').writeFileSync(maName,creasalvataggio())
+		}
+	}, 150);
+	
+	
+	
 	
 
 }
