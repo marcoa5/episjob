@@ -753,7 +753,7 @@ function renderPdf(){
 async function salvaMaPdf(){
 	await closeMenu()
 	$('#docbpcs').text($('#sudocbpcs').val())
-	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	//var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
@@ -761,13 +761,13 @@ async function salvaMaPdf(){
 			break
 		}
 	}
-	setTimeout(() => {
+	/*setTimeout(() => {
 		fName = fName.replace(/ /g,"%20")
-	}, 500)
+	}, 500)*/
 	setTimeout(() => {
 		let optionsSaveMa = {
 			title : "Salva Files", 
-			defaultPath : `${cartel1}`,
+			defaultPath : require('path').join(require('os').homedir(),'Desktop'),
 			buttonLabel : "Salva",  
 			properties: ['openDirectory']
 		}
