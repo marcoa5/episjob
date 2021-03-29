@@ -196,11 +196,11 @@ async function callEmail(urlPdf, urlMa, nome, key){
 				fs.renameSync(nome + '.ma', os.tmpdir() + '\\ServiceJob\\' + n + '.ma')
 				contaSchede()
 				Notif(res)
-				localStorage.removeItem(nome)
+				localStorage.removeItem(key)
 			},
 			fail: err=>{
 				console.log(err)
-				localStorage.removeItem(nome)
+				localStorage.removeItem(key)
 			}
 		})
 	})
@@ -754,5 +754,5 @@ function renderPdf(){
 }
 
 function test(){
-	localStorage.setItem('test','prova')
+	localStorage.removeItem('20210329091337 - SCAVI E DEMOLIZIONI - ROC D7-11 - AVO03A773')
 }
