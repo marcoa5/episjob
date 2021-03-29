@@ -1,3 +1,5 @@
+const { fn } = require('moment');
+
 var utenti=[]
 const url = 'https://episjobreq.herokuapp.com/'//'http://localhost:3000/' 
 var showSU = false
@@ -751,9 +753,9 @@ function renderPdf(){
 
 
 function test(){
-	let optionsSave = {
+	/*let optionsSave = {
 		title : "Salva", 
-		defaultPath : require('path').join(require('os').homedir(),'Desktop', 'prova.txt'),
+		defaultPath : 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents',
 		buttonLabel : "Salva", 
 		filters :[
 			{name: 'txt', extensions: ['txt']},
@@ -763,5 +765,18 @@ function test(){
 	var htmlName = dialog.showSaveDialogSync(optionsSave, "")
 	if(htmlName!=undefined){
 		require('fs').writeFileSync(htmlName,'Prova')
+	}*/
+	var cartel = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	var fName = `${$('#docbpcs').text()} - `
+	for (var i = 7;i>0;i--){
+		if($('#dat' + i + '1').text()!==''){
+			fName += `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
+			break
+		}
 	}
+	setTimeout(() => {
+		require('fs').writeFileSync(`${cartel}${fName}.ma`, creasalvataggio())
+	}, 4000);
+	
+
 }
