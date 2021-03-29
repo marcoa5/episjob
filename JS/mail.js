@@ -60,6 +60,7 @@ async function contEconf(){
 		files.forEach(file=>{
 			if(pathfs.extname(file)=='.econf'){
 				var nome = file.substring(0,file.length - 6)
+				localStorage.setItem(nome, 'sending')
 				var nomeL = path + '\\' + nome
 				var user = `${$('#userN').text()} ${$('#userC').text()}`
 				var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
@@ -71,6 +72,7 @@ async function contEconf(){
 							refpdf.put(b)
 							.catch(err=>{
 								console.error(err.message)
+								localStorage.removeItem(nome)
 							})
 							.then(()=>{
 								fetch(nomeL + '.ma')
@@ -84,18 +86,21 @@ async function contEconf(){
 												var urlMa = ''
 												refma.getDownloadURL().then((url)=> {
 													urlMa = url
-													callEmail(urlPdf, urlMa, nomeL)
+													callEmail(urlPdf, urlMa, nomeL, nome)
 												})
 												.catch((err)=>{
 													console.error(err.message)
+													localStorage.removeItem(nome)
 												})
 											})
 											.catch((err)=>{
 												console.error(err.message)
+												localStorage.removeItem(nome)
 											})
 										})
 										.catch((err)=>{
 											console.error(err.message)
+											localStorage.removeItem(nome)
 										})
 									})
 								})
@@ -157,7 +162,7 @@ async function Notif(to1){
 }
 
 
-async function callEmail(urlPdf, urlMa, nome){
+async function callEmail(urlPdf, urlMa, nome, key){
 	var urlp=url + 'mail/'
 	const options = {
 		type: 'question',
@@ -191,6 +196,11 @@ async function callEmail(urlPdf, urlMa, nome){
 				fs.renameSync(nome + '.ma', os.tmpdir() + '\\ServiceJob\\' + n + '.ma')
 				contaSchede()
 				Notif(res)
+				localStorage.removeItem(nome)
+			},
+			fail: err=>{
+				console.log(err)
+				localStorage.removeItem(nome)
 			}
 		})
 	})
@@ -739,25 +749,10 @@ function renderPdf(){
 			$.post(url + 'sjpdffile',g,(a,b,c)=>{
 				console.log(c)
 			})
-			/*.done(a=>{
-				let optionsSave = {
-					title : "Salva PDF", 
-					defaultPath : require('path').join(require('os').homedir(),'Desktop', n + '.pdf'),
-					buttonLabel : "Salva PDF", 
-					filters :[
-						{name: 'pdf', extensions: ['pdf']},
-					   ],   
-					properties: ['saveFile']
-				}
-				var pdfName = dialog.showSaveDialogSync(optionsSave, "")
-				if(pdfName!=undefined){
-					var h = Buffer.from(a.data)
-					require('fs').writeFile(pdfName,h,(err)=>{
-						if(err) console.log (err)
-						shell.openItem(pdfName)
-					})
-				}
-			})*/
 		})
 	}
+}
+
+function test(){
+	localStorage.setItem('test','prova')
 }
