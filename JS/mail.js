@@ -60,33 +60,39 @@ async function contEconf(){
 		files.forEach(file=>{
 			if(pathfs.extname(file)=='.econf'){
 				var nome = file.substring(0,file.length - 6)
-				localStorage.setItem(nome, 'sending')
-				var nomeL = path + '\\' + nome
-				var user = `${$('#userN').text()} ${$('#userC').text()}`
-				var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
-				var refma = firebase.storage().ref().child(user +'/' + nome + '.ma')
-				if (user && refpdf && refma) {
-					fetch(nomeL + '.pdf')
-					.then((a)=>{
-						a.blob().then(b=>{
-							refpdf.put(b)
-							.catch(err=>{
-								console.error(err.message)
-								localStorage.removeItem(nome)
-							})
-							.then(()=>{
-								fetch(nomeL + '.ma')
-								.then(c=>{
-									c.blob().then(d=>{
-										refma.put(d)
-										.then(async ()=>{
-											var urlPdf = ''
-											await refpdf.getDownloadURL().then((url)=> {
-												urlPdf = url
-												var urlMa = ''
-												refma.getDownloadURL().then((url)=> {
-													urlMa = url
-													callEmail(urlPdf, urlMa, nomeL, nome)
+				if (!localStorage.getItem(nome)){
+					localStorage.setItem(nome, 'sending')
+					var nomeL = path + '\\' + nome
+					var user = `${$('#userN').text()} ${$('#userC').text()}`
+					var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
+					var refma = firebase.storage().ref().child(user +'/' + nome + '.ma')
+					if (user && refpdf && refma) {
+						fetch(nomeL + '.pdf')
+						.then((a)=>{
+							a.blob().then(b=>{
+								refpdf.put(b)
+								.catch(err=>{
+									console.error(err.message)
+									localStorage.removeItem(nome)
+								})
+								.then(()=>{
+									fetch(nomeL + '.ma')
+									.then(c=>{
+										c.blob().then(d=>{
+											refma.put(d)
+											.then(async ()=>{
+												var urlPdf = ''
+												await refpdf.getDownloadURL().then((url)=> {
+													urlPdf = url
+													var urlMa = ''
+													refma.getDownloadURL().then((url)=> {
+														urlMa = url
+														callEmail(urlPdf, urlMa, nomeL, nome)
+													})
+													.catch((err)=>{
+														console.error(err.message)
+														localStorage.removeItem(nome)
+													})
 												})
 												.catch((err)=>{
 													console.error(err.message)
@@ -98,15 +104,11 @@ async function contEconf(){
 												localStorage.removeItem(nome)
 											})
 										})
-										.catch((err)=>{
-											console.error(err.message)
-											localStorage.removeItem(nome)
-										})
 									})
 								})
 							})
 						})
-					})
+					}
 				}
             }
         })
