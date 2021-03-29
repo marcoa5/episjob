@@ -775,7 +775,7 @@ function test(){
 		}
 	}
 	setTimeout(() => {
-		require('fs').writeFileSync(`${cartel}${fName}.ma`, creasalvataggio())
+		require('fs').writeFileSync(`${cartel}prova.ma`, creasalvataggio())
 	}, 4000);
 	
 
