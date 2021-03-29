@@ -1,5 +1,3 @@
-const { fn } = require('moment');
-
 var utenti=[]
 const url = 'https://episjobreq.herokuapp.com/'//'http://localhost:3000/' 
 var showSU = false
@@ -757,34 +755,23 @@ async function salvaMaPdf(){
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			fName += `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
-			fName=fName.replaceAll(" ","%20")
 			break
 		}
 	}
 	setTimeout(() => {
+		fName = fName.replace(/ /g,"%20")
+	}, 100)
+	setTimeout(() => {
 		let optionsSaveMa = {
 			title : "Salva Files", 
 			defaultPath : `${cartel1}`,
-			buttonLabel : "Salva", 
-			/*filters :[
-				{name: 'Modificabile', extensions: ['ma']},
-			   ],  */ 
+			buttonLabel : "Salva",  
 			properties: ['openDirectory']
 		}
 		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
 		if(maName!=undefined){
 			require('fs').writeFileSync(`${maName}\\${fName}.ma`,creasalvataggio())
 		}
-		/*let optionsSavePdf = {
-			title : "Salva Pdf", 
-			defaultPath : `${cartel1}${fName}.pdf`,
-			buttonLabel : "Salva Pdf", 
-			filters :[
-				{name: 'PDF', extensions: ['pdf']},
-			   ],   
-			properties: ['saveFile']
-		}
-		var maName = dialog.showSaveDialogSync(optionsSaveMa, "")*/
 		if(maName!=undefined){
 			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}\\${fName}.pdf`, data)});
 		}
