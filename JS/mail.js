@@ -763,15 +763,15 @@ async function test(){
 	}
 	setTimeout(() => {
 		let optionsSaveMa = {
-			title : "Salva Modificabile", 
+			title : "Salva Files", 
 			defaultPath : `${cartel1}`,
 			buttonLabel : "Salva", 
-			filters :[
+			/*filters :[
 				{name: 'Modificabile', extensions: ['ma']},
-			   ],   
-			properties: ['saveFile']
+			   ],  */ 
+			properties: ['openDirectory']
 		}
-		var maName = dialog.showSaveDialogSync(optionsSaveMa, "")
+		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
 		if(maName!=undefined){
 			require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
 		}
