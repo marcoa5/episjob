@@ -754,7 +754,7 @@ async function salvaMaPdf(){
 	await closeMenu()
 	closeSU()
 	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
-	var c2=`\\\\home.intranet.epiroc.com@SSL\\DavWWWRoot\\sites\\cc\\iyc\\MRService\\Documents\\`
+	var maName=`\\\\home.intranet.epiroc.com@SSL\\DavWWWRoot\\sites\\cc\\iyc\\MRService\\Documents\\`
 	$('#docbpcs').text($('#sudocbpcs').val())
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
@@ -765,7 +765,6 @@ async function salvaMaPdf(){
 	}
 	
 	setTimeout(() => {
-		require('fs').writeFileSync(`${c2}${fName}.ma`,creasalvataggio())
 		/*let optionsSaveMa = {
 			title : "Salva Files", 
 			defaultPath : cartel1,
@@ -773,22 +772,21 @@ async function salvaMaPdf(){
 			properties: ['openDirectory']
 		}
 		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
-		if(maName!=undefined){
-			console.log(maName)
-			if(require('fs').existsSync(`${maName}/${fName}.ma`)){
+		if(maName!=undefined){*/
+			if(require('fs').existsSync(`${maName}${fName}.ma`)){
 				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'ma'))
-				if(sc==0) require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())
+				if(sc==0) require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
 			} else {
-				require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())	
+				require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())	
 			}
 
-			if(require('fs').existsSync(`${maName}/${fName}.pdf`)){
+			if(require('fs').existsSync(`${maName}${fName}.pdf`)){
 				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
-				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
+				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
 			} else {
-				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
+				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
 			}
-		}*/
+		//}
 	}, 100)
 	
 	setTimeout(() => {
