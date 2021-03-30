@@ -753,7 +753,7 @@ function renderPdf(){
 async function salvaMaPdf(){
 	await closeMenu()
 	$('#docbpcs').text($('#sudocbpcs').val())
-	//var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
@@ -778,7 +778,8 @@ async function salvaMaPdf(){
 		if(maName!=undefined){
 			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}\\${fName}.pdf`, data)});
 		}*/
-		require('fs').writeFileSync(new URL(fName + '.ma',cartel1),creasalvataggio())	
+		var ind = new URL(fName + '.ma',cartel1)
+		require('fs').writeFileSync(ind.href,creasalvataggio())	
 	}, 100)
 	
 	setTimeout(() => {
@@ -795,5 +796,17 @@ function attBottone(){
 }
 
 function prova(){
-	alert('test')
+	$('#docbpcs').text($('#sudocbpcs').val())
+	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	var fName = `${$('#sudocbpcs').val()} - `
+	for (var i = 7;i>0;i--){
+		if($('#dat' + i + '1').text()!==''){
+			fName += `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
+			break
+		}
+	}
+	setTimeout(() => {
+		console.log(new URL(fName + '.ma',cartel1))
+		//require('fs').writeFileSync(new URL(fName + '.ma',cartel1),creasalvataggio())	
+	}, 100)
 }
