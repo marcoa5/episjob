@@ -812,7 +812,7 @@ function optOW(maName,fName,a){
 	return {
 		title : "Sovrascrivere",
 		icon: 'question',
-		message: `Vuoi sovrascrivere il file ${maName}/${fName}.${a}?`,
+		message: `Il file ${maName}/${fName}.${a} esiste già, vuoi sovrascriverlo?`,
 		buttons : ['Sì', 'No'],  
 		noLink: true
 	}
