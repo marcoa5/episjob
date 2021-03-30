@@ -754,6 +754,7 @@ async function salvaMaPdf(){
 	await closeMenu()
 	closeSU()
 	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	var c2=`\\\\home.intranet.epiroc.com@SSL\\DavWWWRoot\\sites\\cc\\iyc\\MRService\\Documents\\`
 	$('#docbpcs').text($('#sudocbpcs').val())
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
@@ -764,7 +765,8 @@ async function salvaMaPdf(){
 	}
 	
 	setTimeout(() => {
-		let optionsSaveMa = {
+		require('fs').writeFileSync(`${c2}${fName}.ma`,creasalvataggio())
+		/*let optionsSaveMa = {
 			title : "Salva Files", 
 			defaultPath : cartel1,
 			buttonLabel : "Salva",  
@@ -786,7 +788,7 @@ async function salvaMaPdf(){
 			} else {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
 			}
-		}
+		}*/
 	}, 100)
 	
 	setTimeout(() => {
@@ -804,8 +806,8 @@ function attBottone(){
 }
 
 function prova(){
-	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW('a','b','pdf'))
-	console.log(sc)
+	var c2=`\\\\home.intranet.epiroc.com@SSL\\DavWWWRoot\\sites\\cc\\iyc\\MRService\\Documents\\`
+	console.log(c2)
 }
 
 function optOW(maName,fName,a){
