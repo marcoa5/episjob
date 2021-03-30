@@ -774,28 +774,14 @@ async function salvaMaPdf(){
 		if(maName!=undefined){
 			console.log(maName)
 			if(require('fs').existsSync(`${maName}/${fName}.ma`)){
-				let optionsOW = {
-					title : "Sovrascrivere",
-					icon: 'question',
-					message: `Vuoi sovrascrivere il file ${maName}/${fName}.ma?`,
-					buttons : ['Sì', 'No'],  
-					noLink: true
-				}
-				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optionsOW)
+				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'ma'))
 				if(sc==0) require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())
 			} else {
 				require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())	
 			}
 
 			if(require('fs').existsSync(`${maName}/${fName}.pdf`)){
-				let optionsOW = {
-					title : "Sovrascrivere",
-					icon: 'question',
-					message: `Vuoi sovrascrivere il file ${maName}/${fName}.pdf?`,
-					buttons : ['Sì', 'No'],  
-					noLink: true
-				}
-				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optionsOW)
+				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
 				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
 			} else {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
@@ -818,13 +804,16 @@ function attBottone(){
 }
 
 function prova(){
-	let optionsOW = {
-		title : "Sovrascrivere",
-					message: "Vuoi sovrascrivere il file" ,
-					type: 'question',
-					buttons : ['No', 'Si'],  
-					noLink: true
-	}
-	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optionsOW)
+	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW('a','b','pdf'))
 	console.log(sc)
+}
+
+function optOW(maName,fName,a){
+	return {
+		title : "Sovrascrivere",
+		icon: 'question',
+		message: `Vuoi sovrascrivere il file ${maName}/${fName}.${a}?`,
+		buttons : ['Sì', 'No'],  
+		noLink: true
+	}
 }
