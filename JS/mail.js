@@ -772,15 +772,17 @@ async function salvaMaPdf(){
 		}
 		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
 		if(maName!=undefined){
+			console.log(maName)
 			if(require('fs').existsSync(`${maName}/${fName}.ma`)){
 				let optionsOW = {
 					title : "Sovrascrivere",
+					icon: 'question',
 					message: `Vuoi sovrascrivere il file ${maName}/${fName}.ma?`,
-					buttons : ['No', 'Si'],  
+					buttons : ['Sì', 'No'],  
 					noLink: true
 				}
-				var sc = dialog.showMessageBoxSync(optionsOW,"")
-				if(sc==1) require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())
+				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optionsOW)
+				if(sc==0) require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())
 			} else {
 				require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())	
 			}
@@ -788,12 +790,13 @@ async function salvaMaPdf(){
 			if(require('fs').existsSync(`${maName}/${fName}.pdf`)){
 				let optionsOW = {
 					title : "Sovrascrivere",
+					icon: 'question',
 					message: `Vuoi sovrascrivere il file ${maName}/${fName}.pdf?`,
-					buttons : ['No', 'Si'],  
+					buttons : ['Sì', 'No'],  
 					noLink: true
 				}
-				var sc = dialog.showMessageBoxSync(optionsOW,"")
-				if(sc==1) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
+				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optionsOW)
+				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
 			} else {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
 			}
@@ -818,9 +821,10 @@ function prova(){
 	let optionsOW = {
 		title : "Sovrascrivere",
 					message: "Vuoi sovrascrivere il file" ,
+					type: 'question',
 					buttons : ['No', 'Si'],  
 					noLink: true
 	}
-	var sc = dialog.showMessageBoxSync(optionsOW,"")
+	var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optionsOW)
 	console.log(sc)
 }
