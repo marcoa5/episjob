@@ -752,8 +752,9 @@ function renderPdf(){
 
 async function salvaMaPdf(){
 	await closeMenu()
-	$('#docbpcs').text($('#sudocbpcs').val())
+	closeSU()
 	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
+	$('#docbpcs').text($('#sudocbpcs').val())
 	var fName = `${$('#sudocbpcs').val()} - `
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
@@ -761,29 +762,47 @@ async function salvaMaPdf(){
 			break
 		}
 	}
-	/*setTimeout(() => {
-		fName = fName.replace(/ /g,"%20")
-	}, 50)*/
+	
 	setTimeout(() => {
-		/*let optionsSaveMa = {
+		let optionsSaveMa = {
 			title : "Salva Files", 
-			defaultPath : require('path').join(require('os').homedir(),'Desktop'),
+			defaultPath : cartel1,
 			buttonLabel : "Salva",  
 			properties: ['openDirectory']
 		}
 		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
 		if(maName!=undefined){
-			require('fs').writeFileSync(new URL(fName + '.ma',cartel1),creasalvataggio())
+			if(require('fs').existsSync(`${maName}/${fName}.ma`)){
+				let optionsOW = {
+					title : "Sovrascrivere",
+					message: `Vuoi sovrascrivere il file ${maName}/${fName}.ma?`,
+					buttons : ['No', 'Si'],  
+					noLink: true
+				}
+				var sc = dialog.showMessageBoxSync(optionsOW,"")
+				if(sc==1) require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())
+			} else {
+				require('fs').writeFileSync(`${maName}/${fName}.ma`,creasalvataggio())	
+			}
+
+			if(require('fs').existsSync(`${maName}/${fName}.pdf`)){
+				let optionsOW = {
+					title : "Sovrascrivere",
+					message: `Vuoi sovrascrivere il file ${maName}/${fName}.pdf?`,
+					buttons : ['No', 'Si'],  
+					noLink: true
+				}
+				var sc = dialog.showMessageBoxSync(optionsOW,"")
+				if(sc==1) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
+			} else {
+				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}/${fName}.pdf`, data)});
+			}
 		}
-		if(maName!=undefined){
-			remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}\\${fName}.pdf`, data)});
-		}*/
-		var ind = new URL(fName + '.ma',cartel1)
-		require('fs').writeFileSync(ind.href,creasalvataggio())	
 	}, 100)
 	
 	setTimeout(() => {
 		openMenu('menuSU')
+		openSU()
 	}, 150);
 }
 
@@ -796,5 +815,12 @@ function attBottone(){
 }
 
 function prova(){
-	alert('ok')
+	let optionsOW = {
+		title : "Sovrascrivere",
+					message: "Vuoi sovrascrivere il file" ,
+					buttons : ['No', 'Si'],  
+					noLink: true
+	}
+	var sc = dialog.showMessageBoxSync(optionsOW,"")
+	console.log(sc)
 }
