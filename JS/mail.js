@@ -795,15 +795,5 @@ function attBottone(){
 }
 
 function prova(){
-	var cartel1 = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/Documents/'
-	var fName = `${$('#sudocbpcs').val()} - `
-	for (var i = 7;i>0;i--){
-		if($('#dat' + i + '1').text()!==''){
-			fName += `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
-			break
-		}
-	}
-	setTimeout(() => {
-		console.log(new URL(fName + '.ma',cartel1))
-	}, 50);
+	alert('test')
 }
