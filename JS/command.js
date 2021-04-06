@@ -833,8 +833,8 @@ function sortTable() {
 function verificadata(g, gg,mm,an){
     var feste = ["01/01", "06/01", "25/04", "01/05", "02/06", "15/08", "16/08", "01/11", "07/12", "08/12", "24/12", "25/12", "26/12", "31/12"];
     var dd = new Date(g);
-    var pasqua = Easter(an);
-    var pasquetta =  padout(pasqua.substring(0,2)*1+1) + "/" + padout(pasqua.substring(4,5));
+    var pasqua = moment(new Date(an, Easter(an).month, Easter(an).day)).format("DD/MM");
+    var pasquetta =  moment(new Date(an, Easter(an).month, Easter(an).day+1)).format("DD/MM");
 	feste.push(pasqua, pasquetta);
     var wd = dd.getDay();
 	var fest = false;
@@ -857,8 +857,8 @@ function Easter(Y) {
     J = J - 7*Math.floor(J/7);
     var L = I - J;
     var M = 3 + Math.floor((L + 40)/44);
-    var D = L + 28 - 31*Math.floor(M/4)-1;
-    return padout(D) + '/' + padout(M);
+    var D = L + 28 - 31*Math.floor(M/4);
+    return {month: M, day: D}
 }
 
 function padout(number) { return (number < 10) ? '0' + number : number; }
