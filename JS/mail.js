@@ -49,66 +49,69 @@ async function contEconf(){
 	contaSchede();
 	var path = os.tmpdir() + '\\ServiceJobTemp';
 	fs.readdir(path, (err, files)=>{
-		files.forEach(file=>{
+		files.forEach(async file=>{
 			if(pathfs.extname(file)=='.econf'){
 				var nome = file.substring(0,file.length - 6)
-				if (localStorage.getItem(nome)){
-					console.log('Invio in corso....')
-				} else {
-					localStorage.setItem(nome, 'sending')
-					var nomeL = path + '\\' + nome
-					var user = `${$('#userN').text()} ${$('#userC').text()}`
-					var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
-					var refma = firebase.storage().ref().child(user +'/' + nome + '.ma')
-					if (user && refpdf && refma) {
-						fetch(nomeL + '.pdf')
-						.then((a)=>{
-							a.blob().then(b=>{
-								refpdf.put(b)
-								.catch(err=>{
-									console.error(err.message)
-									localStorage.removeItem(nome)
-								})
-								.then(()=>{
-									fetch(nomeL + '.ma')
-									.then(c=>{
-										c.blob().then(d=>{
-											refma.put(d)
-											.then(async ()=>{
-												var urlPdf = ''
-												await refpdf.getDownloadURL().then((url)=> {
-													urlPdf = url
-													var urlMa = ''
-													refma.getDownloadURL().then((url)=> {
-														urlMa = url
-														callEmail(urlPdf, urlMa, nomeL, nome)
-													})
-													.catch((err)=>{
-														console.error(err.message)
-														localStorage.removeItem(nome)
-													})
-												})
-												.catch((err)=>{
-													console.error(err.message)
-													localStorage.removeItem(nome)
-												})
-											})
-											.catch((err)=>{
-												console.error(err.message)
-												localStorage.removeItem(nome)
-											})
-										})
-									})
-								})
-							})
+				var nomeL = path + '\\' + nome
+				var user = `${$('#userN').text()} ${$('#userC').text()}`
+				var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
+				var refma = firebase.default.storage().ref().child(user +'/' + nome + '.ma')
+				var urlPdf; var urlMa;
+				if (user && refpdf && refma) {
+					if(require('fs').existsSync(nomeL + '.pdf')){
+						await uplFB(nomeL, '.pdf', refpdf)
+						.catch(err=>console.error(err))
+						.then(a=>{
+							urlPdf=a
 						})
+					} else {
+						await refpdf.getDownloadURL()
+						.then(url=>urlPdf=url)
 					}
+					if(require('fs').existsSync(nomeL + '.ma')){
+						await uplFB(nomeL, '.ma', refma)
+						.catch(err=>console.error(err))
+						.then(a=>{
+							urlMa=a
+						})
+					} else {
+						await refma.getDownloadURL()
+						.then(url=>urlMa=url)
+					}	
+					var t
+					var n = require('path').basename(nomeL)
+					await $.get(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', data=>{t=data})
+					callEmail(urlPdf,urlMa,n,t)
+					await require('fs').renameSync(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf_') 					
 				}
-            }
-        })
-    })    
+			}
+		})
+	})   
 }
 
+async function uplFB(fName, ext, ref){
+	var nome = require('path').basename(fName)
+	return new Promise((res,rej)=>{
+		fetch(fName + ext)
+		.catch(err=>console.error(err))
+		.then(a=>{
+			a.blob().then(b=>{
+				ref.put(b)
+				.catch(err=>console.error(err))
+				.then(()=>{
+					ref.getDownloadURL()
+					.catch(err=>console.error(err))
+					.then(url=>{
+						if(url) {
+							require('fs').renameSync(fName + ext, os.tmpdir() + '\\ServiceJob\\' + nome + ext)
+							res(url)
+						} else {rej('Errore!')}
+					})
+				})
+			})
+		})
+	})
+}
 
 //Invia Mail
 function preparaMail(r) { 	
@@ -138,7 +141,13 @@ function preparaMail(r) {
 	var userC= $('#userC').text()
 	var userM = $('#userM').text()
 	createEconf(nomeL,subject, to1, son1, son2, son3,rap, rAss, userN, userC,userM)
-	.then(contEconf(a))
+	.then(()=>{
+		require('dns').lookup('google.com',(err)=> {
+			if (err && err.code == "ENOTFOUND") {} else{
+				contEconf(a)
+			}
+		})
+	})
 }
 
 async function Notif(to1){
@@ -158,7 +167,9 @@ async function Notif(to1){
 }
 
 
-async function callEmail(urlPdf, urlMa, nome, key){
+async function callEmail(urlPdf, urlMa, n, dati){
+	//console.log(urlPdf,urlMa,nome,dati)
+	
 	var urlp=url + 'mail/'
 	const options = {
 		type: 'question',
@@ -167,38 +178,31 @@ async function callEmail(urlPdf, urlMa, nome, key){
 		message: `Utilizzare Debug Mode?`,
 		noLink: true,
 	};
-	var n = require('path').basename(nome)
-	await $.get(nome + '.econf', dati=>{
-		var t = JSON.parse(dati)[0]
-		t['urlPdf'] = urlPdf
-		t['urlMa'] = urlMa
-		t['fileN'] = n
-		if($('#userP').text()=='SU'){
-			var w = dialog.showMessageBoxSync(remote.getCurrentWindow(), options)
-			if (w==0){
-				urlp = url + 'mail/'
-			} else if(w==1){
-				urlp = url + 'maildebug/'
-			}
-		}                    
-		var request = $.ajax({
-			url: urlp,
-			type: 'GET',
-			data: jQuery.param(t) ,
-			contentType: 'application/json; charset=utf-8',
-			success: res=>{
-				localStorage.removeItem(key)
-				fs.unlinkSync(nome + '.econf')
-				fs.renameSync(nome + '.pdf', os.tmpdir() + '\\ServiceJob\\' + n + '.pdf')
-				fs.renameSync(nome + '.ma', os.tmpdir() + '\\ServiceJob\\' + n + '.ma')
-				contaSchede()
-				Notif(res)
-			},
-			fail: err=>{
-				console.log(err)
-				localStorage.removeItem(key)
-			}
-		})
+	var t = JSON.parse(dati)[0]
+	t['urlPdf'] = urlPdf
+	t['urlMa'] = urlMa
+	t['fileN'] = n
+	if($('#userP').text()=='SU'){
+		var w = dialog.showMessageBoxSync(remote.getCurrentWindow(), options)
+		if (w==0){
+			urlp = url + 'mail/'
+		} else if(w==1){
+			urlp = url + 'maildebug/'
+		}
+	}
+	              
+	var request = $.ajax({
+		url: urlp,
+		type: 'GET',
+		data: jQuery.param(t) ,
+		contentType: 'application/json; charset=utf-8',
+		success: res=>{
+			contaSchede()
+			Notif(res)
+		},
+		fail: err=>{
+			console.log(err)
+		}
 	})
 }
 

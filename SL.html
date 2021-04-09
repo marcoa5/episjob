@@ -1020,7 +1020,9 @@ function Upd(){
 			loadMOL();
 			loadCus();
         } else {
-			contEconf();
+			setTimeout(() => {
+				contEconf();	
+			}, 500);
 			aggiornamol();
 			aggiornacli();
 			aggiornatech();
