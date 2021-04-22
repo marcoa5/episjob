@@ -829,11 +829,11 @@ async function readHrs(){
 	var perc2H = $('#perc21').text()
 	var perc3H = $('#perc31').text()
 	var matr = $('#matricola').text()
-	var techN = $('#user').text()
+	var techNa = $('#user').text()
 	var timeS = moment(new Date()).format('YYYYMMDDHHmmss')
 	if(matr!=''){
 		var data ={
-			tech: techN,
+			tech: techNa,
 			time: timeS,
 			engine: engH,
 			perc1: perc1H,
