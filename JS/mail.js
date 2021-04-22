@@ -824,23 +824,63 @@ function optOW(maName,fName,a){
 }
 
 async function readHrs(){
-	var engH = $('#orem1').text()
-	var perc1H = $('#perc11').text()
-	var perc2H = $('#perc21').text()
-	var perc3H = $('#perc31').text()
+	var engH = $('#orem1').text().replace('.','')
+	var perc1H = $('#perc11').text().replace('.','')
+	var perc2H = $('#perc21').text().replace('.','')
+	var perc3H = $('#perc31').text().replace('.','')
 	var matr = $('#matricola').text()
-	var techNa = $('#user').text()
-	var timeS = moment(new Date()).format('YYYYMMDDHHmmss')
+	var techNa = findTech()
+	var timeS = findLastLabor()
 	if(matr!=''){
 		var data ={
 			tech: techNa,
-			time: timeS,
 			engine: engH,
 			perc1: perc1H,
 			perc2: perc2H,
 			perc3: perc3H
 		}
-		firebase.default.database().ref('hours/' + matr).set(data)
+		firebase.default.database().ref('hours/' + matr + '/' + timeS).set(data)
 		.catch(err=>{if(err) console.log(err)})
+	}
+}
+
+function findLastLabor(){
+	for(let i=7;i>0;i--){
+		if(
+			$('#spol' + i + '1').text() != '' ||
+			$('#spll' + i + '1').text() != '' ||
+			$('#stdl' + i + '1').text() != '' ||
+			$('#strl' + i + '1').text() != '' ||
+			$('#mntl' + i + '1').text() != '' ||
+			$('#mfl' + i + '1').text() != '' ||
+			$('#mnfl' + i + '1').text() != ''
+		) {
+			let a = 
+				moment(new Date(
+				$('#dat' + i + '3').text(),
+				$('#dat' + i + '2').text()-1,
+				$('#dat' + i + '1').text(), 
+				moment(new Date()).format('HH'),
+				moment(new Date()).format('mm'),
+				moment(new Date()).format('ss'),
+				)).format('YYYYMMDDHHmmss')
+			return a
+		}
+	}
+}
+
+function findTech(){
+	for(let i=7;i>0;i--){
+		if(
+			$('#spol' + i + '1').text() != '' ||
+			$('#spll' + i + '1').text() != '' ||
+			$('#stdl' + i + '1').text() != '' ||
+			$('#strl' + i + '1').text() != '' ||
+			$('#mntl' + i + '1').text() != '' ||
+			$('#mfl' + i + '1').text() != '' ||
+			$('#mnfl' + i + '1').text() != ''
+		) {
+			return $('#tecnico' + i + '1').text()
+		}
 	}
 }

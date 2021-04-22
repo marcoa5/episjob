@@ -835,7 +835,6 @@ function verificadata(g, gg,mm,an){
     var dd = new Date(g);
     var pasqua = moment(new Date(an, Easter(an).month-1, Easter(an).day)).format("DD/MM");
     var pasquetta =  moment(new Date(an, Easter(an).month-1, Easter(an).day+1)).format("DD/MM");
-	console.log(pasqua)
 	feste.push(pasqua, pasquetta);
     var wd = dd.getDay();
 	var fest = false;
