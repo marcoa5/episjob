@@ -82,6 +82,7 @@ async function contEconf(){
 					var n = require('path').basename(nomeL)
 					await $.get(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', data=>{t=data})
 					callEmail(urlPdf,urlMa,n,t)
+					readHrs()
 					await require('fs').renameSync(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf_') 					
 				}
 			}
@@ -819,5 +820,25 @@ function optOW(maName,fName,a){
 		message: `Il file ${maName}/${fName}.${a} esiste già, vuoi sovrascriverlo?`,
 		buttons : ['Sì', 'No'],  
 		noLink: true
+	}
+}
+
+async function readHrs(){
+	var engH = $('#orem1').text()
+	var perc1H = $('#perc11').text()
+	var perc2H = $('#perc21').text()
+	var perc3H = $('#perc31').text()
+	var matr = $('#matricola').text()
+	var timeS = moment(new Date()).format('YYYYMMDDHHmmss')
+	if(matr!=''){
+		var data ={
+			time: timeS,
+			engine: engH,
+			perc1: perc1H,
+			perc2: perc2H,
+			perc3: perc3H
+		}
+		firebase.default.database().ref('hours/' + matr).set(data)
+		.catch(err=>{if(err) console.log(err)})
 	}
 }
