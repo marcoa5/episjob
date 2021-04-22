@@ -863,7 +863,7 @@ function findLastLabor(){
 				moment(new Date()).format('HH'),
 				moment(new Date()).format('mm'),
 				moment(new Date()).format('ss'),
-				)).format('YYYYMMDDHHmmss')
+				)).format('YYYYMMDD')
 			return a
 		}
 	}
@@ -884,3 +884,22 @@ function findTech(){
 		}
 	}
 }
+/*
+function lista(){
+	var a = require('fs').readdirSync('c:\\users\\iycma\\desktop\\test\\')
+	a.map(b=>{
+		var dt= b.split(' - ')[1]
+		$.get('c:\\users\\iycma\\desktop\\test\\' + b,data=>{
+			let c = JSON.parse(data)
+			firebase.default.database().ref('Hours/' + c.matricola + '/' + dt + '/').set(
+				{
+					engine: c.orem1? c.orem1.replace('.', '') : '0',
+					perc1: c.perc11? c.perc11.replace('.', ''): '0',
+					perc2: c.perc21? c.perc21.replace('.', ''): '0',
+					perc3: c.perc31? c.perc31.replace('.', ''): '0',
+					tech: '',
+				}
+			)
+		})
+	})
+}*/
