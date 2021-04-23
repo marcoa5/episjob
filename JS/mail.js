@@ -196,7 +196,7 @@ async function callEmail(urlPdf, urlMa, n, dati){
 	}     
 	$.ajax({
 		url: urlp,
-		type: 'POST',
+		type: 'GET',
 		data: jQuery.param(t) ,
 		contentType: 'application/json; charset=utf-8',
 		success: res=>{
