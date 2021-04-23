@@ -54,9 +54,10 @@ async function contEconf(){
 				var nome = file.substring(0,file.length - 6)
 				var nomeL = path + '\\' + nome
 				var user = `${$('#userN').text()} ${$('#userC').text()}`
+				var urlPdf; var urlMa;
 				var refpdf = firebase.default.storage().ref().child(user + '/' + nome + '.pdf')
 				var refma = firebase.default.storage().ref().child(user +'/' + nome + '.ma')
-				var urlPdf; var urlMa;
+				
 				if (user && refpdf && refma) {
 					if(require('fs').existsSync(nomeL + '.pdf')){
 						await uplFB(nomeL, '.pdf', refpdf)
@@ -77,14 +78,14 @@ async function contEconf(){
 					} else {
 						await refma.getDownloadURL()
 						.then(url=>urlMa=url)
-					}	
+					}
+					
 					var t
 					var n = require('path').basename(nomeL)
 					await $.get(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', data=>{t=data})
-					console.log(t)
-					callEmail(urlPdf,urlMa,n,t)
+					//await callEmail(urlPdf,urlMa,n,t)
 					//readHrs()
-					await require('fs').renameSync(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf_') 					
+					//await require('fs').renameSync(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf_') 					
 				}
 			}
 		})
@@ -191,11 +192,10 @@ async function callEmail(urlPdf, urlMa, n, dati){
 		} else if(w==1){
 			urlp = url + 'maildebug/'
 		}
-	}
-	              
-	var request = $.ajax({
+	}     
+	$.ajax({
 		url: urlp,
-		type: 'GET',
+		type: 'POST',
 		data: jQuery.param(t) ,
 		contentType: 'application/json; charset=utf-8',
 		success: res=>{
@@ -918,4 +918,12 @@ function lista(){
 			)*/
 		//})
 		})
+}
+
+function prova(){
+	fetch('c:\\users\\iycma\\desktop\\prova.txt')
+	.then(a=>{
+		a.blob()
+		.then(b=>{console.log(b)})
+	})
 }
