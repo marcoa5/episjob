@@ -84,7 +84,6 @@ async function contEconf(){
 					var n = require('path').basename(nomeL)
 					await $.get(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', data=>{t=data})
 					//await callEmail(urlPdf,urlMa,n,t)
-					//readHrs()
 					//await require('fs').renameSync(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf_') 					
 				}
 			}
