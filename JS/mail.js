@@ -194,7 +194,7 @@ async function callEmail(urlPdf, urlMa, n, dati){
 			urlp = url + 'maildebug/'
 		}
 	}     
-	$.ajax({
+	var request= $.ajax({
 		url: urlp,
 		type: 'GET',
 		data: jQuery.param(t) ,
