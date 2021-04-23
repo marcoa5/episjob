@@ -82,7 +82,7 @@ async function contEconf(){
 					var n = require('path').basename(nomeL)
 					await $.get(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', data=>{t=data})
 					callEmail(urlPdf,urlMa,n,t)
-					readHrs()
+					//readHrs()
 					await require('fs').renameSync(os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf', os.tmpdir() + '\\ServiceJobTemp\\' + nome + '.econf_') 					
 				}
 			}
@@ -884,22 +884,37 @@ function findTech(){
 		}
 	}
 }
-/*
+
+
 function lista(){
 	var a = require('fs').readdirSync('c:\\users\\iycma\\desktop\\test\\')
-	a.map(b=>{
+	let b = a[1] //.map(b=>{
 		var dt= b.split(' - ')[1]
 		$.get('c:\\users\\iycma\\desktop\\test\\' + b,data=>{
 			let c = JSON.parse(data)
-			firebase.default.database().ref('Hours/' + c.matricola + '/' + dt + '/').set(
+			var doc = new DOMParser().parseFromString('<table>'+ c.tabset + '</table>', 'text/html');
+			var t = doc.getElementsByTagName('tr')
+			for(let r=3; r<10;r++){
+				var cell = t[r].getElementsByTagName('td')
+				var row1={
+					nome: cell[0].innerText
+				}
+			}
+			setTimeout(()=>{
+				console.log(cell[0], row1)
+			},100)
+			
+			/*firebase.default.database().ref('Hours/' + c.matricola + '/' + dt + '/').set(
 				{
 					engine: c.orem1? c.orem1.replace('.', '') : '0',
 					perc1: c.perc11? c.perc11.replace('.', ''): '0',
 					perc2: c.perc21? c.perc21.replace('.', ''): '0',
 					perc3: c.perc31? c.perc31.replace('.', ''): '0',
 					tech: '',
+					rapporto: c.rappl1? c.rappl1 : '',
+					osservazioni: c.oss1? c.oss1 : ''
 				}
-			)
+			)*/
+		//})
 		})
-	})
-}*/
+}
