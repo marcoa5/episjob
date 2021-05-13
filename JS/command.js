@@ -888,7 +888,35 @@ function closeSU(){
 	document.getElementById('apbpcs').innerText=convdata(document.getElementById('suapbpcs').value);
 	document.getElementById('chbpcs').innerText=convdata(document.getElementById('suchbpcs').value);
 	document.getElementById('docbpcs').innerText=document.getElementById('sudocbpcs').value;
+	if($('#sudocbpcs').val()!='' && getDay()!=0) loadHrs()
 	closeMenu();
+}
+
+function loadHrs(){
+	let info ={}
+	info = {
+		sn: $('#matricola').text(),
+		rig: $('#prodotto1').text(),
+		orem: $('#orem1').text().replace('.',''),
+		perc1: $('#perc11').text()? $('#perc11').text().replace('.',''): '0',
+		perc2: $('#perc21').text()? $('#perc21').text().replace('.',''): '0',
+		perc3: $('#perc31').text()? $('#perc31').text().replace('.',''): '0',
+		site: $('#cantiere1').text(),
+		customer: $('#cliente11').text(),
+		docBPCS: $('#sudocbpcs').val()
+	}
+	firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase()).child(getDay()).set(info)
+}
+
+function getDay(){
+	let fName
+	for (var i = 7;i>0;i--){
+		if($('#dat' + i + '1').text()!==''){
+			fName = `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()}`
+			return fName
+		}
+	}
+	return 0
 }
 
 function sondaggio(){
