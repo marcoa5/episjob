@@ -905,7 +905,7 @@ function loadHrs(){
 		customer: $('#cliente11').text(),
 		docBPCS: $('#sudocbpcs').val()
 	}
-	firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase()).child(getDaySave()).set(info)
+	firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase() + '/' + getDaySave()).set(info)
 }
 
 function getDaySave(){
