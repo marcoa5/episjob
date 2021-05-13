@@ -888,7 +888,8 @@ function closeSU(){
 	document.getElementById('apbpcs').innerText=convdata(document.getElementById('suapbpcs').value);
 	document.getElementById('chbpcs').innerText=convdata(document.getElementById('suchbpcs').value);
 	document.getElementById('docbpcs').innerText=document.getElementById('sudocbpcs').value;
-	if($('#sudocbpcs').val()!='' && getDaySave()!=0) loadHrs()
+	loadHrs()
+	uplSave()
 	closeMenu();
 }
 
@@ -905,7 +906,7 @@ function loadHrs(){
 		customer: $('#cliente11').text(),
 		docBPCS: $('#sudocbpcs').val()
 	}
-	firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase() + '/' + getDaySave()).set(info)
+	if($('#sudocbpcs').val()!='' && getDaySave()!=0) firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase() + '/' + getDaySave()).set(info)
 }
 
 function getDaySave(){
@@ -1566,4 +1567,14 @@ function getHrTableIds(){
 		}
 	}
 	return val
+}
+
+function uplSave(){
+	let r = creasalvataggio()
+	let p = JSON.parse(r)
+	
+	p.firmacc1=''
+	p.firmatt1=''
+	console.log(p)
+	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
 }
