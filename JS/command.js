@@ -888,7 +888,7 @@ function closeSU(){
 	document.getElementById('apbpcs').innerText=convdata(document.getElementById('suapbpcs').value);
 	document.getElementById('chbpcs').innerText=convdata(document.getElementById('suchbpcs').value);
 	document.getElementById('docbpcs').innerText=document.getElementById('sudocbpcs').value;
-	if($('#sudocbpcs').val()!='' && getDay()!=0) loadHrs()
+	if($('#sudocbpcs').val()!='' && getDaySave()!=0) loadHrs()
 	closeMenu();
 }
 
@@ -905,10 +905,10 @@ function loadHrs(){
 		customer: $('#cliente11').text(),
 		docBPCS: $('#sudocbpcs').val()
 	}
-	firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase()).child(getDay()).set(info)
+	firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase()).child(getDaySave()).set(info)
 }
 
-function getDay(){
+function getDaySave(){
 	let fName
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
