@@ -794,7 +794,10 @@ async function salvaMaPdf(){
 					firebase.default.storage().ref('Closed/' + `${maName}${fName}.pdf`).put(data)
 				});
 			} else {
-				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
+				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+					fs.writeFileSync(`${maName}${fName}.pdf`, data)
+					firebase.default.storage().ref('Closed/' + `${maName}${fName}.pdf`).put(data)
+				});
 			}
 		//}
 	}, 100)
@@ -925,15 +928,5 @@ function lista(){
 }
 
 function prova(){
-	/*fetch('c:\\users\\iycma\\desktop\\a.pdf')
-	.then(a=>{
-		a.blob()
-		.then(b=>{
-			firebase.default.storage().ref('test.pdf').put(b)
-		})
-	})*/
-	remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
-		firebase.default.storage().ref('test.pdf').put(data)
-	})
-	
+
 }
