@@ -760,7 +760,7 @@ function getSavedName(){
 	let fName=''
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
-			fName += `${$('#sudocbpcs').val()} -  ${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
+			fName += `${$('#sudocbpcs').val()} - ${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()} - ${$('#cliente11').text()} - ${$('#prodotto1').text()} - ${$('#matricola').text()}`
 			if (fName!='') return fName
 		}
 	}
