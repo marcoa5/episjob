@@ -789,7 +789,10 @@ async function salvaMaPdf(){
 
 			if(require('fs').existsSync(`${maName}${fName}.pdf`)){
 				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
-				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
+				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+					fs.writeFileSync(`${maName}${fName}.pdf`, data)
+					firebase.default.storage().ref('Closed/' + `${maName}${fName}.pdf`).put(data)
+				});
 			} else {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {fs.writeFileSync(`${maName}${fName}.pdf`, data)});
 			}
@@ -922,9 +925,15 @@ function lista(){
 }
 
 function prova(){
-	fetch('c:\\users\\iycma\\desktop\\prova.txt')
+	/*fetch('c:\\users\\iycma\\desktop\\a.pdf')
 	.then(a=>{
 		a.blob()
-		.then(b=>{console.log(b)})
+		.then(b=>{
+			firebase.default.storage().ref('test.pdf').put(b)
+		})
+	})*/
+	remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+		firebase.default.storage().ref('test.pdf').put(data)
 	})
+	
 }
