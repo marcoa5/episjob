@@ -796,12 +796,12 @@ async function salvaMaPdf(){
 				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
 				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					fs.writeFileSync(`${maName}${fName}.pdf`, data)
-					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, ,{contentType:'application/pdf'})
+					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 				});
 			} else {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					fs.writeFileSync(`${maName}${fName}.pdf`, data)
-					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, ,{contentType:'application/pdf'})
+					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 				});
 			}
 		//}
