@@ -796,17 +796,17 @@ async function salvaMaPdf(){
 				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
 				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					fs.writeFileSync(`${maName}${fName}.pdf`, data)
-					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data)
+					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, ,{contentType:'application/pdf'})
 				});
 			} else {
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					fs.writeFileSync(`${maName}${fName}.pdf`, data)
-					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data)
+					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, ,{contentType:'application/pdf'})
 				});
 			}
 		//}
 	}, 100)
-	
+
 	setTimeout(() => {
 		openMenu('menuSU')
 		openSU()
@@ -933,5 +933,9 @@ function lista(){
 }
 
 function prova(){
-
+	/*remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+		let t = firebase.default.storage().ref('Test/' + `${getSavedName()}.pdf`)
+		t.put(data,{contentType:'application/pdf'})
+		.then((a,b,c)=>{console.log(a,b,c)})
+	});*/
 }
