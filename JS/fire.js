@@ -124,7 +124,6 @@ function login(){
 
   require('fs').readFile(path, 'utf-8',(a,b)=>{
     if (a) {
-      console.log(a)
       $('#logCont').show()
       $('#logCont').css('display', 'flex')
     } else {
@@ -168,10 +167,13 @@ function readRealTimeDB(id, eMail){
 function readConf(){
   var user = JSON.parse(require('fs').readFileSync(path, 'utf-8')) 
   if(!user.id){
-    firebase.default.auth().signInWithEmailAndPassword(user.Mail, 'Epiroc2021').then(a=>{
+    $('#logCont').show()
+    $('#logCont').css('display', 'flex')
+    $('#salva').hide()
+    /*firebase.default.auth().signInWithEmailAndPassword(user.Mail, 'Epiroc2021').then(a=>{
       user.id = a.user.uid
       require('fs').writeFileSync(path,JSON.stringify(user))
-    })
+    })*/
   }
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
