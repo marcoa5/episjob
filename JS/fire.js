@@ -153,7 +153,6 @@ function readRealTimeDB(id, eMail){
     var v= snapshot.val();
     v.Mail = eMail
     v.Id = id
-    console.log(v)
     await require('fs').writeFileSync(path, JSON.stringify(v))
     firebase.default.database().ref(`mails/${v.Nome} ${v.Cognome}`).once('value', async mailList=>{
       if(mailList.val()!=null) {
@@ -166,8 +165,7 @@ function readRealTimeDB(id, eMail){
 
 
 function readConf(){
-  var user = JSON.parse(require('fs').readFileSync(path, 'utf-8')) 
-  console.log(user)
+  var user = JSON.parse(require('fs').readFileSync(path, 'utf-8'))
   if(!user.Id){
     $('#logCont').show()
     $('#logCont').css('display', 'flex')
