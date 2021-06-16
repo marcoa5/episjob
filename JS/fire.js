@@ -167,7 +167,7 @@ function readRealTimeDB(id, eMail){
 function readConf(){
   var user = JSON.parse(require('fs').readFileSync(path, 'utf-8')) 
   console.log(user)
-  if(!user.id){
+  if(!user.Id){
     $('#logCont').show()
     $('#logCont').css('display', 'flex')
     $('#salva').hide()
