@@ -126,10 +126,10 @@ function login(){
     if (a) {
       $('#logCont').show()
       $('#logCont').css('display', 'flex')
-    } else {
+    } else {*/
       $('#salva').show()
       readConf()
-    }
+   /* }
   })*/
 }
 
