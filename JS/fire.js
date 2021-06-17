@@ -122,15 +122,15 @@ function login(){
   if(!pathmol) fs.createWriteStream(pathmol, { overwrite: false })
   if(!pathcus) fs.createWriteStream(pathcus, { overwrite: false })
 
- /* require('fs').readFile(path, 'utf-8',(a,b)=>{
+  require('fs').readFile(path, 'utf-8',(a,b)=>{
     if (a) {
       $('#logCont').show()
       $('#logCont').css('display', 'flex')
-    } else {*/
+    } else {
       $('#salva').show()
       readConf()
-   /* }
-  })*/
+    }
+  })
 }
 
 function fireLogin(){
@@ -167,9 +167,9 @@ function readRealTimeDB(id, eMail){
 function readConf(){
   var user = JSON.parse(require('fs').readFileSync(path, 'utf-8'))
   if(!user.Id){
-    //$('#logCont').show()
-    //$('#logCont').css('display', 'flex')
-    //$('#salva').hide()
+    $('#logCont').show()
+    $('#logCont').css('display', 'flex')
+    $('#salva').hide()
     /*firebase.default.auth().signInWithEmailAndPassword(user.Mail, 'Epiroc2021').then(a=>{
       user.id = a.user.uid
       require('fs').writeFileSync(path,JSON.stringify(user))
