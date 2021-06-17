@@ -122,7 +122,7 @@ function login(){
   if(!pathmol) fs.createWriteStream(pathmol, { overwrite: false })
   if(!pathcus) fs.createWriteStream(pathcus, { overwrite: false })
 
-  require('fs').readFile(path, 'utf-8',(a,b)=>{
+ /* require('fs').readFile(path, 'utf-8',(a,b)=>{
     if (a) {
       $('#logCont').show()
       $('#logCont').css('display', 'flex')
@@ -130,7 +130,7 @@ function login(){
       $('#salva').show()
       readConf()
     }
-  })
+  })*/
 }
 
 function fireLogin(){
