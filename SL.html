@@ -1002,6 +1002,7 @@
 </body>
 
 <script>
+const { ipcRenderer } = require('electron');
 $('#listaMai').hide()
 $('#salva').hide()
 $('#logCont').hide()
@@ -1033,7 +1034,7 @@ function Upd(){
 
 }
 
-const { ipcRenderer } = require('electron');
+
 const version = document.getElementById('upd');
 ipcRenderer.send('app_version');
 ipcRenderer.on('app_version', (event, arg) => {
