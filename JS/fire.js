@@ -58,7 +58,7 @@ function loadtech(){
 }
 
 function aggiornacli(){
-  firebase.default.database().ref('Customers').once('value',sn=>{
+  firebase.default.database().ref('CustomerC').once('value',sn=>{
     require('fs').writeFileSync(pathcus,JSON.stringify(sn.val()))
   })
   .then(()=>{
