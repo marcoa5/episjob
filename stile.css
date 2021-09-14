@@ -832,6 +832,11 @@ border:1px solid rgb(255,205,0);
     color: rgb(66, 85, 99);
 }
 
+.buttonore:disabled, .buttonore:disabled:hover{
+    background-color: bisque;
+    color:rgb(255,205,0)
+}
+
 .elim{
     cursor: pointer;
 }
@@ -1480,4 +1485,16 @@ input[type=email]:valid{
 
 .maPdf {
     width:60%;
+}
+
+.divImi{
+    display: grid;
+    grid-template-columns: 40% 40% 10% 10%;
+    margin: 0 20px 0 20px;
+    align-items: center;
+}
+
+.imiForm{
+    width:90%;
+    margin:0;
 }
