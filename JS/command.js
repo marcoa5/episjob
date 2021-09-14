@@ -14,6 +14,7 @@ const pathfs = require('path');
 const os = require('os');
 var imiCount=1;
 var hrsImiCount = 0;
+var hrsImiLeft = 0;
 
 function startVue(){
 	var app2= new Vue({
@@ -22,6 +23,7 @@ function startVue(){
 			techni:'none',
 		}
 	})
+
 	
 }
 	
@@ -264,12 +266,12 @@ function imiFabi(){
 function addHrsImi(){
 	var fam = [
 		{name: '', val: 0},
-		{name: 'fam1', val: 1},
-		{name: 'fam2', val: 2},
-		{name: 'fam3', val: 3},
-		{name: 'fam4', val: 4},
-		{name: 'fam5', val: 5},
-		{name: 'fam6', val: 6},
+		{name: 'fam1', val: 'fam1'},
+		{name: 'fam2', val: 'fam2'},
+		{name: 'fam3', val: 'fam3'},
+		{name: 'fam4', val: 'fam4'},
+		{name: 'fam5', val: 'fam5'},
+		{name: 'fam6', val: 'fam6'},
 	]
 	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')
 	
@@ -278,7 +280,7 @@ function addHrsImi(){
 	fam.forEach(f=>{
 		$('#familyParts' + imiCount).append('<option value="' + f.val + '">' + f.name + '</option>')
 	})
-	$('#div' + imiCount).append('<input :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
+	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
 	var app = new Vue({
@@ -306,31 +308,45 @@ function addHrsImi(){
 				return this.ore <1 || parseInt(this.ore)==this.oreL || this.fam==0
 			},
 			isOk: function(a){
-				let aw = this.$root.$el.id
-				let b = aw.substring(3,aw.length)
-				console.log(b)
-				if(parseInt(hrsImiCount)==0 || a<imiCount) return true
+				return parseInt(hrsImiCount)==0 
 			}
 		},
 		methods: {
 			prevDef: function(e){
 				if(this.ore + (parseInt(e.key)) > this.diff) e.preventDefault()
+			},
+			imp: function(e){
+				let t
+				t=parseInt(e.target.value)
+				for(i=1;i<imiCount-1;i++){
+					t+=parseInt($('#hrs' + i).val())
+				}
+				hrsImiLeft=t
+				if(t==hrsImiCount) {$('#saveImiBut').prop('disabled', false)} else {$('#saveImiBut').prop('disabled', true)}
 			}
 		}
 	  })
-	
-	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled','true')
+	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled',true)
+	if(imiCount>1) $('#hrs' + (imiCount-1)).prop('disabled',true)
 	imiCount++
 }
 
 function delHrsImi(){
-	console.log(imiCount-1)
 	$('#div' +(imiCount-1)).remove()
+	$('#hrs' + (imiCount-2)).prop('disabled',false)
 	if((imiCount-2)>1) $('#imiDelBut' + (imiCount-2)).prop('disabled',false)
 	$('#imiAddBut' + (imiCount-2)).prop('disabled',false)
 	if((imiCount-2)>0)imiCount--
 }
 
+function saveImi(){
+	let b=''
+	for(i=1;i<imiCount;i++){
+		b+=$('#familyParts'+i).val() + ";" + $('#hrs' + i).val() + '@'
+	}
+	$('#imiFabi').text(b)
+	closeMenu()
+}
 
 
 
@@ -682,7 +698,7 @@ function salvafile(nome, callback){
 			noLink: true
 		}
 	var f = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
-	callback();
+	if(callback) callback();
 		})
 }
 
@@ -1557,6 +1573,7 @@ function creasalvataggio(){
 	s[$('#contnomec').attr('id')]= $('#contnomec').text();
 	s[$('#contfirmac').attr('id')]= $('#contfirmac').text();
 	s[$('#contsondc').attr('id')]= $('#contsondc').text();
+	if($('#imiFabi').text()!='') s[$('#imiFabi').attr('id')]= $('#imiFabi').text();
 	//s[$('#tabset').attr('id')]= $('#tabset').html();
 	var sup = getHrTableIds()
 	var k = Object.keys(sup)
