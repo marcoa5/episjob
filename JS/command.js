@@ -18,6 +18,7 @@ var hrsImiLeft = 0;
 
 function startVue(){
 	let r = require('fs').existsSync('./node_modules/vue/dist/vue.min.js')
+	console.log(r)
 	if(r){
 		var app2= new Vue({
 			el: '#htmlore',
