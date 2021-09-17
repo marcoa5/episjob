@@ -6,7 +6,7 @@
   	<meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="stile.css">
 	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-	<script src="./node_modules/vue/dist/vue.min.js"></script>
+	<script src="./node_modules/vue/dist/vue.js"></script>
 	<script src="js/jquery.js"></script>
 	<script src="js/mail.js"></script> 
 	<script src="js/command.js"></script>
@@ -492,7 +492,7 @@
 								</tr>
 								<tr id="rigadati">
 										<td>
-										<select id="tec">
+										<select id="tec" v-model="techni">
 											<!--Nomi da aggiungere-->
 										</select>
 										</td>
@@ -517,7 +517,7 @@
 
 								</table>
 								<br>
-								<button class="buttonore" id="agg" onclick="aggiungi()">Aggiungi</button>
+								<button class="buttonore" id="agg" onclick="aggiungi()" :disabled="techni=='none'">Aggiungi</button>
 								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
 								<br><br>
 								<table id="ris" style="color: white;"></table>
@@ -539,6 +539,19 @@
 			<button class="pulsante" onclick="controllaindirizzi()">Invia Mail</button>		
 	</div>
 </div>	
+
+<div class="ccc"><!--IMI FABI-->    
+	<div class="finestra" id="menuImiFabi">
+			<div class="barrat"><div class="g"></div><p class="tt">Report Imi Fabi</p></div>
+			<div class="container" id="oreCont">
+				<div id="oreCou"></div>
+				<div id="oreImi"></div>
+			</div>
+			<button class="pulsante" onclick="closeMenu()">Annulla</button>
+			<button id="saveImiBut" class="pulsante" onclick="saveImi()" disabled>Salva</button>		
+	</div>
+</div>
+
 <div class="ccc"><!--RiskAssessment-->    
 	<div class="finestra" id="menurisk" style="max-width: 800px; width: 800px;">
 			<div class="barrat"><div class="g"></div><p class="tt">Risk Assessment</p></div>
@@ -776,6 +789,7 @@
 <div id="contfirmac" style="display: none"></div>
 <div id="contnomec" style="display: none"></div>
 <div id="contsondc" style="display: none"></div>
+<div id="imiFabi" style="display: none"></div>
 <!--std o spe--><div id="stdspe" style="display: none;">STD</div>
 <!--risposta al sondaggio--><div id="rissondaggio" style="display: none"></div>
 <!--Updater-->
@@ -1003,6 +1017,7 @@
 </body>
 
 <script>
+startVue()
 const { ipcRenderer } = require('electron');
 $('#listaMai').hide()
 $('#salva').hide()
