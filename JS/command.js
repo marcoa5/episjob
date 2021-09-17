@@ -17,12 +17,16 @@ var hrsImiCount = 0;
 var hrsImiLeft = 0;
 
 function startVue(){
-	var app2= new Vue({
-		el: '#htmlore',
-		data:{
-			techni:'none',
-		}
-	})
+	let r = require('fs').existsSync('./node_modules/vue/dist/vue.js')
+	if(r){
+		var app2= new Vue({
+			el: '#htmlore',
+			data:{
+				techni:'none',
+			}
+		})
+	}
+	
 
 	
 }
@@ -283,6 +287,8 @@ function addHrsImi(){
 	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
+	let r = require('fs').existsSync('./node_modules/vue/dist/vue.js')
+	if(r){
 	var app = new Vue({
 		el: '#div' + imiCount,
 		data:{
@@ -326,6 +332,7 @@ function addHrsImi(){
 			}
 		}
 	  })
+	}
 	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled',true)
 	if(imiCount>1) $('#hrs' + (imiCount-1)).prop('disabled',true)
 	imiCount++
