@@ -18,7 +18,7 @@ var hrsImiLeft = 0;
 
 function startVue(){
 	try{
-		let r = require('Vue')
+		var r = require('Vue')
 	} catch{}
 	if(r){
 		var app2= new Vue({
@@ -248,7 +248,7 @@ function copiaore(){
 	}
 	closeMenu();
 	try{
-		let r = require('Vue')
+		var r = require('Vue')
 	} catch{}
 	if($('#cliente11').text()=='IMI FABI SPA' && r) imiFabi()
 }
@@ -290,7 +290,7 @@ function addHrsImi(){
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
 	try{
-		let r = require('Vue')
+		var r = require('Vue')
 	} catch{}
 	if(r){
 	var app = new Vue({
