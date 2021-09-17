@@ -25,10 +25,7 @@ function startVue(){
 				techni:'none',
 			}
 		})
-	}
-	
-
-	
+	}	
 }
 	
 
@@ -248,7 +245,8 @@ function copiaore(){
 		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[18].innerText = mille(righe[i].getElementsByTagName('td')[13].innerText);
 	}
 	closeMenu();
-	if($('#cliente11').text()) imiFabi()
+	let r = require('fs').existsSync('./node_modules/vue/dist/vue.js')
+	if($('#cliente11').text()=='IMI FABI SPA' && r) imiFabi()
 }
 
 function imiFabi(){
