@@ -16,22 +16,6 @@ var imiCount=1;
 var hrsImiCount = 0;
 var hrsImiLeft = 0;
 
-function startVue(){
-	try{
-		var r = require('Vue')
-	} catch{}
-	if(r){
-		var app2= new Vue({
-			el: '#htmlore',
-			data:{
-				techni:'none',
-			}
-		})
-	}	
-}
-	
-
-
 function UpFiles(){
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
