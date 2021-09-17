@@ -3,7 +3,7 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 const tmp = require('tmp');
 const prompt = require('electron-prompt');
-const {shell} = require('electron');
+const {shell, TouchBarScrubber} = require('electron');
 const homedir = require('os').homedir();
 var sprLib = require("sprestlib");
 var moment = require("moment");
@@ -15,7 +15,6 @@ const os = require('os');
 var imiCount=1;
 var hrsImiCount = 0;
 var hrsImiLeft = 0;
-
 
 function startVue(){
 	var app2= new Vue({
@@ -224,27 +223,136 @@ function copiaore(){
 	var elenco=[];
 	var riga=[];
 	for(var i=0;i<righe.length;i++){
-	datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[0].innerText = righe[i].getElementsByTagName('td')[1].innerText;
-	var dd = righe[i].getElementsByTagName('td')[2].innerText;
-	datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[1].innerText = dd.substring(6,8);
-	datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[2].innerText = dd.substring(4,6);
-	datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[3].innerText = dd.substring(0,4);
-	var che = document.getElementById('stdspe').innerText;
-	if(che=="STD"){
-	for(var f=3; f<17;f++){
-	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
-	}
-	} else {
-	for(var f=3; f<7;f++){
-	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+1].innerText = righe[i].getElementsByTagName('td')[f].innerText;
-	}
-		for(var f=7; f<17;f++){
-	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
-	}
-	}
-	datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[18].innerText = mille(righe[i].getElementsByTagName('td')[13].innerText);
+		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[0].innerText = righe[i].getElementsByTagName('td')[1].innerText;
+		var dd = righe[i].getElementsByTagName('td')[2].innerText;
+		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[1].innerText = dd.substring(6,8);
+		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[2].innerText = dd.substring(4,6);
+		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[3].innerText = dd.substring(0,4);
+		var che = document.getElementById('stdspe').innerText;
+		if(che=="STD"){
+			for(var f=3; f<17;f++){
+				datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
+			}
+		} else {
+			for(var f=3; f<7;f++){
+				datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+1].innerText = righe[i].getElementsByTagName('td')[f].innerText;
+			}
+			for(var f=7; f<17;f++){
+				datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
+			}
+		}
+		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[18].innerText = mille(righe[i].getElementsByTagName('td')[13].innerText);
 	}
 	closeMenu();
+	if($('#cliente11').text()) imiFabi()
+}
+
+function imiFabi(){
+	openMenu('menuImiFabi')
+	var a = $('#tabset')
+	let sum=0
+	for(var i=1;i<8;i++){sum +=$('#stdl' + i + '1').text()*1}
+	for(var i=1;i<8;i++){sum +=$('#spll' + i + '1').text()*1}
+	for(var i=1;i<8;i++){sum +=$('#spol' + i + '1').text()*1}
+	for(var i=1;i<8;i++){sum +=$('#strl' + i + '1').text()*1}
+	for(var i=1;i<8;i++){sum +=$('#mntl' + i + '1').text()*1}
+	for(var i=1;i<8;i++){sum +=$('#mfl' + i + '1').text()*1}
+	for(var i=1;i<8;i++){sum +=$('#mnfl' + i + '1').text()*1}
+	hrsImiCount = sum
+	$('#oreCou').text('Totale ore lavorate: ' + sum)
+	if(imiCount==1) addHrsImi()
+}
+
+function addHrsImi(){
+	var fam = [
+		{name: '', val: 0},
+		{name: 'fam1', val: 'fam1'},
+		{name: 'fam2', val: 'fam2'},
+		{name: 'fam3', val: 'fam3'},
+		{name: 'fam4', val: 'fam4'},
+		{name: 'fam5', val: 'fam5'},
+		{name: 'fam6', val: 'fam6'},
+	]
+	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')
+	
+
+	$('#div' + imiCount).append('<select id="familyParts' + imiCount + '" class="imiForm" v-model="fam"></select>')
+	fam.forEach(f=>{
+		$('#familyParts' + imiCount).append('<option value="' + f.val + '">' + f.name + '</option>')
+	})
+	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
+	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
+	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
+	var app = new Vue({
+		el: '#div' + imiCount,
+		data:{
+			ore:0,
+			fam:0,
+		},
+		computed: {
+			tot: function(){
+				let t = 0
+				for(i=1;i<imiCount;i++){
+					t+=parseInt($('#hrs' + i).val())
+				}
+				return t
+			},
+			diff: function(){
+				if(imiCount==1) return parseInt(hrsImiCount) 
+				return parseInt(hrsImiCount)-this.tot
+			},
+			oreL: function(){
+				return this.diff
+			} ,
+			isDis(){
+				return this.ore <1 || parseInt(this.ore)==this.oreL || this.fam==0
+			},
+			isOk: function(a){
+				return parseInt(hrsImiCount)==0 
+			}
+		},
+		methods: {
+			prevDef: function(e){
+				if(this.ore + (parseInt(e.key)) > this.diff) e.preventDefault()
+			},
+			imp: function(e){
+				let t
+				t=parseInt(e.target.value)
+				for(i=1;i<imiCount-1;i++){
+					t+=parseInt($('#hrs' + i).val())
+				}
+				hrsImiLeft=t
+				if(t==hrsImiCount) {$('#saveImiBut').prop('disabled', false)} else {$('#saveImiBut').prop('disabled', true)}
+			}
+		}
+	  })
+	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled',true)
+	if(imiCount>1) $('#hrs' + (imiCount-1)).prop('disabled',true)
+	imiCount++
+}
+
+function delHrsImi(){
+	$('#div' +(imiCount-1)).remove()
+	$('#hrs' + (imiCount-2)).prop('disabled',false)
+	if((imiCount-2)>1) $('#imiDelBut' + (imiCount-2)).prop('disabled',false)
+	$('#imiAddBut' + (imiCount-2)).prop('disabled',false)
+	if((imiCount-2)>0)imiCount--
+}
+
+function saveImi(){
+	let b=''
+	for(i=1;i<imiCount;i++){
+		b+=$('#familyParts'+i).val() + ";" + $('#hrs' + i).val() + '@'
+	}
+	$('#imiFabi').text(b)
+	closeMenu()
+}
+
+
+
+function lockPrev(){
+	$('#imiDelBut' + (imiCount-1)).prop("disabled", true)
+	$('#imiAddBut' + (imiCount-1)).prop("disabled", true)
 }
 
 //permette di scrivere solo numeri nelle caselle 'ore'
@@ -590,7 +698,7 @@ function salvafile(nome, callback){
 			noLink: true
 		}
 	var f = dialog.showMessageBoxSync(remote.getCurrentWindow(), options);
-	callback();
+	if(callback) callback();
 		})
 }
 
@@ -1465,6 +1573,7 @@ function creasalvataggio(){
 	s[$('#contnomec').attr('id')]= $('#contnomec').text();
 	s[$('#contfirmac').attr('id')]= $('#contfirmac').text();
 	s[$('#contsondc').attr('id')]= $('#contsondc').text();
+	if($('#imiFabi').text()!='') s[$('#imiFabi').attr('id')]= $('#imiFabi').text();
 	//s[$('#tabset').attr('id')]= $('#tabset').html();
 	var sup = getHrTableIds()
 	var k = Object.keys(sup)
