@@ -256,12 +256,18 @@ function imiFabi(){
 function addHrsImi(){
 	var fam = [
 		{name: '', val: 0},
-		{name: 'fam1', val: 'fam1'},
-		{name: 'fam2', val: 'fam2'},
-		{name: 'fam3', val: 'fam3'},
-		{name: 'fam4', val: 'fam4'},
-		{name: 'fam5', val: 'fam5'},
-		{name: 'fam6', val: 'fam6'},
+		{name: 'Carro/Cabina', val: 'Carro/Cabina'},
+		{name: 'Motore Diesel/Batteria', val: 'Motore Diesel/Batteria'},
+		{name: 'Cabina', val: 'Cabina'},
+		{name: 'RCS', val: 'RCS'},
+		{name: 'Trasmissione', val: 'Trasmissione'},
+		{name: 'Imp. Elettrico', val: 'Imp. Elettrico'},
+		{name: 'Imp. Idraulico', val: 'Imp. Idraulico'},
+		{name: 'Imp. Aria/Acqua', val: 'Imp. Aria/Acqua'},
+		{name: 'Braccio/Slitta', val: 'Braccio/Slitta'},
+		{name: 'Perforatrice', val: 'Perforatrice'},
+		{name: 'Bullonatura', val: 'Bullonatura'},
+		{name: 'RigScan', val: 'RigScan'},
 	]
 	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')
 	
