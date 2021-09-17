@@ -12,8 +12,6 @@ var acc = "";
 var murl = 'https://home.intranet.epiroc.com/sites/cc/iyc/MRService/';
 const pathfs = require('path');
 const os = require('os');
-<<<<<<< Updated upstream
-=======
 var imiCount=1;
 var hrsImiCount = 0;
 var hrsImiLeft = 0;
@@ -30,7 +28,6 @@ function startVue(){
 	
 }
 	
->>>>>>> Stashed changes
 
 
 function UpFiles(){
@@ -237,118 +234,9 @@ function copiaore(){
 	for(var f=3; f<17;f++){
 	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
 	}
-<<<<<<< Updated upstream
 	} else {
 	for(var f=3; f<7;f++){
 	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+1].innerText = righe[i].getElementsByTagName('td')[f].innerText;
-=======
-	closeMenu();
-	if($('#cliente11').text()) imiFabi()
-}
-
-function imiFabi(){
-	openMenu('menuImiFabi')
-	var a = $('#tabset')
-	let sum=0
-	for(var i=1;i<8;i++){sum +=$('#stdl' + i + '1').text()*1}
-	for(var i=1;i<8;i++){sum +=$('#spll' + i + '1').text()*1}
-	for(var i=1;i<8;i++){sum +=$('#spol' + i + '1').text()*1}
-	for(var i=1;i<8;i++){sum +=$('#strl' + i + '1').text()*1}
-	for(var i=1;i<8;i++){sum +=$('#mntl' + i + '1').text()*1}
-	for(var i=1;i<8;i++){sum +=$('#mfl' + i + '1').text()*1}
-	for(var i=1;i<8;i++){sum +=$('#mnfl' + i + '1').text()*1}
-	hrsImiCount = sum
-	$('#oreCou').text('Totale ore lavorate: ' + sum)
-	if(imiCount==1) addHrsImi()
-}
-
-function addHrsImi(){
-	var fam = [
-		{name: '', val: 0},
-		{name: 'Carro/Cabina', val: 'Carro/Cabina'},
-		{name: 'Motore Diesel', val: 'Motore Diesel'},
-		{name: 'Batteria', val: 'Batteria'},
-		{name: 'Trasmissione', val: 'Trasmissione'},
-		{name: 'Impianto Idraulico', val: 'Impianto Idraulico'},
-		{name: 'Impianto Elettrico', val: 'Impianto Elettrico'},
-		{name: 'Impianto Aria/Acqua', val: 'Impianto Aria/Acqua'},
-		{name: 'Sistema di controllo RCS', val: 'Sistema di controllo RCS'},
-		{name: 'Braccio/Slitta', val: 'Braccio/Slitta'},
-		{name: 'Perforatrice', val: 'Perforatrice'},
-		{name: 'Bullonatura', val: 'Bullonatura'},
-		{name: 'RigScan', val: 'RigScan'},
-	]
-	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')
-	
-
-	$('#div' + imiCount).append('<select id="familyParts' + imiCount + '" class="imiForm" v-model="fam"></select>')
-	fam.forEach(f=>{
-		$('#familyParts' + imiCount).append('<option value="' + f.val + '">' + f.name + '</option>')
-	})
-	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
-	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
-	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
-	var app = new Vue({
-		el: '#div' + imiCount,
-		data:{
-			ore:0,
-			fam:0,
-		},
-		computed: {
-			tot: function(){
-				let t = 0
-				for(i=1;i<imiCount;i++){
-					t+=parseInt($('#hrs' + i).val())
-				}
-				return t
-			},
-			diff: function(){
-				if(imiCount==1) return parseInt(hrsImiCount) 
-				return parseInt(hrsImiCount)-this.tot
-			},
-			oreL: function(){
-				return this.diff
-			} ,
-			isDis(){
-				return this.ore <1 || parseInt(this.ore)==this.oreL || this.fam==0
-			},
-			isOk: function(a){
-				return parseInt(hrsImiCount)==0 
-			}
-		},
-		methods: {
-			prevDef: function(e){
-				if(this.ore + (parseInt(e.key)) > this.diff) e.preventDefault()
-			},
-			imp: function(e){
-				let t
-				t=parseInt(e.target.value)
-				for(i=1;i<imiCount-1;i++){
-					t+=parseInt($('#hrs' + i).val())
-				}
-				hrsImiLeft=t
-				if(t==hrsImiCount) {$('#saveImiBut').prop('disabled', false)} else {$('#saveImiBut').prop('disabled', true)}
-			}
-		}
-	  })
-	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled',true)
-	if(imiCount>1) $('#hrs' + (imiCount-1)).prop('disabled',true)
-	imiCount++
-}
-
-function delHrsImi(){
-	$('#div' +(imiCount-1)).remove()
-	$('#hrs' + (imiCount-2)).prop('disabled',false)
-	if((imiCount-2)>1) $('#imiDelBut' + (imiCount-2)).prop('disabled',false)
-	$('#imiAddBut' + (imiCount-2)).prop('disabled',false)
-	if((imiCount-2)>0)imiCount--
-}
-
-function saveImi(){
-	let b=''
-	for(i=1;i<imiCount;i++){
-		b+=$('#familyParts'+i).val() + ";" + $('#hrs' + i).val() + '@'
->>>>>>> Stashed changes
 	}
 		for(var f=7; f<17;f++){
 	  datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[f+5].innerText = righe[i].getElementsByTagName('td')[f].innerText;
