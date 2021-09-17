@@ -17,7 +17,7 @@ var hrsImiCount = 0;
 var hrsImiLeft = 0;
 
 function startVue(){
-	let r = require('fs').existsSync('./node_modules/vue/dist/vue.js')
+	let r = require('fs').existsSync('./node_modules/vue/dist/vue.min.js')
 	if(r){
 		var app2= new Vue({
 			el: '#htmlore',
@@ -287,7 +287,7 @@ function addHrsImi(){
 	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
-	let r = require('fs').existsSync('./node_modules/vue/dist/vue.js')
+	let r = require('fs').existsSync('./node_modules/vue/dist/vue.min.js')
 	if(r){
 	var app = new Vue({
 		el: '#div' + imiCount,
