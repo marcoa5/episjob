@@ -230,7 +230,7 @@ function update(){
 
 
 app.on('ready', async () => {
-	//await update()
+	await update()
 	createWindow()
 	autoUpdater.checkForUpdatesAndNotify()
 });
