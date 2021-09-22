@@ -80,6 +80,17 @@ function aggiornamails(){
   })
 }
 
+function aggiornaVue(){
+  let t = require('fs').existsSync('js/vue.min.js')
+  if(!t){
+      $.get('https://firebasestorage.googleapis.com/v0/b/epi-serv-job.appspot.com/o/vue.txt?alt=media&token=83452ed8-5b4f-4e22-bd7e-e3ef0516c96d',data=>{
+        if(!require('fs').existsSync('js/vue.min.js')) require('fs').createWriteStream('js/vue.min.js')
+        require('fs').writeFileSync('js/vue.min.js',data)
+      })
+  }
+  
+}
+
 var eye = true
 
 function hideP(){
@@ -164,15 +175,6 @@ function readRealTimeDB(id, eMail){
 
 function readConf(){
   var user = JSON.parse(require('fs').readFileSync(path, 'utf-8'))
-  /*if(!user.Id){
-    $('#logCont').show()
-    $('#logCont').css('display', 'flex')
-    $('#salva').hide()
-    firebase.default.auth().signInWithEmailAndPassword(user.Mail, 'Epiroc2021').then(a=>{
-      user.id = a.user.uid
-      require('fs').writeFileSync(path,JSON.stringify(user))
-    })
-  }*/
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })

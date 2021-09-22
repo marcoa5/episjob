@@ -231,15 +231,19 @@ function copiaore(){
 		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[18].innerText = mille(righe[i].getElementsByTagName('td')[13].innerText);
 	}
 	closeMenu();
-	try{
+	/*try{
 		var r = require('Vue')
-	} catch{}
-	if($('#cliente11').text()=='IMI FABI SPA' && r) imiFabi()
+	} catch{}*/
+	if($('#cliente11').text()=='IMI FABI SPA' /*&& r*/) imiFabi()
 }
 
 function imiFabi(){
+	$('#oreImi').html('')
+	let g = $('#rappl1').text()
+	let newG = g.replace(/\n+DETTAGLIO ORE:.+./g,'')
+	$('#rappl1').text(newG)
+	imiCount=1
 	openMenu('menuImiFabi')
-	var a = $('#tabset')
 	let sum=0
 	for(var i=1;i<8;i++){sum +=$('#stdl' + i + '1').text()*1}
 	for(var i=1;i<8;i++){sum +=$('#spll' + i + '1').text()*1}
@@ -258,7 +262,6 @@ function addHrsImi(){
 		{name: '', val: 0},
 		{name: 'Carro/Cabina', val: 'Carro/Cabina'},
 		{name: 'Motore Diesel/Batteria', val: 'Motore Diesel/Batteria'},
-		{name: 'Cabina', val: 'Cabina'},
 		{name: 'RCS', val: 'RCS'},
 		{name: 'Trasmissione', val: 'Trasmissione'},
 		{name: 'Imp. Elettrico', val: 'Imp. Elettrico'},
@@ -279,11 +282,10 @@ function addHrsImi(){
 	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
-	try{
+	/*try{
 		var r = require('Vue')
-	} catch{}
-	if(r){
-	var app = new Vue({
+	} catch{}*/
+	/*if(r){*/var app = new Vue({
 		el: '#div' + imiCount,
 		data:{
 			ore:0,
@@ -326,7 +328,7 @@ function addHrsImi(){
 			}
 		}
 	  })
-	}
+	//}
 	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled',true)
 	if(imiCount>1) $('#hrs' + (imiCount-1)).prop('disabled',true)
 	imiCount++
@@ -341,11 +343,24 @@ function delHrsImi(){
 }
 
 function saveImi(){
+	const imiOptions = {
+		type: 'question', 
+		buttons: ['Aggiungi alle note', 'Non Aggiungere'], 
+		title: 'Aggiungi note', 
+		message: 'Vuoi aggiungere il dettaglio delle ore al rapporto di lavoro?', 
+		noLink: true
+	};
+	
 	let b=''
 	for(i=1;i<imiCount;i++){
 		b+=$('#familyParts'+i).val() + ";" + $('#hrs' + i).val() + '@'
 	}
 	$('#imiFabi').text(b)
+	var sce = dialog.showMessageBoxSync(remote.getCurrentWindow(), imiOptions);
+	if(sce==0){
+		let g = $('#rappl1').text()
+		$('#rappl1').text((g+ '\n\nDettaglio ore: ' + b.replace(/;/g,': ').replace(/@/g,'; ') + '_').replace(/; _/g,'.').toUpperCase())
+	} else {console.log('Annulla')}
 	closeMenu()
 }
 
