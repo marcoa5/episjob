@@ -231,10 +231,10 @@ function copiaore(){
 		datioutput.getElementsByTagName('tr')[i+3].getElementsByTagName('td')[18].innerText = mille(righe[i].getElementsByTagName('td')[13].innerText);
 	}
 	closeMenu();
-	/*try{
-		var r = require('Vue')
-	} catch{}*/
-	if($('#cliente11').text()=='IMI FABI SPA' /*&& r*/) imiFabi()
+	try{
+		var r = require('fs').existsSync(__dirname + '/js/vue.min.js')
+	} catch{}
+	if($('#cliente11').text()=='IMI FABI SPA' && r) imiFabi()
 }
 
 function imiFabi(){

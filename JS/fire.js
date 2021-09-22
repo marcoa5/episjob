@@ -86,6 +86,8 @@ function aggiornaVue(){
     $.get('https://firebasestorage.googleapis.com/v0/b/epi-serv-job.appspot.com/o/vue.txt?alt=media&token=83452ed8-5b4f-4e22-bd7e-e3ef0516c96d',data=>{
       if(!require('fs').existsSync(__dirname + '/js/vue.min.js')) require('fs').createWriteStream(__dirname + '/js/vue.min.js')
       require('fs').writeFileSync(__dirname + '/js/vue.min.js',data)
+      alert('l\'applicazione è stata aggiornata e la pagina verrà ricaricata')
+      require('electron').remote.getCurrentWindow().reload()
     })
   }
 }
