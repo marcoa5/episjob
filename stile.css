@@ -1500,14 +1500,18 @@ input[type=email]:valid{
 
 .divImi{
     display: grid;
-    grid-template-columns: 40% 40% 10% 10%;
+    grid-template-columns: 50% 30% 10% 10%;
+    column-gap: 5px;
     margin: 0 20px 0 20px;
     align-items: center;
 }
 
 .imiForm{
-    width:90%;
+    width:100%;
     margin:0;
+}
+.oreInp{
+    width: calc(100% - 5px);
 }
 
 .imiTitle, .imiBigTitle{
@@ -1516,6 +1520,6 @@ input[type=email]:valid{
     margin:0;
 }
 
-.imiBigTitle{
-    margin-bottom: 25px;
+.imiBigTitle, #oreImi{
+    margin-bottom: 15px;
 }
