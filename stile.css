@@ -1509,3 +1509,13 @@ input[type=email]:valid{
     width:90%;
     margin:0;
 }
+
+.imiTitle, .imiBigTitle{
+    font-weight: 900;
+    font-size: 7pt;
+    margin:0;
+}
+
+.imiBigTitle{
+    margin-bottom: 25px;
+}

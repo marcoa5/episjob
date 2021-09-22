@@ -272,9 +272,10 @@ function addHrsImi(){
 		{name: 'Bullonatura', val: 'Bullonatura'},
 		{name: 'RigScan', val: 'RigScan'},
 	]
-	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')
-	
-
+	$('#oreImi').append('<div id="div0" class="divImi"></div>')
+	$('#div0').append('<p class="imiTitle">Family</p>')
+	$('#div0').append('<p class="imiTitle">Hours</p>')
+	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')	
 	$('#div' + imiCount).append('<select id="familyParts' + imiCount + '" class="imiForm" v-model="fam"></select>')
 	fam.forEach(f=>{
 		$('#familyParts' + imiCount).append('<option value="' + f.val + '">' + f.name + '</option>')
