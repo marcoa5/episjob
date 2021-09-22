@@ -238,7 +238,8 @@ function copiaore(){
 }
 
 function imiFabi(){
-	$('#oreImi').html('')
+	$('#oreImi').html('<div id="div0" class="divImi"></div>')
+	$('#div0').html('<p class="imiTitle">Family</p><p class="imiTitle">Hours</p>')
 	let g = $('#rappl1').text()
 	let newG = g.replace(/\n+DETTAGLIO ORE:.+./g,'')
 	$('#rappl1').text(newG)
@@ -272,9 +273,7 @@ function addHrsImi(){
 		{name: 'Bullonatura', val: 'Bullonatura'},
 		{name: 'RigScan', val: 'RigScan'},
 	]
-	$('#oreImi').append('<div id="div0" class="divImi"></div>')
-	$('#div0').append('<p class="imiTitle">Family</p>')
-	$('#div0').append('<p class="imiTitle">Hours</p>')
+	
 	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')	
 	$('#div' + imiCount).append('<select id="familyParts' + imiCount + '" class="imiForm" v-model="fam"></select>')
 	fam.forEach(f=>{
