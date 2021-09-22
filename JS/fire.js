@@ -81,14 +81,13 @@ function aggiornamails(){
 }
 
 function aggiornaVue(){
-  let t = require('fs').existsSync('js/vue.min.js')
+  let t = require('fs').existsSync(__dirname + '/js/vue.min.js')
   if(!t){
-      $.get('https://firebasestorage.googleapis.com/v0/b/epi-serv-job.appspot.com/o/vue.txt?alt=media&token=83452ed8-5b4f-4e22-bd7e-e3ef0516c96d',data=>{
-        if(!require('fs').existsSync('js/vue.min.js')) require('fs').createWriteStream('js/vue.min.js')
-        require('fs').writeFileSync('js/vue.min.js',data)
-      })
+    $.get('https://firebasestorage.googleapis.com/v0/b/epi-serv-job.appspot.com/o/vue.txt?alt=media&token=83452ed8-5b4f-4e22-bd7e-e3ef0516c96d',data=>{
+      if(!require('fs').existsSync(__dirname + '/js/vue.min.js')) require('fs').createWriteStream(__dirname + '/js/vue.min.js')
+      require('fs').writeFileSync(__dirname + '/js/vue.min.js',data)
+    })
   }
-  
 }
 
 var eye = true
