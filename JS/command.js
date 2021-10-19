@@ -15,6 +15,188 @@ const os = require('os');
 var imiCount=1;
 var hrsImiCount = 0;
 var hrsImiLeft = 0;
+var hrsId=1;
+var appHrs
+
+function addTabHrs(){	
+	appHrs = new Vue({
+		el: '#menuOre',
+		data: {
+			righe:[1,2,3,4,5,6,7],
+			tec: [],
+			spov: [], spol:[],
+			date: [],
+			spv: [], spl:[],
+			spsv:[],spsl:[],
+			mntv:[],mntl:[],
+			mfv:[],mfl:[],
+			mnfv:[],mnfl:[],
+			km:[],off:[], ofs:[], 
+		},
+		
+		methods: {
+			copiaOre(){
+				for(i=1;i<8;i++){
+    				var iu = $('#stdspe').text();
+					if(iu=='spe'){
+						$('#spov'+i+'1').text(this.spov[i]==0?'':this.spov[i])
+						$('#spol'+i+'1').text(this.spol[i]==0?'':this.spol[i])
+						$('#spsv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
+						$('#spsl'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])	
+					} else {
+						$('#stdv'+i+'1').text(this.spov[i]==0?'':this.spov[i])
+						$('#stdl'+i+'1').text(this.spol[i]==0?'':this.spol[i])
+						$('#strv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
+						$('#strl'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])
+					}
+					$('#mntv'+i+'1').text(this.mntv[i]==0?'':this.mntv[i])
+					$('#mntl'+i+'1').text(this.mntl[i]==0?'':this.mntl[i])
+					$('#mfv'+i+'1').text(this.mfv[i]==0?'':this.mfv[i])
+					$('#mfl'+i+'1').text(this.mfl[i]==0?'':this.mfl[i])
+					$('#mnfv'+i+'1').text(this.mnfv[i]==0?'':this.mnfv[i])
+					$('#mnfl'+i+'1').text(this.mnfl[i]==0?'':this.mnfl[i])
+					$('#km'+i+'1').text(this.km[i]==0?'':this.km[i])
+					$('#spv'+i+'1').text(this.spv[i])
+					$('#off'+i+'1').text(this.off[i]==0?'':this.off[i])
+					$('#tecnico'+i+'1').text(this.tec[i])
+					
+				}
+			},
+			zero(e){
+				if(e.target.value==0){e.target.value=''}
+			},
+			spese(e){
+				this.$refs['offRef'+e][0].focus()
+				var t = parseFloat($('#userK').text())
+				prompt({
+					title: 'KM',
+					label: 'Km di autostrada:',
+					value:( $('#spv'+e).val()/t).toFixed(0),
+					type: 'input'
+				})
+				.then((r) => {
+					if(r == 0) {
+						$('#spv'+e).val('');
+					} else if(r!==null){
+						$('#spv'+e).val((r*t).toFixed(2))
+					}
+				})
+			},
+			chDis(e,g){
+				let fd=this.date[e]
+				let f = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"))
+				if(this.date[e]==undefined || this.tec[e]==undefined || this.tec[e]=='none') return true
+				switch (g){
+					case 'spov':
+					case 'spol':
+						switch (f){
+							case 'fer': return false
+							case 'sab': 
+							case 'fest': 
+								this.spov[e]=''
+								this.spol[e]=''
+								return true
+						}
+					case 'spsv':
+					case 'spsl':
+						switch (f){
+							case 'fer': return false
+							case 'sab': return false
+							case 'fest': 
+								this.spsv[e]=''
+								this.spsl[e]=''
+								return true
+						}
+					case 'mntv':
+					case 'mntl':
+						switch (f){
+							case 'fer': return false
+							case 'sab': return false
+							case 'fest': 
+							this.mntv[e]=''
+							this.mntl[e]=''
+							return true
+						}
+					case 'mfv':
+					case 'mfl':
+					case 'mnfv':
+					case 'mnfl':
+						switch (f){
+							case 'fer':
+							case 'sab': 
+								this.mnfv[e]=''
+								this.mnfl[e]=''
+								return true
+							case 'fest': return false
+						}
+					case 'km':
+					case 'spv':
+						let sum=this.spov[e]?this.spov[e]:0+this.spsv[e]?this.spsv[e]:0+this.mntv[e]?this.mntv[e]:0+this.mfv[e]?this.mfv[e]:0+this.mnfv[e]?this.mnfv[e]:0
+						if(sum>0) {
+							return false
+						} else {
+							this.km[e]=''
+							this.spv[e]=''
+							return true
+						}
+					case 'off':
+						switch (f){
+							case 'fer': return false
+							case 'sab':
+							case 'fest': 
+								this.off[e]=''
+								return true
+						}
+					case 'ofs':
+						switch (f){
+							case 'fer': return false
+							case 'sab': return false
+							case 'fest': 
+								this.ofs[e]=''
+								return true
+						}
+				}
+			},
+			maxKm(e){
+				let sum=this.spov[e]?this.spov[e]:0+this.spsv[e]?this.spsv[e]:0+this.mntv[e]?this.mntv[e]:0+this.mfv[e]?this.mfv[e]:0+this.mnfv[e]?this.mnfv[e]:0
+				return sum*100
+			},
+			prevKey(e){
+				e.preventDefault()
+			},
+			maxHrs(e,b){
+				let fd=this.date[e]
+				let f = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"))
+				switch (b){
+					case 'spov': return 8 - parseFloat(this.spol[e]?this.spol[e]:0)
+					case 'spol': return 8 - parseFloat(this.spov[e]?this.spov[e]:0)	
+					case 'spsv':
+						if(f=='fer') return 8 - parseFloat(this.spsl[e]?this.spsl[e]:0)
+						if(f=='sab') return 16 - parseFloat(this.spsl[e]?this.spsl[e]:0)
+						break	
+					case 'spsl':
+						if(f=='fer') return 8 - parseFloat(this.spsv[e]?this.spsv[e]:0)
+						if(f=='sab') return 16 - parseFloat(this.spsv[e]?this.spsv[e]:0)
+						break	
+					case 'mntv': return 8 - parseFloat(this.mntl[e]?this.mntl[e]:0)	
+					case 'mntl': return 8 - parseFloat(this.mntv[e]?this.mntv[e]:0)	
+					case 'mfv': return 16 - parseFloat(this.mfl[e]?this.mfl[e]:0)	
+					case 'mfl': return 16 - parseFloat(this.mfv[e]?this.mfv[e]:0)	
+					case 'mnfv': return 8 - parseFloat(this.mnfl[e]?this.mnfl[e]:0)	
+					case 'mnfl': return 8 - parseFloat(this.mnfv[e]?this.mnfv[e]:0)	
+					case 'off': return 8 	
+					case 'ofs': 
+						if(f=='fer') return 8
+						if(f=='sab') return 16
+						break
+				}
+			}
+		}
+	})
+	for(let i=1;i<8;i++){
+		loadtech(i)
+	}
+}
 
 function UpFiles(){
 	require('dns').lookup('google.com',(err)=> {
@@ -63,7 +245,9 @@ function openMenu(n){
 	if(n == 'firmat1'){init("firmat")};
 	if(n=='manuMail'){caricaMails()}
     if(n=='menuRapporto'){$('#rappl').focus()};
-    if(n=='menuOre'){oggi()};
+    if(n=='menuOre'){
+		console.log(appHrs)
+	};
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
 	if(n=='menurisk'){};
@@ -198,7 +382,7 @@ function salvacomm(){
 
 function copiaore(){
 	//salvadati();
-	var datiinput = document.getElementById('ris');
+	/*var datiinput = document.getElementById('ris');
 	var righe = datiinput.getElementsByTagName('tr');
 	var datioutput = document.getElementById('tabset');
 	var righeout = datioutput.getElementsByTagName('tr');
@@ -234,7 +418,7 @@ function copiaore(){
 	try{
 		var r = require('fs').existsSync(__dirname + '/js/vue.min.js')
 	} catch{}
-	if($('#cliente11').text()=='IMI FABI SPA' && r) imiFabi()
+	if($('#cliente11').text()=='IMI FABI SPA' && r) imiFabi()*/
 }
 
 function imiFabi(){
@@ -381,7 +565,7 @@ function isNumber(evt) {
 	return true;
 }
 
-function isNumberHr(evt) {
+/*function isNumberHr(evt) {
 	evt = (evt) ? evt : window.event;
 	var charCode = (evt.which) ? evt.which : evt.keyCode;
 	var a = $('#' + evt.target.id).val();
@@ -409,22 +593,9 @@ function isNumberHr(evt) {
 	} else {
 		return false
 	}
-	/*} else if((a.length+1)<3){
-		if ((charCode > 47 && charCode < 58) || charCode==46) {
-			if ((a.length+2)<4){
-				if ((charCode > 47 && charCode < 58) || charCode==46){
-					return true
-				}
-			}
-		}	else {
-			return false;
-		}
-	} else {
-		if((charCode == 53 && a.length==3 && (a.substring(a.length-1,a.length)==2 || a.substring(a.length-1,a.length)==2))||(charCode == 50 && a.length==2)||(charCode == 53 && a.length==2)){return true} else {return false};
-	}*/
-}
+}*/
 
-function controllaP(e){
+/*function controllaP(e){
 	var te = $('#' + e.target.id).val();
 	if(te.substring(te.length-1,2)=="."){
 		$('#' + e.target.id).val($('#' + e.target.id).val()+"5")
@@ -434,7 +605,7 @@ function controllaP(e){
 
 //verifica l'inserimento delle ore nella maschera
 function controllaore(n, id){
-	const options = {
+	/*const options = {
 		type: 'error',
 		buttons: ['OK'],
 		title: 'Errore',
@@ -520,53 +691,8 @@ function controllaore(n, id){
 			document.getElementById('ofs1').value = 8 
 		}
 	}
-}
 
-//disabilita l'inserimento in base al giorno dell'anno
-function controlladata(){
-	var fd = $('#data1').val();
-	var param = verificadata(fd, moment(fd).format("DD"),moment(fd).format("MM"),moment(fd).format("YYYY"));
-	if(param=="fest"){
-		document.getElementById('spov1').disabled= true;
-		document.getElementById('spol1').disabled= true;
-		document.getElementById('spsv1').disabled= true;
-		document.getElementById('spsl1').disabled= true;
-		document.getElementById('mntv1').disabled= true;
-		document.getElementById('mntl1').disabled= true;
-		document.getElementById('mfv1').disabled= false;
-		document.getElementById('mfl1').disabled= false;
-		document.getElementById('mnfv1').disabled= false;
-		document.getElementById('mnfl1').disabled= false;
-		document.getElementById('off1').disabled= true;
-		document.getElementById('ofs1').disabled= false;
-	} else if (param=="fer"){
-		document.getElementById('spov1').disabled= false;
-		document.getElementById('spol1').disabled= false;
-		document.getElementById('spsv1').disabled= false;
-		document.getElementById('spsl1').disabled= false;
-		document.getElementById('mntv1').disabled= false;
-		document.getElementById('mntl1').disabled= false;
-		document.getElementById('mfv1').disabled= true;
-		document.getElementById('mfl1').disabled= true;
-		document.getElementById('mnfv1').disabled= true;
-		document.getElementById('mnfl1').disabled= true;
-		document.getElementById('off1').disabled= false;
-		document.getElementById('ofs1').disabled= false;
-	} else if (param=="sab"){
-		document.getElementById('spov1').disabled= true;
-		document.getElementById('spol1').disabled= true;
-		document.getElementById('spsv1').disabled= false;
-		document.getElementById('spsl1').disabled= false;
-		document.getElementById('mntv1').disabled= false;
-		document.getElementById('mntl1').disabled= false;
-		document.getElementById('mfv1').disabled= true;
-		document.getElementById('mfl1').disabled= true;
-		document.getElementById('mnfv1').disabled= true;
-		document.getElementById('mnfl1').disabled= true;
-		document.getElementById('off1').disabled= true;
-		document.getElementById('ofs1').disabled= false;
-	};
-}
+}*/
 
 //Esporta PDF
 function printpdf (a) {
@@ -819,14 +945,8 @@ function ver_pulisci(){
 	var resp = dialog.showMessageBoxSync(remote.getCurrentWindow(), options) 
 	if (resp==0){pulisci(); closeMenu();}
 }
-		
-function oggi(){
-	$('#data1').val(convdata(today()));	
-		setTech();
-		controlladata();
-}
 
-function aggiungi() {
+/*function aggiungi() {
 	const options = {
 		type: 'error',
 		buttons: ['OK'],
@@ -907,7 +1027,7 @@ function aggiungi() {
 			}             
 		} else {dialog.showMessageBox(remote.getCurrentWindow(), options);}
 	}
-}
+}*/
 
 function cancella(n){
 	document.getElementById('ris').getElementsByTagName('tr')[n].remove();
@@ -920,13 +1040,14 @@ function cancella(n){
 }
 
 function eliminatutto(){
+	/*addTabHrs()
 	var nrrighe = document.getElementById('ris').getElementsByTagName('tr');
 	if(nrrighe.length>0){
 		var g = document.getElementById('ris').getElementsByTagName('tr');
 		for (var y=g.length - 1;y>-1;y--){
 			g[y].remove();
 		}
-	}
+	}*/
 }
             
 function clearore(){
@@ -1229,25 +1350,6 @@ function abilitaok(a){
 	} else{
 		$('#contfirmac').text('1');
 	}
-}
-
-function scrivikm(){
-	var t = parseFloat($('#userK').text())
-		prompt({
-			title: 'KM',
-			label: 'Km di autostrada:',
-			value: parseFloat(($('#spv1').val()).replace(",",".")/t).toFixed(0),
-			type: 'input'
-		})
-		.then((r) => {
-			if(r == 0) {
-				$('#spv1').val('');
-			} else if(r!==null){
-				$('#spv1').val(parseFloat(r*t).toFixed(0) + ",00");
-			} else if(r==0){$('#spv1').val('')}
-		})
-		.catch(console.error);
-		$('#off1').focus();
 }
 
 function controllafirmac(){
@@ -1687,14 +1789,14 @@ function chMatricola(){
 	}
 }
 
-async function setTech(){
+async function setTech(n){
 	var NC = $('#userN').text().toUpperCase() + ' ' + $('#userC').text().toUpperCase()
-	var options = $('#tec option')
+	var options = $('#tec' + n + ' option')
 	var o = await $.map(options,(a)=>{
 		return(a.value)
 	})
 	if(NC.indexOf(o)){
-		$('#tec').val(NC)
+		$('#tec' + n).val(NC)
 	}
 }
 

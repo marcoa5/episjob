@@ -15,6 +15,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 var path = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
 var path1 = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','emails.list')
 var pathmol = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','mol.list')
@@ -26,10 +27,10 @@ function aggiornatech(){
     require('fs').writeFileSync(pathtech,JSON.stringify(s.val()))
   })
   .then(()=>{
-    loadtech()
+    //loadtech(1)
   })
   .catch(err=>{
-    loadtech()
+    //loadtech(1)
     console.log(err)
   })
 }
@@ -48,12 +49,12 @@ async function aggiornamol(){
   })
 }
 
-function loadtech(){
+function loadtech(n){
   var tech = require('fs').readFileSync(pathtech,'utf-8')
-  $('#tec').html('')
-  $('#tec').append(new Option('','none'))
+  $('#tec' + n).html('')
+  $('#tec' + n).append(new Option('','none'))
   $.each(JSON.parse(tech), (a,i)=>{
-    $('#tec').append(new Option(i.s, a))
+    $('#tec' + n).append(new Option(a, a))
   })
 }
 

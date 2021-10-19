@@ -461,69 +461,58 @@
 				<div class="barrat"><div class="g"></div><p class="tt">ORE LAVORATE</p></div>
 				<div class="finestrai" id="htmlore">
 						<table id="main">
-								<tr>
-										<th rowspan="3">TECNICO</th>
-										<th rowspan="3">DATA</th>
-										<th colspan="10">ORE</th>
-										<th rowspan="3">KM</th>
-										<th rowspan="3">SPV</th>
-										<th rowspan="3">OFF</th>
-										<th rowspan="3">OFS</th>
-								</tr>
-								<tr>
-										<th colspan="2" id="spostd">STD</th>
-										<th colspan="2" id="spsstr">STR</th>
-										<th colspan="2">MNT</th>
-										<th colspan="2">MF</th>
-										<th colspan="2">MNF</th>
-								</tr>
-								<tr>
-										<th>V</th>
-										<th>L</th>
-										<th>V</th>
-										<th>L</th>
-										<th>V</th>
-										<th>L</th>
-										<th>V</th>
-										<th>L</th>
-										<th>V</th>
-										<th>L</th>
+							<tr>
+									<th rowspan="3">TECNICO</th>
+									<th rowspan="3">DATA</th>
+									<th colspan="10">ORE</th>
+									<th rowspan="3">KM</th>
+									<th rowspan="3">SPV</th>
+									<th rowspan="3">OFF</th>
+									<th rowspan="3">OFS</th>
+							</tr>
+							<tr>
+									<th colspan="2" id="spostd">STD/SPO</th>
+									<th colspan="2" id="spsstr">STR/SPS</th>
+									<th colspan="2">MNT</th>
+									<th colspan="2">MF</th>
+									<th colspan="2">MNF</th>
+							</tr>
+							<tr>
+									<th>V</th>
+									<th>L</th>
+									<th>V</th>
+									<th>L</th>
+									<th>V</th>
+									<th>L</th>
+									<th>V</th>
+									<th>L</th>
+									<th>V</th>
+									<th>L</th>
 
-								</tr>
-								<tr id="rigadati">
-										<td>
-										<select id="tec" v-model="techni">
-											<!--Nomi da aggiungere-->
-										</select>
-										</td>
-										<td>
-										<input type="date" name="bday" id="data1" onchange="controlladata()">
-										</td>
-										<td><input id="spov1" class="ore" type="text" maxlength="4" onkeypress="return isNumberHr(event)" onchange="controllaviaggi()" onblur="controllaP(event); controllaore('spo', '1')"></td>
-										<td><input id="spol1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('spo', '2')"></td>
-										<td><input id="spsv1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onchange="controllaviaggi()" onblur="controllaP(event); controllaore('sps','1')"></td>
-										<td><input id="spsl1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('sps','2')"></td>
-										<td><input id="mntv1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onchange="controllaviaggi()" onblur="controllaP(event); controllaore('mnt','1')"></td>
-										<td><input id="mntl1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('mnt','2')"></td>
-										<td><input id="mfv1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)"  onchange="controllaviaggi()" onblur="controllaP(event); controllaore('mf','1')"></td>
-										<td><input id="mfl1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)"  onblur="controllaP(event); controllaore('mf','2')"></td>
-										<td><input id="mnfv1" class="ore" type="text" maxlength="4"  onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('mnf','1')"></td>
-										<td><input id="mnfl1" class="ore" type="text"  maxlength="4" onkeypress="return isNumberHr(event)" onblur="controllaP(event); controllaore('mnf','2')"></td>
-										<td><input id="km1" class="ore" type="text"  maxlength="4" onkeypress="return isNumber(event)" /></td>
-										<td><input id="spv1" class="ore" type="text"  maxlength="2" onfocus="scrivikm()" onkeypress="return isNumber(event)" /></td>
-										<td><input id="off1" class="ore" type="text"  maxlength="4" onkeypress="return isNumberHr(event)" onkeyup="controllaore('off', '1')"></td>
-										<td><input id="ofs1" class="ore" type="text"  maxlength="4" onkeypress="return isNumberHr(event)" onkeyup="controllaore('ofs', '1')"></td>
-								</tr>
+							</tr>
+							<tr v-for="i in righe">
+								<td><select v-model="tec[i]" v-bind:id="'tec' + i" v-on:keydown="prevKey(event)"></select></td>
+								<td><input v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:keydown="prevKey(event)"></td>
+								<td><input v-model="spov[i]" v-bind:id="'_spov' + i" :disabled="chDis(i,'spov')" v-on:keydown="prevKey(event)" class="ore" type="number" step="0.25" min="0" :max="maxHrs(i,'spov')"></td>
+								<td><input v-model="spol[i]" v-bind:id="'_spol' + i" class="ore" :disabled="chDis(i,'spol')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spol')"></td>
+								<td><input v-model="spsv[i]" v-bind:id="'_spsv' + i" class="ore" :disabled="chDis(i,'spsv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsv')"></td>
+								<td><input v-model="spsl[i]" v-bind:id="'_spsl' + i" class="ore" :disabled="chDis(i,'spsl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsl')"></td>
+								<td><input v-model="mntv[i]" v-bind:id="'_mntv' + i" class="ore" :disabled="chDis(i,'mntv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mntv')"></td>
+								<td><input v-model="mntl[i]" v-bind:id="'_mntl' + i" class="ore" :disabled="chDis(i,'mntl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mntl')"></td>
+								<td><input v-model="mfv[i]" v-bind:id="'_mfv' + i" class="ore" :disabled="chDis(i,'mfv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mfv')"></td>
+								<td><input v-model="mfl[i]" v-bind:id="'_mfl' + i" class="ore" :disabled="chDis(i,'mfl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mfl')"></td>
+								<td><input v-model="mnfv[i]" v-bind:id="'_mnfv' + i" class="ore" :disabled="chDis(i,'mnfv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0"  :max="maxHrs(i,'mnfv')"></td>
+								<td><input v-model="mnfl[i]" v-bind:id="'_mnfl' + i" class="ore" :disabled="chDis(i,'mnfl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0"  :max="maxHrs(i,'mnfl')"></td>
+								<td><input v-model="km[i]" v-bind:id="'_km' + i" class="ore" :disabled="chDis(i,'km')" v-on:keydown="prevKey(event)" type="number" step="5" min="0" :max="maxKm(i)"></td>
+								<td><input v-model="spv[i]" v-bind:id="'_spv' + i" v-bind:id="'spv' + i" class="ore" :disabled="chDis(i,'spv')" v-on:focus="spese(i)" type="text"></td>
+								<td><input v-model="off[i]" v-bind:id="'_off' + i" class="ore" :ref="'offRef' + i" :disabled="chDis(i,'off')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'off')"></td>
+								<td><input v-model="ofs[i]" v-bind:id="'_ofs' + i" class="ore" :disabled="chDis(i,'ofs')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'ofs')"></td>
+							</tr>
 
-								</table>
-								<br>
-								<button class="buttonore" id="agg" onclick="aggiungi()" :disabled="techni=='none'">Aggiungi</button>
-								<button class="buttonore" id="eli" onclick="eliminatutto()">Elimina Tutto</button>
-								<br><br>
-								<table id="ris" style="color: white;"></table>
+						</table>
 				</div>
 				<button class="pulsante" onclick="closeMenu()">Annulla</button>
-				<button class="pulsante" onclick="copiaore()">OK</button>
+				<button class="pulsante" v-on:click="copiaOre()">OK</button>
 		</div>    
 
 
@@ -1018,6 +1007,7 @@
 
 <script>
 const { ipcRenderer } = require('electron');
+addTabHrs()
 $('#listaMai').hide()
 $('#salva').hide()
 $('#logCont').hide()

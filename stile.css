@@ -704,7 +704,7 @@ label{
   }
 
 #menuOre{
-    max-width: 800px;
+    max-width: 1000px;
     width: auto;
 }
 
@@ -802,7 +802,7 @@ label{
     font-size: 9pt;
 }
 .ore{
-    width: 20px;
+    width: 35px;
     
 }
 
@@ -1522,4 +1522,8 @@ input[type=email]:valid{
 
 .imiBigTitle, #oreImi{
     margin-bottom: 15px;
+}
+
+.specs{
+    min-width: 30px;
 }
