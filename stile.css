@@ -704,7 +704,7 @@ label{
   }
 
 #menuOre{
-    max-width: 1000px;
+    max-width: 1100px;
     width: auto;
 }
 
@@ -1526,4 +1526,11 @@ input[type=email]:valid{
 
 .specs{
     min-width: 30px;
+}
+
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+    color: rgb(66,85,99) !important;
 }

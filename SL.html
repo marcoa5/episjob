@@ -492,7 +492,7 @@
 							</tr>
 							<tr v-for="i in righe">
 								<td><select v-model="tec[i]" v-bind:id="'tec' + i" v-on:keydown="prevKey(event)"></select></td>
-								<td><input v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:keydown="prevKey(event)"></td>
+								<td><input v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:keydown="prevKey(event)" required></td>
 								<td><input v-model="spov[i]" v-bind:id="'_spov' + i" :disabled="chDis(i,'spov')" v-on:keydown="prevKey(event)" class="ore" type="number" step="0.25" min="0" :max="maxHrs(i,'spov')"></td>
 								<td><input v-model="spol[i]" v-bind:id="'_spol' + i" class="ore" :disabled="chDis(i,'spol')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spol')"></td>
 								<td><input v-model="spsv[i]" v-bind:id="'_spsv' + i" class="ore" :disabled="chDis(i,'spsv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsv')"></td>
@@ -1018,7 +1018,6 @@ $('#menuOre').draggable();
 $('#menuSU').draggable();
 $('#menuMail').draggable();
 $('#menurisk').draggable();
-
 function Upd(){
 	contaSchede();
 	require('dns').lookup('google.com',(err)=> {

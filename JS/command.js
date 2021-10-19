@@ -21,24 +21,27 @@ var appHrs
 function addTabHrs(){	
 	appHrs = new Vue({
 		el: '#menuOre',
-		data: {
-			righe:[1,2,3,4,5,6,7],
-			tec: [],
-			spov: [], spol:[],
-			date: [],
-			spv: [], spl:[],
-			spsv:[],spsl:[],
-			mntv:[],mntl:[],
-			mfv:[],mfl:[],
-			mnfv:[],mnfl:[],
-			km:[],off:[], ofs:[], 
+		data(){
+			return{
+				righe:[1,2,3,4,5,6,7],
+				tec:[],
+				spov: [], spol:[],
+				date: [],
+				spv: [], spl:[],
+				spsv:[],spsl:[],
+				mntv:[],mntl:[],
+				mfv:[],mfl:[],
+				mnfv:[],mnfl:[],
+				km:[],off:[], ofs:[], 
+			}
+			
 		},
 		
 		methods: {
 			copiaOre(){
 				for(i=1;i<8;i++){
     				var iu = $('#stdspe').text();
-					if(iu=='spe'){
+					if(iu=='SPE'){
 						$('#spov'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#spol'+i+'1').text(this.spol[i]==0?'':this.spol[i])
 						$('#spsv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
@@ -58,9 +61,11 @@ function addTabHrs(){
 					$('#km'+i+'1').text(this.km[i]==0?'':this.km[i])
 					$('#spv'+i+'1').text(this.spv[i])
 					$('#off'+i+'1').text(this.off[i]==0?'':this.off[i])
+					$('#ofs'+i+'1').text(this.ofs[i]==0?'':this.off[i])
 					$('#tecnico'+i+'1').text(this.tec[i])
 					
 				}
+				closeMenu()
 			},
 			zero(e){
 				if(e.target.value==0){e.target.value=''}
@@ -68,17 +73,19 @@ function addTabHrs(){
 			spese(e){
 				this.$refs['offRef'+e][0].focus()
 				var t = parseFloat($('#userK').text())
+				let s = parseInt(this.spv[e])
+				console.log(s)
 				prompt({
 					title: 'KM',
 					label: 'Km di autostrada:',
-					value:( $('#spv'+e).val()/t).toFixed(0),
+					value:s==''?0: (s/t).toFixed(0),
 					type: 'input'
 				})
 				.then((r) => {
 					if(r == 0) {
 						$('#spv'+e).val('');
 					} else if(r!==null){
-						$('#spv'+e).val((r*t).toFixed(2))
+						Vue.set(appHrs.spv, e, (r*t).toFixed(2))	
 					}
 				})
 			},
@@ -198,6 +205,37 @@ function addTabHrs(){
 	}
 }
 
+function popTable(){
+	for(let i=1;i<8;i++){
+		if($('#tecnico' + i + '1').text()!='') Vue.set(appHrs.tec, i, $('#tecnico'+i+'1').text())
+		let a
+		if($('#dat' + i + '1').text()!='') a = $('#dat' + i + '3').text() + '-' + $('#dat' + i + '2').text() + '-' + $('#dat' + i + '1').text()
+		Vue.set(appHrs.date, i, a)
+		var iu = $('#stdspe').text()
+		if(iu=='SPE'){
+			if($('#spov' + i + '1').text()!='') Vue.set(appHrs.spov, i, $('#spov' + i + '1').text())
+			if($('#spol' + i + '1').text()!='') Vue.set(appHrs.spol, i, $('#spol' + i + '1').text())
+			if($('#spsv' + i + '1').text()!='') Vue.set(appHrs.spsv, i, $('#spsv' + i + '1').text())
+			if($('#spsl' + i + '1').text()!='') Vue.set(appHrs.spsl, i, $('#spsl' + i + '1').text())	
+		} else {
+			if($('#stdv' + i + '1').text()!='') Vue.set(appHrs.spov, i, $('#stdv' + i + '1').text())
+			if($('#stdl' + i + '1').text()!='') Vue.set(appHrs.spol, i, $('#stdl' + i + '1').text())
+			if($('#strv' + i + '1').text()!='') Vue.set(appHrs.spsv, i, $('#strv' + i + '1').text())
+			if($('#strl' + i + '1').text()!='') Vue.set(appHrs.spsl, i, $('#strl' + i + '1').text())	
+		}
+		if($('#mntv' + i + '1').text()!='') Vue.set(appHrs.mntv, i, $('#mntv' + i + '1').text())	
+		if($('#mntl' + i + '1').text()!='') Vue.set(appHrs.mntl, i, $('#mntl' + i + '1').text())	
+		if($('#mfv' + i + '1').text()!='') Vue.set(appHrs.mfv, i, $('#mfv' + i + '1').text())	
+		if($('#mfl' + i + '1').text()!='') Vue.set(appHrs.mfl, i, $('#mfl' + i + '1').text())	
+		if($('#mnfv' + i + '1').text()!='') Vue.set(appHrs.mnfv, i, $('#mnfv' + i + '1').text())	
+		if($('#mnfl' + i + '1').text()!='') Vue.set(appHrs.mnfl, i, $('#mnfl' + i + '1').text())	
+		if($('#km' + i + '1').text()!='') Vue.set(appHrs.km, i, $('#km' + i + '1').text())	
+		if($('#spv' + i + '1').text()!='') Vue.set(appHrs.spv, i, $('#spv' + i + '1').text())	
+		if($('#off' + i + '1').text()!='') Vue.set(appHrs.off, i, $('#off' + i + '1').text())	
+		if($('#ofs' + i + '1').text()!='') Vue.set(appHrs.ofs, i, $('#ofs' + i + '1').text())	
+	}
+}
+
 function UpFiles(){
 	require('dns').lookup('google.com',(err)=> {
         if (err && err.code == "ENOTFOUND") {
@@ -246,7 +284,7 @@ function openMenu(n){
 	if(n=='manuMail'){caricaMails()}
     if(n=='menuRapporto'){$('#rappl').focus()};
     if(n=='menuOre'){
-		console.log(appHrs)
+		popTable()
 	};
 	if(n=='menuSU'){openSU()};
 	if(n=='menuMatricola'){Apri()};
