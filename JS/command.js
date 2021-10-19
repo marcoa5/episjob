@@ -45,7 +45,7 @@ function addTabHrs(){
 						$('#spov'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#spol'+i+'1').text(this.spol[i]==0?'':this.spol[i])
 						$('#spsv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
-						$('#spsl'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])	
+						$('#spll'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])	
 					} else {
 						$('#stdv'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#stdl'+i+'1').text(this.spol[i]==0?'':this.spol[i])
@@ -63,9 +63,14 @@ function addTabHrs(){
 					$('#off'+i+'1').text(this.off[i]==0?'':this.off[i])
 					$('#ofs'+i+'1').text(this.ofs[i]==0?'':this.off[i])
 					$('#tecnico'+i+'1').text(this.tec[i])
-					
+					if(this.date[i]) {
+						$('#dat' + i + '1').text(moment(this.date[i]).format('DD'))
+						$('#dat' + i + '2').text(moment(this.date[i]).format('MM'))
+						$('#dat' + i + '3').text(moment(this.date[i]).format('YYYY'))
+					}
 				}
 				closeMenu()
+				if($('#cliente11').text()=='IMI FABI SPA') imiFabi()
 			},
 			zero(e){
 				if(e.target.value==0){e.target.value=''}
@@ -73,8 +78,8 @@ function addTabHrs(){
 			spese(e){
 				this.$refs['offRef'+e][0].focus()
 				var t = parseFloat($('#userK').text())
-				let s = parseInt(this.spv[e])
-				console.log(s)
+				
+				let s = this.spv[e]==''?0:parseInt(this.spv[e])
 				prompt({
 					title: 'KM',
 					label: 'Km di autostrada:',
@@ -165,7 +170,12 @@ function addTabHrs(){
 				}
 			},
 			maxKm(e){
-				let sum=this.spov[e]?this.spov[e]:0+this.spsv[e]?this.spsv[e]:0+this.mntv[e]?this.mntv[e]:0+this.mfv[e]?this.mfv[e]:0+this.mnfv[e]?this.mnfv[e]:0
+				let a1= this.spov[e]?parseFloat(this.spov[e]):0
+				let a2= this.spsv[e]?parseFloat(this.spsv[e]):0
+				let a3=this.mntv[e]?parseFloat(this.mntv[e]):0
+				let a4=this.mfv[e]?parseFloat(this.mfv[e]):0
+				let a5=this.mnfv[e]?parseFloat(this.mnfv[e]):0
+				let sum=a1+a2+a3+a4+a5
 				return sum*100
 			},
 			prevKey(e){
@@ -216,7 +226,7 @@ function popTable(){
 			if($('#spov' + i + '1').text()!='') Vue.set(appHrs.spov, i, $('#spov' + i + '1').text())
 			if($('#spol' + i + '1').text()!='') Vue.set(appHrs.spol, i, $('#spol' + i + '1').text())
 			if($('#spsv' + i + '1').text()!='') Vue.set(appHrs.spsv, i, $('#spsv' + i + '1').text())
-			if($('#spsl' + i + '1').text()!='') Vue.set(appHrs.spsl, i, $('#spsl' + i + '1').text())	
+			if($('#spll' + i + '1').text()!='') Vue.set(appHrs.spsl, i, $('#spll' + i + '1').text())	
 		} else {
 			if($('#stdv' + i + '1').text()!='') Vue.set(appHrs.spov, i, $('#stdv' + i + '1').text())
 			if($('#stdl' + i + '1').text()!='') Vue.set(appHrs.spol, i, $('#stdl' + i + '1').text())
@@ -476,7 +486,7 @@ function imiFabi(){
 	for(var i=1;i<8;i++){sum +=$('#mfl' + i + '1').text()*1}
 	for(var i=1;i<8;i++){sum +=$('#mnfl' + i + '1').text()*1}
 	hrsImiCount = sum
-	$('#oreCou').text('Totale ore lavorate: ' + sum)
+	$('#oreCou').text('Totale ore lavorate: ' + hrsImiCount)
 	if(imiCount==1) addHrsImi()
 }
 
@@ -501,13 +511,10 @@ function addHrsImi(){
 	fam.forEach(f=>{
 		$('#familyParts' + imiCount).append('<option value="' + f.val + '">' + f.name + '</option>')
 	})
-	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
+	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" step="0.25" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
-	/*try{
-		var r = require('Vue')
-	} catch{}*/
-	/*if(r){*/var app = new Vue({
+	var app = new Vue({
 		el: '#div' + imiCount,
 		data:{
 			ore:0,
@@ -517,22 +524,22 @@ function addHrsImi(){
 			tot: function(){
 				let t = 0
 				for(i=1;i<imiCount;i++){
-					t+=parseInt($('#hrs' + i).val())
+					t+=$('#hrs' + i).val()
 				}
 				return t
 			},
 			diff: function(){
-				if(imiCount==1) return parseInt(hrsImiCount) 
-				return parseInt(hrsImiCount)-this.tot
+				if(imiCount==1) return hrsImiCount
+				return hrsImiCount-this.tot
 			},
 			oreL: function(){
 				return this.diff
 			} ,
 			isDis(){
-				return this.ore <1 || parseInt(this.ore)==this.oreL || this.fam==0
+				return this.ore <.25 || this.ore==this.oreL || this.fam==0
 			},
 			isOk: function(a){
-				return parseInt(hrsImiCount)==0 
+				return hrsImiCount==0 
 			}
 		},
 		methods: {
@@ -541,16 +548,15 @@ function addHrsImi(){
 			},
 			imp: function(e){
 				let t
-				t=parseInt(e.target.value)
+				t=parseFloat(e.target.value)
 				for(i=1;i<imiCount-1;i++){
-					t+=parseInt($('#hrs' + i).val())
+					t+=parseFloat($('#hrs' + i).val())
 				}
 				hrsImiLeft=t
 				if(t==hrsImiCount) {$('#saveImiBut').prop('disabled', false)} else {$('#saveImiBut').prop('disabled', true)}
 			}
 		}
 	  })
-	//}
 	if(imiCount==1) $('#imiDelBut'+ imiCount).prop('disabled',true)
 	if(imiCount>1) $('#hrs' + (imiCount-1)).prop('disabled',true)
 	imiCount++
