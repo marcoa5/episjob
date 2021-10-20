@@ -1248,7 +1248,7 @@ function getDaySave(){
 	let fName
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
-			fName = `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()}`
+			fName = `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()}-${$('#tecnico' + i + '1')}`
 			return fName
 		}
 	}
@@ -1894,6 +1894,5 @@ function uplSave(){
 	p.firmatt1=''
 	console.log(p)
 	p.filename = getSavedName() + '.pdf'
-
 	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
 }
