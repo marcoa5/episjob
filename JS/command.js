@@ -39,7 +39,7 @@ function addTabHrs(){
 		
 		methods: {
 			delRow(i){
-				Vue.set(appHrs.date, i, '')
+				Vue.set(appHrs.date, i, undefined)
 				Vue.set(appHrs.tec, i, '')
 				Vue.set(appHrs.spov, i, '')
 				Vue.set(appHrs.spol, i, '')
@@ -59,6 +59,7 @@ function addTabHrs(){
 				Vue.set(appHrs.spv, i, '')	
 				Vue.set(appHrs.off, i, '')	
 				Vue.set(appHrs.ofs, i, '')	
+				console.log(this.date[i])
 			},
 			copiaOre(){
 				for(i=1;i<8;i++){
@@ -97,6 +98,10 @@ function addTabHrs(){
 						$('#dat' + i + '1').text(moment(this.date[i]).format('DD'))
 						$('#dat' + i + '2').text(moment(this.date[i]).format('MM'))
 						$('#dat' + i + '3').text(moment(this.date[i]).format('YYYY'))
+					} else {
+						$('#dat' + i + '1').text('')
+						$('#dat' + i + '2').text('')
+						$('#dat' + i + '3').text('')
 					}
 				}
 				closeMenu()
