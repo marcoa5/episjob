@@ -1253,7 +1253,7 @@ function getDaySave(){
 	let fName
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
-			fName = `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()}-${$('#tecnico' + i + '1')}`
+			fName = `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()}-${$('#tecnico' + i + '1').text()}`
 			return fName
 		}
 	}
