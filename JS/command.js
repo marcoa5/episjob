@@ -45,12 +45,20 @@ function addTabHrs(){
 						$('#spov'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#spol'+i+'1').text(this.spol[i]==0?'':this.spol[i])
 						$('#spsv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
-						$('#spll'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])	
+						$('#spll'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])
+						$('#stdv'+i+'1').text('')
+						$('#stdl'+i+'1').text('')
+						$('#strv'+i+'1').text('')
+						$('#strl'+i+'1').text('')	
 					} else {
 						$('#stdv'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#stdl'+i+'1').text(this.spol[i]==0?'':this.spol[i])
 						$('#strv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
 						$('#strl'+i+'1').text(this.spsl[i]==0?'':this.spsl[i])
+						$('#spov'+i+'1').text('')
+						$('#spol'+i+'1').text('')
+						$('#spsv'+i+'1').text('')
+						$('#spll'+i+'1').text('')
 					}
 					$('#mntv'+i+'1').text(this.mntv[i]==0?'':this.mntv[i])
 					$('#mntl'+i+'1').text(this.mntl[i]==0?'':this.mntl[i])
@@ -524,15 +532,15 @@ function addHrsImi(){
 			tot: function(){
 				let t = 0
 				for(i=1;i<imiCount;i++){
-					t+=$('#hrs' + i).val()
+					t+=parseFloat($('#hrs' + i).val())
 				}
 				return t
 			},
-			diff: function(){
+			diff(){
 				if(imiCount==1) return hrsImiCount
 				return hrsImiCount-this.tot
 			},
-			oreL: function(){
+			oreL(){
 				return this.diff
 			} ,
 			isDis(){
