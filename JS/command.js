@@ -38,6 +38,28 @@ function addTabHrs(){
 		},
 		
 		methods: {
+			delRow(i){
+				Vue.set(appHrs.date, i, '')
+				Vue.set(appHrs.tec, i, '')
+				Vue.set(appHrs.spov, i, '')
+				Vue.set(appHrs.spol, i, '')
+				Vue.set(appHrs.spsv, i, '')
+				Vue.set(appHrs.spsl, i, '')	
+				Vue.set(appHrs.spov, i, '')
+				Vue.set(appHrs.spol, i, '')
+				Vue.set(appHrs.spsv, i, '')
+				Vue.set(appHrs.spsl, i, '')	
+				Vue.set(appHrs.mntv, i, '')	
+				Vue.set(appHrs.mntl, i, '')	
+				Vue.set(appHrs.mfv, i, '')	
+				Vue.set(appHrs.mfl, i, '')
+				Vue.set(appHrs.mnfv, i, '')	
+				Vue.set(appHrs.mnfl, i, '')	
+				Vue.set(appHrs.km, i, '')	
+				Vue.set(appHrs.spv, i, '')	
+				Vue.set(appHrs.off, i, '')	
+				Vue.set(appHrs.ofs, i, '')	
+			},
 			copiaOre(){
 				for(i=1;i<8;i++){
     				var iu = $('#stdspe').text();
@@ -1872,5 +1894,6 @@ function uplSave(){
 	p.firmatt1=''
 	console.log(p)
 	p.filename = getSavedName() + '.pdf'
+
 	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
 }

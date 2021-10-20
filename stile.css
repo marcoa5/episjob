@@ -1534,3 +1534,8 @@ input[type=date]:required:invalid::-webkit-datetime-edit {
 input[type=date]:focus::-webkit-datetime-edit {
     color: rgb(66,85,99) !important;
 }
+
+.hg{
+    margin:0;
+    min-width: 15px;
+}
