@@ -214,14 +214,18 @@ function addTabHrs(){
 				return sum*100
 			},
 			prevKey(e,a,i){
+				var n = 1.1;
+				n = n.toLocaleString().substring(1, 2);
 				if(a=='date' || a=='tec'){
 					return true
 				}
 				let m = parseFloat(e.target.max)
 				let v = parseFloat(e.target.value)
-				if(e.data=='.' && e.target.value.length>3){
+				if(e.data==n && e.target.value.length>3){
 					e.preventDefault()
 				} else {
+					if(n=='.' && e.data==',') e.data='.' 
+					if(n==',' && e.data=='.') e.data=',' 
 					if(v>m && v>0) {
 						Vue.set(appHrs[a],i,m)
 					} else {
