@@ -223,9 +223,7 @@ function addTabHrs(){
 				let v = parseFloat(e.target.value)
 				if(e.data==n && e.target.value.length>3){
 					e.preventDefault()
-				} else {
-					if(n=='.' && e.data==',') e.data='.' 
-					if(n==',' && e.data=='.') e.data=',' 
+				} else { 
 					if(v>m && v>0) {
 						Vue.set(appHrs[a],i,m)
 					} else {
