@@ -492,7 +492,7 @@
 							</tr>
 							<tr v-for="i in righe">
 								<td><select v-model="tec[i]" v-bind:id="'tec' + i" v-on:input="prevKey(event,'tec',i)"></select></td>
-								<td><input v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:input="prevKey(event,'date',i)" required></td>
+								<td><input class="dataTable" data-date="" data-date-format="DD/MM/YYYY" v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:input="prevKey(event,'date',i)" required></td>
 								<td><input v-model="spov[i]" v-bind:id="'_spov' + i" :disabled="chDis(i,'spov')" v-on:input="prevKey(event,'spov',i)" class="ore" type="number" step="0.25" min="0" :max="maxHrs(i,'spov')"></td>
 								<td><input v-model="spol[i]" v-bind:id="'_spol' + i" class="ore" :disabled="chDis(i,'spol')" v-on:input="prevKey(event,'spol',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'spol')"></td>
 								<td><input v-model="spsv[i]" v-bind:id="'_spsv' + i" class="ore" :disabled="chDis(i,'spsv')" v-on:input="prevKey(event,'spsv',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsv')"></td>
