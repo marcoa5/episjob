@@ -491,22 +491,22 @@
 
 							</tr>
 							<tr v-for="i in righe">
-								<td><select v-model="tec[i]" v-bind:id="'tec' + i" v-on:keydown="prevKey(event)"></select></td>
-								<td><input v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:keydown="prevKey(event)" required></td>
-								<td><input v-model="spov[i]" v-bind:id="'_spov' + i" :disabled="chDis(i,'spov')" v-on:keydown="prevKey(event)" class="ore" type="number" step="0.25" min="0" :max="maxHrs(i,'spov')"></td>
-								<td><input v-model="spol[i]" v-bind:id="'_spol' + i" class="ore" :disabled="chDis(i,'spol')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spol')"></td>
-								<td><input v-model="spsv[i]" v-bind:id="'_spsv' + i" class="ore" :disabled="chDis(i,'spsv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsv')"></td>
-								<td><input v-model="spsl[i]" v-bind:id="'_spsl' + i" class="ore" :disabled="chDis(i,'spsl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsl')"></td>
-								<td><input v-model="mntv[i]" v-bind:id="'_mntv' + i" class="ore" :disabled="chDis(i,'mntv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mntv')"></td>
-								<td><input v-model="mntl[i]" v-bind:id="'_mntl' + i" class="ore" :disabled="chDis(i,'mntl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mntl')"></td>
-								<td><input v-model="mfv[i]" v-bind:id="'_mfv' + i" class="ore" :disabled="chDis(i,'mfv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mfv')"></td>
-								<td><input v-model="mfl[i]" v-bind:id="'_mfl' + i" class="ore" :disabled="chDis(i,'mfl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'mfl')"></td>
-								<td><input v-model="mnfv[i]" v-bind:id="'_mnfv' + i" class="ore" :disabled="chDis(i,'mnfv')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0"  :max="maxHrs(i,'mnfv')"></td>
-								<td><input v-model="mnfl[i]" v-bind:id="'_mnfl' + i" class="ore" :disabled="chDis(i,'mnfl')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0"  :max="maxHrs(i,'mnfl')"></td>
-								<td><input v-model="km[i]" v-bind:id="'_km' + i" class="ore" :disabled="chDis(i,'km')" v-on:keydown="prevKey(event)" type="number" step="5" min="0" :max="maxKm(i)"></td>
+								<td><select v-model="tec[i]" v-bind:id="'tec' + i" v-on:input="prevKey(event,'tec',i)"></select></td>
+								<td><input v-model="date[i]" v-bind:id="'_date' + i" type="date" v-on:input="prevKey(event,'date',i)" required></td>
+								<td><input v-model="spov[i]" v-bind:id="'_spov' + i" :disabled="chDis(i,'spov')" v-on:input="prevKey(event,'spov',i)" class="ore" type="number" step="0.25" min="0" :max="maxHrs(i,'spov')"></td>
+								<td><input v-model="spol[i]" v-bind:id="'_spol' + i" class="ore" :disabled="chDis(i,'spol')" v-on:input="prevKey(event,'spol',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'spol')"></td>
+								<td><input v-model="spsv[i]" v-bind:id="'_spsv' + i" class="ore" :disabled="chDis(i,'spsv')" v-on:input="prevKey(event,'spsv',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsv')"></td>
+								<td><input v-model="spsl[i]" v-bind:id="'_spsl' + i" class="ore" :disabled="chDis(i,'spsl')" v-on:input="prevKey(event,'spsl',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'spsl')"></td>
+								<td><input v-model="mntv[i]" v-bind:id="'_mntv' + i" class="ore" :disabled="chDis(i,'mntv')" v-on:input="prevKey(event,'mntv',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'mntv')"></td>
+								<td><input v-model="mntl[i]" v-bind:id="'_mntl' + i" class="ore" :disabled="chDis(i,'mntl')" v-on:input="prevKey(event,'mntl',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'mntl')"></td>
+								<td><input v-model="mfv[i]" v-bind:id="'_mfv' + i" class="ore" :disabled="chDis(i,'mfv')" v-on:input="prevKey(event,'mfv',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'mfv')"></td>
+								<td><input v-model="mfl[i]" v-bind:id="'_mfl' + i" class="ore" :disabled="chDis(i,'mfl')" v-on:input="prevKey(event,'mfl',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'mfl')"></td>
+								<td><input v-model="mnfv[i]" v-bind:id="'_mnfv' + i" class="ore" :disabled="chDis(i,'mnfv')" v-on:input="prevKey(event,'mnfv',i)" type="number" step="0.25" min="0"  :max="maxHrs(i,'mnfv')"></td>
+								<td><input v-model="mnfl[i]" v-bind:id="'_mnfl' + i" class="ore" :disabled="chDis(i,'mnfl')" v-on:input="prevKey(event,'mnfl',i)" type="number" step="0.25" min="0"  :max="maxHrs(i,'mnfl')"></td>
+								<td><input v-model="km[i]" v-bind:id="'_km' + i" class="ore" :disabled="chDis(i,'km')" v-on:input="prevKey(event,'km',i)" type="number" step="5" min="0" :max="maxKm(i)"></td>
 								<td><input v-model="spv[i]" v-bind:id="'_spv' + i" v-bind:id="'spv' + i" class="ore" :disabled="chDis(i,'spv')" v-on:focus="spese(i)" type="text"></td>
-								<td><input v-model="off[i]" v-bind:id="'_off' + i" class="ore" :ref="'offRef' + i" :disabled="chDis(i,'off')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'off')"></td>
-								<td><input v-model="ofs[i]" v-bind:id="'_ofs' + i" class="ore" :disabled="chDis(i,'ofs')" v-on:keydown="prevKey(event)" type="number" step="0.25" min="0" :max="maxHrs(i,'ofs')"></td>
+								<td><input v-model="off[i]" v-bind:id="'_off' + i" class="ore" :ref="'offRef' + i" :disabled="chDis(i,'off')" v-on:input="prevKey(event,'off',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'off')"></td>
+								<td><input v-model="ofs[i]" v-bind:id="'_ofs' + i" class="ore" :disabled="chDis(i,'ofs')" v-on:input="prevKey(event,'ofs',i)" type="number" step="0.25" min="0" :max="maxHrs(i,'ofs')"></td>
 								<td><button class="pulsante hg" v-on:click="delRow(i)">x</button></td>
 								</tr>
 

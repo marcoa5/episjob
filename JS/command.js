@@ -213,8 +213,23 @@ function addTabHrs(){
 				let sum=a1+a2+a3+a4+a5
 				return sum*100
 			},
-			prevKey(e){
-				e.preventDefault()
+			prevKey(e,a,i){
+				if(a=='date' || a=='tec'){
+					return true
+				}
+				let m = parseFloat(e.target.max)
+				let v = parseFloat(e.target.value)
+				if(e.data=='.' && e.target.value.length>3){
+					e.preventDefault()
+				} else {
+					if(v>m && v>0) {
+						Vue.set(appHrs[a],i,m)
+					} else {
+						if(e.inputType!="deleteContentBackward") {
+							Vue.set(appHrs[a],i,Math.round(v*4)/4)
+						}
+					}
+				}
 			},
 			maxHrs(e,b){
 				let fd=this.date[e]
