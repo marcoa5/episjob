@@ -178,7 +178,12 @@ function addTabHrs(){
 						}
 					case 'km':
 					case 'spv':
-						let sum=this.spov[e]?this.spov[e]:0+this.spsv[e]?this.spsv[e]:0+this.mntv[e]?this.mntv[e]:0+this.mfv[e]?this.mfv[e]:0+this.mnfv[e]?this.mnfv[e]:0
+						let a1 = this.spov[e]?this.spov[e]:0
+						let a2= this.spsv[e]?this.spsv[e]:0
+						let a3=this.mntv[e]?this.mntv[e]:0
+						let a4=this.mfv[e]?this.mfv[e]:0
+						let a5=this.mnfv[e]?this.mnfv[e]:0
+						let sum=a1+a2+a3+a4+a5
 						if(sum>0) {
 							return false
 						} else {
