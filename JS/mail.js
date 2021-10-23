@@ -931,11 +931,3 @@ function lista(){
 		//})
 		})
 }
-
-function prova(){
-	/*remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
-		let t = firebase.default.storage().ref('Test/' + `${getSavedName()}.pdf`)
-		t.put(data,{contentType:'application/pdf'})
-		.then((a,b,c)=>{console.log(a,b,c)})
-	});*/
-}

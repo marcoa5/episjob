@@ -1268,14 +1268,31 @@ function loadHrs(){
 		customer: $('#cliente11').text(),
 		docBPCS: $('#sudocbpcs').val()
 	}
-	if($('#sudocbpcs').val()!='' && getDaySave()!=0) firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase() + '/' + getDaySave()).set(info)
+	if($('#sudocbpcs').val()!='' && getDaySaveShort()!=0) firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase() + '/' + getDaySaveShort()).set(info)
+}
+
+function prova(){
+	console.log(getDaySave())
+}
+
+function getDaySaveShort(){
+	let fName
+	for (var i = 7;i>0;i--){
+		if($('#dat' + i + '1').text()!==''){
+			let r = `${$('#dat' + i + '3').text()}-${$('#dat' + i + '2').text()}-${$('#dat' + i + '1').text()}`
+			fName = moment(r).format("YYYYMMDD")
+			return fName
+		}
+	}
+	return 0
 }
 
 function getDaySave(){
 	let fName
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
-			fName = `${$('#dat' + i + '3').text()}${$('#dat' + i + '2').text()}${$('#dat' + i + '1').text()}-${$('#tecnico' + i + '1').text()}`
+			let r = `${$('#dat' + i + '3').text()}-${$('#dat' + i + '2').text()}-${$('#dat' + i + '1').text()}`
+			fName = moment(r).format('YYYYMMDD') + moment(new Date()).format('HHmmss') + `-${$('#tecnico' + i + '1').text()}`
 			return fName
 		}
 	}
