@@ -1268,7 +1268,7 @@ function loadHrs(){
 		customer: $('#cliente11').text(),
 		docBPCS: $('#sudocbpcs').val()
 	}
-	if($('#sudocbpcs').val()!='' && getDaySaveShort()!=0) firebase.default.database().ref('Hours/' + $('#matricola').text().toUpperCase() + '/' + getDaySaveShort()).set(info)
+	if($('#sudocbpcs').val()!='' && getDaySaveShort()!=0) firebase.default.database().ref('Hours/').child($('#matricola').text().toUpperCase()).child(getDaySaveShort()).set(info)
 }
 
 function prova(){
@@ -1276,12 +1276,11 @@ function prova(){
 }
 
 function getDaySaveShort(){
-	let fName
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			let r = `${$('#dat' + i + '3').text()}-${$('#dat' + i + '2').text()}-${$('#dat' + i + '1').text()}`
-			fName = moment(r).format("YYYYMMDD")
-			return fName
+			
+			return moment(r).format("YYYYMMDD")
 		}
 	}
 	return 0

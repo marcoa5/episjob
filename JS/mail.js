@@ -1,5 +1,5 @@
 var utenti=[]
-const url = 'https://episjobreq.herokuapp.com/'//'http://localhost:3000/' 
+const url = 'https://episjobreq.azurewebsites.net/'//'https://episjobreq.herokuapp.com/'//'http://localhost:3000/' 
 var showSU = false
 
 async function createEconf(nomeF,subject, to1, son1, son2, son3,rap, rAss, userN, userC, userM){
