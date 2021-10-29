@@ -564,11 +564,11 @@ function addHrsImi(){
 	]
 	
 	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')	
-	$('#div' + imiCount).append('<select id="familyParts' + imiCount + '" class="imiForm" v-model="fam"></select>')
+	$('#div' + imiCount).append('<select id="familyParts' + imiCount + '" class="imiForm" v-model="fam" v-on:change="imp"></select>')
 	fam.forEach(f=>{
 		$('#familyParts' + imiCount).append('<option value="' + f.val + '">' + f.name + '</option>')
 	})
-	$('#div' + imiCount).append('<input v-on:change="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" step="0.25" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
+	$('#div' + imiCount).append('<input v-on:input="imp" :disabled="isOk" v-on:keydown="prevDef" type="number" min="0" :max="oreL" step="0.25" v-model="ore"  class="imiForm oreInp" id="hrs' + imiCount + '">')
 	$('#div' + imiCount).append('<button onClick="delHrsImi()" id="imiDelBut' + imiCount + '" class="pulsante imiForm">-</button>')
 	$('#div' + imiCount).append('<button :disabled="isDis" onClick="lockPrev(); addHrsImi()" id="imiAddBut' + imiCount + '" class="pulsante imiForm">+</button>')
 	var app = new Vue({
@@ -610,7 +610,7 @@ function addHrsImi(){
 					t+=parseFloat($('#hrs' + i).val())
 				}
 				hrsImiLeft=t
-				if(t==hrsImiCount) {$('#saveImiBut').prop('disabled', false)} else {$('#saveImiBut').prop('disabled', true)}
+				if(t==hrsImiCount && this.fam!=0) {$('#saveImiBut').prop('disabled', false)} else {$('#saveImiBut').prop('disabled', true)}
 			}
 		}
 	  })
