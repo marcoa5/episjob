@@ -1291,7 +1291,7 @@ function getDaySave(){
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			let r = `${$('#dat' + i + '3').text()}-${$('#dat' + i + '2').text()}-${$('#dat' + i + '1').text()}`
-			fName = moment(r).format('YYYYMMDD') + moment(new Date()).format('HHmmss') + `-${$('#tecnico' + i + '1').text()}`
+			fName = moment(r).format('YYYYMMDD') + `-${$('#tecnico' + i + '1').text()}`
 			return fName
 		}
 	}
