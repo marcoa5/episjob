@@ -1638,23 +1638,26 @@ $( document ).ready(function(e) {
 			});
 		}
 	})*/
-	sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
-	.then(function(arr,err){
-		if(arr==""){
-		} else {
-			chiave = arr[0].GetContextWebInformation.FormDigestValue;
-			campi[0]=chiave;
-			sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: chiave }).cols()
-			.then(function(arrayResults){
-				colonne=arrayResults; 
-				colonne.forEach(function(id){
-					if(id.dataType=="Text"){
-						campi.push(id.dataName);
-					}
-				})
-			});
-		}
-	})
+	try{
+		sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
+		.then(function(arr,err){
+			if(arr==""){
+			} else {
+				chiave = arr[0].GetContextWebInformation.FormDigestValue;
+				campi[0]=chiave;
+				sprLib.list({name:'Sondaggio', baseUrl: murl, requestDigest: chiave }).cols()
+				.then(function(arrayResults){
+					colonne=arrayResults; 
+					colonne.forEach(function(id){
+						if(id.dataType=="Text"){
+							campi.push(id.dataName);
+						}
+					})
+				});
+			}
+		})
+	}
+	catch{console.log('ERRORE')}
 });
 
 
