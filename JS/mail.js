@@ -795,15 +795,15 @@ async function salvaMaPdf(){
 					remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 						fs.writeFileSync(`${maName}${fName}.pdf`, data)
 						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
-						.then(()=>console.log(a))
-						.catch(err=>console.log(err))
 					});
 				}
 			}
 			catch{
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
-					.then((a)=>console.log(a))
+					.then((a)=>{
+						console.log(a, 'SJ loaded in FireBase bu not in SP')
+					})
 					.catch(err=>console.log(err))
 				});
 			}
