@@ -777,22 +777,31 @@ async function salvaMaPdf(){
 	let fName = getSavedName()
 	
 	setTimeout(() => {
-			if(require('fs').existsSync(`${maName}${fName}.ma`)){
-				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'ma'))
-				if(sc==0) require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
-			} else {
-				require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())	
+			try{
+				if(require('fs').existsSync(`${maName}${fName}.ma`)){
+					var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'ma'))
+					if(sc==0) require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
+				} else {
+					require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())	
+				}
+	
+				if(require('fs').existsSync(`${maName}${fName}.pdf`)){
+					var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
+					if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+						fs.writeFileSync(`${maName}${fName}.pdf`, data)
+						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
+					});
+				} else {
+					remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
+						fs.writeFileSync(`${maName}${fName}.pdf`, data)
+						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
+						.then(()=>console.log(a))
+						.catch(err=>console.log(err))
+					});
+				}
 			}
-
-			if(require('fs').existsSync(`${maName}${fName}.pdf`)){
-				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
-				if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
-					fs.writeFileSync(`${maName}${fName}.pdf`, data)
-					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
-				});
-			} else {
+			catch{
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
-					fs.writeFileSync(`${maName}${fName}.pdf`, data)
 					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 					.then(()=>console.log(a))
 					.catch(err=>console.log(err))
