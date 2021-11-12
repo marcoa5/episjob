@@ -777,14 +777,6 @@ async function salvaMaPdf(){
 	let fName = getSavedName()
 	
 	setTimeout(() => {
-		/*let optionsSaveMa = {
-			title : "Salva Files", 
-			defaultPath : cartel1,
-			buttonLabel : "Salva",  
-			properties: ['openDirectory']
-		}
-		var maName = dialog.showOpenDialogSync(optionsSaveMa, "")
-		if(maName!=undefined){*/
 			if(require('fs').existsSync(`${maName}${fName}.ma`)){
 				var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'ma'))
 				if(sc==0) require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
@@ -802,9 +794,10 @@ async function salvaMaPdf(){
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					fs.writeFileSync(`${maName}${fName}.pdf`, data)
 					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
+					.then(()=>console.log(a))
+					.catch(err=>console.log(err))
 				});
 			}
-		//}
 	}, 100)
 
 	setTimeout(() => {
