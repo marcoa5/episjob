@@ -803,7 +803,7 @@ async function salvaMaPdf(){
 			catch{
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
-					.then(()=>console.log(a))
+					.then((a)=>console.log(a))
 					.catch(err=>console.log(err))
 				});
 			}

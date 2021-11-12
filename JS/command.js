@@ -1938,7 +1938,6 @@ function uplSave(){
 	
 	p.firmacc1=''
 	p.firmatt1=''
-	console.log(p)
 	p.filename = getSavedName() + '.pdf'
 	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
 }
