@@ -1637,7 +1637,7 @@ $( document ).ready(function(e) {
 				$('#user').text('External User')
 			});
 		}
-	})*/
+	})
 	try{
 		sprLib.rest({ url:murl + 'Lists/Sondaggio/_api/contextinfo', type:'POST' })
 		.then(function(arr,err){
@@ -1657,9 +1657,8 @@ $( document ).ready(function(e) {
 			}
 		})
 	}
-	catch{console.log('ERRORE')}
+	catch{console.log('ERRORE')}*/
 });
-
 
 function addsp(){
 	var risu = ['a'];
