@@ -188,12 +188,7 @@ function readConf(){
   caricaMails()
   var t= $('#userI').text()
   if(t){
-    firebase.default.database().ref('Users/'+t).set({
-      km: $('#userK').text(),
-      Nome: $('#userN').text(), 
-      Cognome: $('#userC').text(),
-      Pos: $('#userP').text()
-    })
+    firebase.default.database().ref('Users/'+t).child('km').set($('#userK').text())
   }
 }
 
