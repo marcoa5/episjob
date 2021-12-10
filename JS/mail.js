@@ -797,16 +797,23 @@ async function salvaMaPdf(){
 				} else {
 					remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 						fs.writeFileSync(`${maName}${fName}.pdf`, data)
-
+						
 						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 						.then(()=>{
-							firebase.default.database().ref('Notif').child($('#userI').text()).child(moment(new Date()).format('YYYY-MM-DD HH:mm')).set({
-								text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
-								auth: $('#userN').text() + ' ' + $('#userC').text(),
-								status: 0,
-								date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-								userId: $('#userI').text()
+							firebase.default.database().ref('Users').once('value',a=>{
+								a.forEach(b=>{
+									if((b.val().Pos=='SU' || b.val().Pos=='admin' || b.val().Pos=='adminS') && b.val().sj==1) {
+										firebase.default.database().ref('Notif').child(b.key).child(moment(new Date()).format('YYYY-MM-DD HH:mm')).set({
+											text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
+											auth: $('#userN').text() + ' ' + $('#userC').text(),
+											status: 0,
+											date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+											userId: b.key
+										})
+									}
+								})
 							})
+							
 						})
 					});
 				}
@@ -826,14 +833,6 @@ async function salvaMaPdf(){
 		openMenu('menuSU')
 		openSU()
 	}, 150);
-}
-
-function frt(){
-	firebase.default.database().ref('Users').once('value',a=>{
-		a.forEach(b=>{
-			if((b.val().Pos=='SU' || b.val().Pos=='admin' || b.val().Pos=='adminS') && b.val().sj==1) console.log(b.key)
-		})
-	})
 }
 
 function attBottone(){
