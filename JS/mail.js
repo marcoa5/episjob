@@ -778,6 +778,7 @@ async function salvaMaPdf(){
 	
 	setTimeout(() => {
 			try{
+
 				if(require('fs').existsSync(`${maName}${fName}.ma`)){
 					var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'ma'))
 					if(sc==0) require('fs').writeFileSync(`${maName}${fName}.ma`,creasalvataggio())
@@ -794,7 +795,15 @@ async function salvaMaPdf(){
 				} else {
 					remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 						fs.writeFileSync(`${maName}${fName}.pdf`, data)
-						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
+						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'}).then(()=>{
+							firebase.default.database().ref('Notif').child($(#userI).text()).child(moment(new Date()).format('YYYY-MM-DD HH:mm')).set({
+								text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
+								auth: $('#userN').text() + ' ' + $('#userC').text(),
+								status: 0,
+								date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+								userId: $(#userI).text()
+							})
+						})
 					});
 				}
 			}
