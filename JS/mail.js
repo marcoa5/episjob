@@ -831,7 +831,8 @@ async function salvaMaPdf(){
 											auth: $('#userN').text() + ' ' + $('#userC').text(),
 											status: 0,
 											date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-											userId: t
+											userId: t,
+											url: 'files'
 										})
 									})
 								})
