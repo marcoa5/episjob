@@ -810,7 +810,6 @@ async function salvaMaPdf(){
 						})
 					})
 					.then(()=>{
-						console.log('start')
 						let sn = $('#matricola').text()
 						firebase.default.database().ref('RigAuth').child(sn).once('value',a=>{
 							a.forEach(b=>{
@@ -827,7 +826,6 @@ async function salvaMaPdf(){
 							})
 						})
 						.then(()=>{
-							console.log('ok')
 							users.forEach(t=>{
 								firebase.default.database().ref('Notif').child(t).child(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')).set({
 									text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
