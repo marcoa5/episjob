@@ -64,6 +64,7 @@ function addTabHrs(){
 			copiaOre(){
 				for(i=1;i<8;i++){
     				var iu = $('#stdspe').text();
+					console.log(iu)
 					if(iu=='SPE'){
 						$('#spov'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#spol'+i+'1').text(this.spol[i]==0?'':this.spol[i])
@@ -73,7 +74,7 @@ function addTabHrs(){
 						$('#stdl'+i+'1').text('')
 						$('#strv'+i+'1').text('')
 						$('#strl'+i+'1').text('')	
-					} else {
+					} else if(iu=='STD'){
 						$('#stdv'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#stdl'+i+'1').text(this.spol[i]==0?'':this.spol[i])
 						$('#strv'+i+'1').text(this.spsv[i]==0?'':this.spsv[i])
