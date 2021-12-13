@@ -797,51 +797,48 @@ async function salvaMaPdf(){
 				} else {
 					remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 						fs.writeFileSync(`${maName}${fName}.pdf`, data)
-						
 						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
-						.then(()=>{
-							let users = []
-							firebase.default.database().ref('Users').once('value',a=>{
-								a.forEach(b=>{
-									if((b.val().Pos=='SU' || b.val().Pos=='admin' || b.val().Pos=='adminS') && b.val().sj==1) {
-										if(!users.includes(b.key)) users.push(b.key)
-									}
-								})
-							})
-							.then(()=>{
-								console.log('start')
-								let sn = $('#matricola').text()
-								firebase.default.database().ref('RigAuth').child(sn).once('value',a=>{
-									a.forEach(b=>{
-										if(b.val()=='1') {
-											let ar = b.key.substring(1,100)
-											firebase.default.database().ref('Users').orderByChild('area').once('value',x=>{
-												x.forEach(y=>{
-													//console.log(y.val())
-													if(y.val().Area==ar) users.push(y.key)
-												})
-												//console.log(x.val())
-											})
-										}
-									})
-								})
-								.then(()=>{
-									console.log('ok')
-									users.forEach(t=>{
-										firebase.default.database().ref('Notif').child(t).child(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')).set({
-											text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
-											auth: $('#userN').text() + ' ' + $('#userC').text(),
-											status: 0,
-											date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-											userId: t,
-											url: 'files'
-										})
-									})
-								})
-							})
-						})
 					});
 				}
+				let users = []
+				firebase.default.database().ref('Users').once('value',a=>{
+					a.forEach(b=>{
+						if((b.val().Pos=='SU' || b.val().Pos=='admin' || b.val().Pos=='adminS') && b.val().sj==1) {
+							if(!users.includes(b.key)) users.push(b.key)
+						}
+					})
+				})
+				.then(()=>{
+					console.log('start')
+					let sn = $('#matricola').text()
+					firebase.default.database().ref('RigAuth').child(sn).once('value',a=>{
+						a.forEach(b=>{
+							if(b.val()=='1') {
+								let ar = b.key.substring(1,100)
+								firebase.default.database().ref('Users').orderByChild('area').once('value',x=>{
+									x.forEach(y=>{
+										//console.log(y.val())
+										if(y.val().Area==ar) users.push(y.key)
+									})
+									//console.log(x.val())
+								})
+							}
+						})
+					})
+					.then(()=>{
+						console.log('ok')
+						users.forEach(t=>{
+							firebase.default.database().ref('Notif').child(t).child(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')).set({
+								text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
+								auth: $('#userN').text() + ' ' + $('#userC').text(),
+								status: 0,
+								date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+								userId: t,
+								url: 'files'
+							})
+						})
+					})
+				})
 			}
 			catch{
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {

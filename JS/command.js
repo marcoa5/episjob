@@ -64,7 +64,6 @@ function addTabHrs(){
 			copiaOre(){
 				for(i=1;i<8;i++){
     				var iu = $('#stdspe').text();
-					console.log(iu)
 					if(iu=='SPE'){
 						$('#spov'+i+'1').text(this.spov[i]==0?'':this.spov[i])
 						$('#spol'+i+'1').text(this.spol[i]==0?'':this.spol[i])
