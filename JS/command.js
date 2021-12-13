@@ -125,7 +125,7 @@ function addTabHrs(){
 					if(r == 0) {
 						$('#spv'+e).val('');
 					} else if(r!==null){
-						Vue.set(appHrs.spv, e, (r*t).toFixed(2))	
+						Vue.set(appHrs.spv, e, (Math.round((r*t)*2)/2).toFixed(2))	
 					}
 				})
 			},
