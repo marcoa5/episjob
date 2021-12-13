@@ -826,7 +826,7 @@ async function salvaMaPdf(){
 								})
 								.then(()=>{
 									users.forEach(t=>{
-										firebase.default.database().ref('Notif').child(t).child(moment(new Date()).format('YYYY-MM-DD HH:mm')).set({
+										firebase.default.database().ref('Notif').child(t).child(moment(new Date()).format('YYYY-MM-DD HH:mm:ss')).set({
 											text: 'New Service Job Loaded for ' + $('#prodotto1').text() + ' (' + $('#matricola').text() + ') - Customer: ' + $('#cliente11').text(),
 											auth: $('#userN').text() + ' ' + $('#userC').text(),
 											status: 0,
