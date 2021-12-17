@@ -834,7 +834,7 @@ async function salvaMaPdf(){
 									status: 0,
 									date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
 									userId: t,
-									url: 'files'
+									url: './machine,{"sn":"' + $('#matricola').text() + '"}'
 								})
 							})
 						})
