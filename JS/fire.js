@@ -180,6 +180,7 @@ function readConf(){
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
+  //COEFFICIENTE KILOMETRICO STD
   $('#userK').text('0.07')
   var a = $('#userP').text()
   if(a=='admin'){ipcRenderer.send('attmenu');}
@@ -233,12 +234,4 @@ function copia(a){
   $('#cantiere').val($('#' + a + 'site').text())
   indirizzo_cliente();
   myFunction();
-}
-
-function updKm(){
-  var k = JSON.parse(require('fs').readFileSync(path,'utf-8'))
-  firebase.default.database().ref('Users').child(k.Id).child('km').once('value',a=>{
-    k.km=a.val()
-    require('fs').writeFileSync(path,JSON.stringify(k))
-  })
 }
