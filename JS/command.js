@@ -1540,7 +1540,7 @@ function mille(a){
 }
 
 function coeffkm(){
-	var cart = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
+	/*var cart = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','user.conf')
 	$.get(cart, function(data){
 	prompt({
 		title: 'Coefficiente km',
@@ -1558,7 +1558,7 @@ function coeffkm(){
 		}
 	})
 	.catch(console.error);
-	})
+	})*/
 }
 
 
