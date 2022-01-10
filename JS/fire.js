@@ -180,6 +180,7 @@ function readConf(){
   Object.keys(user).forEach(key=>{
     $('#user' + key.substring(0,1).toUpperCase()).text(user[key])
   })
+  $('#userK').text('0.07')
   var a = $('#userP').text()
   if(a=='admin'){ipcRenderer.send('attmenu');}
   if(a=='SU'){ipcRenderer.send('attmenu');ipcRenderer.send('attSU');}
