@@ -187,9 +187,9 @@ function readConf(){
   aggiornamails()
   caricaMails()
   var t= $('#userI').text()
-  if(t){
+  /*if(t){
     firebase.default.database().ref('Users/'+t).child('km').set($('#userK').text())
-  }
+  }*/
 }
 
 function writeSign(sig){
