@@ -236,5 +236,8 @@ function copia(a){
 
 function updKm(){
   var k = JSON.parse(require('fs').readFileSync(path,'utf-8'))
-  //firebase.default.database().ref('Users/' + k.Id).child('km').set(k.km)
+  firebase.default.database().ref('Users').child(k.Id).child('km').once('value',a=>{
+    k.km=a.val()
+    require('fs').writeFileSync(path,JSON.stringify(k))
+  })
 }
