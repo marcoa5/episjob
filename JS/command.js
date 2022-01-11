@@ -92,7 +92,7 @@ function addTabHrs(){
 					$('#km'+i+'1').text(this.km[i]==0?'':this.km[i])
 					$('#spv'+i+'1').text(this.spv[i])
 					$('#off'+i+'1').text(this.off[i]==0?'':this.off[i])
-					$('#ofs'+i+'1').text(this.ofs[i]==0?'':this.off[i])
+					$('#ofs'+i+'1').text(this.ofs[i]==0?'':this.ofs[i])
 					$('#tecnico'+i+'1').text(this.tec[i])
 					if(this.date[i]) {
 						$('#dat' + i + '1').text(moment(this.date[i]).format('DD'))
