@@ -50,12 +50,15 @@ async function aggiornamol(){
 }
 
 function loadtech(n){
-  var tech = require('fs').readFileSync(pathtech,'utf-8')
-  $('#tec' + n).html('')
-  $('#tec' + n).append(new Option('','none'))
-  $.each(JSON.parse(tech), (a,i)=>{
-    $('#tec' + n).append(new Option(a, a))
-  })
+  console.log(pathtech)
+  if(pathtech!=''){
+    var tech = require('fs').readFileSync(pathtech,'utf-8')
+    $('#tec' + n).html('')
+    $('#tec' + n).append(new Option('','none'))
+    $.each(JSON.parse(tech), (a,i)=>{
+      $('#tec' + n).append(new Option(a, a))
+    })
+  }
 }
 
 function aggiornacli(){
