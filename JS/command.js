@@ -268,7 +268,7 @@ function addTabHrs(){
 		}
 	})
 	let pathtech = require('path').join(require('os').homedir(),'Documents','ServiceJobConfig','tech.list')
-	if(require('fs').existsSync('pathtech')) {
+	if(require('fs').existsSync(pathtech)) {
 		for(let i=1;i<8;i++){
 			loadtech(i)
 		}
