@@ -804,7 +804,7 @@ async function salvaMaPdf(){
 					let users = []
 					firebase.default.database().ref('Users').once('value',a=>{
 						a.forEach(b=>{
-							if((b.val().Pos=='SU' || b.val().Pos=='admin' || b.val().Pos=='adminS') && b.val()._sj==1) {
+							if((b.val().Pos=='SU' || b.val().Pos=='admin' || b.val().Pos=='adminS') && (b.val()._sj==1 || b.val()._sj=='1')) {
 								if(!users.includes(b.key)) users.push(b.key)
 							}
 						})
