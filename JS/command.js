@@ -1848,9 +1848,15 @@ function estraidati(a){
 		}  else if(key=="firmatt1" | key=="firmacc1"){
 			$('#' + key).attr('src', a[key]);
 		} else {
-			a[key].forEach(el =>{
-				$('#' + el).prop('checked', true);
-			});
+			try{
+				a[key].forEach(el =>{
+					console.log(el)
+					$('#' + el).prop('checked', true);
+				});
+			} catch {
+				console.log('File creato con EpisjobAdminTool. Il risk Assesment è:',a.rs)
+			}
+			
 		}
 		
 	})
