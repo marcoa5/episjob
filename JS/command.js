@@ -1522,7 +1522,8 @@ function caricasond(){
 		var s1 = risso.substring(0,1);
 		var s2 = risso.substring(1,2);
 		var s3 = risso.substring(2,3);
-		document.getElementsByName('int')[s1-1].checked=true;
+		console.log(s1, s1-1)
+		document.getElementsByName('int')[(s1-1).toString()].checked=true;
 		document.getElementsByName('ric')[s2-1].checked=true;
 		document.getElementsByName('ese')[s3-1].checked=true;
 	}
@@ -1822,7 +1823,7 @@ function creasalvataggio(){
 		//console.log(key, sup[key])
 	})
 	s[$('#ris').attr('id')]= $('#ris').html();
-	s[$('#sondaggio').attr('id')]= $('#sondaggio').html();
+	//s[$('#sondaggio').attr('id')]= $('#sondaggio').html();
 	s[$('#elencomail').attr('id')]= $('#elencomail').html();
 	s[$('#firmatt1').attr('id')]= $('#firmatt1').attr('src');
 	s[$('#firmacc1').attr('id')]= $('#firmacc1').attr('src');
@@ -1850,7 +1851,6 @@ function estraidati(a){
 		} else {
 			try{
 				a[key].forEach(el =>{
-					console.log(el)
 					$('#' + el).prop('checked', true);
 				});
 			} catch {
