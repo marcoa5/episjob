@@ -1847,7 +1847,7 @@ function estraidati(a){
 		} else if(key=="sondaggio" | key=="ris" |  key=="tabset" | key=="elencomail"){
 			$('#' + key).html(a[key]);
 		}  else if(key=="firmatt1" | key=="firmacc1"){
-			$('#' + key).attr('src', a[key]);
+			if(a[key]!='') $('#' + key).attr('src', a[key]);
 		} else {
 			try{
 				a[key].forEach(el =>{
