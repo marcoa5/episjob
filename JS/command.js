@@ -553,9 +553,12 @@ function imiFabi(){
 function addHrsImi(){
 	var fam = [
 		{name: '', val: 0},
+		{name: 'Avviamento', val: 'Avviamento'},
 		{name: 'Carro/Cabina', val: 'Carro/Cabina'},
 		{name: 'Motore Diesel/Batteria', val: 'Motore Diesel/Batteria'},
 		{name: 'RCS', val: 'RCS'},
+		{name: 'Perforazione', val: 'Perforazione'},
+		{name: 'Braccio Benna', val: 'Braccio Benna'},
 		{name: 'Trasmissione', val: 'Trasmissione'},
 		{name: 'Imp. Elettrico', val: 'Imp. Elettrico'},
 		{name: 'Imp. Idraulico', val: 'Imp. Idraulico'},
