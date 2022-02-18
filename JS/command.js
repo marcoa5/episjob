@@ -1525,7 +1525,6 @@ function caricasond(){
 		var s1 = risso.substring(0,1);
 		var s2 = risso.substring(1,2);
 		var s3 = risso.substring(2,3);
-		console.log(s1, s1-1)
 		document.getElementsByName('int')[(s1-1).toString()].checked=true;
 		document.getElementsByName('ric')[s2-1].checked=true;
 		document.getElementsByName('ese')[s3-1].checked=true;
@@ -1847,7 +1846,22 @@ function estraidati(a){
 	p.forEach(function(key){
 		if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1" && key!=="rs"){
 			$('#' + key).text(a[key]);
-		} else if(key=="sondaggio" | key=="ris" |  key=="tabset" | key=="elencomail"){
+		} else if(key=='elencomail') {
+			if(a[key].substring(0,1)=='<'){
+				$('#' + key).html(a[key])
+			} else {
+				if(a[key]!=''){
+					let str=''
+					let m = a[key].split(';')
+					m.forEach(s=>{
+						str+='<div class=\"mail\">'+s+"</div>"
+					})
+					$('#' + key).html(str)
+				}
+				
+
+			}
+		} else if(key=="sondaggio" | key=="ris" |  key=="tabset"){
 			$('#' + key).html(a[key]);
 		}  else if(key=="firmatt1" | key=="firmacc1"){
 			if(a[key]!='') $('#' + key).attr('src', a[key]);
