@@ -1858,8 +1858,6 @@ function estraidati(a){
 					})
 					$('#' + key).html(str)
 				}
-				
-
 			}
 		} else if(key=="sondaggio" | key=="ris" |  key=="tabset"){
 			$('#' + key).html(a[key]);
