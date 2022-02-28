@@ -567,6 +567,7 @@ function addHrsImi(){
 		{name: 'Perforatrice', val: 'Perforatrice'},
 		{name: 'Bullonatura', val: 'Bullonatura'},
 		{name: 'RigScan', val: 'RigScan'},
+		{name: 'Stazione di ricarica', val: 'Stazione di ricarica'},
 	]
 	
 	$('#oreImi').append('<div id="div' + imiCount + '" class="divImi"></div>')	
