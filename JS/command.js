@@ -216,7 +216,7 @@ function addTabHrs(){
 				let a4=this.mfv[e]?parseFloat(this.mfv[e]):0
 				let a5=this.mnfv[e]?parseFloat(this.mnfv[e]):0
 				let sum=a1+a2+a3+a4+a5
-				return sum*100
+				return sum*140
 			},
 			prevKey(e,a,i){
 				var n = 1.1;
