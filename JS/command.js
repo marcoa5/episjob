@@ -1845,7 +1845,9 @@ function creasalvataggio(){
 function estraidati(a){
 	var p = Object.keys(a);
 	p.forEach(function(key){
-		if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1" && key!=="rs"){
+		if(key.substring(0,4)=='spsl')  {
+			$('#spll' + key.substring(4,6)).text(a[key])
+		} else if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1" && key!=="rs"){
 			$('#' + key).text(a[key]);
 		} else if(key=='elencomail') {
 			if(a[key].substring(0,1)=='<'){
