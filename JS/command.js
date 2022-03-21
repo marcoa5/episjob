@@ -1830,6 +1830,7 @@ function creasalvataggio(){
 	s[$('#elencomail').attr('id')]= $('#elencomail').html();
 	s[$('#firmatt1').attr('id')]= $('#firmatt1').attr('src');
 	s[$('#firmacc1').attr('id')]= $('#firmacc1').attr('src');
+	s[$('#sjid').attr('id')]= $('#sjid').text();
 	var ar = [];
 	$('#rs input:radio').each(function (index) {
 
@@ -1844,10 +1845,11 @@ function creasalvataggio(){
 
 function estraidati(a){
 	var p = Object.keys(a);
+	console.log(p)
 	p.forEach(function(key){
 		if(key.substring(0,4)=='spsl')  {
 			$('#spll' + key.substring(4,6)).text(a[key])
-		} else if(key!=="sondaggio" && key!=="ris" &&  key!=="tabset" && key!=="elencomail" && key!=="firmacc1" && key!=="firmatt1" && key!=="rs"){
+		} else if(key!="sondaggio" && key!="ris" &&  key!="tabset" && key!="elencomail" && key!="firmacc1" && key!="firmatt1" && key!="rs"){
 			$('#' + key).text(a[key]);
 		} else if(key=='elencomail') {
 			if(a[key].substring(0,1)=='<'){
@@ -1965,5 +1967,10 @@ function uplSave(){
 	p.firmacc1=''
 	p.firmatt1=''
 	p.filename = getSavedName() + '.pdf'
-	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
+	if($('#sjid').text().split('')[2]=='s') {
+		firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
+		.then(()=>{
+			if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
+		})
+	}
 }
