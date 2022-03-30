@@ -1845,7 +1845,6 @@ function creasalvataggio(){
 
 function estraidati(a){
 	var p = Object.keys(a);
-	console.log(p)
 	p.forEach(function(key){
 		if(key.substring(0,4)=='spsl')  {
 			$('#spll' + key.substring(4,6)).text(a[key])
