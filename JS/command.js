@@ -1969,5 +1969,5 @@ function uplSave(){
 	if($('#sjid').text().split('')[2]=='s') {
 		firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
 	}
-	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p)
+	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p).then(()=>{alert('SJ Loaded')})
 }
