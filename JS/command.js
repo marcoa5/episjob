@@ -1967,8 +1967,10 @@ function uplSave(){
 	p.firmacc1=''
 	p.firmatt1=''
 	p.filename = getSavedName() + '.pdf'
-	if($('#sjid').text().split('')[2]=='s') {
-		firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
-	}
+	firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
 	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p).then(()=>{alert('SJ Loaded')})
+}
+
+function frt(){
+	$.get('https://episjobrequ.herokuapp.com/getusers')
 }
