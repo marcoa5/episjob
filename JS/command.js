@@ -1299,7 +1299,7 @@ function getDaySave(){
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			let r = `${$('#dat' + i + '3').text()}-${$('#dat' + i + '2').text()}-${$('#dat' + i + '1').text()}`
-			fName = moment(r).format('YYYYMMDD') + `-${$('#tecnico' + i + '1').text()}_` + makeId(5)
+			fName = moment(r).format('YYYYMMDD') + `-${$('#tecnico' + i + '1').text()}_` + $('#sudocbpcs').val()
 			return fName
 		}
 	}
