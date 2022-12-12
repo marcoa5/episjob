@@ -1299,7 +1299,7 @@ function getDaySave(){
 	for (var i = 7;i>0;i--){
 		if($('#dat' + i + '1').text()!==''){
 			let r = `${$('#dat' + i + '3').text()}-${$('#dat' + i + '2').text()}-${$('#dat' + i + '1').text()}`
-			fName = moment(r).format('YYYYMMDD') + `-${$('#tecnico' + i + '1').text()}`
+			fName = moment(r).format('YYYYMMDD') + `-${$('#tecnico' + i + '1').text()}_` + makeId(5)
 			return fName
 		}
 	}
@@ -1972,5 +1972,15 @@ function uplSave(){
 }
 
 function frt(){
-	$.get('https://episjobrequ.herokuapp.com/getusers')
+	console.log(makeId(5))
 }
+
+function makeId(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
