@@ -1201,7 +1201,7 @@ function sortTable() {
 }
 		  
 function verificadata(g, gg,mm,an){
-    var feste = ["01/01", "06/01", "25/04", "01/05", "02/06", "15/08", "16/08", "01/11", "07/12", "08/12", "24/12", "25/12", "26/12", "31/12"];
+    var feste = ["01/01", "06/01", "25/04", "01/05", "02/06", "15/08", "16/08", "01/11", "08/12", "24/12", "25/12", "26/12", "31/12"];
     var dd = new Date(g);
     var pasqua = moment(new Date(an, Easter(an).month-1, Easter(an).day)).format("DD/MM");
     var pasquetta =  moment(new Date(an, Easter(an).month-1, Easter(an).day+1)).format("DD/MM");
