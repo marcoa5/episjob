@@ -1845,6 +1845,7 @@ function creasalvataggio(){
 }
 
 function estraidati(a){
+	if(a.info.fileName) $('#fileName').text(a.info.fileName)
 	var p = Object.keys(a);
 	p.forEach(function(key){
 		if(key.substring(0,4)=='spsl')  {
@@ -1966,10 +1967,15 @@ function uplSave(){
 	
 	p.firmacc1=''
 	p.firmatt1=''
-	p.filename = getSavedName() + '.pdf'
+	if($('#fileName').val()){
+		p.filename =$('#fileName').val()
+	} else {
+		p.filename = getSavedName() + '.pdf'
+	}
 	firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
 	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p).then(()=>{alert('SJ Loaded')})
 }
+
 
 function frt(){
 	console.log(makeId(5))

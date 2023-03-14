@@ -792,12 +792,12 @@ async function salvaMaPdf(){
 					var sc = dialog.showMessageBoxSync(remote.getCurrentWindow(), optOW(maName,fName,'pdf'))
 					if(sc==0) remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 						fs.writeFileSync(`${maName}${fName}.pdf`, data)
-						firebase.default.storage().ref('Closed/' + `${makeId(4)} - ${fName}.pdf`).put(data, {contentType:'application/pdf'})
+						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 					});
 				} else {
 					remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
 						fs.writeFileSync(`${maName}${fName}.pdf`, data)
-						firebase.default.storage().ref('Closed/' + `${makeId(4)} - ${fName}.pdf`).put(data, {contentType:'application/pdf'})
+						firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 					});
 				}
 				setTimeout(() => {
@@ -844,7 +844,7 @@ async function salvaMaPdf(){
 			}
 			catch{
 				remote.getCurrentWindow().webContents.printToPDF({pageSize: 'A4', marginsType: '0'}).then(data => {
-					firebase.default.storage().ref('Closed/' + `${makeId(4)} - ${fName}.pdf`).put(data, {contentType:'application/pdf'})
+					firebase.default.storage().ref('Closed/' + `${fName}.pdf`).put(data, {contentType:'application/pdf'})
 					.then((a)=>{
 						console.log(a, 'SJ loaded in FireBase bu not in SP')
 					})
@@ -977,13 +977,3 @@ function lista(){
 		//})
 		})
 }
-
-function makeId(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
