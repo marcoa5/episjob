@@ -1845,7 +1845,7 @@ function creasalvataggio(){
 }
 
 function estraidati(a){
-	if(a.info.fileName) $('#fileName').text(a.info.fileName)
+	if(a.info && a.info.fileName!=undefined && a.info.fileName!=null) $('#fileName').text(a.info.fileName)
 	var p = Object.keys(a);
 	p.forEach(function(key){
 		if(key.substring(0,4)=='spsl')  {
