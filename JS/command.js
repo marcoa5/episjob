@@ -1972,7 +1972,7 @@ function uplSave(){
 	} else {
 		p.filename = getSavedName() + '.pdf'
 	}
-	firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
+	if($('#sjid').text() && $('#sjid').text()!='') firebase.default.database().ref('sjDraft').child('sent').child($('#sjid').text()).remove()
 	if($('#matricola').text()!='' && getDaySave()!=0)	firebase.default.database().ref('Saved/' + $('#matricola').text() + '/' + getDaySave()).set(p).then(()=>{alert('SJ Loaded')})
 }
 
