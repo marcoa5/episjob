@@ -1012,6 +1012,21 @@ function aprifile(a){
 		var filename =  dialog.showOpenDialogSync(options, "");
 		if(filename!==undefined){
 			$.get(filename, function(data) {
+				console.log(JSON.parse(data).heading)
+				if(JSON.parse(data).heading=="fea"){
+					$("#log").attr("src","img/fea.jpg")
+					$("#log").attr("width","")
+					$("#log").attr("height","83")
+					$("#log").css({
+						margin:'0 10px 10px 0',
+						transform: 'translate(27px, 0)'
+					})
+					$("#ragsoc").css({
+						transform: 'translate(37px, 0)'
+					})
+					$("#ragsoc").html('<strong style="font-size: 6pt">FEA Service Srl</strong><br>Sede legale e amministrativa<br>Via Michelangelo Signorile, 24 - 70121 – Bari (BA)<br>Telefono +39 080 914 67 93<br>https://www.feaitalia.net/')
+					$("#slnome").html('FEA Service Srl<br>SCHEDA LAVORO')
+				}
 				estraidati(JSON.parse(data));
 				//document.getElementById('salva').innerHTML = data
 			})
@@ -1036,6 +1051,7 @@ function aprifile(a){
 			$('#menuMail').draggable();
 		})
 	}
+
 }
 
 //Cancella tutti i dati
