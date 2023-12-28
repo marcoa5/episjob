@@ -1049,6 +1049,7 @@ function aprifile(a){
 			$('#menuOre').draggable();
 			$('#menuSU').draggable();
 			$('#menuMail').draggable();
+			console.log(JSON.parse(dat).heading)
 			if(JSON.parse(dat).heading=="fea"){
 				$("#log").attr("src","img/fea.jpg")
 				$("#log").attr("width","")
